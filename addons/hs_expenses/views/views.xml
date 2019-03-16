@@ -1,0 +1,270 @@
+<odoo>
+    <data>
+
+        <!-- Top menu item -->
+        <menuitem
+            id="menu_hs_expenses_root"
+            name="Marketing Expenses"
+
+            sequence="10"/>
+
+        <menuitem id="hs_special_expenses_management_menu" name="Special Expenses" parent="menu_hs_expenses_root"
+                  sequence="0"></menuitem>
+
+        <menuitem id="setting_menu" name="Settings" parent="menu_hs_expenses_root" sequence="9999"/>
+
+        <menuitem id="menu_Sale" name="Sale Management" parent="setting_menu" sequence="0"/>
+
+        <menuitem id="menu_entertain" name="Entertain Party" parent="setting_menu" sequence="1"/>
+
+        <record model="ir.ui.view" id="view_hs_sale_seller_tree">
+            <field name="name">hs.sale.seller.tree</field>
+            <field name="model">hs.base.employee</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="sale_market_id"/>
+                    <field name="sale_area_id"/>
+                    <field name="bank_name"/>
+                    <field name="bank_account"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hs_sale_seller_form" model="ir.ui.view">
+            <field name="name">hs.sale.seller.form</field>
+            <field name="model">hs.base.employee</field>
+            <field name="inherit_id" ref="hs_base.view_employee_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <group string="Sale Information">
+                        <group>
+                            <field name="sale_market_id"/>
+                            <field name="sale_area_id"/>
+                        </group>
+                        <group>
+                            <field name="bank_name"/>
+                            <field name="bank_account"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_sale_seller" model="ir.actions.act_window">
+             <field name="name">Seller</field>
+             <field name="res_model">hs.base.employee</field>
+             <field name="view_type">form</field>
+             <field name="view_mode">tree,form</field>
+             <field name="domain">[('department_id.name', 'ilike', '营销')]</field>
+             <field name="view_id" ref="view_hs_sale_seller_tree"/>
+        </record>
+
+        <menuitem
+            id="menu_hs_sale_seller"
+            action="action_sale_seller"
+            parent="menu_Sale"
+            sequence="0"/>
+
+        <record model="ir.ui.view" id="view_hs_sale_market_tree">
+          <field name="name">hs.sale.market.tree</field>
+          <field name="model">hs.sale.market</field>
+          <field name="arch" type="xml">
+            <tree>
+              <field name="name"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="view_hs_sale_market_form" model="ir.ui.view">
+            <field name="name">hs.sale.market.form</field>
+            <field name="model">hs.sale.market</field>
+            <field name="arch" type="xml">
+                <form string="Sale Market">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hs_sale_market" model="ir.actions.act_window">
+            <field name="name">Sale Market</field>
+            <field name="res_model">hs.sale.market</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+            id="menu_hs_sale_market"
+            action="action_hs_sale_market"
+            parent="menu_Sale"
+            sequence="1"/>
+
+        <record model="ir.ui.view" id="view_hs_sale_area_tree">
+          <field name="name">hs.sale.area.tree</field>
+          <field name="model">hs.sale.area</field>
+          <field name="arch" type="xml">
+            <tree>
+              <field name="name"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="view_hs_sale_area_form" model="ir.ui.view">
+            <field name="name">hs.sale.area.form</field>
+            <field name="model">hs.sale.area</field>
+            <field name="arch" type="xml">
+                <form string="Sale Area">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hs_sale_area" model="ir.actions.act_window">
+            <field name="name">Sale Area</field>
+            <field name="res_model">hs.sale.area</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+            id="menu_hs_sale_area"
+            action="action_hs_sale_area"
+            parent="menu_Sale"
+            sequence="2"/>
+
+
+        <record model="ir.ui.view" id="view_entertain_company_tree">
+          <field name="name">hs.expense.entertain.company.tree</field>
+          <field name="model">hs.expense.entertain.company</field>
+          <field name="arch" type="xml">
+            <tree>
+              <field name="name"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="view_entertain_company_form" model="ir.ui.view">
+            <field name="name">hs.expense.entertain.company.form</field>
+            <field name="model">hs.expense.entertain.company</field>
+            <field name="arch" type="xml">
+                <form string="Entertain Company">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_entertain_company" model="ir.actions.act_window">
+            <field name="name">Entertain Company</field>
+            <field name="res_model">hs.expense.entertain.company</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+
+        <menuitem
+            id="menu_entertain_company"
+            action="action_entertain_company"
+            parent="menu_entertain"
+            sequence="0"/>
+
+
+        <record model="ir.ui.view" id="view_entertain_user_tree">
+          <field name="name">hs.expense.entertain.user.tree</field>
+          <field name="model">hs.expense.entertain.user</field>
+          <field name="arch" type="xml">
+            <tree>
+                <!--<field name="name"/>-->
+                <field name="display_name"/>
+                <field name="function"/>
+                <field name="parent_id"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="view_entertain_user_form" model="ir.ui.view">
+            <field name="name">hs.expense.entertain.user.form</field>
+            <field name="model">hs.expense.entertain.user</field>
+            <field name="arch" type="xml">
+                <form string="Entertain User">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="parent_id" domain="[('is_company', '=', True)]" />
+                            </group>
+                            <group>
+                                <field name="function"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_entertain_user" model="ir.actions.act_window">
+            <field name="name">Entertain User</field>
+            <field name="res_model">hs.expense.entertain.user</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <!--<record model="ir.actions.act_window" id="action_entertain_user_tree">-->
+             <!--<field name="name">Entertain User</field>-->
+             <!--<field name="res_model">res.partner</field>-->
+             <!--<field name="view_type">form</field>-->
+             <!--<field name="view_mode">tree,form</field>-->
+             <!--<field name="domain">[('is_entertain_user', '=', True)]</field>-->
+             <!--<field name="view_id" ref="view_entertain_user_tree"/>-->
+         <!--</record>-->
+
+
+
+        <menuitem
+            id="menu_entertain_user"
+            action="action_entertain_user"
+            parent="menu_entertain"
+            sequence="1"/>
+        <!-- menu categories -->
+        <!--
+        <menuitem name="Menu 1" id="hs_expenses.menu_1" parent="hs_expenses.menu_root"/>
+        <menuitem name="Menu 2" id="hs_expenses.menu_2" parent="hs_expenses.menu_root"/>
+        -->
+        <!-- actions -->
+        <!--
+        <menuitem name="List" id="hs_expenses.menu_1_list" parent="hs_expenses.menu_1"
+                  action="hs_expenses.action_window"/>
+        <menuitem name="Server to list" id="hs_expenses" parent="hs_expenses.menu_2"
+                  action="hs_expenses.action_server"/>
+        -->
+    </data>
+</odoo>

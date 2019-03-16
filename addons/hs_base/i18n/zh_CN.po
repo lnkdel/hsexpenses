@@ -1,0 +1,418 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* hs_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-14 01:23+0000\n"
+"PO-Revision-Date: 2019-03-14 01:23+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__active
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__active
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee_tag__active
+msgid "Active"
+msgstr "有效"
+
+#. module: hs_base
+#: model_terms:ir.ui.view,arch_db:hs_base.user_create_wizard_view
+msgid "添加用户到群组"
+msgstr ""
+
+#. module: hs_base
+#: model_terms:ir.ui.view,arch_db:hs_base.user_create_wizard_view
+msgid "Cancel"
+msgstr "取消"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__child_ids
+msgid "Child Departments"
+msgstr "子部门"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__color
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee_tag__color
+msgid "Color"
+msgstr "颜色"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__company_id
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__company_id
+msgid "Company"
+msgstr "公司"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__complete_name
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__complete_name
+msgid "Complete Name"
+msgstr "完整名称"
+
+#. module: hs_base
+#: model_terms:ir.ui.view,arch_db:hs_base.view_employee_form
+msgid "Contact Information"
+msgstr "合同信息"
+
+#. module: hs_base
+#: model_terms:ir.ui.view,arch_db:hs_base.user_create_wizard_view
+msgid "Create"
+msgstr "创建"
+
+#. module: hs_base
+#: model_terms:ir.ui.view,arch_db:hs_base.user_create_wizard_view
+msgid "Create New User"
+msgstr "创建新用户"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__create_uid
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__create_uid
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee_tag__create_uid
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_user_create_wizard__create_uid
+msgid "Created by"
+msgstr "创建人"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__create_date
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__create_date
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee_tag__create_date
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_user_create_wizard__create_date
+msgid "Created on"
+msgstr "创建时间"
+
+#. module: hs_base
+#: model:ir.model,name:hs_base.model_hs_base_department
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__department_id
+#: model_terms:ir.ui.view,arch_db:hs_base.view_department_form
+msgid "Department"
+msgstr "部门"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__name
+msgid "Department Name"
+msgstr "部门名称"
+
+#. module: hs_base
+#: model:ir.actions.act_window,name:hs_base.action_department
+#: model:ir.ui.menu,name:hs_base.menu_department
+#: model_terms:ir.ui.view,arch_db:hs_base.view_department_tree
+msgid "Departments"
+msgstr "部门"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__display_name
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__display_name
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee_tag__display_name
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_user_create_wizard__display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: hs_base
+#: model:ir.ui.menu,name:hs_base.menu_hs_ec_root
+msgid "EC"
+msgstr "工程中心"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__email
+msgid "Email"
+msgstr "EMail"
+
+#. module: hs_base
+#: model:ir.model,name:hs_base.model_hs_base_employee
+#: model_terms:ir.ui.view,arch_db:hs_base.view_employee_form
+msgid "Employee"
+msgstr "员工"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__employee_no
+#: model_terms:ir.ui.view,arch_db:hs_base.view_employee_form
+msgid "Employee No."
+msgstr "工号"
+
+#. module: hs_base
+#: sql_constraint:hs.base.employee:0
+msgid "Employee No. already exists!"
+msgstr "工号已经存在！"
+
+#. module: hs_base
+#: model:ir.model,name:hs_base.model_hs_base_employee_tag
+msgid "Employee Tag"
+msgstr "员工标签"
+
+#. module: hs_base
+#: model:ir.actions.act_window,name:hs_base.action_employee_tag
+#: model:ir.ui.menu,name:hs_base.menu_employee_tag
+#: model_terms:ir.ui.view,arch_db:hs_base.view_employee_tag_tree
+msgid "Employee Tags"
+msgstr "员工标签"
+
+#. module: hs_base
+#: model_terms:ir.ui.view,arch_db:hs_base.view_employee_form
+msgid "Employee's Name"
+msgstr "员工姓名"
+
+#. module: hs_base
+#: model:ir.actions.act_window,name:hs_base.action_employee
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee_tag__employee_ids
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_user_create_wizard__employee_ids
+#: model:ir.ui.menu,name:hs_base.menu_employee
+#: model_terms:ir.ui.view,arch_db:hs_base.view_employee_tree
+msgid "Employees"
+msgstr "员工"
+
+#. module: hs_base
+#: model_terms:ir.ui.view,arch_db:hs_base.view_employee_tag_form
+msgid "Empoloyee Tag"
+msgstr "员工标签"
+
+#. module: hs_base
+#: code:addons/hs_base/models/hs_base.py:87
+#, python-format
+msgid "Error! Cannot create recursive hierarchy of Employee(s)."
+msgstr "错误！部门创建循环引用的员工记录。"
+
+#. module: hs_base
+#: code:addons/hs_base/models/hs_base.py:142
+#, python-format
+msgid "Error! You cannot create recursive departments."
+msgstr "错误！部门创建循环引用的部门记录。"
+
+#. module: hs_base
+#: selection:hs.base.employee,gender:0
+msgid "Female"
+msgstr "女"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__gender
+msgid "Gender"
+msgstr "性别"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_user_create_wizard__group_ids
+msgid "Group"
+msgstr "组"
+
+#. module: hs_base
+#: model:ir.ui.menu,name:hs_base.menu_hs_root
+msgid "HS"
+msgstr "恒神"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__id
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__id
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee_tag__id
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_user_create_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_user_create_wizard__lang
+msgid "Language"
+msgstr "语言"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department____last_update
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee____last_update
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee_tag____last_update
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_user_create_wizard____last_update
+msgid "Last Modified on"
+msgstr "最后修改日"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__write_uid
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__write_uid
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee_tag__write_uid
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_user_create_wizard__write_uid
+msgid "Last Updated by"
+msgstr "最后更新者"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__write_date
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__write_date
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee_tag__write_date
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_user_create_wizard__write_date
+msgid "Last Updated on"
+msgstr "最后更新时间"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__last_login
+msgid "Latest Connection"
+msgstr "最后访问"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__login
+msgid "Login"
+msgstr "登录"
+
+#. module: hs_base
+#: selection:hs.base.employee,gender:0
+msgid "Male"
+msgstr "男"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__manager_id
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__parent_id
+#: model:res.groups,name:hs_base.group_manager
+msgid "Manager"
+msgstr "经理"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__image_medium
+msgid "Medium-sized photo"
+msgstr "中等尺寸照片"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__member_ids
+msgid "Members"
+msgstr "会员"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__mobile_phone
+msgid "Mobile Phone"
+msgstr "手机"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__name
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee_tag__name
+msgid "Name"
+msgstr "名称"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_user_create_wizard__initial_password
+msgid "New User Initial Password"
+msgstr "新用户初始密码"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__note
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__note
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee_tag__note
+msgid "Note"
+msgstr "笔记"
+
+#. module: hs_base
+#: model:ir.ui.menu,name:hs_base.menu_organization
+#: model_terms:ir.ui.view,arch_db:hs_base.view_employee_form
+msgid "Organization"
+msgstr "组织"
+
+#. module: hs_base
+#: selection:hs.base.employee,gender:0
+msgid "Other"
+msgstr "其它"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__other_department_ids
+msgid "Other Departments"
+msgstr "其它部门"
+
+#. module: hs_base
+#: model_terms:ir.ui.view,arch_db:hs_base.view_department_form
+#: model_terms:ir.ui.view,arch_db:hs_base.view_employee_form
+#: model_terms:ir.ui.view,arch_db:hs_base.view_employee_tag_form
+msgid "Other Information ..."
+msgstr "其它信息..."
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__parent_id
+msgid "Parent Department"
+msgstr "上级部门"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__phone
+msgid "Phone"
+msgstr "电话"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__image
+msgid "Photo"
+msgstr "照片"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__rfid
+msgid "RFID"
+msgstr "RFID"
+
+#. module: hs_base
+#: model_terms:ir.ui.view,arch_db:hs_base.view_employee_form
+msgid "Related User"
+msgstr "相关用户"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_department__sequence
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee_tag__sequence
+msgid "Sequence"
+msgstr "序号"
+
+#. module: hs_base
+#: model:ir.ui.menu,name:hs_base.menu_hs_ec_settings
+#: model:ir.ui.menu,name:hs_base.menu_settings
+msgid "Settings"
+msgstr "设置"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__image_small
+msgid "Small-sized photo"
+msgstr "小尺寸照片"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__child_ids
+msgid "Subordinates"
+msgstr "下属"
+
+#. module: hs_base
+#: sql_constraint:hs.base.employee.tag:0
+msgid "Tag name already exists!"
+msgstr "标签名称已经存在！"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__tag_ids
+msgid "Tags"
+msgstr "标签"
+
+#. module: hs_base
+#: model:res.groups,comment:hs_base.group_manager
+msgid "The user will be able to manage all records in hs_base module."
+msgstr "用户可以管理所有hs_base模块包含的数据。"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_user_create_wizard__tz
+msgid "Timezone"
+msgstr "时区"
+
+#. module: hs_base
+#: model:ir.model.fields,help:hs_base.field_hs_base_employee__login
+msgid "Used to log into the system"
+msgstr "用户登录入系统"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__user_id
+msgid "User"
+msgstr "用户"
+
+#. module: hs_base
+#: model:ir.actions.act_window,name:hs_base.user_create_wizard_action
+#: model:ir.model,name:hs_base.model_hs_base_user_create_wizard
+#: model_terms:ir.ui.view,arch_db:hs_base.user_create_wizard_view
+msgid "User Create Wizard"
+msgstr "用户创建向导"
+
+#. module: hs_base
+#: model:ir.model.fields,field_description:hs_base.field_hs_base_employee__wechat_account
+msgid "WeChat Account"
+msgstr "微信帐号"
+
+#. module: hs_base
+#: sql_constraint:hs.base.employee:0
+msgid "WeChat Account already exists!"
+msgstr "微信帐号已经存在！"
+
+#. module: hs_base
+#: model_terms:ir.ui.view,arch_db:hs_base.view_employee_form
+msgid "e.g. Part Time"
+msgstr "例如： 部分时间"

@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+employee_tag_base_group_user,employee_tag base.group_user,model_hs_base_employee_tag,base.group_user,1,0,0,0
+employee_base_group_user,employee base.group_user,model_hs_base_employee,base.group_user,1,0,0,0
+department_base_group_user,department base.group_user,model_hs_base_department,base.group_user,1,0,0,0
+employee_tag_hs_base_group_manager,employee_tag hs_base.group_manager,model_hs_base_employee_tag,hs_base.group_manager,1,1,1,1
+employee_hs_base_group_manager,employee hs_base.group_manager,model_hs_base_employee,hs_base.group_manager,1,1,1,1
+department_hs_base_group_manager,department hs_base.group_manager,model_hs_base_department,hs_base.group_manager,1,1,1,1
+

@@ -1,0 +1,897 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="10fad822-c613-4aa4-951e-6fda4913114f" name="Default" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="views.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/addons/hs_expenses/views/views.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="104" column="17" lean-forward="true" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
+              <folding>
+                <element signature="n#record#3;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+                <element signature="n#record#4;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+                <element signature="n#record#5;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+                <element signature="n#record#6;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+                <element signature="n#record#7;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+                <element signature="n#record#8;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="groups.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/addons/hs_expenses/security/groups.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" column="55" lean-forward="true" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hs_base_view.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/addons/hs_base/views/hs_base_view.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194">
+              <caret line="46" column="63" lean-forward="false" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="63" />
+              <folding>
+                <element signature="n#record#1;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+                <element signature="n#record#2;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+                <element signature="n#record#3;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+                <element signature="n#record#4;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+                <element signature="n#record#5;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+                <element signature="n#record#9;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="groups.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/addons/hs_base/security/groups.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="7" column="47" lean-forward="false" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hs_base.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/addons/hs_base/models/hs_base.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="432">
+              <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="17" />
+              <folding>
+                <element signature="e#25#39#0" expanded="true" />
+                <element signature="e#4163#6517#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/addons/hs_expenses/models/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding>
+                <element signature="e#25#64#0" expanded="true" />
+                <element signature="e#214#1063#0" expanded="false" />
+                <element signature="e#1105#2249#0" expanded="false" />
+                <element signature="e#2603#2905#0" expanded="false" />
+                <element signature="e#2942#3240#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="res_partner.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../odoo/odoo/addons/base/models/res_partner.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="253" column="44" lean-forward="false" selection-start-line="253" selection-start-column="41" selection-end-line="253" selection-end-column="44" />
+              <folding>
+                <element signature="e#14497#15625#0" expanded="false" />
+                <element signature="e#16710#18028#0" expanded="false" />
+                <element signature="e#19380#19986#0" expanded="false" />
+                <element signature="e#21292#21750#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_move2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../odoo/addons/stock/tests/test_move2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="422">
+              <caret line="1774" column="36" lean-forward="true" selection-start-line="1774" selection-start-column="36" selection-end-line="1774" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>_name = &quot;res.partner</find>
+      <find>_compute_commercial_partner</find>
+      <find>commercial_partner_id</find>
+      <find>column_type</find>
+      <find>required=</find>
+      <find>_commercial_fields</find>
+      <find>model=&quot;ir.actions.act_window&quot;</find>
+      <find>&lt;field name=&quot;view_type&quot;&gt;</find>
+      <find>SELECT id FROM</find>
+      <find>hs.expense.entertain.user</find>
+      <find>action_entertain_user</find>
+      <find>entertain_company_id</find>
+      <find>_inherit = 'res.partner'</find>
+      <find>_inherits</find>
+      <find>hs.expense.entertain.company</find>
+      <find>_inherits = {'</find>
+      <find>model_hs_expense_entertain_user</find>
+      <find>action_entertain_company</find>
+      <find>domain=</find>
+      <find>compute=</find>
+      <find>.join</find>
+      <find>_compute_display_name</find>
+      <find>view_id</find>
+      <find>&lt;field name=&quot;view_id&quot; ref=&quot;</find>
+      <find>view_model_data_form</find>
+      <find>&lt;xpath</find>
+      <find>&lt;field name=&quot;inherit_id&quot; ref=&quot;</find>
+      <find>hs.base.employee</find>
+      <find>&lt;field name=&quot;domain&quot;&gt;</find>
+      <find>partner</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>_</replace>
+      <replace>module_category_hs_expenses</replace>
+      <replace>module_category_hengshen_expenses</replace>
+      <replace>module_category_hengshen_expense</replace>
+      <replace>res.partner</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/addons</dir>
+      <dir>$PROJECT_DIR$/../odoo/addons</dir>
+      <dir>$PROJECT_DIR$/../odoo</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../odoo" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/hsexpenses.conf" />
+        <option value="$PROJECT_DIR$/addons/hs_base/security/ir.model.access.csv" />
+        <option value="$PROJECT_DIR$/addons/hs_base/models/hs_base.py" />
+        <option value="$PROJECT_DIR$/addons/hs_base/i18n/zh_CN.po" />
+        <option value="$PROJECT_DIR$/addons/hs_base/views/hs_base_view.xml" />
+        <option value="$PROJECT_DIR$/addons/hs_expenses/__init__.py" />
+        <option value="$PROJECT_DIR$/addons/hs_base/security/groups.xml" />
+        <option value="$PROJECT_DIR$/addons/hs_expenses/__manifest__.py" />
+        <option value="$PROJECT_DIR$/addons/hs_expenses/security/groups.xml" />
+        <option value="$PROJECT_DIR$/addons/hs_expenses/security/ir.model.access.csv" />
+        <option value="$PROJECT_DIR$/addons/hs_expenses/models/models.py" />
+        <option value="$PROJECT_DIR$/addons/hs_expenses/views/views.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="10" />
+    <option name="y" value="44" />
+    <option name="width" value="1260" />
+    <option name="height" value="697" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="hsexpenses" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hsexpenses" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hsexpenses" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hsexpenses" type="462c0819:PsiDirectoryNode" />
+              <item name="addons" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hsexpenses" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hsexpenses" type="462c0819:PsiDirectoryNode" />
+              <item name="addons" type="462c0819:PsiDirectoryNode" />
+              <item name="hs_base" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hsexpenses" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hsexpenses" type="462c0819:PsiDirectoryNode" />
+              <item name="addons" type="462c0819:PsiDirectoryNode" />
+              <item name="hs_base" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hsexpenses" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hsexpenses" type="462c0819:PsiDirectoryNode" />
+              <item name="addons" type="462c0819:PsiDirectoryNode" />
+              <item name="hs_base" type="462c0819:PsiDirectoryNode" />
+              <item name="security" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hsexpenses" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hsexpenses" type="462c0819:PsiDirectoryNode" />
+              <item name="addons" type="462c0819:PsiDirectoryNode" />
+              <item name="hs_base" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hsexpenses" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hsexpenses" type="462c0819:PsiDirectoryNode" />
+              <item name="addons" type="462c0819:PsiDirectoryNode" />
+              <item name="hs_expenses" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hsexpenses" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hsexpenses" type="462c0819:PsiDirectoryNode" />
+              <item name="addons" type="462c0819:PsiDirectoryNode" />
+              <item name="hs_expenses" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hsexpenses" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hsexpenses" type="462c0819:PsiDirectoryNode" />
+              <item name="addons" type="462c0819:PsiDirectoryNode" />
+              <item name="hs_expenses" type="462c0819:PsiDirectoryNode" />
+              <item name="security" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hsexpenses" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hsexpenses" type="462c0819:PsiDirectoryNode" />
+              <item name="addons" type="462c0819:PsiDirectoryNode" />
+              <item name="hs_expenses" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hsexpenses" type="b2602c69:ProjectViewProjectNode" />
+              <item name="odoo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hsexpenses" type="b2602c69:ProjectViewProjectNode" />
+              <item name="odoo" type="462c0819:PsiDirectoryNode" />
+              <item name="addons" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hsexpenses" type="b2602c69:ProjectViewProjectNode" />
+              <item name="odoo" type="462c0819:PsiDirectoryNode" />
+              <item name="addons" type="462c0819:PsiDirectoryNode" />
+              <item name="decimal_precision" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hsexpenses" type="b2602c69:ProjectViewProjectNode" />
+              <item name="odoo" type="462c0819:PsiDirectoryNode" />
+              <item name="addons" type="462c0819:PsiDirectoryNode" />
+              <item name="decimal_precision" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../odoo" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="hsexpenses" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/../env.odoo12/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../odoo" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="hsexpenses" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../odoo/odoo-bin" />
+      <option name="PARAMETERS" value="-c $PROJECT_DIR$/hsexpenses.conf -u hs_expenses" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="10fad822-c613-4aa4-951e-6fda4913114f" name="Default" comment="" />
+      <created>1552354412439</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1552354412439</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="-6" width="1920" height="1051" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13385417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22057264" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24496289" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../odoo/odoo/addons/base/models/res_partner.py</url>
+          <line>545</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="18" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/addons/hs_base/models/hs_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="33" lean-forward="false" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
+          <folding>
+            <element signature="e#25#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_expenses/models/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="71" column="94" lean-forward="false" selection-start-line="71" selection-start-column="81" selection-end-line="71" selection-end-column="94" />
+          <folding>
+            <element signature="e#25#64#0" expanded="true" />
+            <element signature="e#214#1063#0" expanded="false" />
+            <element signature="e#1105#2249#0" expanded="false" />
+            <element signature="e#2603#2905#0" expanded="false" />
+            <element signature="e#2942#3240#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_base/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/decimal_precision/models/decimal_precision.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="58" lean-forward="true" selection-start-line="9" selection-start-column="58" selection-end-line="9" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_expenses/views/views.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="864">
+          <caret line="48" column="8" lean-forward="false" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
+          <folding>
+            <element signature="n#record#3;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#4;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#5;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#6;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#7;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#8;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_base/__manifest__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_base/security/ir.model.access.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_base/models/hs_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="18" column="29" lean-forward="true" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+          <folding>
+            <element signature="e#25#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_base/views/hs_base_view.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2394">
+          <caret line="133" column="43" lean-forward="true" selection-start-line="133" selection-start-column="43" selection-end-line="133" selection-end-column="43" />
+          <folding>
+            <element signature="n#record#1;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#2;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#3;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#4;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#5;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#9;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/hr_attendance/models/hr_employee.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="28" column="14" lean-forward="false" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/hr/models/hr.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#820#4076#0" expanded="false" />
+            <element signature="e#4113#13371#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/hr/security/hr_security.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/hr_attendance/views/hr_department_view.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/hr/security/ir.model.access.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/hr_attendance/views/hr_department_view.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/hr_attendance/models/hr_employee.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="28" column="14" lean-forward="false" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/hr/models/hr.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-700">
+          <caret line="3" column="14" lean-forward="true" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+          <folding>
+            <element signature="e#820#4076#0" expanded="false" />
+            <element signature="e#4113#13371#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_base/i18n/zh_CN.po">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="844">
+          <caret line="418" column="0" lean-forward="true" selection-start-line="418" selection-start-column="0" selection-end-line="418" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/hr/security/ir.model.access.csv">
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="77" lean-forward="true" selection-start-line="7" selection-start-column="77" selection-end-line="7" selection-end-column="77" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/hr/views/hr_views.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="609" column="47" lean-forward="false" selection-start-line="609" selection-start-column="20" selection-end-line="609" selection-end-column="47" />
+          <folding>
+            <element signature="n#record#0;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#1;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#2;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#3;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#6;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#7;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#8;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#9;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#10;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#11;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#12;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#13;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#14;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#15;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#16;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#17;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#21;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/hr_expense/models/hr_expense.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-378">
+          <caret line="9" column="37" lean-forward="false" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_base/static/description/icon.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/hr/security/hr_security.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="15" column="81" lean-forward="false" selection-start-line="15" selection-start-column="81" selection-end-line="15" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_base/security/ir.model.access.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="57" lean-forward="false" selection-start-line="1" selection-start-column="47" selection-end-line="1" selection-end-column="57" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hsexpenses.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="14" lean-forward="true" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_base/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_expenses/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="17" lean-forward="true" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/decimal_precision/models/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="31" lean-forward="false" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/decimal_precision/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/product/models/product.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/sale_management/models/sale_order.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="159" column="67" lean-forward="true" selection-start-line="159" selection-start-column="67" selection-end-line="159" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/product/models/product_pricelist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/lunch/models/lunch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="41" lean-forward="false" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/website_sale/models/product.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="127" column="99" lean-forward="false" selection-start-line="127" selection-start-column="86" selection-end-line="127" selection-end-column="99" />
+          <folding>
+            <element signature="e#99#145#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/decimal_precision/models/decimal_precision.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="23" column="17" lean-forward="true" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/stock/tests/test_move2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="1774" column="36" lean-forward="true" selection-start-line="1774" selection-start-column="36" selection-end-line="1774" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_base/__manifest__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="19" column="39" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="19" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_expenses/__manifest__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/odoo/addons/base/models/res_company.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="43" column="11" lean-forward="false" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/addons/web/controllers/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="953" column="0" lean-forward="false" selection-start-line="953" selection-start-column="0" selection-end-line="953" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/odoo/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="426" column="19" lean-forward="false" selection-start-line="426" selection-start-column="19" selection-end-line="426" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_expenses/security/ir.model.access.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="139" lean-forward="false" selection-start-line="2" selection-start-column="139" selection-end-line="2" selection-end-column="139" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_expenses/security/groups.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="55" lean-forward="true" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/odoo/fields.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="1037" column="0" lean-forward="false" selection-start-line="1037" selection-start-column="0" selection-end-line="1037" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/typing.pyi">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="312" column="8" lean-forward="false" selection-start-line="312" selection-start-column="8" selection-end-line="312" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../odoo/odoo/addons/base/models/res_partner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="253" column="44" lean-forward="false" selection-start-line="253" selection-start-column="41" selection-end-line="253" selection-end-column="44" />
+          <folding>
+            <element signature="e#14497#15625#0" expanded="false" />
+            <element signature="e#16710#18028#0" expanded="false" />
+            <element signature="e#19380#19986#0" expanded="false" />
+            <element signature="e#21292#21750#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_base/security/groups.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="47" lean-forward="false" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_base/views/hs_base_view.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="46" column="63" lean-forward="false" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="63" />
+          <folding>
+            <element signature="n#record#1;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#2;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#3;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#4;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#5;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#9;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_base/models/hs_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="17" />
+          <folding>
+            <element signature="e#25#39#0" expanded="true" />
+            <element signature="e#4163#6517#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_expenses/views/views.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="104" column="17" lean-forward="true" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
+          <folding>
+            <element signature="n#record#3;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#4;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#5;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#6;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#7;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+            <element signature="n#record#8;n#data#0;n#odoo#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addons/hs_expenses/models/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <element signature="e#25#64#0" expanded="true" />
+            <element signature="e#214#1063#0" expanded="false" />
+            <element signature="e#1105#2249#0" expanded="false" />
+            <element signature="e#2603#2905#0" expanded="false" />
+            <element signature="e#2942#3240#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

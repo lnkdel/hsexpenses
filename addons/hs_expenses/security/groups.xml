@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="base.module_category_hengshen_expense" model="ir.module.category">
+            <field name="name">HengShen Expense</field>
+            <field name="sequence" eval="20" />
+        </record>
+
+        <record id="group_hs_expenses_user" model="res.groups">
+            <field name="name">[HS Expenses] User</field>
+            <field name="category_id" ref="base.module_category_hengshen_expense"/>
+            <field name="comment">The user will be able to see all records in hs_expenses module.</field>
+        </record>
+
+        <record id="group_hs_expenses_seller" model="res.groups">
+            <field name="name">[HS Expenses] Seller</field>
+            <field name="category_id" ref="base.module_category_hengshen_expense"/>
+            <field name="implied_ids" eval="[(4, ref('group_hs_expenses_user'))]"/>
+            <field name="comment">The user will be able to submitted the application.</field>
+        </record>
+
+        <record id="group_hs_expenses_reviewer" model="res.groups">
+            <field name="name">[HS Expenses] Reviewer</field>
+            <field name="category_id" ref="base.module_category_hengshen_expense"/>
+            <field name="implied_ids" eval="[(4, ref('group_hs_expenses_user'))]"/>
+            <field name="comment">The user will be able to reviewed the application.</field>
+        </record>
+
+        <record id="group_hs_expenses_financial_officer" model="res.groups">
+            <field name="name">[HS Expenses] Financial Officer</field>
+            <field name="category_id" ref="base.module_category_hengshen_expense"/>
+            <field name="implied_ids" eval="[(4, ref('group_hs_expenses_user'))]"/>
+            <field name="comment">The user will be able to reviewed the application.</field>
+        </record>
+
+        <record id="group_hs_expenses_cashier" model="res.groups">
+            <field name="name">[HS Expenses] Cashier</field>
+            <field name="category_id" ref="base.module_category_hengshen_expense"/>
+            <field name="implied_ids" eval="[(4, ref('group_hs_expenses_user'))]"/>
+            <field name="comment">The user will be able to reviewed the application.</field>
+        </record>
+
+        <record id="group_hs_expenses_leader" model="res.groups">
+            <field name="name">[HS Expenses] Leader</field>
+            <field name="category_id" ref="base.module_category_hengshen_expense"/>
+            <field name="implied_ids" eval="[(4, ref('group_hs_expenses_user'))]"/>
+            <field name="comment">The user will be able to reviewed the application.</field>
+        </record>
+
+        <record id="group_hs_expenses_manager" model="res.groups">
+            <field name="name">[HS Expenses] Manager</field>
+            <field name="comment">The user will have access to the manage all records in hs_expenses module.</field>
+            <field name="category_id" ref="base.module_category_hengshen_expense"/>
+            <field name="implied_ids" eval="[
+            (4, ref('group_hs_expenses_user')),
+            (4, ref('group_hs_expenses_seller')),
+            (4, ref('group_hs_expenses_reviewer')),
+            (4, ref('group_hs_expenses_financial_officer')),
+            (4, ref('group_hs_expenses_cashier')),
+            (4, ref('group_hs_expenses_leader'))]"/>
+        </record>
+    </data>
+</odoo>

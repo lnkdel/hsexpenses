@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- HS Top menu item -->
+        <menuitem
+            id="menu_hs_root"
+            name="HS"
+            groups="base.group_user"
+            web_icon="hs_base,static/description/icon.png"
+            sequence="10"/>
+
+        <!-- Sub menu items -->
+        <menuitem
+            id="menu_organization"
+            name="Organization"
+            parent="menu_hs_root"
+            groups="base.group_user"
+            sequence="10"/>
+
+        <menuitem
+            id="menu_settings"
+            name="Settings"
+            parent="menu_hs_root"
+            groups="base.group_user"
+            sequence="99999"/>
+
+        <!-- Employee -->
+        <record id="view_employee_form" model="ir.ui.view">
+            <field name="name">hs.base.employee.form</field>
+            <field name="model">hs.base.employee</field>
+            <field name="arch" type="xml">
+                <form string="Employee">
+                    <sheet>
+                        <field name="image" widget='image' class="oe_avatar" options='{"preview_image":"image_medium"}'/>
+                        <div class="oe_title">
+                            <label for="employee_no" class="oe_edit_only"/>
+                            <h1>
+                                <field name="employee_no" placeholder="Employee No."/>
+                            </h1>
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Employee's Name"/>
+                            </h1>
+                        </div>
+                        <field name="tag_ids" widget="many2many_tags" placeholder="e.g. Part Time" options="{'no_create_edit': True}"/>
+                        <group>
+                            <group string="Contact Information">
+                                <field name="phone"/>
+                                <field name="mobile_phone"/>
+                                <field name="email" widget="email"/>
+                                <field name="wechat_account"/>
+                                <field name="rfid"/>
+                            </group>
+                            <group string="Organization">
+                                <field name="department_id"/>
+                                <field name="other_department_ids" widget="many2many_tags"/>
+                                <field name="parent_id"/>
+                                <field name="user_id" string="Related User"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <field name="note" placeholder="Other Information ..." colspan="4"/>
+                        <group name="group_log_access">
+                            <group>
+                                <field name="create_date" readonly="1"/>
+                                <field name="create_uid" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="write_date" readonly="1"/>
+                                <field name="write_uid" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_employee_tree" model="ir.ui.view">
+            <field name="name">hs.base.employee.tree</field>
+            <field name="model">hs.base.employee</field>
+            <field name="arch" type="xml">
+                <tree string="Employees">
+                    <field name="complete_name"/>
+                    <field name="department_id"/>
+                    <field name="other_department_ids"/>
+                    <field name="tag_ids"/>
+                    <field name="parent_id"/>
+                    <field name="phone"/>
+                    <field name="mobile_phone"/>
+                    <field name="login"/>
+                    <field name="rfid"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_employee" model="ir.actions.act_window">
+            <field name="name">Employees</field>
+            <field name="res_model">hs.base.employee</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+            id="menu_employee"
+            action="action_employee"
+            parent="menu_organization"
+            sequence="20"/>
+
+        <!-- Department -->
+        <record id="view_department_form" model="ir.ui.view">
+            <field name="name">hs.base.department.form</field>
+            <field name="model">hs.base.department</field>
+            <field name="arch" type="xml">
+                <form string="Department">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="parent_id"/>
+                                <field name="complete_name"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                            <group>
+                                <field name="manager_id"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <field name="note" placeholder="Other Information ..." colspan="4"/>
+                        <group name="group_log_access">
+                            <group>
+                                <field name="create_date" readonly="1"/>
+                                <field name="create_uid" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="write_date" readonly="1"/>
+                                <field name="write_uid" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_department_tree" model="ir.ui.view">
+            <field name="name">hs.base.department.tree</field>
+            <field name="model">hs.base.department</field>
+            <field name="arch" type="xml">
+                <tree string="Departments">
+                    <field name="complete_name"/>
+                    <field name="name"/>
+                    <field name="parent_id"/>
+                    <field name="manager_id"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_department" model="ir.actions.act_window">
+            <field name="name">Departments</field>
+            <field name="res_model">hs.base.department</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+            id="menu_department"
+            action="action_department"
+            parent="menu_organization"
+            sequence="10"/>
+
+
+        <!-- Employee Tag -->
+        <record id="view_employee_tag_form" model="ir.ui.view">
+            <field name="name">hs.base.employee.tag.form</field>
+            <field name="model">hs.base.employee.tag</field>
+            <field name="arch" type="xml">
+                <form string="Empoloyee Tag">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <field name="note" placeholder="Other Information ..." colspan="4"/>
+                        <group name="group_log_access">
+                            <group>
+                                <field name="create_date" readonly="1"/>
+                                <field name="create_uid" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="write_date" readonly="1"/>
+                                <field name="write_uid" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_employee_tag_tree" model="ir.ui.view">
+            <field name="name">hs.base.employee.tag</field>
+            <field name="model">hs.base.employee.tag</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Tags">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_employee_tag" model="ir.actions.act_window">
+            <field name="name">Employee Tags</field>
+            <field name="res_model">hs.base.employee.tag</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+            id="menu_employee_tag"
+            action="action_employee_tag"
+            parent="menu_settings"
+            sequence="10"/>
+
+        <record id="user_create_wizard_view" model="ir.ui.view">
+            <field name="name">hs.base.user.create.wizard</field>
+            <field name="model">hs.base.user.create.wizard</field>
+            <field name="arch" type="xml">
+                <form string="User Create Wizard">
+                    <notebook>
+                        <page string="Create New User">
+                            <field name="employee_ids"/>
+                            <group>
+                                <field name="initial_password"/>
+                                <field name="tz"/>
+                                <field name="lang"/>
+                            </group>
+                        </page>
+                    </notebook>
+                    <notebook>
+                        <page string="Add users to Groups">
+                            <field name="group_ids"/>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button type="object" name="create_user" string="Create" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window id="user_create_wizard_action" name="User Create Wizard" src_model="hs.base.employee"
+                    res_model="hs.base.user.create.wizard" view_mode="form" target="new" multi="True"
+                    groups="group_manager"/>
+    </data>
+</odoo>
