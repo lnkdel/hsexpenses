@@ -23,8 +23,10 @@
 
     # always loaded
     'data': [
+        'data/ir_sequence_data.xml',
         'security/groups.xml',
         'security/ir.model.access.csv',
+        'security/rules.xml',
         'views/views.xml',
         # 'views/templates.xml',
     ],
