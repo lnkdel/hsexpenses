@@ -55,7 +55,7 @@
              <field name="res_model">hs.base.employee</field>
              <field name="view_type">form</field>
              <field name="view_mode">tree,form</field>
-             <field name="domain">[('department_id.name', 'ilike', '营销')]</field>
+             <field name="domain">['|', ('department_id.name', 'ilike', '营销'), ('department_id.parent_id.name', 'ilike', '营销')]</field>
              <field name="view_id" ref="view_hs_sale_seller_tree"/>
         </record>
 

@@ -68,7 +68,7 @@ class EntertainUser(models.Model):
 
 
 class Seller(models.Model):
-    _inherit = 'hs.base.employee'
+    _inherit = ['hs.base.employee']
 
     sale_market_id = fields.Many2one('hs.sale.market', string='Sale Market')
     sale_area_id = fields.Many2one('hs.sale.area', string='Sale Area')
