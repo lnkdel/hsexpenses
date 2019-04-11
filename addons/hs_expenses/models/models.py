@@ -215,6 +215,13 @@ class SpecialApplication(models.Model):
     ], string='Status', copy=False, index=True, readonly=True, store=True, default='draft',
         help="Status of the expense.")
 
+    expense_category = fields.Selection([
+        ('quality', 'Quality'),
+        ('contract', 'Contract order delivery'),
+        ('project', 'New project development'),
+        ('other', 'Other'),
+    ], string='Category', index=True, default='other', required=True)
+
     @api.model
     def create(self, vals):
         if vals.get('name') is None:
