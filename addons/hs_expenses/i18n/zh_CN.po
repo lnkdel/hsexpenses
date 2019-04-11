@@ -157,6 +157,11 @@ msgid "Cashier Audited"
 msgstr "出纳"
 
 #. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_special_application__expense_category
+msgid "Category"
+msgstr "类别"
+
+#. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_special_application__cause
 msgid "Cause"
 msgstr "事由"
@@ -275,6 +280,10 @@ msgstr "联系人"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_entertain_user__child_ids
 msgid "Contacts"
 msgstr "联系人"
+
+#: selection:hs.expense.special.application,expense_category:0
+msgid "Contract order delivery"
+msgstr "合同订单发货回款"
 
 #. module: hs_expenses
 #: model:ir.model.fields,help:hs_expenses.field_hs_expense_entertain_company__message_bounce
@@ -631,6 +640,21 @@ msgstr "银行转帐"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_market__name
 msgid "Name"
 msgstr "名称"
+
+#. module: hs_expenses
+#: selection:hs.expense.special.application,expense_category:0
+msgid "New project development"
+msgstr "新项目拓展"
+
+#. module: hs_expenses
+#: selection:hs.expense.special.application,expense_category:0
+msgid "Other"
+msgstr "其他"
+
+#. module: hs_expenses
+#: selection:hs.expense.special.application,expense_category:0
+msgid "Quality"
+msgstr "质量"
 
 #. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_entertain_company__activity_date_deadline
@@ -1123,9 +1147,24 @@ msgid "[HS Expenses] Manager"
 msgstr "[恒神费用] 管理员"
 
 #. module: hs_expenses
-#: model:res.groups,name:hs_expenses.group_hs_expenses_reviewer
-msgid "[HS Expenses] Reviewer"
-msgstr "[恒神费用] 领导"
+#: model:res.groups,name:hs_expenses.group_hs_expenses_other_reviewer
+msgid "[HS Expenses] Other Reviewer"
+msgstr "[恒神费用] 其他相关审核员"
+
+#. module: hs_expenses
+#: model:res.groups,name:hs_expenses.group_hs_expenses_project_reviewer
+msgid "[HS Expenses] Project Reviewer"
+msgstr "[恒神费用] 项目相关审核员"
+
+#. module: hs_expenses
+#: model:res.groups,name:hs_expenses.group_hs_expenses_quality_reviewer
+msgid "[HS Expenses] Quality Reviewer"
+msgstr "[恒神费用] 质量相关审核员"
+
+#. module: hs_expenses
+#: model:res.groups,name:hs_expenses.group_hs_expenses_contract_reviewer
+msgid "[HS Expenses] Contract Reviewer"
+msgstr "[恒神费用] 合同相关审核员"
 
 #. module: hs_expenses
 #: model:res.groups,name:hs_expenses.group_hs_expenses_seller
