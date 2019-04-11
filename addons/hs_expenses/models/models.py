@@ -45,8 +45,9 @@ class EntertainUser(models.Model):
     @api.depends('partner_id', 'name', 'parent_id.name')
     def _compute_display_name(self):
         for res in self:
-            names = [res.partner_id.parent_id.name, res.partner_id.name]
-            res.display_name = ','.join(names)
+            if res.partner_id is not None and res.partner_id.parent_id is not None:
+                names = [res.partner_id.parent_id.name, res.partner_id.name]
+                res.display_name = ','.join(names)
 
     @api.model
     def create(self, vals):

@@ -168,7 +168,7 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="name"/>
+                                <field name="name" required="True"/>
                             </group>
                         </group>
                     </sheet>
@@ -216,12 +216,12 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="name"/>
-                                <field name="phone"/>
+                                <field name="name" required="True"/>
+                                <field name="phone" required="True"/>
                             </group>
                             <group>
-                                <field name="function"/>
-                                <field name="parent_id" domain="[('is_company', '=', True)]" />
+                                <field name="function" required="True"/>
+                                <field name="parent_id" required="True" domain="[('is_company', '=', True)]" />
                             </group>
                         </group>
                     </sheet>
