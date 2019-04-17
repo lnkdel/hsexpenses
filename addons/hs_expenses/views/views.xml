@@ -12,9 +12,11 @@
 
         <menuitem id="setting_menu" name="Settings" parent="menu_hs_expenses_root" sequence="9999"/>
 
-        <menuitem id="menu_Sale" name="Sale Management" parent="setting_menu" sequence="0"/>
+        <menuitem id="menu_sale" name="Sale Management" parent="setting_menu" sequence="0"/>
 
-        <menuitem id="menu_entertain" name="Entertain Party" parent="setting_menu" sequence="1"/>
+        <menuitem id="menu_travel" name="Travel Management" parent="setting_menu" sequence="1"/>
+
+        <menuitem id="menu_entertain" name="Entertain Party" parent="setting_menu" sequence="9"/>
 
         <record model="ir.ui.view" id="view_hs_sale_seller_tree">
             <field name="name">hs.sale.seller.tree</field>
@@ -26,6 +28,8 @@
                     <field name="sale_area_id"/>
                     <field name="bank_name"/>
                     <field name="bank_account"/>
+                    <field name="employee_level_id"/>
+                    <field name="current_month_quota"/>
                 </tree>
             </field>
         </record>
@@ -40,10 +44,12 @@
                         <group>
                             <field name="sale_market_id"/>
                             <field name="sale_area_id"/>
+                            <field name="employee_level_id"/>
                         </group>
                         <group>
                             <field name="bank_name"/>
                             <field name="bank_account"/>
+                            <field name="current_month_quota"/>
                         </group>
                     </group>
                 </xpath>
@@ -62,7 +68,7 @@
         <menuitem
             id="menu_hs_sale_seller"
             action="action_sale_seller"
-            parent="menu_Sale"
+            parent="menu_sale"
             sequence="0"/>
 
         <record model="ir.ui.view" id="view_hs_sale_market_tree">
@@ -104,7 +110,7 @@
         <menuitem
             id="menu_hs_sale_market"
             action="action_hs_sale_market"
-            parent="menu_Sale"
+            parent="menu_sale"
             sequence="1"/>
 
         <record model="ir.ui.view" id="view_hs_sale_area_tree">
@@ -146,8 +152,61 @@
         <menuitem
             id="menu_hs_sale_area"
             action="action_hs_sale_area"
-            parent="menu_Sale"
+            parent="menu_sale"
             sequence="2"/>
+
+        <record model="ir.ui.view" id="view_hs_sale_benefit_tree">
+          <field name="name">hs.sale.benefit.tree</field>
+          <field name="model">hs.sale.benefit</field>
+          <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id"/>
+                <field name="year"/>
+                <field name="month"/>
+                <field name="benefit"/>
+                <field name="remark"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="view_hs_sale_benefit_form" model="ir.ui.view">
+            <field name="name">hs.sale.benefit.form</field>
+            <field name="model">hs.sale.benefit</field>
+            <field name="arch" type="xml">
+                <form string="Benefit">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="year"/>
+                                <field name="employee_id"/>
+                                <field name="remark"/>
+                            </group>
+                            <group>
+                                <field name="month"/>
+                                <field name="benefit"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hs_sale_benefit" model="ir.actions.act_window">
+            <field name="name">Sale Benefit</field>
+            <field name="res_model">hs.sale.benefit</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+            id="menu_hs_sale_benefit"
+            action="action_hs_sale_benefit"
+            parent="menu_sale"
+            sequence="3"/>
+
 
 
         <record model="ir.ui.view" id="view_entertain_company_tree">
@@ -217,10 +276,10 @@
                         <group>
                             <group>
                                 <field name="name" required="True"/>
-                                <field name="phone" required="True"/>
+                                <field name="phone" />
                             </group>
                             <group>
-                                <field name="function" required="True"/>
+                                <field name="function" />
                                 <field name="parent_id" required="True" domain="[('is_company', '=', True)]" />
                             </group>
                         </group>
@@ -238,17 +297,6 @@
             <field name="context">{}</field>
             <field name="view_id" eval="False"/>
         </record>
-
-        <!--<record model="ir.actions.act_window" id="action_entertain_user_tree">-->
-             <!--<field name="name">Entertain User</field>-->
-             <!--<field name="res_model">res.partner</field>-->
-             <!--<field name="view_type">form</field>-->
-             <!--<field name="view_mode">tree,form</field>-->
-             <!--<field name="domain">[('is_entertain_user', '=', True)]</field>-->
-             <!--<field name="view_id" ref="view_entertain_user_tree"/>-->
-         <!--</record>-->
-
-
 
         <menuitem
             id="menu_entertain_user"
@@ -299,58 +347,51 @@
                         <button name="action_confirm_expenses" string="Confirm" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','approved')]}" groups="hs_expenses.group_hs_expenses_seller"/>
 
                         <!--reviewer-->
-                        <button name="action_audit_expenses" string="Audit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'other')]}" groups="hs_expenses.group_hs_expenses_other_reviewer"/>
-                        <button name="action_back_to_confirm" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'other')]}" groups="hs_expenses.group_hs_expenses_other_reviewer"/>
+                        <!--<button name="action_audit_expenses" string="Audit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'other')]}" groups="hs_expenses.group_hs_expenses_other_reviewer"/>-->
+                        <!--<button name="action_back_to_confirm" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'other')]}" groups="hs_expenses.group_hs_expenses_other_reviewer"/>-->
 
-                        <button name="action_audit_expenses" string="Audit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'quality')]}" groups="hs_expenses.group_hs_expenses_quality_reviewer"/>
-                        <button name="action_back_to_confirm" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'quality')]}" groups="hs_expenses.group_hs_expenses_quality_reviewer"/>
+                        <!--<button name="action_audit_expenses" string="Audit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'quality')]}" groups="hs_expenses.group_hs_expenses_quality_reviewer"/>-->
+                        <!--<button name="action_back_to_confirm" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'quality')]}" groups="hs_expenses.group_hs_expenses_quality_reviewer"/>-->
 
-                        <button name="action_audit_expenses" string="Audit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'contract')]}" groups="hs_expenses.group_hs_expenses_contract_reviewer"/>
-                        <button name="action_back_to_confirm" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'contract')]}" groups="hs_expenses.group_hs_expenses_contract_reviewer"/>
+                        <!--<button name="action_audit_expenses" string="Audit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'contract')]}" groups="hs_expenses.group_hs_expenses_contract_reviewer"/>-->
+                        <!--<button name="action_back_to_confirm" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'contract')]}" groups="hs_expenses.group_hs_expenses_contract_reviewer"/>-->
 
-                        <button name="action_audit_expenses" string="Audit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'project')]}" groups="hs_expenses.group_hs_expenses_project_reviewer"/>
-                        <button name="action_back_to_confirm" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'project')]}" groups="hs_expenses.group_hs_expenses_project_reviewer"/>
+                        <!--<button name="action_audit_expenses" string="Audit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'project')]}" groups="hs_expenses.group_hs_expenses_project_reviewer"/>-->
+                        <!--<button name="action_back_to_confirm" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','confirmed'), ('expense_category', '!=', 'project')]}" groups="hs_expenses.group_hs_expenses_project_reviewer"/>-->
 
                         <!--financial-->
-                        <button name="action_audit2_expenses" string="Audit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','audited')]}" groups="hs_expenses.group_hs_expenses_financial_officer"/>
+                        <button name="action_audit_expenses" string="Audit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','confirmed')]}" groups="hs_expenses.group_hs_expenses_financial_officer"/>
+                        <button name="action_back_to_confirm" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','confirmed')]}" groups="hs_expenses.group_hs_expenses_financial_officer"/>
 
                         <!--cashier-->
-                        <button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=', 'audited2'), ('reimbursement_amount', '&gt;', 4999)]}" groups="hs_expenses.group_hs_expenses_cashier"/>
-                        <button name="action_cashier_expenses" string="Submit To Sign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('complete_countersign', '=', True), ('state','!=', 'audited2'), ('reimbursement_amount', '&lt;', 5000)]}" groups="hs_expenses.group_hs_expenses_cashier"/>
-                        <button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('complete_countersign', '=', False), ('state','!=', 'audited2'), ('reimbursement_amount', '&lt;', 5000)]}" groups="hs_expenses.group_hs_expenses_cashier"/>
+                        <button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=', 'audited'), ('audit_amount', '&gt;=', 5000)]}" groups="hs_expenses.group_hs_expenses_cashier"/>
+                        <button name="action_cashier_expenses" string="Submit To Sign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('complete_countersign', '=', True), ('state','!=', 'audited'), ('audit_amount', '&lt;', 5000)]}" groups="hs_expenses.group_hs_expenses_cashier"/>
+                        <button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('complete_countersign', '=', False), ('state','!=', 'audited'), ('audit_amount', '&lt;', 5000)]}" groups="hs_expenses.group_hs_expenses_cashier"/>
 
                         <!--sign-->
-                        <button name="function_countersign_expenses" string="Countersign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=', 'countersign'), ('reimbursement_amount', '&lt;', 5000), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_leader"/>
-                        <button name="function_countersign_expenses" string="Countersign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=', 'countersign'), ('reimbursement_amount', '&lt;', 5000), ('current_sign_completed', '=', False)]}" disabled="disabled" groups="hs_expenses.group_hs_expenses_leader"/>
+                        <button name="function_countersign_expenses" string="Countersign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=', 'countersign'), ('audit_amount', '&lt;', 5000), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_leader"/>
+                        <button name="function_countersign_expenses" string="Countersign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=', 'countersign'), ('audit_amount', '&lt;', 5000), ('current_sign_completed', '=', False)]}" disabled="disabled" groups="hs_expenses.group_hs_expenses_leader"/>
 
-                        <field name="state" widget="statusbar" statusbar_visible="draft,reported,approved,confirmed,audited,audited2,countersign,done"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,reported,approved,confirmed,audited,countersign,done"/>
                     </header>
                     <sheet>
                         <group string="Special Application Information">
                             <group>
                                 <field name="expense_category" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="applicant_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                                <field name="handler_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="handler_id" attrs="{'readonly': [('state', '!=', 'draft')]}" invisible="1"/>
                                 <field name="sale_area_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
                                 <field name="entertain_company_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
                                 <field name="entertain_res_user_ids" attrs="{'readonly': [('state', '!=', 'draft')]}" />
-                                <!--<notebook>-->
-                                    <!--<page string="Entertain Person">-->
-                                        <!--<field name="entertain_res_user_ids" attrs="{'readonly': [('state', '!=', 'draft')]}" >-->
-                                            <!--<tree>-->
-                                                <!--<field name="display_name"/>-->
-                                                <!--<field name="partner_id"/>-->
-                                            <!--</tree>-->
-                                        <!--</field>-->
-                                    <!--</page>-->
-                                <!--</notebook>-->
                             </group>
                             <group>
                                 <field name="applicant_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="applicant_department_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="sale_market_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
                                 <field name="applicant_amount" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="entertain_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="cause" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="application_remark" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="current_sign_completed" invisible="1"/>
                                 <field name="complete_countersign" invisible="1"/>
                             </group>
@@ -364,11 +405,16 @@
                             <group>
                                 <field name="reimbursement_payment_method" attrs="{'readonly': [('state', 'not in', ['draft', 'approved'])]}"/>
                                 <field name="bank_account" attrs="{'readonly': [('state', 'not in', ['draft', 'approved'])]}"/>
+                                <field name="reimbursement_remark" attrs="{'readonly': [('state', 'not in', ['draft', 'approved'])]}"/>
                             </group>
                         </group>
-                        <!--<group string="Countersign Information" attrs="{'invisible': [('state', 'not in', ['countersign', 'done'])]}">-->
-                            <!---->
-                        <!--</group>-->
+                        <group string="Audit Information" attrs="{'invisible':[('state', 'not in', ['confirmed', 'audited', 'done', 'countersign'])]}">
+                            <group>
+                                <field name="audit_amount" attrs="{'readonly': [('state', 'not in', ['confirmed'])], 'required':[('state', '=', 'confirmed')]}"/>
+                            </group>
+                            <group></group>
+                        </group>
+
                         <notebook>
                             <page string="Countersign Information" attrs="{'invisible': ['|', ('state', 'not in', ['audited2', 'countersign', 'done']), ('reimbursement_amount', '&lt;', 5000)]}">
                                 <field name="countersign_ids">

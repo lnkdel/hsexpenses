@@ -781,7 +781,7 @@ msgid "Sale Information"
 msgstr "销售信息"
 
 #. module: hs_expenses
-#: model:ir.ui.menu,name:hs_expenses.menu_Sale
+#: model:ir.ui.menu,name:hs_expenses.menu_sale
 msgid "Sale Management"
 msgstr "销售管理"
 

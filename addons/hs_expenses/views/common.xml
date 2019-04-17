@@ -1,0 +1,192 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_hs_employee_level_tree">
+          <field name="name">hs.base.employee.level.tree</field>
+          <field name="model">hs.base.employee.level</field>
+          <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="view_hs_employee_level_form" model="ir.ui.view">
+            <field name="name">hs.base.employee.level.form</field>
+            <field name="model">hs.base.employee.level</field>
+            <field name="arch" type="xml">
+                <form string="Benefit">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hs_employee_level" model="ir.actions.act_window">
+            <field name="name">Employee Level</field>
+            <field name="res_model">hs.base.employee.level</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+            id="menu_hs_employee_level"
+            action="action_hs_employee_level"
+            parent="menu_sale"
+            sequence="4"/>
+
+
+        <record model="ir.ui.view" id="view_hs_expense_travel_standard_tree">
+          <field name="name">hs.expense.travel.standard.tree</field>
+          <field name="model">hs.expense.travel.standard</field>
+          <field name="arch" type="xml">
+            <tree>
+                <field name="travel_category_id"/>
+                <field name="employee_level_id"/>
+                <field name="city_level_id"/>
+                <field name="standard_meal_cost"/>
+                <field name="standard_hotel_cost"/>
+                <field name="standard_car_cost"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="view_hs_expense_travel_standard_form" model="ir.ui.view">
+            <field name="name">hs.expense.travel.standard.form</field>
+            <field name="model">hs.expense.travel.standard</field>
+            <field name="arch" type="xml">
+                <form string="Travel Standard">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="travel_category_id"/>
+                                <field name="city_level_id"/>
+                                <field name="standard_hotel_cost"/>
+                                <field name="remark"/>
+                            </group>
+                            <group>
+                                <field name="employee_level_id"/>
+                                <field name="standard_meal_cost"/>
+                                <field name="standard_car_cost"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hs_expense_travel_standard" model="ir.actions.act_window">
+            <field name="name">Travel Standard</field>
+            <field name="res_model">hs.expense.travel.standard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+            id="menu_hs_expense_travel_standard"
+            action="action_hs_expense_travel_standard"
+            parent="menu_travel"
+            sequence="0"/>
+
+        <record model="ir.ui.view" id="view_hs_city_level_tree">
+          <field name="name">hs.base.city.level.tree</field>
+          <field name="model">hs.base.city.level</field>
+          <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="view_hs_city_level_form" model="ir.ui.view">
+            <field name="name">hs.base.city.level.form</field>
+            <field name="model">hs.base.city.level</field>
+            <field name="arch" type="xml">
+                <form string="City Level">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Add cities to Groups">
+                                <field name="city_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hs_city_level" model="ir.actions.act_window">
+            <field name="name">City Level</field>
+            <field name="res_model">hs.base.city.level</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+            id="menu_hs_city_level"
+            action="action_hs_city_level"
+            parent="menu_travel"
+            sequence="1"/>
+
+        <record model="ir.ui.view" id="view_hs_city_tree">
+          <field name="name">hs.base.city.tree</field>
+          <field name="model">hs.base.city</field>
+          <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="city_level_id"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="view_hs_city_form" model="ir.ui.view">
+            <field name="name">hs.base.city.form</field>
+            <field name="model">hs.base.city</field>
+            <field name="arch" type="xml">
+                <form string="City Level">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="city_level_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hs_city" model="ir.actions.act_window">
+            <field name="name">City</field>
+            <field name="res_model">hs.base.city</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+            id="menu_hs_city"
+            action="action_hs_city"
+            parent="menu_travel"
+            sequence="2"/>
+    </data>
+</odoo>

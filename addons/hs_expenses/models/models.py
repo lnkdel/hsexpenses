@@ -71,10 +71,44 @@ class EntertainUser(models.Model):
 class Seller(models.Model):
     _inherit = ['hs.base.employee']
 
+    def _compute_current_month_quota(self):
+        for seller in self:
+            seller.current_month_quota = 0
+            today = fields.Date.today()
+            year = today.year
+            month = today.month - 1
+
+            last_month_benefit = self.env['hs.sale.benefit'].sudo().\
+                search([('employee_id', '=', seller.id), ('year', '=', year), ('month', '=', month)])
+
+            if last_month_benefit:
+                seller.current_month_quota = last_month_benefit[0]['benefit'] * 0.01
+
     sale_market_id = fields.Many2one('hs.sale.market', string='Sale Market')
     sale_area_id = fields.Many2one('hs.sale.area', string='Sale Area')
     bank_name = fields.Char(string='Bank Name')
     bank_account = fields.Char(string='Bank Account')
+    employee_level_id = fields.Many2one('hs.base.employee.level', string='Employee Level')
+    current_month_quota = fields.Float("Current Month Quota", required=True, digits=(16, 2),
+                                       compute='_compute_current_month_quota')
+
+
+class Benefit(models.Model):
+    _name = 'hs.sale.benefit'
+    _description = 'Sale Benefit'
+    _order = 'year desc, month desc'
+
+    employee_id = fields.Many2one('hs.base.employee', string='Employee', required=True)
+    year = fields.Integer(default=fields.Date.today().year, required=True)
+    month = fields.Integer(default=fields.Date.today().month, required=True)
+    benefit = fields.Float("Benefit", required=True, digits=(16, 2))
+    remark = fields.Text()
+
+    _sql_constraints = [
+        ('employee_year_month_uniq',
+         'unique (employee_id,year,month)',
+         'The month has the same records.')
+    ]
 
 
 class SaleMarket(models.Model):
@@ -107,7 +141,6 @@ class SpecialApplication(models.Model):
     _name = 'hs.expense.special.application'
     _description = 'Special application and reimbursement form'
     _order = 'applicant_date desc, id desc'
-    # _rec_name = 'complete_name'
 
     @api.model
     def _get_default_employee(self):
@@ -135,6 +168,12 @@ class SpecialApplication(models.Model):
     def onchange_applicant_amount(self):
         for s in self:
             s.reimbursement_amount = s.applicant_amount
+
+    @api.onchange('reimbursement_amount')
+    def onchange_reimbursement_amount(self):
+        for s in self:
+            if s.reimbursement_amount > s.applicant_amount:
+                raise UserError(_("Reimbursement amount must be less than or equal to the application amount!"))
 
     @api.onchange('handler_id')
     def onchange_handler_id(self):
@@ -179,8 +218,12 @@ class SpecialApplication(models.Model):
                                            domain="[('is_entertain_company', '=', True)]")
     entertain_res_user_ids = fields.Many2many('hs.expense.entertain.user', string='Entertain Person',
                                               domain=_get_company_partner_domain)
+    entertain_date = fields.Date(string='Entertain Date', required=True,
+                                 default=lambda self: fields.Date.context_today(self))
     applicant_amount = fields.Float("Applicant Amount", required=True, digits=(16, 2))
-    cause = fields.Text(string="Cause")
+    cause = fields.Text(string="Cause", required=True)
+    application_remark = fields.Text(string="Application Remark")
+
     sale_area_id = fields.Many2one('hs.sale.area', related='applicant_id.sale_area_id', string='Sale Area', store=True)
     sale_market_id = fields.Many2one('hs.sale.market', related='applicant_id.sale_market_id', string='Sale Market', store=True)
 
@@ -194,6 +237,9 @@ class SpecialApplication(models.Model):
         "Reimbursement Amount",
         required=True,
         digits=(16, 2))
+    reimbursement_remark = fields.Text(string="Reimbursement Remark")
+
+    audit_amount = fields.Float("Audit Amount", digits=(16, 2))
 
     # have_to_countersign = fields.Boolean(default=False)
     complete_countersign = fields.Boolean(default=False)
@@ -209,7 +255,7 @@ class SpecialApplication(models.Model):
         ('approved', 'Approved'),
         ('confirmed', 'Confirmed '),
         ('audited', 'Audited'),
-        ('audited2', 'Cashier Audited'),
+        # ('audited2', 'Cashier Audited'),
         ('countersign', 'Countersign'),
         ('done', 'Paid')
     ], string='Status', copy=False, index=True, readonly=True, store=True, default='draft',
@@ -241,13 +287,6 @@ class SpecialApplication(models.Model):
 
     @api.multi
     def write(self, vals):
-        # employee = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
-        # if self.handler_id.id != employee.id:
-        #     raise UserError(_("You are not the handler!"))
-        # if vals:
-        #     if self.state not in ['draft', 'approved']:
-        #         raise UserError(_("You cannot modify the application that have already been submitted!"))
-
         return super(SpecialApplication, self).write(vals)
 
     @api.multi
@@ -282,35 +321,43 @@ class SpecialApplication(models.Model):
         return True
 
     @api.multi
-    def action_confirm_expenses(self): # 报销经办人填写好后提交到领导审批
-        employee = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
+    def action_confirm_expenses(self): # 报销经办人填写好后提交到财务审批
+        today = fields.Date.today()
+        if today.day < 23:
+            raise UserError(_("Please submit after 23 days of each month."))
+
         if any(expense.state != 'approved' for expense in self):
             raise UserError(_("You cannot confirm twice the same line!"))
-        if self.handler_id._uid != self.env.uid:
-            raise UserError(_("You are not the handler!"))
+
+        if self.reimbursement_amount > self.applicant_amount:
+            raise UserError(_("Reimbursement amount must be less than or equal to the application amount!"))
+
         self.write({'state': 'confirmed'})
         return True
 
-    @api.multi
-    def action_audit_expenses(self): # 领导审批完成，提交给财务审核
-        if any(expense.state != 'confirmed' for expense in self):
-            raise UserError(_("You cannot audit twice the same line!"))
-        self.write({'state': 'audited'})
-        return True
+    # @api.multi
+    # def action_audit_expenses(self): # 领导审批完成，提交给财务审核
+    #     if any(expense.state != 'confirmed' for expense in self):
+    #         raise UserError(_("You cannot audit twice the same line!"))
+    #     self.write({'state': 'audited'})
+    #     return True
 
     @api.multi
-    def action_back_to_confirm(self):
+    def action_back_to_confirm(self): # 财务退回上一步
         if any(expense.state != 'confirmed' for expense in self):
             raise UserError(_("You cannot audit twice the same line!"))
         self.write({'state': 'approved'})
         return True
 
     @api.multi
-    def action_audit2_expenses(self): # 财务审核完成，提交给出纳
-        if any(expense.state != 'audited' for expense in self):
+    def action_audit_expenses(self): # 财务审核完成，提交给出纳
+        if any(expense.state != 'confirmed' for expense in self):
             raise UserError(_("You cannot audit twice the same line!"))
 
-        if self.reimbursement_amount >= 5000:
+        if self.audit_amount <= 0:
+            raise UserError(_("Please enter the correct audit amount!"))
+
+        if self.audit_amount >= 5000:
             group_id = self.env.ref('hs_expenses.group_hs_expenses_leader').id
             leaders = self.env['res.users'].search([('groups_id', '=', group_id)])
             countersign = self.env['hs.expense.countersign']
@@ -321,14 +368,15 @@ class SpecialApplication(models.Model):
                         'employee_id': employee.id,
                         'expense_id': self.id
                     })
-        self.write({'state': 'audited2'})
+
+        self.write({'state': 'audited'})
         return True
 
     @api.multi
-    def action_cashier_expenses(self):
-        if any(expense.state != 'audited2' for expense in self):
+    def action_cashier_expenses(self): # 审核金额>=5000出纳提交会签，否则放款结束流程
+        if any(expense.state != 'audited' for expense in self):
             raise UserError(_("You cannot audit twice the same line!"))
-        if self.reimbursement_amount >= 5000:
+        if self.audit_amount >= 5000:
             if not self.complete_countersign:
                 self.write({'state': 'countersign'})
             else:
@@ -351,16 +399,16 @@ class SpecialApplication(models.Model):
 
             if not any(sign.is_approved is False
                        for sign in self.env['hs.expense.countersign'].search([('expense_id', '=', expense_id.id)])):
-                self.write({'complete_countersign': True, 'state': 'audited2'})
+                self.write({'complete_countersign': True, 'state': 'audited'})
                 # self.action_done_expenses()
         return True
 
-    # todo: 出纳需要判断金额是否大于5000,大于5000需要会签，5000以内直接放款结束流程
+    # 出纳需要判断金额是否大于5000,大于5000需要会签，5000以内直接放款结束流程
     @api.multi
     def action_done_expenses(self):
-        if any(expense.state not in ['audited2', 'countersign'] for expense in self):
+        if any(expense.state not in ['audited', 'countersign'] for expense in self):
             raise UserError(_("You cannot audit twice the same line!"))
-        if self.reimbursement_amount < 5000:
+        if self.audit_amount < 5000:
             self.write({'state': 'done'})
         else:
             if self.complete_countersign:
