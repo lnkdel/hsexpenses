@@ -173,6 +173,7 @@ class SpecialApplication(models.Model):
     def onchange_reimbursement_amount(self):
         for s in self:
             if s.reimbursement_amount > s.applicant_amount:
+                s.reimbursement_amount = s.applicant_amount
                 raise UserError(_("Reimbursement amount must be less than or equal to the application amount!"))
 
     @api.onchange('handler_id')
@@ -256,7 +257,7 @@ class SpecialApplication(models.Model):
         ('confirmed', 'Confirmed '),
         ('audited', 'Audited'),
         # ('audited2', 'Cashier Audited'),
-        ('countersign', 'Countersign'),
+        # ('countersign', 'Countersign'),
         ('done', 'Paid')
     ], string='Status', copy=False, index=True, readonly=True, store=True, default='draft',
         help="Status of the expense.")
@@ -303,6 +304,10 @@ class SpecialApplication(models.Model):
     def action_submit_expenses(self): # 营销人员草稿状态提交到领导审批
         if any(expense.state != 'draft' for expense in self):
             raise UserError(_("You cannot report twice the same line!"))
+        if self.applicant_amount <= 2000:
+            raise UserError(_("For applications within 2,000 yuan, please use the ordinary hospitality application."))
+        elif self.applicant_amount > 10000:
+            raise UserError(_("The amount of a single application cannot exceed 10,000 yuan."))
         self.write({'state': 'reported'})
         return True
 
@@ -357,17 +362,17 @@ class SpecialApplication(models.Model):
         if self.audit_amount <= 0:
             raise UserError(_("Please enter the correct audit amount!"))
 
-        if self.audit_amount >= 5000:
-            group_id = self.env.ref('hs_expenses.group_hs_expenses_leader').id
-            leaders = self.env['res.users'].search([('groups_id', '=', group_id)])
-            countersign = self.env['hs.expense.countersign']
-            for leader in leaders:
-                employee = self.env['hs.base.employee'].search([('user_id', '=', leader.id)], limit=1)
-                if employee and not leader.has_group('hs_expenses.group_hs_expenses_manager'):
-                    countersign.sudo().create({
-                        'employee_id': employee.id,
-                        'expense_id': self.id
-                    })
+        # if self.audit_amount >= 5000:
+        #     group_id = self.env.ref('hs_expenses.group_hs_expenses_leader').id
+        #     leaders = self.env['res.users'].search([('groups_id', '=', group_id)])
+        #     countersign = self.env['hs.expense.countersign']
+        #     for leader in leaders:
+        #         employee = self.env['hs.base.employee'].search([('user_id', '=', leader.id)], limit=1)
+        #         if employee and not leader.has_group('hs_expenses.group_hs_expenses_manager'):
+        #             countersign.sudo().create({
+        #                 'employee_id': employee.id,
+        #                 'expense_id': self.id
+        #             })
 
         self.write({'state': 'audited'})
         return True
@@ -376,13 +381,15 @@ class SpecialApplication(models.Model):
     def action_cashier_expenses(self): # 审核金额>=5000出纳提交会签，否则放款结束流程
         if any(expense.state != 'audited' for expense in self):
             raise UserError(_("You cannot audit twice the same line!"))
-        if self.audit_amount >= 5000:
-            if not self.complete_countersign:
-                self.write({'state': 'countersign'})
-            else:
-                self.action_done_expenses()
-        else:
-            self.action_done_expenses()
+        # if self.audit_amount >= 5000:
+        #     if not self.complete_countersign:
+        #         self.write({'state': 'countersign'})
+        #     else:
+        #         self.action_done_expenses()
+        # else:
+        #     self.action_done_expenses()
+        # 去掉会签
+        self.action_done_expenses()
         return True
 
     @api.multi
@@ -403,16 +410,18 @@ class SpecialApplication(models.Model):
                 # self.action_done_expenses()
         return True
 
-    # 出纳需要判断金额是否大于5000,大于5000需要会签，5000以内直接放款结束流程
+    # 出纳需要判断金额是否大于5000,大于5000需要会签，5000以内直接放款结束流程  --20190417 与姜烨确认去掉会签
     @api.multi
     def action_done_expenses(self):
         if any(expense.state not in ['audited', 'countersign'] for expense in self):
             raise UserError(_("You cannot audit twice the same line!"))
-        if self.audit_amount < 5000:
-            self.write({'state': 'done'})
-        else:
-            if self.complete_countersign:
-                self.write({'state': 'done'})
+        # if self.audit_amount < 5000:
+        #     self.write({'state': 'done'})
+        # else:
+        #     if self.complete_countersign:
+        #         self.write({'state': 'done'})
+        # 去掉会签
+        self.write({'state': 'done'})
         return True
 
 
@@ -425,3 +434,29 @@ class CounterSign(models.Model):
     #                               'countersign_id', 'expense_id', string='Special Application')
     expense_id = fields.Many2one('hs.expense.special.application', string='Special Application')
     is_approved = fields.Boolean(default=False)
+
+
+class BatchEndApplicationWizard(models.TransientModel):
+    _name = 'hs.expense.batch.end.wizard'
+    _description = 'Batch end application wizard'
+
+    application_ids = fields.Many2many('hs.expense.special.application', string='Special Applications')
+
+    @api.model
+    def default_get(self, fields):
+        res = {}
+        active_ids = self._context.get('active_ids')
+        if active_ids:
+            applications = self.env['hs.expense.special.application'].search_read(
+                domain=[('id', 'in', active_ids)], fields=['id', 'state'])
+            ids = [s['id'] for s in list(filter(lambda s: s['state'] == 'audited', applications))]
+            res = {'application_ids': ids}
+        return res
+
+    @api.multi
+    def batch_end_button(self):
+        self.ensure_one()
+        active_ids = self._context.get('active_ids')
+        applications = self.env['hs.expense.special.application'].search([('id', 'in', active_ids)])
+        applications.write({'state': 'done'})
+        return {'type': 'ir.actions.act_window_close'}

@@ -304,6 +304,27 @@
             parent="menu_entertain"
             sequence="1"/>
 
+        <record id="batch_end_application_wizard_view" model="ir.ui.view">
+            <field name="name">hs.expense.batch.end.wizard</field>
+            <field name="model">hs.expense.batch.end.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Batch End Application Wizard">
+                    <notebook>
+                        <page string="Batch End Application">
+                            <field name="application_ids"/>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button type="object" name="batch_end_button" string="Batch End" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window id="batch_end_application_wizard_action" name="Batch End Wizard"
+                    src_model="hs.expense.special.application"
+                    res_model="hs.expense.batch.end.wizard" view_mode="form" target="new" multi="True"
+                    groups="hs_expenses.group_hs_expenses_cashier"/>
 
         <record model="ir.ui.view" id="view_special_application_tree">
           <field name="name">hs.expense.special.application.tree</field>
@@ -364,15 +385,16 @@
                         <button name="action_back_to_confirm" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','confirmed')]}" groups="hs_expenses.group_hs_expenses_financial_officer"/>
 
                         <!--cashier-->
-                        <button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=', 'audited'), ('audit_amount', '&gt;=', 5000)]}" groups="hs_expenses.group_hs_expenses_cashier"/>
-                        <button name="action_cashier_expenses" string="Submit To Sign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('complete_countersign', '=', True), ('state','!=', 'audited'), ('audit_amount', '&lt;', 5000)]}" groups="hs_expenses.group_hs_expenses_cashier"/>
-                        <button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('complete_countersign', '=', False), ('state','!=', 'audited'), ('audit_amount', '&lt;', 5000)]}" groups="hs_expenses.group_hs_expenses_cashier"/>
+                        <button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier"/>
+                        <!--<button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=', 'audited'), ('audit_amount', '&gt;=', 5000)]}" groups="hs_expenses.group_hs_expenses_cashier"/>-->
+                        <!--<button name="action_cashier_expenses" string="Submit To Sign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('complete_countersign', '=', True), ('state','!=', 'audited'), ('audit_amount', '&lt;', 5000)]}" groups="hs_expenses.group_hs_expenses_cashier"/>-->
+                        <!--<button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('complete_countersign', '=', False), ('state','!=', 'audited'), ('audit_amount', '&lt;', 5000)]}" groups="hs_expenses.group_hs_expenses_cashier"/>-->
 
                         <!--sign-->
-                        <button name="function_countersign_expenses" string="Countersign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=', 'countersign'), ('audit_amount', '&lt;', 5000), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_leader"/>
-                        <button name="function_countersign_expenses" string="Countersign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=', 'countersign'), ('audit_amount', '&lt;', 5000), ('current_sign_completed', '=', False)]}" disabled="disabled" groups="hs_expenses.group_hs_expenses_leader"/>
+                        <!--<button name="function_countersign_expenses" string="Countersign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=', 'countersign'), ('audit_amount', '&lt;', 5000), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_leader"/>-->
+                        <!--<button name="function_countersign_expenses" string="Countersign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=', 'countersign'), ('audit_amount', '&lt;', 5000), ('current_sign_completed', '=', False)]}" disabled="disabled" groups="hs_expenses.group_hs_expenses_leader"/>-->
 
-                        <field name="state" widget="statusbar" statusbar_visible="draft,reported,approved,confirmed,audited,countersign,done"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,reported,approved,confirmed,audited,done"/>
                     </header>
                     <sheet>
                         <group string="Special Application Information">

@@ -63,7 +63,7 @@
             <field name="perm_write" eval="1" />
             <field name="perm_create" eval="0" />
             <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('state', 'in', ['reported', 'confirmed'])]</field>
+            <field name="domain_force">[('state', 'in', ['reported'])]</field>
             <field name="groups" eval="[(4, ref('group_hs_expenses_other_reviewer'))]"/>
         </record>
 
@@ -84,7 +84,7 @@
             <field name="perm_write" eval="1" />
             <field name="perm_create" eval="0" />
             <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('state', 'in', ['reported', 'confirmed'])]</field>
+            <field name="domain_force">[('state', 'in', ['reported'])]</field>
             <field name="groups" eval="[(4, ref('group_hs_expenses_quality_reviewer'))]"/>
         </record>
 
@@ -105,7 +105,7 @@
             <field name="perm_write" eval="1" />
             <field name="perm_create" eval="0" />
             <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('state', 'in', ['reported', 'confirmed'])]</field>
+            <field name="domain_force">[('state', 'in', ['reported'])]</field>
             <field name="groups" eval="[(4, ref('group_hs_expenses_contract_reviewer'))]"/>
         </record>
 
@@ -126,28 +126,28 @@
             <field name="perm_write" eval="1" />
             <field name="perm_create" eval="0" />
             <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('state', 'in', ['reported', 'confirmed'])]</field>
+            <field name="domain_force">[('state', 'in', ['reported'])]</field>
             <field name="groups" eval="[(4, ref('group_hs_expenses_project_reviewer'))]"/>
         </record>
 
         <record id="hs_expense_financial_officer_rule" model="ir.rule">
             <field name="name">financial officer can be update the application</field>
             <field name="model_id" ref="model_hs_expense_special_application"/>
-            <field name="perm_read" eval="0" />
+            <field name="perm_read" eval="1" />
             <field name="perm_write" eval="1" />
             <field name="perm_create" eval="0" />
             <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('state', 'in', ['confirmed'])]</field>
+            <field name="domain_force">[('state', 'in', ['approved', 'confirmed', 'audited', 'done'])]</field>
             <field name="groups" eval="[(4, ref('group_hs_expenses_financial_officer'))]"/>
         </record>
         <record id="hs_expense_cashier_rule" model="ir.rule">
             <field name="name">cashier can be update the application</field>
             <field name="model_id" ref="model_hs_expense_special_application"/>
-            <field name="perm_read" eval="0" />
+            <field name="perm_read" eval="1" />
             <field name="perm_write" eval="1" />
             <field name="perm_create" eval="0" />
             <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('state', 'in', ['audited', 'countersign', 'done'])]</field>
+            <field name="domain_force">[('state', 'in', ['audited', 'done'])]</field>
             <field name="groups" eval="[(4, ref('group_hs_expenses_cashier'))]"/>
         </record>
         <record id="hs_expense_leader_rule" model="ir.rule">
