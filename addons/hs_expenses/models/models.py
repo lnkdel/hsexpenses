@@ -3,7 +3,6 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from datetime import datetime
-# from odoo.addons import decimal_precision as dp
 
 
 class EntertainCompany(models.Model):
@@ -242,10 +241,7 @@ class SpecialApplication(models.Model):
 
     audit_amount = fields.Float("Audit Amount", digits=(16, 2))
 
-    # have_to_countersign = fields.Boolean(default=False)
     complete_countersign = fields.Boolean(default=False)
-    # countersign_ids = fields.Many2many('hs.expense.countersign', 'hs_expense_app_sign_rel',
-    #                                    'expense_id', 'countersign_id', string='Countersign', readonly=True)
     countersign_ids = fields.One2many('hs.expense.countersign', 'expense_id', string='Countersign', readonly=True)
 
     current_sign_completed = fields.Boolean(compute='_compute_current_sign_completed')
@@ -292,7 +288,6 @@ class SpecialApplication(models.Model):
 
     @api.multi
     def unlink(self):
-        employee = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
         for expense in self:
             if expense.state not in ['draft']:
                 raise UserError(_('You cannot delete a posted or approved expense.'))
@@ -430,8 +425,6 @@ class CounterSign(models.Model):
     _description = 'Countersign'
 
     employee_id = fields.Many2one('hs.base.employee', string='Employee', required=True)
-    # expense_ids = fields.Many2many('hs.expense.special.application', 'hs_expense_app_sign_rel',
-    #                               'countersign_id', 'expense_id', string='Special Application')
     expense_id = fields.Many2one('hs.expense.special.application', string='Special Application')
     is_approved = fields.Boolean(default=False)
 
