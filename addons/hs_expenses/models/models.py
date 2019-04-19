@@ -315,10 +315,16 @@ class SpecialApplication(models.Model):
         special_quota_used = self.applicant_id.special_quota_used
         special_quota = self.applicant_id.special_quota
         if special_quota_used + self.applicant_amount > special_quota:
-            raise UserError(_("The accumulated application amount within one year shall not exceed %.2f yuan. \r\n"
-                              "You have used %.2f yuan this year.\r\n "
-                              "Please modify the application amount." %
-                              special_quota, special_quota_used))
+            # raise UserError(_("The accumulated application amount within one year shall not exceed %.2f yuan."
+            #                   "You have used %.2f yuan this year."
+            #                   "Please modify the application amount." %
+            #                   (special_quota, special_quota_used)))
+            # raise UserError(_("一年内累计申请金额不得超过 {quota} 元。今年你已经使用了 {quota_used} 元。请修改申请金额。"
+            #                   .format(quota=special_quota, quota_used=special_quota_used)))
+            raise UserError(_("The accumulated application amount within one year shall not exceed {quota} yuan."
+                              "You have used {quota_used} yuan this year."
+                              "Please modify the application amount."
+                              .format(quota=special_quota, quota_used=special_quota_used)))
 
         self.write({'state': 'reported'})
         return True

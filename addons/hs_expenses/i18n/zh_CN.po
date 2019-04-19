@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-18 05:08+0000\n"
-"PO-Revision-Date: 2019-04-18 05:08+0000\n"
+"POT-Creation-Date: 2019-04-19 08:58+0000\n"
+"PO-Revision-Date: 2019-04-19 08:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -95,6 +95,11 @@ msgid "Approved"
 msgstr "已批准"
 
 #. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_special_application__approved_deduction_amount
+msgid "Approved Deduction Amount"
+msgstr ""
+
+#. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_entertain_company__message_attachment_count
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_entertain_user__message_attachment_count
 msgid "Attachment Count"
@@ -119,6 +124,11 @@ msgstr "财务审核信息"
 #: selection:hs.expense.special.application,state:0
 msgid "Audited"
 msgstr "已审核"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_special_application__audited_deduction_amount
+msgid "Audited Deduction Amount"
+msgstr ""
 
 #. module: hs_expenses
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_special_application_form
@@ -420,6 +430,11 @@ msgid "Current Month Quota"
 msgstr "当月报销额度"
 
 #. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_base_employee__current_month_quota_used
+msgid "Current Month Quota Used"
+msgstr "本月已使用报销额度"
+
+#. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_special_application__current_sign_completed
 msgid "Current Sign Completed"
 msgstr ""
@@ -537,7 +552,7 @@ msgid "Followers (Partners)"
 msgstr "关注者(业务伙伴)"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:303
+#: code:addons/hs_expenses/models/models.py:311
 #, python-format
 msgid "For applications within 2,000 yuan, please use the ordinary hospitality application."
 msgstr "2000元以内的申请，请使用差旅报销和普通招待申请。"
@@ -882,13 +897,13 @@ msgid "Phone"
 msgstr "电话"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:358
+#: code:addons/hs_expenses/models/models.py:412
 #, python-format
 msgid "Please enter the correct audit amount!"
 msgstr "请输入审核金额"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:327
+#: code:addons/hs_expenses/models/models.py:374
 #, python-format
 msgid "Please submit after 23 days of each month."
 msgstr "请在每个月的23日之后提交！"
@@ -897,6 +912,11 @@ msgstr "请在每个月的23日之后提交！"
 #: selection:hs.expense.special.application,expense_category:0
 msgid "Quality"
 msgstr "质量"
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.view_hs_sale_seller_form
+msgid "Quota Information"
+msgstr "额度信息"
 
 #. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_special_application__reimbursement_amount
@@ -919,8 +939,8 @@ msgid "Reimbursement Remark"
 msgstr "报销备注"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:176
-#: code:addons/hs_expenses/models/models.py:333
+#: code:addons/hs_expenses/models/models.py:180
+#: code:addons/hs_expenses/models/models.py:380
 #, python-format
 msgid "Reimbursement amount must be less than or equal to the application amount!"
 msgstr "报销金额必须小于或者等于申请金额！"
@@ -1058,7 +1078,7 @@ msgid "Small-sized image of this contact. It is automatically resized as a 64x64
 msgstr "联系人小尺寸图像。自动缩放为64x64px ，保留纵横比。此字段用于任何需要小图像的场合"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:400
+#: code:addons/hs_expenses/models/models.py:477
 #, python-format
 msgid "Some errors have occurred in the system!"
 msgstr "系统发生错误！"
@@ -1084,6 +1104,16 @@ msgstr "特殊招待申请单据"
 #: model:ir.ui.menu,name:hs_expenses.hs_special_expenses_management_menu
 msgid "Special Expenses"
 msgstr "特殊费用"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_base_employee__special_quota
+msgid "Special Quota"
+msgstr "年度特殊额度"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_base_employee__special_quota_used
+msgid "Special Quota Used"
+msgstr "年度已使用特殊额度"
 
 #. module: hs_expenses
 #: model:ir.model,name:hs_expenses.model_hs_expense_special_application
@@ -1174,7 +1204,13 @@ msgid "The Tax Identification Number. Complete it if the contact is subjected to
 msgstr "税号。 如果联系人需缴纳税款，请填写。 用于某些法律声明。"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:305
+#: code:addons/hs_expenses/models/models.py:327
+#, python-format
+msgid "The accumulated application amount within one year shall not exceed {quota} yuan.You have used {quota_used} yuan this year.Please modify the application amount."
+msgstr "一年内累计申请金额不得超过 {quota} 元。今年你已经使用了 {quota_used} 元。请修改申请金额。"
+
+#. module: hs_expenses
+#: code:addons/hs_expenses/models/models.py:313
 #, python-format
 msgid "The amount of a single application cannot exceed 10,000 yuan."
 msgstr "单个申请单金额不得大于10,000元。"
@@ -1312,41 +1348,41 @@ msgid "Year"
 msgstr "年"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:312
+#: code:addons/hs_expenses/models/models.py:335
 #, python-format
 msgid "You cannot approve twice the same line!"
 msgstr "同一条记录你不能批准两次！"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:319
-#: code:addons/hs_expenses/models/models.py:348
-#: code:addons/hs_expenses/models/models.py:355
-#: code:addons/hs_expenses/models/models.py:378
-#: code:addons/hs_expenses/models/models.py:412
+#: code:addons/hs_expenses/models/models.py:358
+#: code:addons/hs_expenses/models/models.py:388
+#: code:addons/hs_expenses/models/models.py:409
+#: code:addons/hs_expenses/models/models.py:455
+#: code:addons/hs_expenses/models/models.py:489
 #, python-format
 msgid "You cannot audit twice the same line!"
 msgstr "同一条记录你不能审核两次！"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:330
+#: code:addons/hs_expenses/models/models.py:377
 #, python-format
 msgid "You cannot confirm twice the same line!"
 msgstr "同一条记录你不能确认两次！"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:293
+#: code:addons/hs_expenses/models/models.py:301
 #, python-format
 msgid "You cannot delete a posted or approved expense."
 msgstr "你不能删除已经提交的记录。"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:295
+#: code:addons/hs_expenses/models/models.py:303
 #, python-format
 msgid "You cannot delete the expense!"
 msgstr "你不能删除该条记录！"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:301
+#: code:addons/hs_expenses/models/models.py:309
 #, python-format
 msgid "You cannot report twice the same line!"
 msgstr "同一条记录你不能报告两次！"
