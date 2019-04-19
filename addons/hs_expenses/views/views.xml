@@ -23,13 +23,16 @@
             <field name="model">hs.base.employee</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="name"/>
+                    <field name="display_name"/>
                     <field name="sale_market_id"/>
                     <field name="sale_area_id"/>
                     <field name="bank_name"/>
                     <field name="bank_account"/>
                     <field name="employee_level_id"/>
                     <field name="current_month_quota"/>
+                    <field name="current_month_quota_used"/>
+                    <field name="special_quota"/>
+                    <field name="special_quota_used"/>
                 </tree>
             </field>
         </record>
@@ -40,18 +43,54 @@
             <field name="inherit_id" ref="hs_base.view_employee_form" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='tag_ids']" position="after">
-                    <group string="Sale Information">
-                        <group>
-                            <field name="sale_market_id"/>
-                            <field name="sale_area_id"/>
-                            <field name="employee_level_id"/>
-                        </group>
-                        <group>
-                            <field name="bank_name"/>
-                            <field name="bank_account"/>
-                            <field name="current_month_quota"/>
-                        </group>
-                    </group>
+                    <notebook>
+                        <page string="Sale Information">
+                            <group>
+                                <group>
+                                    <field name="sale_market_id"/>
+                                    <field name="sale_area_id"/>
+                                    <field name="employee_level_id"/>
+                                </group>
+                                <group>
+                                    <field name="bank_name"/>
+                                    <field name="bank_account"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Quota Information">
+                            <group>
+                                <group>
+                                    <field name="current_month_quota"/>
+                                    <field name="special_quota"/>
+                                </group>
+                                <group>
+                                    <field name="current_month_quota_used"/>
+                                    <field name="special_quota_used"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                    <!--<group string="Sale Information">-->
+                        <!--<group>-->
+                            <!--<field name="sale_market_id"/>-->
+                            <!--<field name="sale_area_id"/>-->
+                            <!--<field name="employee_level_id"/>-->
+                        <!--</group>-->
+                        <!--<group>-->
+                            <!--<field name="bank_name"/>-->
+                            <!--<field name="bank_account"/>-->
+                        <!--</group>-->
+                    <!--</group>-->
+                    <!--<group string="Travel Information">-->
+                        <!--<group>-->
+                            <!--<field name="current_month_quota"/>-->
+                            <!--<field name="special_quota"/>-->
+                        <!--</group>-->
+                        <!--<group>-->
+                            <!--<field name="current_month_quota_used"/>-->
+                            <!--<field name="special_quota_used"/>-->
+                        <!--</group>-->
+                    <!--</group>-->
                 </xpath>
             </field>
         </record>

@@ -90,6 +90,10 @@ class Seller(models.Model):
     employee_level_id = fields.Many2one('hs.base.employee.level', string='Employee Level')
     current_month_quota = fields.Float("Current Month Quota", required=True, digits=(16, 2),
                                        compute='_compute_current_month_quota')
+    current_month_quota_used = fields.Float("Current Month Quota Used", required=True, digits=(16, 2),
+                                            default=0, readonly=True)
+    special_quota = fields.Float("Special Quota", required=True, digits=(16, 2), default=200000)
+    special_quota_used = fields.Float("Special Quota Used", required=True, digits=(16, 2), default=0, readonly=True)
 
 
 class Benefit(models.Model):
@@ -245,6 +249,10 @@ class SpecialApplication(models.Model):
     countersign_ids = fields.One2many('hs.expense.countersign', 'expense_id', string='Countersign', readonly=True)
 
     current_sign_completed = fields.Boolean(compute='_compute_current_sign_completed')
+    # 批准后减去额度
+    approved_deduction_amount = fields.Float("Approved Deduction Amount", digits=(16, 2))
+    # 审计后减去额度
+    audited_deduction_amount = fields.Float("Audited Deduction Amount", digits=(16, 2))
 
     state = fields.Selection([
         ('draft', 'To Submit'),
@@ -303,6 +311,15 @@ class SpecialApplication(models.Model):
             raise UserError(_("For applications within 2,000 yuan, please use the ordinary hospitality application."))
         elif self.applicant_amount > 10000:
             raise UserError(_("The amount of a single application cannot exceed 10,000 yuan."))
+
+        special_quota_used = self.applicant_id.special_quota_used
+        special_quota = self.applicant_id.special_quota
+        if special_quota_used + self.applicant_amount > special_quota:
+            raise UserError(_("The accumulated application amount within one year shall not exceed %.2f yuan. \r\n"
+                              "You have used %.2f yuan this year.\r\n "
+                              "Please modify the application amount." %
+                              special_quota, special_quota_used))
+
         self.write({'state': 'reported'})
         return True
 
@@ -310,6 +327,22 @@ class SpecialApplication(models.Model):
     def action_approve_expenses(self): # 领导审批完成，提交到报销经办人申请报销（填写报销相关内容）
         if any(expense.state != 'reported' for expense in self):
             raise UserError(_("You cannot approve twice the same line!"))
+
+        # 批准 记录已使用额度
+        if self.approved_deduction_amount == 0:
+            self.applicant_id.special_quota_used += self.applicant_amount
+        else:
+            if self.applicant_amount != self.approved_deduction_amount:
+                difference = abs(self.applicant_amount - self.approved_deduction_amount)
+                if self.applicant_amount > self.approved_deduction_amount:
+                    self.applicant_id.special_quota_used += difference
+                else:
+                    self.applicant_id.special_quota_used -= difference
+                    if self.applicant_id.special_quota_used < 0:
+                        self.applicant_id.special_quota_used = 0
+
+        self.approved_deduction_amount = self.applicant_amount
+
         self.write({'state': 'approved'})
         return True
 
@@ -317,6 +350,14 @@ class SpecialApplication(models.Model):
     def action_back_to_draft(self):
         if any(expense.state != 'reported' for expense in self):
             raise UserError(_("You cannot audit twice the same line!"))
+
+        # 退回 释放已使用额度
+        if self.approved_deduction_amount != 0:
+            self.applicant_id.special_quota_used -= self.approved_deduction_amount
+            if self.applicant_id.special_quota_used < 0:
+                self.applicant_id.special_quota_used = 0
+            self.approved_deduction_amount = 0
+
         self.write({'state': 'draft'})
         return True
 
@@ -335,17 +376,24 @@ class SpecialApplication(models.Model):
         self.write({'state': 'confirmed'})
         return True
 
-    # @api.multi
-    # def action_audit_expenses(self): # 领导审批完成，提交给财务审核
-    #     if any(expense.state != 'confirmed' for expense in self):
-    #         raise UserError(_("You cannot audit twice the same line!"))
-    #     self.write({'state': 'audited'})
-    #     return True
-
     @api.multi
     def action_back_to_confirm(self): # 财务退回上一步
         if any(expense.state != 'confirmed' for expense in self):
             raise UserError(_("You cannot audit twice the same line!"))
+
+        # 审计退回， 释放审计金额占用额度
+        if self.audited_deduction_amount != 0:
+            if self.audited_deduction_amount != self.approved_deduction_amount:
+                difference = abs(self.audited_deduction_amount - self.approved_deduction_amount)
+                if self.audited_deduction_amount > self.approved_deduction_amount:
+                    self.applicant_id.special_quota_used -= difference
+                    if self.applicant_id.special_quota_used < 0:
+                        self.applicant_id.special_quota_used = 0
+                else:
+                    self.applicant_id.special_quota_used += difference
+
+            self.audited_deduction_amount = 0
+
         self.write({'state': 'approved'})
         return True
 
@@ -357,6 +405,7 @@ class SpecialApplication(models.Model):
         if self.audit_amount <= 0:
             raise UserError(_("Please enter the correct audit amount!"))
 
+        # 生成会签条件   已去除
         # if self.audit_amount >= 5000:
         #     group_id = self.env.ref('hs_expenses.group_hs_expenses_leader').id
         #     leaders = self.env['res.users'].search([('groups_id', '=', group_id)])
@@ -368,6 +417,28 @@ class SpecialApplication(models.Model):
         #                 'employee_id': employee.id,
         #                 'expense_id': self.id
         #             })
+
+        # 根据审核金额 调整特殊招待全年申请额度
+        if self.audited_deduction_amount == 0:
+            if self.audit_amount != self.approved_deduction_amount:
+                ded_difference = abs(self.audit_amount - self.approved_deduction_amount)
+                if self.audit_amount > self.approved_deduction_amount:
+                    self.applicant_id.special_quota_used += ded_difference
+                else:
+                    self.applicant_id.special_quota_used -= ded_difference
+                    if self.applicant_id.special_quota_used < 0:
+                        self.applicant_id.special_quota_used = 0
+        else:
+            if self.audit_amount != self.audited_deduction_amount:
+                difference = abs(self.audited_deduction_amount - self.audit_amount)
+                if self.audit_amount > self.audited_deduction_amount:
+                    self.applicant_id.special_quota_used += difference
+                else:
+                    self.applicant_id.special_quota_used -= difference
+                    if self.applicant_id.special_quota_used < 0:
+                        self.applicant_id.special_quota_used = 0
+
+        self.audited_deduction_amount = self.audit_amount
 
         self.write({'state': 'audited'})
         return True
