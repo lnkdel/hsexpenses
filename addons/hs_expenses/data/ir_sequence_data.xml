@@ -12,5 +12,35 @@
             <field name="padding">8</field>
         </record>
 
+        <!-- Sequences for hs.expense.ordinary.application -->
+        <record id="seq_hs_expense_ordinary_application" model="ir.sequence">
+            <field name="name">Ordinary Application NO.</field>
+            <field name="code">hs.expense.ordinary.application.no</field>
+            <field name="prefix">OA</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="padding">8</field>
+        </record>
+
+        <!-- Sequences for hs.expense.travel.application -->
+        <record id="seq_hs_expense_travel_application" model="ir.sequence">
+            <field name="name">Travel Application NO.</field>
+            <field name="code">hs.expense.travel.application.no</field>
+            <field name="prefix">TA</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="padding">8</field>
+        </record>
+
+        <!-- Sequences for hs.expense.month.application -->
+        <record id="seq_hs_expense_month_application" model="ir.sequence">
+            <field name="name">Month Application NO.</field>
+            <field name="code">hs.expense.month.application.no</field>
+            <field name="prefix">MA</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="padding">8</field>
+        </record>
+
     </data>
 </odoo>

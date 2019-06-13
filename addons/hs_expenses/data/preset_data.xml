@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="hs_expense_category_quality" model="hs.expense.category">
+            <field name="name">质量</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_category_contract" model="hs.expense.category">
+            <field name="name">合同订单发货回款</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_category_project" model="hs.expense.category">
+            <field name="name">新项目拓展</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_category_other" model="hs.expense.category">
+            <field name="name">其他</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+</odoo>

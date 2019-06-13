@@ -81,7 +81,12 @@ class Seller(models.Model):
                 search([('employee_id', '=', seller.id), ('year', '=', year), ('month', '=', month)])
 
             if last_month_benefit:
-                seller.current_month_quota = last_month_benefit[0]['benefit'] * 0.01
+                seller.current_month_quota = last_month_benefit[0]['benefit']
+
+    @api.depends('current_month_quota', 'current_month_quota_used')
+    def _compute_current_month_quota_remained(self):
+        for seller in self:
+            seller.current_month_quota_remained = seller.current_month_quota - seller.current_month_quota_used
 
     sale_market_id = fields.Many2one('hs.sale.market', string='Sale Market')
     sale_area_id = fields.Many2one('hs.sale.area', string='Sale Area')
@@ -92,6 +97,8 @@ class Seller(models.Model):
                                        compute='_compute_current_month_quota')
     current_month_quota_used = fields.Float("Current Month Quota Used", required=True, digits=(16, 2),
                                             default=0, readonly=True)
+    current_month_quota_remained = fields.Float("Current Month Quota remained", required=True, digits=(16, 2),
+                                                compute='_compute_current_month_quota_remained')
     special_quota = fields.Float("Special Quota", required=True, digits=(16, 2), default=200000)
     special_quota_used = fields.Float("Special Quota Used", required=True, digits=(16, 2), default=0, readonly=True)
 
@@ -137,6 +144,19 @@ class SaleArea(models.Model):
 
     sql_constraints = [
         ('name_uniq', 'unique (name)', 'The name already exists!'),
+    ]
+
+
+class ExpenseCategory(models.Model):
+    _name = 'hs.expense.category'
+    _description = 'Expense Category'
+
+    name = fields.Char()
+    sequence = fields.Integer(string="Sequence", default=10)
+    active = fields.Boolean(string='Active', default=True)
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', 'Category name already exists!'),
     ]
 
 
@@ -212,6 +232,9 @@ class SpecialApplication(models.Model):
             if sign.employee_id.id == current_employee.id:
                 self.current_sign_completed = sign.is_approved
 
+    def _compute_current_user_is_financial(self):
+        self.current_user_is_financial = self.user_has_groups('hs_expenses.group_hs_expenses_financial_officer')
+
     name = fields.Char(string="Bill Number", require=True)
     complete_name = fields.Char(compute='_compute_complete_name', string='Complete Name')
     applicant_id = fields.Many2one('hs.base.employee', string='Applicant', required=True, default=_get_default_employee) #申请人
@@ -244,6 +267,7 @@ class SpecialApplication(models.Model):
     reimbursement_remark = fields.Text(string="Reimbursement Remark")
 
     audit_amount = fields.Float("Audit Amount", digits=(16, 2))
+    current_user_is_financial = fields.Boolean(compute="_compute_current_user_is_financial")
 
     complete_countersign = fields.Boolean(default=False)
     countersign_ids = fields.One2many('hs.expense.countersign', 'expense_id', string='Countersign', readonly=True)
@@ -272,6 +296,12 @@ class SpecialApplication(models.Model):
         ('project', 'New project development'),
         ('other', 'Other'),
     ], string='Category', index=True, default='other', required=True)
+    expense_category_ids = fields.Many2many(comodel_name="hs.expense.category",
+                                            relation="hs_expense_special_category_rel",
+                                            column1="special_id",
+                                            column2="category_id",
+                                            string="Category",
+                                            required=True)
 
     @api.model
     def create(self, vals):
@@ -326,6 +356,27 @@ class SpecialApplication(models.Model):
                               "Please modify the application amount."
                               .format(quota=special_quota, quota_used=special_quota_used)))
 
+        countersign = self.env['hs.expense.countersign']
+        reviewers = []
+        for category in self.expense_category_ids:
+            if category.name == 'Quality':
+                group_id = self.env.ref('hs_expenses.group_hs_expenses_quality_reviewer').id
+            elif category.name == 'Contract order delivery':
+                group_id = self.env.ref('hs_expenses.group_hs_expenses_contract_reviewer').id
+            elif category.name == 'New project development':
+                group_id = self.env.ref('hs_expenses.group_hs_expenses_project_reviewer').id
+            elif category.name == 'Other':
+                group_id = self.env.ref('hs_expenses.group_hs_expenses_other_reviewer').id
+            reviewers.append(self.env['res.users'].search([('groups_id', '=', group_id)]))
+        for reviewer in reviewers:
+            for user in reviewer:
+                employee = self.env['hs.base.employee'].search([('user_id', '=', user.id)], limit=1)
+                if employee and not user.has_group('hs_expenses.group_hs_expenses_manager'):
+                    countersign.sudo().create({
+                        'employee_id': employee.id,
+                        'expense_id': self.id
+                    })
+
         self.write({'state': 'reported'})
         return True
 
@@ -334,22 +385,36 @@ class SpecialApplication(models.Model):
         if any(expense.state != 'reported' for expense in self):
             raise UserError(_("You cannot approve twice the same line!"))
 
-        # 批准 记录已使用额度
-        if self.approved_deduction_amount == 0:
-            self.applicant_id.special_quota_used += self.applicant_amount
-        else:
-            if self.applicant_amount != self.approved_deduction_amount:
-                difference = abs(self.applicant_amount - self.approved_deduction_amount)
-                if self.applicant_amount > self.approved_deduction_amount:
-                    self.applicant_id.special_quota_used += difference
-                else:
-                    self.applicant_id.special_quota_used -= difference
-                    if self.applicant_id.special_quota_used < 0:
-                        self.applicant_id.special_quota_used = 0
+        employee = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
+        if employee and employee is not None:
+            expense_id = self
+            countersign = self.env['hs.expense.countersign'].search(
+                [('employee_id', '=', employee.id), ('expense_id', '=', expense_id.id)], limit=1)
+            if countersign and countersign is not None:
+                countersign.write({'is_approved': True})
+            else:
+                raise UserError(_("Some errors have occurred in the system!"))
 
-        self.approved_deduction_amount = self.applicant_amount
+            if not any(sign.is_approved is False
+                       for sign in self.env['hs.expense.countersign'].search([('expense_id', '=', expense_id.id)])):
+                self.write({'complete_countersign': True, 'state': 'approved'})
 
-        self.write({'state': 'approved'})
+                # 批准 记录已使用额度
+                # if self.approved_deduction_amount == 0:
+                #     self.applicant_id.special_quota_used += self.applicant_amount
+                # else:
+                #     if self.applicant_amount != self.approved_deduction_amount:
+                #         difference = abs(self.applicant_amount - self.approved_deduction_amount)
+                #         if self.applicant_amount > self.approved_deduction_amount:
+                #             self.applicant_id.special_quota_used += difference
+                #         else:
+                #             self.applicant_id.special_quota_used -= difference
+                #             if self.applicant_id.special_quota_used < 0:
+                #                 self.applicant_id.special_quota_used = 0
+                #
+                # self.approved_deduction_amount = self.applicant_amount
+
+        # self.write({'state': 'approved'})
         return True
 
     @api.multi
@@ -358,11 +423,11 @@ class SpecialApplication(models.Model):
             raise UserError(_("You cannot audit twice the same line!"))
 
         # 退回 释放已使用额度
-        if self.approved_deduction_amount != 0:
-            self.applicant_id.special_quota_used -= self.approved_deduction_amount
-            if self.applicant_id.special_quota_used < 0:
-                self.applicant_id.special_quota_used = 0
-            self.approved_deduction_amount = 0
+        # if self.approved_deduction_amount != 0:
+        #     self.applicant_id.special_quota_used -= self.approved_deduction_amount
+        #     if self.applicant_id.special_quota_used < 0:
+        #         self.applicant_id.special_quota_used = 0
+        #     self.approved_deduction_amount = 0
 
         self.write({'state': 'draft'})
         return True

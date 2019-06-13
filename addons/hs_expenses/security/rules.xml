@@ -53,7 +53,8 @@
             <field name="perm_write" eval="0" />
             <field name="perm_create" eval="0" />
             <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('expense_category', '=', 'other')]</field>
+            <field name="domain_force">[('expense_category_ids', 'in', 4)]</field>
+            <!--<field name="domain_force">[('other', 'in', 'expense_category_ids')]</field>-->
             <field name="groups" eval="[(4, ref('group_hs_expenses_other_reviewer'))]"/>
         </record>
         <record id="hs_expense_other_reviewer_update_rule" model="ir.rule">
@@ -74,7 +75,8 @@
             <field name="perm_write" eval="0" />
             <field name="perm_create" eval="0" />
             <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('expense_category', '=', 'quality')]</field>
+            <field name="domain_force">[('expense_category_ids', 'in', 1)]</field>
+            <!--<field name="domain_force">[('quality', 'in', 'expense_category_ids')]</field>-->
             <field name="groups" eval="[(4, ref('group_hs_expenses_quality_reviewer'))]"/>
         </record>
         <record id="hs_expense_quality_reviewer_update_rule" model="ir.rule">
@@ -95,7 +97,8 @@
             <field name="perm_write" eval="0" />
             <field name="perm_create" eval="0" />
             <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('expense_category', '=', 'contract')]</field>
+            <field name="domain_force">[('expense_category_ids', 'in', 2)]</field>
+            <!--<field name="domain_force">[('contract', 'in', 'expense_category_ids')]</field>-->
             <field name="groups" eval="[(4, ref('group_hs_expenses_contract_reviewer'))]"/>
         </record>
         <record id="hs_expense_contract_reviewer_update_rule" model="ir.rule">
@@ -116,7 +119,8 @@
             <field name="perm_write" eval="0" />
             <field name="perm_create" eval="0" />
             <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('expense_category', '=', 'project')]</field>
+            <field name="domain_force">[('expense_category_ids', 'in', 3)]</field>
+            <!--<field name="domain_force">[('project', 'in', 'expense_category_ids')]</field>-->
             <field name="groups" eval="[(4, ref('group_hs_expenses_project_reviewer'))]"/>
         </record>
         <record id="hs_expense_project_reviewer_update_rule" model="ir.rule">

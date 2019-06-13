@@ -4,10 +4,12 @@
         <menuitem
             id="menu_hs_expenses_root"
             name="Marketing Expenses"
-
             sequence="10"/>
 
         <menuitem id="hs_special_expenses_management_menu" name="Special Expenses" parent="menu_hs_expenses_root"
+                  sequence="1"></menuitem>
+
+        <menuitem id="hs_travel_expenses_management_menu" name="Travel Expenses" parent="menu_hs_expenses_root"
                   sequence="0"></menuitem>
 
         <menuitem id="setting_menu" name="Settings" parent="menu_hs_expenses_root" sequence="9999"/>
@@ -391,17 +393,17 @@
                         <button name="action_submit_expenses" string="Submit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','draft')]}" groups="hs_expenses.group_hs_expenses_seller"/>
 
                         <!--reviewer-->
-                        <button name="action_approve_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','reported'), ('expense_category', '!=', 'other')]}" groups="hs_expenses.group_hs_expenses_other_reviewer"/>
-                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','reported'), ('expense_category', '!=', 'other')]}" groups="hs_expenses.group_hs_expenses_other_reviewer"/>
+                        <button name="action_approve_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 4), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_other_reviewer"/>
+                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 4), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_other_reviewer"/>
 
-                        <button name="action_approve_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','reported'), ('expense_category', '!=', 'quality')]}" groups="hs_expenses.group_hs_expenses_quality_reviewer"/>
-                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','reported'), ('expense_category', '!=', 'quality')]}" groups="hs_expenses.group_hs_expenses_quality_reviewer"/>
+                        <button name="action_approve_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 1), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_quality_reviewer"/>
+                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 1), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_quality_reviewer"/>
 
-                        <button name="action_approve_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','reported'), ('expense_category', '!=', 'contract')]}" groups="hs_expenses.group_hs_expenses_contract_reviewer"/>
-                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','reported'), ('expense_category', '!=', 'contract')]}" groups="hs_expenses.group_hs_expenses_contract_reviewer"/>
+                        <button name="action_approve_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 2), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_contract_reviewer"/>
+                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 2), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_contract_reviewer"/>
 
-                        <button name="action_approve_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','reported'), ('expense_category', '!=', 'project')]}" groups="hs_expenses.group_hs_expenses_project_reviewer"/>
-                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=','reported'), ('expense_category', '!=', 'project')]}" groups="hs_expenses.group_hs_expenses_project_reviewer"/>
+                        <button name="action_approve_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 3), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_project_reviewer"/>
+                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 3), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_project_reviewer"/>
 
                         <!--seller-->
                         <button name="action_confirm_expenses" string="Confirm" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','approved')]}" groups="hs_expenses.group_hs_expenses_seller"/>
@@ -438,7 +440,8 @@
                     <sheet>
                         <group string="Special Application Information">
                             <group>
-                                <field name="expense_category" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="expense_category" attrs="{'readonly': [('state', '!=', 'draft')]}" invisible="1"/>
+                                <field name="expense_category_ids" widget="many2many_tags" options="{'no_create_edit': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="applicant_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="handler_id" attrs="{'readonly': [('state', '!=', 'draft')]}" invisible="1"/>
                                 <field name="sale_area_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
@@ -471,14 +474,17 @@
                         </group>
                         <group string="Audit Information" attrs="{'invisible':[('state', 'not in', ['confirmed', 'audited', 'done', 'countersign'])]}">
                             <group>
-                                <field name="audit_amount" attrs="{'readonly': [('state', 'not in', ['confirmed'])], 'required':[('state', '=', 'confirmed')]}"/>
+                                <!--<field name="audit_amount" attrs="{'readonly': [('state', 'not in', ['confirmed'])], 'required':[('state', '=', 'confirmed')]}"/>-->
+                                <field name="audit_amount" attrs="{'readonly': [('current_user_is_financial', '=', False)], 'required':[('state', '=', 'confirmed')]}"/>
+                                <field name="current_user_is_financial" invisible="1"/>
                             </group>
                             <group></group>
                         </group>
 
                         <notebook>
-                            <page string="Countersign Information" attrs="{'invisible': ['|', ('state', 'not in', ['audited2', 'countersign', 'done']), ('reimbursement_amount', '&lt;', 5000)]}">
-                                <field name="countersign_ids">
+                            <!--<page string="Countersign Information" attrs="{'invisible': ['|', ('state', 'not in', ['audited2', 'countersign', 'done']), ('reimbursement_amount', '&lt;', 5000)]}">-->
+                            <page string="Countersign Information" attrs="{'invisible': ['|', ('state', 'in', ['draft'])]}">
+                                <field name="countersign_ids" readonly="1">
                                     <tree>
                                         <field name="employee_id"/>
                                         <field name="is_approved"/>

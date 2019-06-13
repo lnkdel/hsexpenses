@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_travel_application_tree" model="ir.ui.view">
+            <field name="name">hs.expense.travel.application.tree</field>
+            <field name="model">hs.expense.travel.application</field>
+            <field name="arch" type="xml">
+                <tree string="Travel Application" create="0">
+                    <field name="name"/>
+                    <field name="applicant_id"/>
+                    <field name="applicant_date"/>
+                    <field name="applicant_department_id"/>
+                    <field name="destination_city"/>
+                    <field name="state"/>
+                    <field name="meal_total_cost"/>
+                    <field name="hotel_total_cost"/>
+                    <field name="car_total_cost"/>
+                    <field name="total_cost"/>
+                    <field name="audit_amount"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_travel_application_form" model="ir.ui.view">
+            <field name="name">hs.expense.travel.application.form</field>
+            <field name="model">hs.expense.travel.application</field>
+            <field name="arch" type="xml">
+                <form string="Travel Application" create="0">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,reported,to_approved,to_audited,audited,done" attrs="{'invisible': [('is_exceed', '!=', True)]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,reported,to_audited,audited,done" attrs="{'invisible': [('is_exceed', '!=', False)]}"/>
+                    </header>
+                    <sheet>
+                        <field name="is_exceed" invisible="1"/>
+                        <group string="">
+                            <group>
+                                <field name="applicant_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="applicant_department_id"/>
+                                <field name="sale_area_id"/>
+                                <field name="cause" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="applicant_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="destination_city" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="sale_market_id"/>
+                                <field name="application_remark" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <notebook>
+                                <page string="Travel Detail">
+                                    <field name="travel_detail_ids"/>
+                                </page>
+                            </notebook>
+                        </group>
+                        <group string="Reimbursement Information">
+                            <group>
+                                <field name="reimbursement_person_id" attrs="{'readonly': [('state', 'not in', ['draft', 'approved'])]}"/>
+                                <field name="bank_name" attrs="{'readonly': [('state', 'not in', ['draft', 'approved'])]}"/>
+                                <field name="reimbursement_remark" attrs="{'readonly': [('state', 'not in', ['draft', 'approved'])]}"/>
+                            </group>
+                            <group>
+                                <field name="reimbursement_payment_method" attrs="{'readonly': [('state', 'not in', ['draft', 'approved'])]}"/>
+                                <field name="bank_account" attrs="{'readonly': [('state', 'not in', ['draft', 'approved'])]}"/>
+                            </group>
+                        </group>
+                        <group string="Audit Information" attrs="{'invisible':[('state', 'not in', ['to_audited', 'done', 'audited'])]}">
+                            <group>
+                                <!--<field name="audit_amount" attrs="{'readonly': [('state', 'not in', ['to_audited'])], 'required':[('state', '=', 'to_audited')]}"/>-->
+                                <field name="audit_amount" attrs="{'readonly': [('current_user_is_financial', '=', False)], 'required':[('state', '=', 'to_audited')]}"/>
+                                <field name="current_user_is_financial" invisible="1"/>
+                            </group>
+                            <group></group>
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="action_travel_application" model="ir.actions.act_window">
+            <field name="name">Travel Application</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hs.expense.travel.application</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+              </p>
+            </field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem
+            id="menu_travel_application"
+            action="action_travel_application"
+            parent="hs_travel_expenses_management_menu"
+            sequence="1"/>
+
+        <record id="view_travel_detail_tree" model="ir.ui.view">
+            <field name="name">hs.expense.travel.detail.tree</field>
+            <field name="model">hs.expense.travel.detail</field>
+            <field name="arch" type="xml">
+                <tree string="Travel Detail">
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="from_city"/>
+                    <field name="to_city"/>
+                    <field name="meal_cost"/>
+                    <field name="hotel_cost"/>
+                    <field name="car_cost"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_travel_detail_form" model="ir.ui.view">
+            <field name="name">hs.expense.travel.detail.form</field>
+            <field name="model">hs.expense.travel.detail</field>
+            <field name="arch" type="xml">
+                <form string="Travel Detail">
+                    <sheet>
+                        <field name="state" invisible="1" />
+                        <group string="">
+                            <group>
+                                <field name="start_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="from_city" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="meal_cost" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="car_cost" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="end_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="to_city" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="hotel_cost" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="view_ordinary_application_tree" model="ir.ui.view">
+            <field name="name">hs.expense.ordinary.application.tree</field>
+            <field name="model">hs.expense.ordinary.application</field>
+            <field name="arch" type="xml">
+                <tree string="Ordinary Application" create="0">
+                    <field name="name"/>
+                    <field name="applicant_id"/>
+                    <field name="applicant_date"/>
+                    <field name="applicant_department_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_ordinary_application_form" model="ir.ui.view">
+            <field name="name">hs.expense.ordinary.application.form</field>
+            <field name="model">hs.expense.ordinary.application</field>
+            <field name="arch" type="xml">
+                <form string="Ordinary Application" create="0">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,reported,to_approved,to_audited,audited,done" attrs="{'invisible': [('is_exceed', '!=', True)]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,reported,to_audited,audited,done" attrs="{'invisible': [('is_exceed', '!=', False)]}"/>
+                    </header>
+                    <sheet>
+                        <field name="is_exceed" invisible="1"/>
+                        <group string="">
+                            <group>
+                                <field name="applicant_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="applicant_department_id"/>
+                                <field name="sale_area_id"/>
+                                <field name="cause" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="applicant_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="applicant_amount" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="sale_market_id"/>
+                                <field name="application_remark" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </group>
+                        </group>
+
+                        <group string="Reimbursement Information">
+                            <group>
+                                <field name="reimbursement_person_id" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                <field name="bank_name" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                            </group>
+                            <group>
+                                <field name="reimbursement_payment_method" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                <field name="bank_account" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                <field name="reimbursement_remark" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                            </group>
+                        </group>
+                        <group string="Audit Information" attrs="{'invisible':[('state', 'not in', ['to_audited', 'done', 'audited'])]}">
+                            <group>
+                                <!--<field name="audit_amount" attrs="{'readonly': [('state', 'not in', ['to_audited'])], 'required':[('state', '=', 'to_audited')]}"/>-->
+                                <field name="audit_amount" attrs="{'readonly': [('current_user_is_financial', '=', False)], 'required':[('state', '=', 'to_audited')]}"/>
+                                <field name="current_user_is_financial" invisible="1"/>
+                            </group>
+                            <group></group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_ordinary_application" model="ir.actions.act_window">
+            <field name="name">Ordinary Application</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hs.expense.ordinary.application</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+              </p>
+            </field>
+        </record>
+
+        <menuitem
+            id="menu_ordinary_application"
+            action="action_ordinary_application"
+            parent="hs_travel_expenses_management_menu"
+            sequence="2"/>
+    </data>
+</odoo>

@@ -1,5 +1,18 @@
 <odoo>
     <data>
+        <record model="ir.ui.view" id="hs_expense_confirm_dialog">
+            <field name="name">Confirm Dialog</field>
+            <field name="model">hs.expense.confirm.dialog</field>
+            <field name="arch" type="xml">
+                <form string="Confirm">
+                    <field name="message"></field>
+                    <footer>
+                        <button type="object" name="yes" string="Confirm" class="oe_highlight" />
+                        <!--<button type="object" name="no" string="Cancel" />-->
+                    </footer>
+                </form>
+            </field>
+        </record>
         <record model="ir.ui.view" id="view_hs_employee_level_tree">
           <field name="name">hs.base.employee.level.tree</field>
           <field name="model">hs.base.employee.level</field>

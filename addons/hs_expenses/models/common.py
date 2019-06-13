@@ -30,6 +30,12 @@ class City(models.Model):
     name = fields.Char()
     city_level_id = fields.Many2one('hs.base.city.level', string='City Level')
 
+    _sql_constraints = [
+        ('city_name_uniq',
+         'unique (name)',
+         'The city has the same records.')
+    ]
+
 
 class CityLevel(models.Model):
     _name = 'hs.base.city.level'
@@ -44,3 +50,4 @@ class TravelCategory(models.Model):
     _description = 'Travel Category'
 
     name = fields.Char(required=True)
+
