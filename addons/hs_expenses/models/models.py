@@ -359,13 +359,13 @@ class SpecialApplication(models.Model):
         countersign = self.env['hs.expense.countersign']
         reviewers = []
         for category in self.expense_category_ids:
-            if category.name == 'Quality':
+            if category.name == '质量':
                 group_id = self.env.ref('hs_expenses.group_hs_expenses_quality_reviewer').id
-            elif category.name == 'Contract order delivery':
+            elif category.name == '合同订单发货回款':
                 group_id = self.env.ref('hs_expenses.group_hs_expenses_contract_reviewer').id
-            elif category.name == 'New project development':
+            elif category.name == '新项目拓展':
                 group_id = self.env.ref('hs_expenses.group_hs_expenses_project_reviewer').id
-            elif category.name == 'Other':
+            elif category.name == '其他':
                 group_id = self.env.ref('hs_expenses.group_hs_expenses_other_reviewer').id
             reviewers.append(self.env['res.users'].search([('groups_id', '=', group_id)]))
         for reviewer in reviewers:
