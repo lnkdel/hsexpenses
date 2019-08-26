@@ -6,6 +6,25 @@
             <field name="model_id" ref="model_hs_expense_special_application"/>
             <field name="groups" eval="[(4, ref('group_hs_expenses_manager'))]"/>
         </record>
+
+        <record id="hs_expense_month_manager_rule" model="ir.rule">
+            <field name="name">manager can be CRUD the application</field>
+            <field name="model_id" ref="model_hs_expense_month_application"/>
+            <field name="groups" eval="[(4, ref('group_hs_expenses_manager'))]"/>
+        </record>
+
+        <record id="hs_expense_travel_manager_rule" model="ir.rule">
+            <field name="name">manager can be CRUD the application</field>
+            <field name="model_id" ref="model_hs_expense_travel_application"/>
+            <field name="groups" eval="[(4, ref('group_hs_expenses_manager'))]"/>
+        </record>
+
+        <record id="hs_expense_ordinary_manager_rule" model="ir.rule">
+            <field name="name">manager can be CRUD the application</field>
+            <field name="model_id" ref="model_hs_expense_ordinary_application"/>
+            <field name="groups" eval="[(4, ref('group_hs_expenses_manager'))]"/>
+        </record>
+
         <record id="hs_expense_ordinary_applicant_rule" model="ir.rule">
             <field name="name">applicant can be CRUD the application</field>
             <field name="model_id" ref="model_hs_expense_ordinary_application"/>
@@ -16,16 +35,7 @@
             <field name="domain_force">[('applicant_id.user_id', '=', user.id)]</field>
             <field name="groups" eval="[(4, ref('group_hs_expenses_seller'))]"/>
         </record>
-        <record id="hs_expense_ordinary_applicant_rule" model="ir.rule">
-            <field name="name">manager can be CRUD the application</field>
-            <field name="model_id" ref="model_hs_expense_ordinary_application"/>
-            <field name="perm_read" eval="1" />
-            <field name="perm_write" eval="1" />
-            <field name="perm_create" eval="1" />
-            <field name="perm_unlink" eval="1" />
-            <field name="domain_force">[(1, '=', 1)]</field>
-            <field name="groups" eval="[(4, ref('group_hs_expenses_manager'))]"/>
-        </record>
+
         <record id="hs_expense_travel_applicant_rule" model="ir.rule">
             <field name="name">applicant can be CRUD the application</field>
             <field name="model_id" ref="model_hs_expense_travel_application"/>
@@ -36,16 +46,7 @@
             <field name="domain_force">[('applicant_id.user_id', '=', user.id)]</field>
             <field name="groups" eval="[(4, ref('group_hs_expenses_seller'))]"/>
         </record>
-        <record id="hs_expense_travel_applicant_rule" model="ir.rule">
-            <field name="name">manager can be CRUD the application</field>
-            <field name="model_id" ref="model_hs_expense_travel_application"/>
-            <field name="perm_read" eval="1" />
-            <field name="perm_write" eval="1" />
-            <field name="perm_create" eval="1" />
-            <field name="perm_unlink" eval="1" />
-            <field name="domain_force">[(1, '=', 1)]</field>
-            <field name="groups" eval="[(4, ref('group_hs_expenses_manager'))]"/>
-        </record>
+
         <record id="hs_expense_month_applicant_rule" model="ir.rule">
             <field name="name">applicant can be CRUD the application</field>
             <field name="model_id" ref="model_hs_expense_month_application"/>
@@ -55,16 +56,6 @@
             <field name="perm_unlink" eval="1" />
             <field name="domain_force">[('seller_id.user_id', '=', user.id)]</field>
             <field name="groups" eval="[(4, ref('group_hs_expenses_seller'))]"/>
-        </record>
-        <record id="hs_expense_month_applicant_rule" model="ir.rule">
-            <field name="name">manager can be CRUD the application</field>
-            <field name="model_id" ref="model_hs_expense_month_application"/>
-            <field name="perm_read" eval="1" />
-            <field name="perm_write" eval="1" />
-            <field name="perm_create" eval="1" />
-            <field name="perm_unlink" eval="1" />
-            <field name="domain_force">[(1, '=', 1)]</field>
-            <field name="groups" eval="[(4, ref('group_hs_expenses_manager'))]"/>
         </record>
         <record id="hs_expense_applicant_rule" model="ir.rule">
             <field name="name">applicant can be CRUD the application</field>
