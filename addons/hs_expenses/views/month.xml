@@ -12,6 +12,7 @@
                     <field name="meal_total_cost"/>
                     <field name="hotel_total_cost"/>
                     <field name="car_total_cost"/>
+                    <field name="city_car_total_cost"/>
                     <field name="total_ordinary_applicant_amount"/>
                     <field name="total_cost"/>
                     <field name="state" />
@@ -50,6 +51,7 @@
                             <group>
                                 <field name="bill_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="hotel_total_cost"/>
+                                <field name="city_car_total_cost"/>
                                 <field name="total_ordinary_applicant_amount"/>
                                 <field name="current_month_quota" invisible="1"/>
                             </group>
@@ -67,6 +69,7 @@
                                         <field name="meal_total_cost"/>
                                         <field name="hotel_total_cost"/>
                                         <field name="car_total_cost"/>
+                                        <field name="city_car_total_cost"/>
                                         <field name="total_cost"/>
                                         <field name="audit_amount"/>
                                     </tree>

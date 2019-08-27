@@ -67,6 +67,7 @@ class TravelDetail(models.Model):
     meal_cost = fields.Float("Meal Cost", digits=(16, 2))
     hotel_cost = fields.Float("Hotel Cost", digits=(16, 2))
     car_cost = fields.Float("Car Cost", digits=(16, 2))
+    city_car_cost = fields.Float("City Car Cost", digits=(16, 2))
     state = fields.Selection([
         ('draft', 'To Submit'),
         ('reported', 'Submitted'),
@@ -116,10 +117,18 @@ class TravelApplication(models.Model):
                 for detail in travel.travel_detail_ids:
                     travel.car_total_cost += detail.car_cost
 
+    @api.depends('travel_detail_ids')
+    def _compute_city_car_total_cost(self):
+        for travel in self:
+            if travel.travel_detail_ids is not None or travel.travel_detail_ids is not False:
+                for detail in travel.travel_detail_ids:
+                    travel.city_car_total_cost += detail.city_car_cost
+
     @api.depends('total_cost')
     def _compute_total_cost(self):
         for travel in self:
-            travel.total_cost = travel.meal_total_cost + travel.hotel_total_cost + travel.car_total_cost
+            travel.total_cost = travel.meal_total_cost + travel.hotel_total_cost \
+                                + travel.car_total_cost + travel.city_car_total_cost
 
     @api.depends('month_application_id')
     def _compute_state(self):
@@ -149,6 +158,7 @@ class TravelApplication(models.Model):
     meal_total_cost = fields.Float("Total Meal Cost", compute="_compute_meal_total_cost", digits=(16, 2))
     hotel_total_cost = fields.Float("Total Hotel Cost", compute="_compute_hotel_total_cost", digits=(16, 2))
     car_total_cost = fields.Float("Total Car Cost", compute="_compute_car_total_cost", digits=(16, 2))
+    city_car_total_cost = fields.Float("Total City Car Cost", compute="_compute_city_car_total_cost", digits=(16, 2))
     total_cost = fields.Float("Total Cost", compute="_compute_total_cost", digits=(16, 2))
     audit_amount = fields.Float("Audit Amount", digits=(16, 2))
     current_user_is_financial = fields.Boolean(compute="_compute_current_user_is_financial")
@@ -272,6 +282,13 @@ class MonthApplication(models.Model):
                 for travel in app.travel_application_ids:
                     app.car_total_cost += travel.car_total_cost
 
+    @api.depends('travel_application_ids')
+    def _compute_city_car_total_cost(self):
+        for app in self:
+            if app.travel_application_ids is not None or app.travel_application_ids is not False:
+                for travel in app.travel_application_ids:
+                    app.city_car_total_cost += travel.city_car_total_cost
+
     @api.depends('ordinary_application_ids')
     def _compute_total_ordinary_applicant_amount(self):
         for app in self:
@@ -338,6 +355,7 @@ class MonthApplication(models.Model):
     meal_total_cost = fields.Float("Total Meal Cost", compute="_compute_meal_total_cost", digits=(16, 2))
     hotel_total_cost = fields.Float("Total Hotel Cost", compute="_compute_hotel_total_cost", digits=(16, 2))
     car_total_cost = fields.Float("Total Car Cost", compute="_compute_car_total_cost", digits=(16, 2))
+    city_car_total_cost = fields.Float("City Total Car Cost", compute="_compute_city_car_total_cost", digits=(16, 2))
     total_ordinary_applicant_amount = fields.Float("Total Ordinary Applicant Amount", compute="_compute_total_ordinary_applicant_amount", digits=(16, 2))
     total_cost = fields.Float("Total Cost", compute="_compute_total_cost", digits=(16, 2))
     current_month_quota = fields.Float("Current Month Quota", related='seller_id.current_month_quota')
@@ -368,10 +386,9 @@ class MonthApplication(models.Model):
         day = today.day
         month = today.month
         bill_date = self.bill_date
-        # if month - bill_date.month != 1 and today.day <= 10:
-        #     raise UserError(_("Please submit by the 10th of the next month of bill date."))
+        if month - bill_date.month != 1 and today.day > 10:
+            raise UserError(_("Please submit by the 10th of the next month of bill date."))
 
-        self.write({'state': 'reported'})
         # 判断额度是否足够
         current_month_quota_remained = self.seller_id.current_month_quota_remained
         # if self.total_cost > current_month_quota_remained:
@@ -404,6 +421,9 @@ class MonthApplication(models.Model):
             self.is_exceed = False
             msg = _('Your monthly quota is sufficient. '
                     'Click Confirm to submit to the financial staff for review.') # 您当月额度足够，点击确定提交给财务人员审核
+        if not self.is_exceed:
+            self.write({'state': 'reported'})
+
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'hs.expense.confirm.dialog',

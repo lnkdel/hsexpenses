@@ -15,6 +15,7 @@
                     <field name="meal_total_cost"/>
                     <field name="hotel_total_cost"/>
                     <field name="car_total_cost"/>
+                    <field name="city_car_total_cost"/>
                     <field name="total_cost"/>
                     <field name="audit_amount"/>
                 </tree>
@@ -111,6 +112,7 @@
                     <field name="meal_cost"/>
                     <field name="hotel_cost"/>
                     <field name="car_cost"/>
+                    <field name="city_car_cost"/>
                 </tree>
             </field>
         </record>
@@ -133,6 +135,7 @@
                                 <field name="end_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="to_city" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="hotel_cost" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="city_car_cost"/>
                             </group>
                         </group>
                     </sheet>

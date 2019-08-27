@@ -1814,3 +1814,18 @@ msgstr "客户名称"
 msgid "hs.expense.entertain.user"
 msgstr "招待人员"
 
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__city_car_cost
+msgid "City Car Cost"
+msgstr "市内交通"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_month_application__city_car_total_cost
+msgid "City Total Car Cost"
+msgstr "市内交通总额"
+
+#. module: hs_expenses
+#: code:addons/hs_expenses/models/daily_expense.py:390
+#, python-format
+msgid "Please submit by the 10th of the next month of bill date."
+msgstr "请在下个月10日之前提交。"
