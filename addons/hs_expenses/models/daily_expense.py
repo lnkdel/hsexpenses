@@ -386,8 +386,14 @@ class MonthApplication(models.Model):
         day = today.day
         month = today.month
         bill_date = self.bill_date
-        if month - bill_date.month != 1 and today.day > 10:
-            raise UserError(_("Please submit by the 10th of the next month of bill date."))
+
+        # if month - bill_date.month != 1 and today.day > 7:
+        #     raise UserError(_("Please submit by the 10th of the next month of bill date."))
+
+        if month - bill_date.month == 1 and today.day <= 7:
+            pass
+        else:
+            raise UserError(_("Please submit by the 7th of the next month of bill date."))
 
         # 判断额度是否足够
         current_month_quota_remained = self.seller_id.current_month_quota_remained

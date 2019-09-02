@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-06 07:27+0000\n"
-"PO-Revision-Date: 2019-06-06 07:27+0000\n"
+"POT-Creation-Date: 2019-09-02 05:33+0000\n"
+"PO-Revision-Date: 2019-09-02 05:33+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -331,6 +331,11 @@ msgid "City"
 msgstr "城市"
 
 #. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__city_car_cost
+msgid "City Car Cost"
+msgstr "市内交通"
+
+#. module: hs_expenses
 #: model:ir.actions.act_window,name:hs_expenses.action_hs_city_level
 #: model:ir.model,name:hs_expenses.model_hs_base_city_level
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_base_city__city_level_id
@@ -340,6 +345,11 @@ msgstr "城市"
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_hs_city_level_form
 msgid "City Level"
 msgstr "城市级别"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_month_application__city_car_total_cost
+msgid "City Total Car Cost"
+msgstr "市内交通总额"
 
 #. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_entertain_company__color
@@ -400,7 +410,7 @@ msgid "Complete Name"
 msgstr "完整名称"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/daily_expense.py:410
+#: code:addons/hs_expenses/models/daily_expense.py:436
 #: model_terms:ir.ui.view,arch_db:hs_expenses.hs_expense_confirm_dialog
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_month_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_special_application_form
@@ -1122,6 +1132,12 @@ msgid "Please submit after 23 days of each month."
 msgstr "请在每个月的23日之后提交！"
 
 #. module: hs_expenses
+#: code:addons/hs_expenses/models/daily_expense.py:396
+#, python-format
+msgid "Please submit by the 7th of the next month of bill date."
+msgstr "请在单据日下个月的7日前提交。"
+
+#. module: hs_expenses
 #: selection:hs.expense.special.application,expense_category:0
 msgid "Quality"
 msgstr "质量"
@@ -1465,7 +1481,7 @@ msgstr "该城市已经存在。"
 
 #. module: hs_expenses
 #: code:addons/hs_expenses/models/daily_expense.py:50
-#: code:addons/hs_expenses/models/daily_expense.py:178
+#: code:addons/hs_expenses/models/daily_expense.py:188
 #, python-format
 msgid "The end date of the trip must be in the current month."
 msgstr "旅程的结束日期必须在当月。"
@@ -1563,6 +1579,11 @@ msgstr "待提交"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_application__car_total_cost
 msgid "Total Car Cost"
 msgstr "交通费合计"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_application__city_car_total_cost
+msgid "Total City Car Cost"
+msgstr "市内交通合计"
 
 #. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_month_application__total_cost
@@ -1727,16 +1748,16 @@ msgid "You cannot report twice the same line!"
 msgstr "同一条记录你不能报告两次！"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/daily_expense.py:401
+#: code:addons/hs_expenses/models/daily_expense.py:424
 #, python-format
 msgid "Your monthly quota is insufficient. Click Confirm to submit it to relevant personnel for review."
 msgstr "您的每月配额不足。 单击“确认”将其提交给相关人员进行审核。"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/daily_expense.py:405
+#: code:addons/hs_expenses/models/daily_expense.py:428
 #, python-format
 msgid "Your monthly quota is sufficient. Click Confirm to submit to the financial staff for review."
-msgstr "您的每月配额就足够了。 单击“确认”以提交给财务人员进行审核。"
+msgstr "您的每月配额足够了。 单击“确认”以提交给财务人员进行审核。"
 
 #. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_entertain_company__zip
@@ -1813,19 +1834,3 @@ msgstr "客户名称"
 #: model:ir.model,name:hs_expenses.model_hs_expense_entertain_user
 msgid "hs.expense.entertain.user"
 msgstr "招待人员"
-
-#. module: hs_expenses
-#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__city_car_cost
-msgid "City Car Cost"
-msgstr "市内交通"
-
-#. module: hs_expenses
-#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_month_application__city_car_total_cost
-msgid "City Total Car Cost"
-msgstr "市内交通总额"
-
-#. module: hs_expenses
-#: code:addons/hs_expenses/models/daily_expense.py:390
-#, python-format
-msgid "Please submit by the 10th of the next month of bill date."
-msgstr "请在下个月10日之前提交。"
