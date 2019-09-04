@@ -55,6 +55,21 @@ class TravelDetail(models.Model):
     _name = 'hs.expense.travel.detail'
     _description = 'Travel detail'
 
+    # @api.onchange('to_city')
+    @api.depends('to_city')
+    def _compute_cost_standard(self):
+        travel_standard_model = self.env['hs.expense.travel.standard']
+        for detail in self:
+            sale_id = detail.travel_application_id.applicant_id
+            to_city_level_id = detail.to_city.city_level_id if detail.to_city.city_level_id else self.env['hs.base.city.level'].search([('name', '=', '其他')], limit=1)
+            travel_standard = travel_standard_model.search([
+                ('employee_level_id', '=', sale_id.employee_level_id.id),
+                ('city_level_id', '=', to_city_level_id.id)], limit=1)
+
+            detail.meal_cost_standard = travel_standard.standard_meal_cost
+            detail.hotel_cost_standard = travel_standard.standard_hotel_cost
+            detail.car_cost_standard = travel_standard.standard_car_cost
+
     start_date = fields.Date(string='Start Date', required=True,
                                  default=lambda self: fields.Date.context_today(self))
     end_date = fields.Date(string='End Date', required=True,
@@ -65,8 +80,11 @@ class TravelDetail(models.Model):
     travel_application_id = fields.Many2one(comodel_name="hs.expense.travel.application", string="Travel Application")
     travel_standard_id = fields.Many2one(comodel_name="hs.expense.travel.standard", string="Travel Standard")
     meal_cost = fields.Float("Meal Cost", digits=(16, 2))
+    meal_cost_standard = fields.Float("Meal Cost Standard", digits=(16, 2), compute="_compute_cost_standard", store=True)
     hotel_cost = fields.Float("Hotel Cost", digits=(16, 2))
+    hotel_cost_standard = fields.Float("Hotel Cost Standard", digits=(16, 2), compute="_compute_cost_standard", store=True)
     car_cost = fields.Float("Car Cost", digits=(16, 2))
+    car_cost_standard = fields.Float("Car Cost Standard", digits=(16, 2), compute="_compute_cost_standard", store=True)
     city_car_cost = fields.Float("City Car Cost", digits=(16, 2))
     state = fields.Selection([
         ('draft', 'To Submit'),

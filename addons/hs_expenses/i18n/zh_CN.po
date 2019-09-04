@@ -1834,3 +1834,18 @@ msgstr "客户名称"
 #: model:ir.model,name:hs_expenses.model_hs_expense_entertain_user
 msgid "hs.expense.entertain.user"
 msgstr "招待人员"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__car_cost_standard
+msgid "Car Cost Standard"
+msgstr "交通费标准"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__hotel_cost_standard
+msgid "Hotel Cost Standard"
+msgstr "住宿费标准"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__meal_cost_standard
+msgid "Meal Cost Standard"
+msgstr "伙食费标准"

@@ -129,13 +129,16 @@
                                 <field name="start_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="from_city" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="meal_cost" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="hotel_cost" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="car_cost" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="city_car_cost"/>
                             </group>
                             <group>
                                 <field name="end_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="to_city" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                                <field name="hotel_cost" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                                <field name="city_car_cost"/>
+                                <field name="meal_cost_standard" readonly="1"/>
+                                <field name="hotel_cost_standard" readonly="1"/>
+                                <field name="car_cost_standard" readonly="1" />
                             </group>
                         </group>
                     </sheet>
