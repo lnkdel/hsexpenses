@@ -339,8 +339,9 @@ class SpecialApplication(models.Model):
             raise UserError(_("You cannot report twice the same line!"))
         if self.applicant_amount <= 2000:
             raise UserError(_("For applications within 2,000 yuan, please use the ordinary hospitality application."))
-        elif self.applicant_amount > 10000:
-            raise UserError(_("The amount of a single application cannot exceed 10,000 yuan."))
+        # elif self.applicant_amount > 10000:
+        #     raise UserError(_("The amount of a single application cannot exceed 10,000 yuan."))
+        # 2019-9-12 要求暂时去掉10000限制，应对中秋送礼
 
         special_quota_used = self.applicant_id.special_quota_used
         special_quota = self.applicant_id.special_quota
