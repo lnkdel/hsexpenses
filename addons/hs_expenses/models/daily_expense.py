@@ -248,6 +248,8 @@ class OrdinaryApplication(models.Model):
         # compute='_compute_state',
         help="Status of the expense.")
     is_exceed = fields.Boolean(related='month_application_id.is_exceed')
+    happen_date = fields.Date(string='Happen Date', required=True,
+                                 default=lambda self: fields.Date.context_today(self))
 
     @api.model
     def create(self, values):

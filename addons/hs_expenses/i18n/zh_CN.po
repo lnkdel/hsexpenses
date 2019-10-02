@@ -1849,3 +1849,8 @@ msgstr "住宿费标准"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__meal_cost_standard
 msgid "Meal Cost Standard"
 msgstr "伙食费标准"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_ordinary_application__happen_date
+msgid "Happen Date"
+msgstr "发生日期"

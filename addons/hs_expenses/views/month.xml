@@ -83,6 +83,7 @@
                                         <field name="name"/>
                                         <field name="applicant_id"/>
                                         <field name="applicant_date"/>
+                                        <field name="happen_date"/>
                                         <field name="applicant_department_id"/>
                                         <field name="state"/>
                                         <field name="applicant_amount"/>
