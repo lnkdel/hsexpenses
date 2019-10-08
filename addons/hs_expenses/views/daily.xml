@@ -98,6 +98,7 @@
             id="menu_travel_application"
             action="action_travel_application"
             parent="hs_travel_expenses_management_menu"
+            groups="hs_expenses.group_hs_expenses_financial_officer"
             sequence="1"/>
 
         <record id="view_travel_detail_tree" model="ir.ui.view">
@@ -231,6 +232,7 @@
             id="menu_ordinary_application"
             action="action_ordinary_application"
             parent="hs_travel_expenses_management_menu"
+            groups="hs_expenses.group_hs_expenses_financial_officer"
             sequence="2"/>
     </data>
 </odoo>
