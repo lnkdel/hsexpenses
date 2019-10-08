@@ -379,11 +379,15 @@ class SpecialApplication(models.Model):
             for user in reviewer:
                 employee = self.env['hs.base.employee'].search([('user_id', '=', user.id)], limit=1)
                 if employee and not user.has_group('hs_expenses.group_hs_expenses_manager'):
-                    countersign.sudo().create({
-                        'employee_id': employee.id,
-                        'expense_id': self.id
-                    })
-
+                    countersign.sudo().search(
+                        [('expense_id', '=', self.id),('is_approved', '=', False)]).unlink()
+                    countersigns = countersign.sudo().search([('expense_id', '=', self.id)]).read([('employee_id')])
+                    lst = [cc['employee_id'][0] for cc in countersigns]
+                    if employee.id not in lst:
+                        countersign.sudo().create({
+                            'employee_id': employee.id,
+                            'expense_id': self.id
+                        })
         self.write({'state': 'reported'})
         return True
 
