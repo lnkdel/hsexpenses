@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
         <record id="hs_expense_category_quality" model="hs.expense.category">
             <field name="name">质量</field>
             <field name="sequence">10</field>
@@ -18,6 +18,11 @@
         </record>
         <record id="hs_expense_category_other" model="hs.expense.category">
             <field name="name">其他</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_category_supplement" model="hs.expense.category">
+            <field name="name">补充申请</field>
             <field name="sequence">10</field>
             <field name="active">True</field>
         </record>

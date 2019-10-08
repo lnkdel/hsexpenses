@@ -295,6 +295,7 @@ class SpecialApplication(models.Model):
         ('contract', 'Contract order delivery'),
         ('project', 'New project development'),
         ('other', 'Other'),
+        ('supplement', 'Supplementary application'),
     ], string='Category', index=True, default='other', required=True)
     expense_category_ids = fields.Many2many(comodel_name="hs.expense.category",
                                             relation="hs_expense_special_category_rel",
@@ -302,6 +303,9 @@ class SpecialApplication(models.Model):
                                             column2="category_id",
                                             string="Category",
                                             required=True)
+    # attachment_file_name = fields.Char(string='Attachment')
+    # attachment_file = fields.Binary(string='Attachment', attachment=True)
+    attachment_ids = fields.Many2many('ir.attachment', 'hs_expense_special_app_rel', 'special_app_id', 'attachment_id', string='Attachments')
 
     @api.model
     def create(self, vals):
@@ -368,6 +372,8 @@ class SpecialApplication(models.Model):
                 group_id = self.env.ref('hs_expenses.group_hs_expenses_project_reviewer').id
             elif category.name == '其他':
                 group_id = self.env.ref('hs_expenses.group_hs_expenses_other_reviewer').id
+            elif category.name == '补充申请':
+                group_id = self.env.ref('hs_expenses.group_hs_expenses_project_reviewer').id
             reviewers.append(self.env['res.users'].search([('groups_id', '=', group_id)]))
         for reviewer in reviewers:
             for user in reviewer:

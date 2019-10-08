@@ -1854,3 +1854,8 @@ msgstr "伙食费标准"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_ordinary_application__happen_date
 msgid "Happen Date"
 msgstr "招待日期"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_special_application__attachment_ids
+msgid "Attachments"
+msgstr "附件"

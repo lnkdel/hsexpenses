@@ -447,6 +447,9 @@
                                 <field name="sale_area_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
                                 <field name="entertain_company_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
                                 <field name="entertain_res_user_ids" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <!--<field name="attachment_file_name" attrs="{'invisible':1}" />-->
+                                <!--<field name="attachment_file" widget="binary" filename="attachment_file_name" attrs="{'readonly': [('state', '!=', 'draft')]}" />-->
+                                <field name="attachment_ids" mode="kanban" />
                             </group>
                             <group>
                                 <field name="applicant_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
