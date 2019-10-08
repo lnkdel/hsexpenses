@@ -410,7 +410,7 @@ class MonthApplication(models.Model):
         # if month - bill_date.month != 1 and today.day > 7:
         #     raise UserError(_("Please submit by the 10th of the next month of bill date."))
 
-        if month - bill_date.month == 1 and today.day <= 7:
+        if month - bill_date.month == 1 and today.day <= 9:
             pass
         else:
             raise UserError(_("Please submit by the 7th of the next month of bill date."))
