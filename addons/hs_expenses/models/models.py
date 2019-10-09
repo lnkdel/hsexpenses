@@ -446,8 +446,8 @@ class SpecialApplication(models.Model):
     @api.multi
     def action_confirm_expenses(self): # 报销经办人填写好后提交到财务审批
         today = fields.Date.today()
-        if today.day < 23:
-            raise UserError(_("Please submit after 23 days of each month."))
+        # if today.day < 23:
+        #     raise UserError(_("Please submit after 23 days of each month."))
 
         if any(expense.state != 'approved' for expense in self):
             raise UserError(_("You cannot confirm twice the same line!"))
