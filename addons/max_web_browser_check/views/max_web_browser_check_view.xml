@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_backend" name="max_web_browser_check assets" inherit_id="web.layout">
+            <xpath expr="//script" position="before">
+                <script type="text/javascript" src="/max_web_browser_check/static/src/js/max_web_browser_check.js"></script>
+            </xpath>
+        </template>
+    </data>
+</odoo>
