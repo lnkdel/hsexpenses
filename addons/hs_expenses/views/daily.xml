@@ -33,6 +33,10 @@
                     </header>
                     <sheet>
                         <field name="is_exceed" invisible="1"/>
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" attrs="{'readonly': True}" options="{'no_create_edit': True}"/>
+                        </h1>
                         <group string="">
                             <group>
                                 <field name="applicant_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
@@ -114,6 +118,7 @@
                     <field name="hotel_cost"/>
                     <field name="car_cost"/>
                     <field name="city_car_cost"/>
+                    <field name="total_cost"/>
                 </tree>
             </field>
         </record>

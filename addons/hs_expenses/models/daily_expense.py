@@ -70,6 +70,11 @@ class TravelDetail(models.Model):
             detail.hotel_cost_standard = travel_standard.standard_hotel_cost
             detail.car_cost_standard = travel_standard.standard_car_cost
 
+    @api.depends('meal_cost', 'hotel_cost', 'car_cost', 'city_car_cost')
+    def _compute_total_cost(self):
+        for detail in self:
+            detail.total_cost = detail.meal_cost + detail.hotel_cost + detail.car_cost + detail.city_car_cost
+
     start_date = fields.Date(string='Start Date', required=True,
                                  default=lambda self: fields.Date.context_today(self))
     end_date = fields.Date(string='End Date', required=True,
@@ -96,6 +101,8 @@ class TravelDetail(models.Model):
     ], string='Status', copy=False, index=True, readonly=True, default='draft',
         related='travel_application_id.state',
         help="Status of the expense.")
+
+    total_cost = fields.Float("Total Cost", compute="_compute_total_cost", digits=(16, 2))
 
     @api.model
     def create(self, values):
