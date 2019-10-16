@@ -1588,6 +1588,7 @@ msgstr "市内交通合计"
 #. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_month_application__total_cost
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_application__total_cost
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__total_cost
 msgid "Total Cost"
 msgstr "费用合计"
 
