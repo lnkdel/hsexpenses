@@ -500,14 +500,27 @@
             </field>
         </record>
 
+        <record id="special_application_search" model="ir.ui.view">
+           <field name="name">hs.expense.special.application.search</field>
+           <field name="model">hs.expense.special.application</field>
+            <field name="arch" type="xml">
+                <search string="Special Applications">
+                    <field name="name" />
+                    <field name="applicant_id" />
+                    <filter string="Current Month" name="cmonth" domain="[('applicant_date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-01'))]" />
+                    <filter string="Last Month" name="lmonth" domain="[('applicant_date', '&gt;=', (datetime.datetime.now().replace(day=1)-datetime.timedelta(days=1)).strftime('%Y-%m-01')), ('applicant_date', '&lt;', datetime.datetime.now().strftime('%Y-%m-01'))]" />
+                </search>
+           </field>
+        </record>
+
         <record id="action_special_application" model="ir.actions.act_window">
             <field name="name">Special Application</field>
             <field name="res_model">hs.expense.special.application</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[]</field>
-            <field name="context">{}</field>
             <field name="view_id" eval="False"/>
+            <field name="context">{'search_default_cmonth': True}</field>
         </record>
 
         <menuitem

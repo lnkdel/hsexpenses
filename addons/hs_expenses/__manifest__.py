@@ -32,6 +32,8 @@
         'views/daily.xml',
         'views/month.xml',
         'data/preset_data.xml',
+        'report/expense_reports.xml',
+        'views/templates.xml',
     ],
     'installable': True,
     'application': True,

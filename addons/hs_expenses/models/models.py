@@ -603,6 +603,8 @@ class BatchEndApplicationWizard(models.TransientModel):
     def batch_end_button(self):
         self.ensure_one()
         active_ids = self._context.get('active_ids')
-        applications = self.env['hs.expense.special.application'].search([('id', 'in', active_ids)])
+        applications = self.env['hs.expense.special.application'].search([
+            ('id', 'in', active_ids),
+            ('state', '=', 'audited')])
         applications.write({'state': 'done'})
         return {'type': 'ir.actions.act_window_close'}

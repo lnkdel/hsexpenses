@@ -39,6 +39,7 @@ class BaseApplication(models.AbstractModel):
         string='Payment Method', default='mt')
     bank_name = fields.Char(string='Bank Name')
     bank_account = fields.Char(string='Bank Account')
+    audit_date = fields.Date(string='Audit Date', default=lambda self: fields.Date.context_today(self))
 
     @api.model
     def create(self, values):
@@ -163,6 +164,11 @@ class TravelApplication(models.Model):
     def _compute_current_user_is_financial(self):
         self.current_user_is_financial = self.user_has_groups('hs_expenses.group_hs_expenses_financial_officer')
 
+    @api.onchange('audit_cut_amount')
+    def _onchange_audit_cut_amount(self):
+        for travel in self:
+            travel.audit_amount = travel.total_cost - self.audit_cut_amount
+
     destination_city = fields.Many2one("hs.base.city", string="Destination City", required=True)
     travel_detail_ids = fields.One2many('hs.expense.travel.detail', 'travel_application_id', string='Travel Details')
     state = fields.Selection([
@@ -186,6 +192,8 @@ class TravelApplication(models.Model):
     city_car_total_cost = fields.Float("Total City Car Cost", compute="_compute_city_car_total_cost", digits=(16, 2))
     total_cost = fields.Float("Total Cost", compute="_compute_total_cost", digits=(16, 2))
     audit_amount = fields.Float("Audit Amount", digits=(16, 2))
+    audit_cut_amount = fields.Float("Audit Cut Amount", digits=(16, 2))
+    audit_remark = fields.Text(string="Audit Remark")
     current_user_is_financial = fields.Boolean(compute="_compute_current_user_is_financial")
     is_exceed = fields.Boolean(related='month_application_id.is_exceed')
 
@@ -218,6 +226,15 @@ class TravelApplication(models.Model):
         # Add code here
         return super(TravelApplication, self).write(values)
 
+    @api.multi
+    def unlink(self):
+        for expense in self:
+            if expense.state not in ['draft']:
+                raise UserError(_('You cannot delete a posted or approved expense.'))
+            if expense.create_uid.id != self.env.uid:
+                raise UserError(_("You cannot delete the expense!"))
+        return super(TravelApplication, self).unlink()
+
 
 class OrdinaryApplication(models.Model):
     _name = 'hs.expense.ordinary.application'
@@ -232,7 +249,7 @@ class OrdinaryApplication(models.Model):
     def _compute_current_user_is_financial(self):
         self.current_user_is_financial = self.user_has_groups('hs_expenses.group_hs_expenses_financial_officer')
 
-    applicant_amount = fields.Float("Applicant Amount", required=True, digits=(16, 2))
+    applicant_amount = fields.Float("Applicant Amount", required=True, max=2000, digits=(16, 2))
 
     # reimbursement_amount = fields.Float(
     #     "Reimbursement Amount",
@@ -273,7 +290,24 @@ class OrdinaryApplication(models.Model):
                 })
                 name = self.env['ir.sequence'].next_by_code('hs.expense.ordinary.application.no')
             values['name'] = name
+        if float(values.get('applicant_amount')) > 2000:
+            raise UserError(_('The application amount shall not be more than 2000.'))
         return super(OrdinaryApplication, self).create(values)
+
+    @api.multi
+    def write(self, vals):
+        if float(vals.get('applicant_amount')) > 2000:
+            raise UserError(_('The application amount shall not be more than 2000.'))
+        return super(OrdinaryApplication, self).write(vals)
+
+    @api.multi
+    def unlink(self):
+        for expense in self:
+            if expense.state not in ['draft']:
+                raise UserError(_('You cannot delete a posted or approved expense.'))
+            if expense.create_uid.id != self.env.uid:
+                raise UserError(_("You cannot delete the expense!"))
+        return super(OrdinaryApplication, self).unlink()
 
 
 class MonthApplication(models.Model):
@@ -323,6 +357,13 @@ class MonthApplication(models.Model):
                 for ordinary in app.ordinary_application_ids:
                     app.total_ordinary_applicant_amount += ordinary.applicant_amount
 
+    @api.depends('travel_application_ids')
+    def _compute_total_travel_applicant_amount(self):
+        for app in self:
+            if app.travel_application_ids is not None or app.travel_application_ids is not False:
+                for travel in app.travel_application_ids:
+                    app.total_travel_applicant_amount += travel.total_cost
+
     @api.depends('total_cost')
     def _compute_total_cost(self):
         for app in self:
@@ -348,11 +389,34 @@ class MonthApplication(models.Model):
                 for ordinary in app.ordinary_application_ids:
                     app.audit_amount += ordinary.audit_amount
 
+    @api.onchange('travel_application_ids')
+    def _compute_total_travel_audit_amount(self):
+        for app in self:
+            app.total_travel_audit_amount = 0
+            if app.travel_application_ids is not None or app.travel_application_ids is not False:
+                for travel in app.travel_application_ids:
+                    app.total_travel_audit_amount += travel.audit_amount
+
+    @api.onchange('ordinary_application_ids')
+    def _compute_total_ordinary_audit_amount(self):
+        for app in self:
+            app.total_ordinary_audit_amount = 0
+            if app.ordinary_application_ids is not None or app.ordinary_application_ids is not False:
+                for ordinary in app.ordinary_application_ids:
+                    app.total_ordinary_audit_amount += ordinary.audit_amount
+
     def _compute_current_user_is_financial(self):
         if self.user_has_groups('hs_expenses.group_hs_expenses_financial_officer'):
             self.current_user_is_financial = True
         else:
             self.current_user_is_financial = False
+
+    @api.onchange('ordinary_application_ids')
+    def _onchange_ordinary_application_ids(self):
+        if self.ordinary_application_ids is not None and self.ordinary_application_ids is not False:
+            for ord in self.ordinary_application_ids:
+                if ord.applicant_amount > 2000:
+                    raise UserError(_('The application amount shall not be more than 2000.'))
 
     name = fields.Char(string="Bill Number", require=True)
     seller_id = fields.Many2one('hs.base.employee', string='Applicant', required=True,
@@ -383,12 +447,20 @@ class MonthApplication(models.Model):
     hotel_total_cost = fields.Float("Total Hotel Cost", compute="_compute_hotel_total_cost", digits=(16, 2))
     car_total_cost = fields.Float("Total Car Cost", compute="_compute_car_total_cost", digits=(16, 2))
     city_car_total_cost = fields.Float("City Total Car Cost", compute="_compute_city_car_total_cost", digits=(16, 2))
-    total_ordinary_applicant_amount = fields.Float("Total Ordinary Applicant Amount", compute="_compute_total_ordinary_applicant_amount", digits=(16, 2))
+    total_ordinary_applicant_amount = fields.Float("Total Ordinary Applicant Amount",
+                                                   compute="_compute_total_ordinary_applicant_amount", digits=(16, 2))
+    total_travel_applicant_amount = fields.Float("Total Travel Applicant Amount",
+                                                   compute="_compute_total_travel_applicant_amount", digits=(16, 2))
     total_cost = fields.Float("Total Cost", compute="_compute_total_cost", digits=(16, 2))
     current_month_quota = fields.Float("Current Month Quota", related='seller_id.current_month_quota')
     # audit_amount = fields.Float("Audit Amount", digits=(16, 2), readonly=lambda self: self._set_audit_amount_readonly())
-    audit_amount = fields.Float("Audit Amount", digits=(16, 2))
+    audit_amount = fields.Float("Audit Amount", digits=(16, 2), compute="_compute_audit_amount")
+    total_travel_audit_amount = fields.Float("Total Travel Audit Amount", digits=(16, 2),
+                                             compute="_compute_total_travel_audit_amount")
+    total_ordinary_audit_amount = fields.Float("Total Ordinary Audit Amount", digits=(16, 2),
+                                             compute="_compute_total_ordinary_audit_amount")
     current_user_is_financial = fields.Boolean(compute="_compute_current_user_is_financial")
+    audit_date = fields.Date(string='Audit Date', default=lambda self: fields.Date.context_today(self))
 
     @api.model
     def create(self, values):
@@ -406,6 +478,15 @@ class MonthApplication(models.Model):
                 name = self.env['ir.sequence'].next_by_code('hs.expense.month.application.no')
             values['name'] = name
         return super(MonthApplication, self).create(values)
+
+    @api.multi
+    def unlink(self):
+        for expense in self:
+            if expense.state not in ['draft']:
+                raise UserError(_('You cannot delete a posted or approved expense.'))
+            if expense.create_uid.id != self.env.uid:
+                raise UserError(_("You cannot delete the expense!"))
+        return super(MonthApplication, self).unlink()
 
     @api.multi
     def action_submit_expenses(self): # 营销员提交草稿到报告状态
@@ -493,6 +574,17 @@ class MonthApplication(models.Model):
         self.write({'state': 'audited'})
 
     @api.multi
+    def action_back_to_to_audited(self):  # 出纳退回给财务审核
+        if self.travel_application_ids is not None or self.travel_application_ids is not False:
+            for travel in self.travel_application_ids:
+                travel.audit_date = datetime.datetime.now()
+
+        if self.ordinary_application_ids is not None or self.ordinary_application_ids is not False:
+            for ordinary in self.ordinary_application_ids:
+                ordinary.audit_date = datetime.datetime.now()
+        self.write({'state': 'to_audited', 'audit_date': datetime.datetime.now()})
+
+    @api.multi
     def action_cashier_expenses(self):  # 出纳放款结束流程
         self.write({'state': 'done'})
 
@@ -510,4 +602,33 @@ class ExpenseConfirmDialog(models.TransientModel): # 营销员点确认从报告
         else:
             self.month_application_id.state = 'to_audited'
         self.sudo().month_application_id.seller_id.current_month_quota_used += self.month_application_id.total_cost
+
+
+class BatchEndMonthApplicationWizard(models.TransientModel):
+    _name = 'month.batch.end.wizard'
+    _description = 'Batch end application wizard'
+
+    application_ids = fields.Many2many('hs.expense.month.application', string='Month Applications')
+
+    @api.model
+    def default_get(self, fields):
+        res = {}
+        active_ids = self._context.get('active_ids')
+        if active_ids:
+            applications = self.env['hs.expense.month.application'].search_read(
+                domain=[('id', 'in', active_ids)], fields=['id', 'state'])
+            ids = [s['id'] for s in list(filter(lambda s: s['state'] == 'audited', applications))]
+            res = {'application_ids': ids}
+        return res
+
+    @api.multi
+    def batch_end_button(self):
+        self.ensure_one()
+        active_ids = self._context.get('active_ids')
+        if active_ids:
+            applications = self.env['hs.expense.month.application'].search([
+                ('id', 'in', active_ids),
+                ('state', '=', 'audited')])
+            applications.write({'state': 'done'})
+        return {'type': 'ir.actions.act_window_close'}
 

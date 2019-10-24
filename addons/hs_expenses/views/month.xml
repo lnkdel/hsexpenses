@@ -9,9 +9,9 @@
                     <field name="name"/>
                     <field name="seller_id"/>
                     <field name="bill_date"/>
+                    <field name="car_total_cost"/>
                     <field name="meal_total_cost"/>
                     <field name="hotel_total_cost"/>
-                    <field name="car_total_cost"/>
                     <field name="city_car_total_cost"/>
                     <field name="total_ordinary_applicant_amount"/>
                     <field name="total_cost"/>
@@ -26,15 +26,16 @@
             <field name="arch" type="xml">
                 <form string="Month Application">
                     <header>
-                        <button name="action_submit_expenses" string="Submit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','draft')]}" groups="hs_expenses.group_hs_expenses_seller"/>
-                        <button name="action_reported_to_approve" string="Confirm" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','reported')]}" groups="hs_expenses.group_hs_expenses_seller"/>
+                        <button name="action_submit_expenses" string="Submit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','draft')]}" groups="hs_expenses.group_hs_expenses_seller" confirm="Are you sure you want to do this?"/>
+                        <button name="action_reported_to_approve" string="Confirm" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','reported')]}" groups="hs_expenses.group_hs_expenses_seller" confirm="Are you sure you want to do this?"/>
 
-                        <button name="action_approve_to_audit" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','to_approved')]}" groups="hs_expenses.group_hs_expenses_project_reviewer"/>
-                        <button name="action_back_to_reported" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','to_approved')]}" groups="hs_expenses.group_hs_expenses_project_reviewer"/>
+                        <button name="action_approve_to_audit" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','to_approved')]}" groups="hs_expenses.group_hs_expenses_project_reviewer" confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_reported" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','to_approved')]}" groups="hs_expenses.group_hs_expenses_project_reviewer" confirm="Are you sure you want to do this?"/>
 
-                        <button name="action_audit_expenses" string="Audit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','to_audited')]}" groups="hs_expenses.group_hs_expenses_financial_officer"/>
+                        <button name="action_audit_expenses" string="Audit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','to_audited')]}" groups="hs_expenses.group_hs_expenses_financial_officer" confirm="Are you sure you want to do this?"/>
 
-                        <button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier"/>
+                        <button name="action_back_to_to_audited" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier" confirm="Are you sure you want to do this?"/>
+                        <button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier" confirm="Are you sure you want to do this?"/>
 
                         <field name="state" widget="statusbar" statusbar_visible="draft,reported,to_approved,to_audited,audited,done"  attrs="{'invisible': [('is_exceed', '!=', True)]}"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,reported,to_audited,audited,done" attrs="{'invisible': [('is_exceed', '!=', False)]}"/>
@@ -44,8 +45,9 @@
                         <group string="">
                             <group>
                                 <field name="seller_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                                <field name="meal_total_cost"/>
                                 <field name="car_total_cost"/>
+                                <field name="meal_total_cost"/>
+                                <field name="total_travel_applicant_amount"/>
                                 <field name="total_cost"/>
                             </group>
                             <group>
@@ -66,9 +68,9 @@
                                         <field name="applicant_department_id"/>
                                         <field name="destination_city"/>
                                         <field name="state"/>
+                                        <field name="car_total_cost"/>
                                         <field name="meal_total_cost"/>
                                         <field name="hotel_total_cost"/>
-                                        <field name="car_total_cost"/>
                                         <field name="city_car_total_cost"/>
                                         <field name="total_cost"/>
                                         <field name="audit_amount"/>
@@ -105,6 +107,19 @@
             </field>
         </record>
 
+        <record id="month_application_search" model="ir.ui.view">
+           <field name="name">hs.expense.month.application.search</field>
+           <field name="model">hs.expense.month.application</field>
+            <field name="arch" type="xml">
+                <search string="Month Applications">
+                    <field name="name" />
+                    <field name="seller_id" />
+                    <filter string="Current Month" name="cmonth" domain="[('bill_date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-01'))]" />
+                    <filter string="Last Month" name="lmonth" domain="[('bill_date', '&gt;=', (datetime.datetime.now().replace(day=1)-datetime.timedelta(days=1)).strftime('%Y-%m-01')), ('bill_date', '&lt;', datetime.datetime.now().strftime('%Y-%m-01'))]" />
+                </search>
+           </field>
+        </record>
+
         <record id="action_month_application" model="ir.actions.act_window">
             <field name="name">Month Application</field>
             <field name="type">ir.actions.act_window</field>
@@ -117,6 +132,7 @@
                 <!-- More details about what a user can do with this object will be OK -->
               </p>
             </field>
+            <field name="context">{'search_default_lmonth': True}</field>
         </record>
 
 

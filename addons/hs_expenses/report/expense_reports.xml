@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="paperformat_month_expense" model="report.paperformat">
+            <field name="name">month expense report format</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">4</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+            id="action_report_hs_expenses_month_expense"
+            string="Month Expenses Report"
+            model="hs.expense.month.application"
+            report_type="qweb-pdf"
+            name="hs_expenses.report_expense_month"
+            file="hs_expenses.report_expense_month"
+            paperformat="hs_expenses.paperformat_month_expense"
+            print_report_name="'Month Expenses - %s - %s' % (object.seller_id.name, (object.name).replace('/', ''))"
+        />
+
+        <report
+            id="action_report_hs_expenses_month_expense_travel"
+            string="Travel Report"
+            model="hs.expense.month.application"
+            report_type="qweb-pdf"
+            name="hs_expenses.report_expense_month_travel"
+            file="hs_expenses.report_expense_month_travel"
+            paperformat="hs_expenses.paperformat_month_expense"
+            print_report_name="'Travel Expenses - %s - %s' % (object.seller_id.name, (object.name).replace('/', ''))"
+        />
+
+        <report
+            id="action_report_hs_expenses_month_expense_ordinary"
+            string="Ordinary Report"
+            model="hs.expense.month.application"
+            report_type="qweb-pdf"
+            name="hs_expenses.report_expense_month_ordinary"
+            file="hs_expenses.report_expense_month_ordinary"
+            paperformat="hs_expenses.paperformat_month_expense"
+            print_report_name="'Ordinary Expenses - %s - %s' % (object.seller_id.name, (object.name).replace('/', ''))"
+        />
+    </data>
+</odoo>

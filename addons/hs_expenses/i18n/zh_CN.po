@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-02 05:33+0000\n"
-"PO-Revision-Date: 2019-09-02 05:33+0000\n"
+"POT-Creation-Date: 2019-10-24 02:39+0000\n"
+"PO-Revision-Date: 2019-10-24 02:39+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -63,7 +63,7 @@ msgstr "地址类型"
 #: model:ir.model.fields,help:hs_expenses.field_hs_expense_entertain_company__lang
 #: model:ir.model.fields,help:hs_expenses.field_hs_expense_entertain_user__lang
 msgid "All the emails and documents sent to this contact will be translated in this language."
-msgstr "发送到该联系人的所有EMail和文件将以这种语言翻译。"
+msgstr "发送到该联系人的所有EMail和文档将以这种语言翻译。"
 
 #. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_base_application__applicant_id
@@ -113,10 +113,20 @@ msgid "Approved Deduction Amount"
 msgstr ""
 
 #. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.view_month_application_form
+msgid "Are you sure you want to do this?"
+msgstr "是否确定此操作？"
+
+#. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_entertain_company__message_attachment_count
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_entertain_user__message_attachment_count
 msgid "Attachment Count"
 msgstr "附件数量"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_special_application__attachment_ids
+msgid "Attachments"
+msgstr "附件"
 
 #. module: hs_expenses
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_month_application_form
@@ -133,12 +143,30 @@ msgid "Audit Amount"
 msgstr "审核金额"
 
 #. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_application__audit_cut_amount
+msgid "Audit Cut Amount"
+msgstr "核减金额"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_base_application__audit_date
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_month_application__audit_date
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_ordinary_application__audit_date
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_application__audit_date
+msgid "Audit Date"
+msgstr "审核日期"
+
+#. module: hs_expenses
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_month_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_ordinary_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_special_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_travel_application_form
 msgid "Audit Information"
 msgstr "财务审核信息"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_application__audit_remark
+msgid "Audit Remark"
+msgstr "审核备注"
 
 #. module: hs_expenses
 #: selection:hs.expense.month.application,state:0
@@ -194,26 +222,31 @@ msgstr ""
 
 #. module: hs_expenses
 #: model_terms:ir.ui.view,arch_db:hs_expenses.batch_end_application_wizard_view
+#: model_terms:ir.ui.view,arch_db:hs_expenses.batch_end_month_application_wizard_view
 msgid "Batch End"
 msgstr "批量结束"
 
 #. module: hs_expenses
 #: model_terms:ir.ui.view,arch_db:hs_expenses.batch_end_application_wizard_view
+#: model_terms:ir.ui.view,arch_db:hs_expenses.batch_end_month_application_wizard_view
 msgid "Batch End Application"
 msgstr "批量结束单据"
 
 #. module: hs_expenses
 #: model_terms:ir.ui.view,arch_db:hs_expenses.batch_end_application_wizard_view
+#: model_terms:ir.ui.view,arch_db:hs_expenses.batch_end_month_application_wizard_view
 msgid "Batch End Application Wizard"
 msgstr "批量结束向导"
 
 #. module: hs_expenses
 #: model:ir.actions.act_window,name:hs_expenses.batch_end_application_wizard_action
+#: model:ir.actions.act_window,name:hs_expenses.batch_end_month_application_wizard_action
 msgid "Batch End Wizard"
 msgstr "批量结束向导"
 
 #. module: hs_expenses
 #: model:ir.model,name:hs_expenses.model_hs_expense_batch_end_wizard
+#: model:ir.model,name:hs_expenses.model_month_batch_end_wizard
 msgid "Batch end application wizard"
 msgstr "批量结束向导"
 
@@ -252,6 +285,7 @@ msgstr "退回"
 
 #. module: hs_expenses
 #: model_terms:ir.ui.view,arch_db:hs_expenses.batch_end_application_wizard_view
+#: model_terms:ir.ui.view,arch_db:hs_expenses.batch_end_month_application_wizard_view
 msgid "Cancel"
 msgstr "取消"
 
@@ -259,6 +293,11 @@ msgstr "取消"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__car_cost
 msgid "Car Cost"
 msgstr "交通费"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__car_cost_standard
+msgid "Car Cost Standard"
+msgstr "交通费标准"
 
 #. module: hs_expenses
 #: selection:hs.expense.base.application,reimbursement_payment_method:0
@@ -410,7 +449,7 @@ msgid "Complete Name"
 msgstr "完整名称"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/daily_expense.py:436
+#: code:addons/hs_expenses/models/daily_expense.py:544
 #: model_terms:ir.ui.view,arch_db:hs_expenses.hs_expense_confirm_dialog
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_month_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_special_application_form
@@ -477,6 +516,7 @@ msgstr "国家/地区"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_area__create_uid
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_benefit__create_uid
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_market__create_uid
+#: model:ir.model.fields,field_description:hs_expenses.field_month_batch_end_wizard__create_uid
 msgid "Created by"
 msgstr "创建人"
 
@@ -500,6 +540,7 @@ msgstr "创建人"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_area__create_date
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_benefit__create_date
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_market__create_date
+#: model:ir.model.fields,field_description:hs_expenses.field_month_batch_end_wizard__create_date
 msgid "Created on"
 msgstr "创建时间"
 
@@ -578,6 +619,7 @@ msgstr "目的地"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_area__display_name
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_benefit__display_name
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_market__display_name
+#: model:ir.model.fields,field_description:hs_expenses.field_month_batch_end_wizard__display_name
 msgid "Display Name"
 msgstr "显示名称"
 
@@ -677,7 +719,7 @@ msgid "Followers (Partners)"
 msgstr "关注者(业务伙伴)"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:341
+#: code:addons/hs_expenses/models/models.py:345
 #, python-format
 msgid "For applications within 2,000 yuan, please use the ordinary hospitality application."
 msgstr "2000元以内的申请，请使用差旅报销和普通招待申请。"
@@ -705,9 +747,19 @@ msgid "Handler"
 msgstr "报销经办人"
 
 #. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_ordinary_application__happen_date
+msgid "Happen Date"
+msgstr "招待日期"
+
+#. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__hotel_cost
 msgid "Hotel Cost"
 msgstr "住宿费"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__hotel_cost_standard
+msgid "Hotel Cost Standard"
+msgstr "住宿费标准"
 
 #. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_base_city__id
@@ -730,6 +782,7 @@ msgstr "住宿费"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_area__id
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_benefit__id
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_market__id
+#: model:ir.model.fields,field_description:hs_expenses.field_month_batch_end_wizard__id
 msgid "ID"
 msgstr ""
 
@@ -861,6 +914,7 @@ msgstr "语言"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_area____last_update
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_benefit____last_update
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_market____last_update
+#: model:ir.model.fields,field_description:hs_expenses.field_month_batch_end_wizard____last_update
 msgid "Last Modified on"
 msgstr "最后修改日"
 
@@ -884,6 +938,7 @@ msgstr "最后修改日"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_area__write_uid
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_benefit__write_uid
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_market__write_uid
+#: model:ir.model.fields,field_description:hs_expenses.field_month_batch_end_wizard__write_uid
 msgid "Last Updated by"
 msgstr "最后更新者"
 
@@ -907,6 +962,7 @@ msgstr "最后更新者"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_area__write_date
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_benefit__write_date
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_sale_market__write_date
+#: model:ir.model.fields,field_description:hs_expenses.field_month_batch_end_wizard__write_date
 msgid "Last Updated on"
 msgstr "最后更新时间"
 
@@ -925,6 +981,11 @@ msgstr "营销费用"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__meal_cost
 msgid "Meal Cost"
 msgstr "伙食费"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__meal_cost_standard
+msgid "Meal Cost Standard"
+msgstr "伙食费标准"
 
 #. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_entertain_company__image_medium
@@ -986,6 +1047,16 @@ msgid "Month Application"
 msgstr "月差旅和普通报销单"
 
 #. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_month_batch_end_wizard__application_ids
+msgid "Month Applications"
+msgstr "月差旅和普通报销单"
+
+#. module: hs_expenses
+#: model:ir.actions.report,name:hs_expenses.action_report_hs_expenses_month_expense
+msgid "Month Expenses Report"
+msgstr "月差旅和普通报销单报表"
+
+#. module: hs_expenses
 #: model:ir.model,name:hs_expenses.model_hs_expense_month_application
 msgid "Monthly routine summary form"
 msgstr "每月汇总表"
@@ -1030,7 +1101,7 @@ msgstr "下一活动类型"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_entertain_company__comment
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_entertain_user__comment
 msgid "Notes"
-msgstr "备注"
+msgstr "便签"
 
 #. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__number_of_days
@@ -1071,11 +1142,17 @@ msgstr "未读消息数量"
 #: model:ir.actions.act_window,name:hs_expenses.action_ordinary_application
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_month_application__ordinary_application_ids
 #: model:ir.ui.menu,name:hs_expenses.menu_ordinary_application
+#: model:ir.ui.menu,name:hs_expenses.menu_ordinary_application_4_cashier
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_month_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_ordinary_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_ordinary_application_tree
 msgid "Ordinary Application"
 msgstr "普通招待申请单"
+
+#. module: hs_expenses
+#: model:ir.actions.report,name:hs_expenses.action_report_hs_expenses_month_expense_ordinary
+msgid "Ordinary Report"
+msgstr "普通招待报表"
 
 #. module: hs_expenses
 #: model:ir.model,name:hs_expenses.model_hs_expense_ordinary_application
@@ -1120,19 +1197,19 @@ msgid "Phone"
 msgstr "电话"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:477
+#: code:addons/hs_expenses/models/models.py:488
 #, python-format
 msgid "Please enter the correct audit amount!"
 msgstr "请输入审核金额"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:439
+#: code:addons/hs_expenses/models/models.py:450
 #, python-format
 msgid "Please submit after 23 days of each month."
 msgstr "请在每个月的23日之后提交！"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/daily_expense.py:396
+#: code:addons/hs_expenses/models/daily_expense.py:504
 #, python-format
 msgid "Please submit by the 7th of the next month of bill date."
 msgstr "请在单据日下个月的7日前提交。"
@@ -1176,7 +1253,7 @@ msgstr "报销备注"
 
 #. module: hs_expenses
 #: code:addons/hs_expenses/models/models.py:200
-#: code:addons/hs_expenses/models/models.py:445
+#: code:addons/hs_expenses/models/models.py:456
 #, python-format
 msgid "Reimbursement amount must be less than or equal to the application amount!"
 msgstr "报销金额必须小于或者等于申请金额！"
@@ -1321,8 +1398,8 @@ msgid "Small-sized image of this contact. It is automatically resized as a 64x64
 msgstr "联系人小尺寸图像。自动缩放为64x64px ，保留纵横比。此字段用于任何需要小图像的场合"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:396
-#: code:addons/hs_expenses/models/models.py:542
+#: code:addons/hs_expenses/models/models.py:407
+#: code:addons/hs_expenses/models/models.py:553
 #, python-format
 msgid "Some errors have occurred in the system!"
 msgstr "系统发生错误！"
@@ -1445,6 +1522,11 @@ msgid "Submitted"
 msgstr "已提交"
 
 #. module: hs_expenses
+#: selection:hs.expense.special.application,expense_category:0
+msgid "Supplementary application"
+msgstr ""
+
+#. module: hs_expenses
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_entertain_company__category_id
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_entertain_user__category_id
 msgid "Tags"
@@ -1463,16 +1545,18 @@ msgid "The Tax Identification Number. Complete it if the contact is subjected to
 msgstr "税号。 如果联系人需缴纳税款，请填写。 用于某些法律声明。"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:357
+#: code:addons/hs_expenses/models/models.py:362
 #, python-format
 msgid "The accumulated application amount within one year shall not exceed {quota} yuan.You have used {quota_used} yuan this year.Please modify the application amount."
 msgstr "一年内累计申请金额不得超过 {quota} 元。今年你已经使用了 {quota_used} 元。请修改申请金额。"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:343
+#: code:addons/hs_expenses/models/daily_expense.py:294
+#: code:addons/hs_expenses/models/daily_expense.py:300
+#: code:addons/hs_expenses/models/daily_expense.py:419
 #, python-format
-msgid "The amount of a single application cannot exceed 10,000 yuan."
-msgstr "单个申请单金额不得大于10,000元。"
+msgid "The application amount shall not be more than 2000."
+msgstr "普通招待申请单，申请金额不得大于2000元。"
 
 #. module: hs_expenses
 #: sql_constraint:hs.base.city:0
@@ -1480,8 +1564,8 @@ msgid "The city has the same records."
 msgstr "该城市已经存在。"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/daily_expense.py:50
-#: code:addons/hs_expenses/models/daily_expense.py:188
+#: code:addons/hs_expenses/models/daily_expense.py:51
+#: code:addons/hs_expenses/models/daily_expense.py:221
 #, python-format
 msgid "The end date of the trip must be in the current month."
 msgstr "旅程的结束日期必须在当月。"
@@ -1610,10 +1694,26 @@ msgid "Total Ordinary Applicant Amount"
 msgstr "普通招待费用合计"
 
 #. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_month_application__total_ordinary_audit_amount
+msgid "Total Ordinary Audit Amount"
+msgstr "普通招待审核金额合计"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_month_application__total_travel_applicant_amount
+msgid "Total Travel Applicant Amount"
+msgstr "差旅报销金额合计"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_month_application__total_travel_audit_amount
+msgid "Total Travel Audit Amount"
+msgstr "差旅报销审核金额合计"
+
+#. module: hs_expenses
 #: model:ir.actions.act_window,name:hs_expenses.action_travel_application
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_month_application__travel_application_ids
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__travel_application_id
 #: model:ir.ui.menu,name:hs_expenses.menu_travel_application
+#: model:ir.ui.menu,name:hs_expenses.menu_travel_application_4_cashier
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_month_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_travel_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses.view_travel_application_tree
@@ -1647,6 +1747,11 @@ msgstr "日常费用"
 #: model:ir.ui.menu,name:hs_expenses.menu_travel
 msgid "Travel Management"
 msgstr "差旅管理"
+
+#. module: hs_expenses
+#: model:ir.actions.report,name:hs_expenses.action_report_hs_expenses_month_expense_travel
+msgid "Travel Report"
+msgstr "差旅报销报表"
 
 #. module: hs_expenses
 #: model:ir.actions.act_window,name:hs_expenses.action_hs_expense_travel_standard
@@ -1709,53 +1814,59 @@ msgid "Year"
 msgstr "年"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:386
+#: code:addons/hs_expenses/models/models.py:397
 #, python-format
 msgid "You cannot approve twice the same line!"
 msgstr "同一条记录你不能批准两次！"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:423
-#: code:addons/hs_expenses/models/models.py:453
-#: code:addons/hs_expenses/models/models.py:474
-#: code:addons/hs_expenses/models/models.py:520
-#: code:addons/hs_expenses/models/models.py:554
+#: code:addons/hs_expenses/models/models.py:434
+#: code:addons/hs_expenses/models/models.py:464
+#: code:addons/hs_expenses/models/models.py:485
+#: code:addons/hs_expenses/models/models.py:531
+#: code:addons/hs_expenses/models/models.py:565
 #, python-format
 msgid "You cannot audit twice the same line!"
 msgstr "同一条记录你不能审核两次！"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:442
+#: code:addons/hs_expenses/models/models.py:453
 #, python-format
 msgid "You cannot confirm twice the same line!"
 msgstr "同一条记录你不能确认两次！"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:331
+#: code:addons/hs_expenses/models/daily_expense.py:233
+#: code:addons/hs_expenses/models/daily_expense.py:307
+#: code:addons/hs_expenses/models/daily_expense.py:486
+#: code:addons/hs_expenses/models/models.py:335
 #, python-format
 msgid "You cannot delete a posted or approved expense."
 msgstr "你不能删除已经提交的记录。"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:333
+#: code:addons/hs_expenses/models/daily_expense.py:235
+#: code:addons/hs_expenses/models/daily_expense.py:309
+#: code:addons/hs_expenses/models/daily_expense.py:488
+#: code:addons/hs_expenses/models/models.py:337
 #, python-format
 msgid "You cannot delete the expense!"
 msgstr "你不能删除该条记录！"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/models.py:339
+#: code:addons/hs_expenses/models/models.py:343
 #, python-format
 msgid "You cannot report twice the same line!"
 msgstr "同一条记录你不能报告两次！"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/daily_expense.py:424
+#: code:addons/hs_expenses/models/daily_expense.py:532
 #, python-format
 msgid "Your monthly quota is insufficient. Click Confirm to submit it to relevant personnel for review."
 msgstr "您的每月配额不足。 单击“确认”将其提交给相关人员进行审核。"
 
 #. module: hs_expenses
-#: code:addons/hs_expenses/models/daily_expense.py:428
+#: code:addons/hs_expenses/models/daily_expense.py:536
 #, python-format
 msgid "Your monthly quota is sufficient. Click Confirm to submit to the financial staff for review."
 msgstr "您的每月配额足够了。 单击“确认”以提交给财务人员进行审核。"
@@ -1837,26 +1948,254 @@ msgid "hs.expense.entertain.user"
 msgstr "招待人员"
 
 #. module: hs_expenses
-#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__car_cost_standard
-msgid "Car Cost Standard"
-msgstr "交通费标准"
+#: model_terms:ir.ui.view,arch_db:hs_expenses.month_application_search
+#: model_terms:ir.ui.view,arch_db:hs_expenses.ordinary_application_search
+#: model_terms:ir.ui.view,arch_db:hs_expenses.special_application_search
+#: model_terms:ir.ui.view,arch_db:hs_expenses.travel_application_search
+msgid "Current Month"
+msgstr "当月"
 
 #. module: hs_expenses
-#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__hotel_cost_standard
-msgid "Hotel Cost Standard"
-msgstr "住宿费标准"
+#: model_terms:ir.ui.view,arch_db:hs_expenses.month_application_search
+#: model_terms:ir.ui.view,arch_db:hs_expenses.ordinary_application_search
+#: model_terms:ir.ui.view,arch_db:hs_expenses.special_application_search
+#: model_terms:ir.ui.view,arch_db:hs_expenses.travel_application_search
+msgid "Last Month"
+msgstr "上月"
 
 #. module: hs_expenses
-#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_detail__meal_cost_standard
-msgid "Meal Cost Standard"
-msgstr "伙食费标准"
+#: model_terms:ir.ui.view,arch_db:hs_expenses.ordinary_application_search
+msgid "Ordinary Applications"
+msgstr "普通招待单"
 
 #. module: hs_expenses
-#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_ordinary_application__happen_date
-msgid "Happen Date"
-msgstr "招待日期"
+#: model_terms:ir.ui.view,arch_db:hs_expenses.travel_application_search
+msgid "Travel Applications"
+msgstr "差旅报销单"
 
 #. module: hs_expenses
-#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_special_application__attachment_ids
-msgid "Attachments"
-msgstr "附件"
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_ordinary
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "事由"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "交通费"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+msgid "交通费合计"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "伙食费"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+msgid "伙食费合计"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "住宿费"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+msgid "住宿费合计"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "出发地"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "到达城市"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+msgid "单据号"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+msgid "单据日期:"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "合计"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+msgid "员工:"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_ordinary
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "备注"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "审核备注"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_ordinary
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "审核金额"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+msgid "差旅报销"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "差旅报销单"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "差旅明细"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "市内交通"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+msgid "市内交通费合计"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "开始日期"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_ordinary
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "开户行"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_ordinary
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "报销人员"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_ordinary
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "报销信息"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_ordinary
+msgid "招待日期"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_ordinary
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "支付方式"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+msgid "普通招待"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_ordinary
+msgid "普通招待报销单"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+msgid "月度差旅及普通招待报销单"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "核减金额"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_ordinary
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "申请人"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_ordinary
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "申请日期"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+msgid "申请金额"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "目的地"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "结束日期"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_ordinary
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "财务审核信息"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_ordinary
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "部门"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_ordinary
+msgid "金额"
+msgstr ""
+
+#. module: hs_expenses
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_ordinary
+#: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
+msgid "银行账户"
+msgstr ""
