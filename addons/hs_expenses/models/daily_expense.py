@@ -296,7 +296,7 @@ class OrdinaryApplication(models.Model):
 
     @api.multi
     def write(self, vals):
-        if float(vals.get('applicant_amount')) > 2000:
+        if self.applicant_amount > 2000:
             raise UserError(_('The application amount shall not be more than 2000.'))
         return super(OrdinaryApplication, self).write(vals)
 
