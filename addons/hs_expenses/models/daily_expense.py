@@ -571,6 +571,7 @@ class MonthApplication(models.Model):
 
     @api.multi
     def action_audit_expenses(self):  # 财务审核完成，提交给出纳
+        self.sudo().seller_id.current_month_quota_used = 0
         self.write({'state': 'audited'})
 
     @api.multi
