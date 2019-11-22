@@ -480,8 +480,10 @@ msgid "Counter of the number of bounced emails for this contact"
 msgstr "此联系人退回邮件数量计数器"
 
 #. module: hs_expenses
+#: selection:hs.expense.special.application,state:0
 #: model:ir.model,name:hs_expenses.model_hs_expense_countersign
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_special_application__countersign_ids
+#: model_terms:ir.ui.view,arch_db:hs_expenses.view_special_application_form
 msgid "Countersign"
 msgstr "会签"
 

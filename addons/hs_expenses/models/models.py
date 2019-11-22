@@ -212,6 +212,10 @@ class SpecialApplication(models.Model):
             s.handler_id = s.applicant_id
             s.sale_area_id = s.applicant_id.sale_area_id
             s.sale_market_id = s.applicant_id.sale_market_id
+            if '技术服务' in s.applicant_id.department_id.name:
+                category_quality = self.env['hs.expense.category'].search([('name', '=', '质量')], limit=1)
+                if category_quality:
+                    s.expense_category_ids = category_quality
 
     @api.depends('cause', 'applicant_id', 'applicant_amount')
     def _compute_complete_name(self):
@@ -285,7 +289,7 @@ class SpecialApplication(models.Model):
         ('confirmed', 'Confirmed '),
         ('audited', 'Audited'),
         # ('audited2', 'Cashier Audited'),
-        # ('countersign', 'Countersign'),
+        ('countersign', 'Countersign'),
         ('done', 'Paid')
     ], string='Status', copy=False, index=True, readonly=True, store=True, default='draft',
         help="Status of the expense.")
@@ -363,6 +367,7 @@ class SpecialApplication(models.Model):
 
         countersign = self.env['hs.expense.countersign']
         reviewers = []
+
         for category in self.expense_category_ids:
             if category.name == '质量':
                 group_id = self.env.ref('hs_expenses.group_hs_expenses_quality_reviewer').id
@@ -380,7 +385,7 @@ class SpecialApplication(models.Model):
                 employee = self.env['hs.base.employee'].search([('user_id', '=', user.id)], limit=1)
                 if employee and not user.has_group('hs_expenses.group_hs_expenses_manager'):
                     countersign.sudo().search(
-                        [('expense_id', '=', self.id),('is_approved', '=', False)]).unlink()
+                        [('expense_id', '=', self.id), ('is_approved', '=', False)]).unlink()
                     countersigns = countersign.sudo().search([('expense_id', '=', self.id)]).read([('employee_id')])
                     lst = [cc['employee_id'][0] for cc in countersigns]
                     if employee.id not in lst:
@@ -487,18 +492,18 @@ class SpecialApplication(models.Model):
         if self.audit_amount <= 0:
             raise UserError(_("Please enter the correct audit amount!"))
 
-        # 生成会签条件   已去除
-        # if self.audit_amount >= 5000:
-        #     group_id = self.env.ref('hs_expenses.group_hs_expenses_leader').id
-        #     leaders = self.env['res.users'].search([('groups_id', '=', group_id)])
-        #     countersign = self.env['hs.expense.countersign']
-        #     for leader in leaders:
-        #         employee = self.env['hs.base.employee'].search([('user_id', '=', leader.id)], limit=1)
-        #         if employee and not leader.has_group('hs_expenses.group_hs_expenses_manager'):
-        #             countersign.sudo().create({
-        #                 'employee_id': employee.id,
-        #                 'expense_id': self.id
-        #             })
+        # 生成会签条件
+        if self.audit_amount >= 5000:
+            group_id = self.env.ref('hs_expenses.group_hs_expenses_leader').id
+            leaders = self.env['res.users'].search([('groups_id', '=', group_id)])
+            countersign = self.env['hs.expense.countersign']
+            for leader in leaders:
+                employee = self.env['hs.base.employee'].search([('user_id', '=', leader.id)], limit=1)
+                if employee and not leader.has_group('hs_expenses.group_hs_expenses_manager'):
+                    countersign.sudo().create({
+                        'employee_id': employee.id,
+                        'expense_id': self.id
+                    })
 
         # 根据审核金额 调整特殊招待全年申请额度
         if self.audited_deduction_amount == 0:
@@ -522,7 +527,10 @@ class SpecialApplication(models.Model):
 
         self.audited_deduction_amount = self.audit_amount
 
-        self.write({'state': 'audited'})
+        if self.audit_amount < 5000:
+            self.write({'state': 'audited'})
+        else:
+            self.write({'state': 'countersign'})
         return True
 
     @api.multi
