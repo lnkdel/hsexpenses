@@ -460,7 +460,8 @@ class MonthApplication(models.Model):
     total_ordinary_audit_amount = fields.Float("Total Ordinary Audit Amount", digits=(16, 2),
                                              compute="_compute_total_ordinary_audit_amount")
     current_user_is_financial = fields.Boolean(compute="_compute_current_user_is_financial")
-    audit_date = fields.Date(string='Audit Date', default=lambda self: fields.Date.context_today(self))
+    audit_date = fields.Date(string='Audit Date')
+    cashier_back_date = fields.Date(string='Back Date')
 
     @api.model
     def create(self, values):
@@ -572,10 +573,6 @@ class MonthApplication(models.Model):
     @api.multi
     def action_audit_expenses(self):  # 财务审核完成，提交给出纳
         self.sudo().seller_id.current_month_quota_used = 0
-        self.write({'state': 'audited'})
-
-    @api.multi
-    def action_back_to_to_audited(self):  # 出纳退回给财务审核
         if self.travel_application_ids is not None or self.travel_application_ids is not False:
             for travel in self.travel_application_ids:
                 travel.audit_date = datetime.datetime.now()
@@ -583,7 +580,12 @@ class MonthApplication(models.Model):
         if self.ordinary_application_ids is not None or self.ordinary_application_ids is not False:
             for ordinary in self.ordinary_application_ids:
                 ordinary.audit_date = datetime.datetime.now()
-        self.write({'state': 'to_audited', 'audit_date': datetime.datetime.now()})
+
+        self.write({'state': 'audited', 'audit_date': datetime.datetime.now()})
+
+    @api.multi
+    def action_back_to_to_audited(self):  # 出纳退回给财务审核
+        self.write({'state': 'to_audited', 'cashier_back_date': datetime.datetime.now()})
 
     @api.multi
     def action_cashier_expenses(self):  # 出纳放款结束流程
