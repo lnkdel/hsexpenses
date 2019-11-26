@@ -39,7 +39,7 @@ class BaseApplication(models.AbstractModel):
         string='Payment Method', default='mt')
     bank_name = fields.Char(string='Bank Name')
     bank_account = fields.Char(string='Bank Account')
-    audit_date = fields.Date(string='Audit Date', default=lambda self: fields.Date.context_today(self))
+    audit_date = fields.Datetime(string='Audit Date')
 
     @api.model
     def create(self, values):
@@ -460,8 +460,7 @@ class MonthApplication(models.Model):
     total_ordinary_audit_amount = fields.Float("Total Ordinary Audit Amount", digits=(16, 2),
                                              compute="_compute_total_ordinary_audit_amount")
     current_user_is_financial = fields.Boolean(compute="_compute_current_user_is_financial")
-    audit_date = fields.Date(string='Audit Date')
-    cashier_back_date = fields.Date(string='Back Date')
+    audit_date = fields.Datetime(string='Audit Date')
 
     @api.model
     def create(self, values):
@@ -585,7 +584,7 @@ class MonthApplication(models.Model):
 
     @api.multi
     def action_back_to_to_audited(self):  # 出纳退回给财务审核
-        self.write({'state': 'to_audited', 'cashier_back_date': datetime.datetime.now()})
+        self.write({'state': 'to_audited'})
 
     @api.multi
     def action_cashier_expenses(self):  # 出纳放款结束流程
