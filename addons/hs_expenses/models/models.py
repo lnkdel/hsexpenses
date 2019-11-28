@@ -380,14 +380,16 @@ class SpecialApplication(models.Model):
             elif category.name == '补充申请':
                 group_id = self.env.ref('hs_expenses.group_hs_expenses_project_reviewer').id
             reviewers.append(self.env['res.users'].search([('groups_id', '=', group_id)]))
+
+        countersign.sudo().search(
+            [('expense_id', '=', self.id), ('is_approved', '=', False)]).unlink()
+        countersigns = countersign.sudo().search([('expense_id', '=', self.id)]).read([('employee_id')])
+        lst = [cc['employee_id'][0] for cc in countersigns]
+
         for reviewer in reviewers:
             for user in reviewer:
                 employee = self.env['hs.base.employee'].search([('user_id', '=', user.id)], limit=1)
                 if employee and not user.has_group('hs_expenses.group_hs_expenses_manager'):
-                    countersign.sudo().search(
-                        [('expense_id', '=', self.id), ('is_approved', '=', False)]).unlink()
-                    countersigns = countersign.sudo().search([('expense_id', '=', self.id)]).read([('employee_id')])
-                    lst = [cc['employee_id'][0] for cc in countersigns]
                     if employee.id not in lst:
                         countersign.sudo().create({
                             'employee_id': employee.id,
@@ -497,13 +499,19 @@ class SpecialApplication(models.Model):
             group_id = self.env.ref('hs_expenses.group_hs_expenses_leader').id
             leaders = self.env['res.users'].search([('groups_id', '=', group_id)])
             countersign = self.env['hs.expense.countersign']
+            # current_countersign_list = self.env['hs.expense.countersign'].search([('expense_id', '=', self.id)])
+
+            current_countersigns = countersign.sudo().search([('expense_id', '=', self.id)]).read([('employee_id')])
+            lst = [cc['employee_id'][0] for cc in current_countersigns]
+
             for leader in leaders:
                 employee = self.env['hs.base.employee'].search([('user_id', '=', leader.id)], limit=1)
                 if employee and not leader.has_group('hs_expenses.group_hs_expenses_manager'):
-                    countersign.sudo().create({
-                        'employee_id': employee.id,
-                        'expense_id': self.id
-                    })
+                    if employee.id not in lst:
+                        countersign.sudo().create({
+                            'employee_id': employee.id,
+                            'expense_id': self.id
+                        })
 
         # 根据审核金额 调整特殊招待全年申请额度
         if self.audited_deduction_amount == 0:

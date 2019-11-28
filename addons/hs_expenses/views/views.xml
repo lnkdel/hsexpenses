@@ -433,7 +433,7 @@
 
                         <!--sign-->
                         <button name="function_countersign_expenses" string="Countersign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=', 'countersign'), ('audit_amount', '&lt;', 5000), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_leader"/>
-                        <button name="function_countersign_expenses" string="Countersign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=', 'countersign'), ('audit_amount', '&lt;', 5000), ('current_sign_completed', '=', False)]}" disabled="disabled" groups="hs_expenses.group_hs_expenses_leader"/>
+                        <!--<button name="function_countersign_expenses" string="Countersign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=', 'countersign'), ('audit_amount', '&lt;', 5000), ('current_sign_completed', '=', False)]}" disabled="disabled" groups="hs_expenses.group_hs_expenses_leader"/>-->
 
                         <field name="state" widget="statusbar" statusbar_visible="draft,reported,approved,confirmed,audited,countersign,done"/>
                     </header>
