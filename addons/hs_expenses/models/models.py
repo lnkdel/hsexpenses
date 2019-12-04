@@ -212,10 +212,11 @@ class SpecialApplication(models.Model):
             s.handler_id = s.applicant_id
             s.sale_area_id = s.applicant_id.sale_area_id
             s.sale_market_id = s.applicant_id.sale_market_id
-            if '技术服务' in s.applicant_id.department_id.name:
-                category_quality = self.env['hs.expense.category'].search([('name', '=', '质量')], limit=1)
-                if category_quality:
-                    s.expense_category_ids = category_quality
+            if s.applicant_id.department_id:
+                if '技术服务' in s.applicant_id.department_id.name:
+                    category_quality = self.env['hs.expense.category'].search([('name', '=', '质量')], limit=1)
+                    if category_quality:
+                        s.expense_category_ids = category_quality
 
     @api.depends('cause', 'applicant_id', 'applicant_amount')
     def _compute_complete_name(self):

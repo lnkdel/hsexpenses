@@ -37,8 +37,10 @@
                         <button name="action_back_to_to_audited" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier" confirm="Are you sure you want to do this?"/>
                         <button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier" confirm="Are you sure you want to do this?"/>
 
-                        <field name="state" widget="statusbar" statusbar_visible="draft,reported,to_approved,to_audited,audited,done"  attrs="{'invisible': [('is_exceed', '!=', True)]}"/>
-                        <field name="state" widget="statusbar" statusbar_visible="draft,reported,to_audited,audited,done" attrs="{'invisible': [('is_exceed', '!=', False)]}"/>
+                        <button name="function_countersign_expenses" string="Countersign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=', 'countersign'), ('audit_amount', '&lt;', 5000), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_leader"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,reported,to_approved,to_audited,audited,countersign,done"  attrs="{'invisible': [('is_exceed', '!=', True)]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,reported,to_audited,audited,countersign,done" attrs="{'invisible': [('is_exceed', '!=', False)]}"/>
                     </header>
                     <sheet>
                         <field name="is_exceed" invisible="1"/>
@@ -56,6 +58,8 @@
                                 <field name="city_car_total_cost"/>
                                 <field name="total_ordinary_applicant_amount"/>
                                 <field name="current_month_quota" invisible="1"/>
+                                <field name="current_sign_completed" invisible="1"/>
+                                <field name="complete_countersign" invisible="1"/>
                             </group>
                         </group>
                         <notebook>
@@ -102,6 +106,16 @@
                             </group>
                             <group></group>
                         </group>
+                        <notebook>
+                            <page string="Countersign Information" attrs="{'invisible': ['|', ('state', 'in', ['draft'])]}">
+                                <field name="countersign_ids" readonly="1">
+                                    <tree>
+                                        <field name="employee_id"/>
+                                        <field name="is_approved"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>

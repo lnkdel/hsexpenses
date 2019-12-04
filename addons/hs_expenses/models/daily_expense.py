@@ -418,6 +418,15 @@ class MonthApplication(models.Model):
                 if ord.applicant_amount > 2000:
                     raise UserError(_('The application amount shall not be more than 2000.'))
 
+    @api.one
+    @api.depends('countersign_ids')
+    def _compute_current_sign_completed(self):
+        self.current_sign_completed = False
+        current_employee = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
+        for sign in self.countersign_ids:
+            if sign.employee_id.id == current_employee.id:
+                self.current_sign_completed = sign.is_approved
+
     name = fields.Char(string="Bill Number", require=True)
     seller_id = fields.Many2one('hs.base.employee', string='Applicant', required=True,
                                 default=_get_default_employee)
@@ -439,6 +448,7 @@ class MonthApplication(models.Model):
         ('to_approved', 'To Approved'),
         ('to_audited', 'To Audited'),
         ('audited', 'Audited'),
+        ('countersign', 'Countersign'),
         ('done', 'Paid')
     ], string='Status', copy=False, index=True, readonly=True, store=True, default='draft',
         help="Status of the expense.")
@@ -461,6 +471,10 @@ class MonthApplication(models.Model):
                                              compute="_compute_total_ordinary_audit_amount")
     current_user_is_financial = fields.Boolean(compute="_compute_current_user_is_financial")
     audit_date = fields.Datetime(string='Audit Date')
+
+    complete_countersign = fields.Boolean(default=False)
+    countersign_ids = fields.One2many('hs.expense.countersign.month', 'expense_id', string='Countersign', readonly=True)
+    current_sign_completed = fields.Boolean(compute='_compute_current_sign_completed')
 
     @api.model
     def create(self, values):
@@ -580,7 +594,26 @@ class MonthApplication(models.Model):
             for ordinary in self.ordinary_application_ids:
                 ordinary.audit_date = datetime.datetime.now()
 
-        self.write({'state': 'audited', 'audit_date': datetime.datetime.now()})
+        if self.audit_amount >= 5000:
+            group_id = self.env.ref('hs_expenses.group_hs_expenses_leader').id
+            leaders = self.env['res.users'].search([('groups_id', '=', group_id)])
+            countersign = self.env['hs.expense.countersign.month']
+
+            current_countersigns = countersign.sudo().search([('expense_id', '=', self.id)]).read([('employee_id')])
+            lst = [cc['employee_id'][0] for cc in current_countersigns]
+
+            for leader in leaders:
+                employee = self.env['hs.base.employee'].search([('user_id', '=', leader.id)], limit=1)
+                if employee and not leader.has_group('hs_expenses.group_hs_expenses_manager'):
+                    if employee.id not in lst:
+                        countersign.sudo().create({
+                            'employee_id': employee.id,
+                            'expense_id': self.id
+                        })
+
+            self.write({'state': 'countersign', 'audit_date': datetime.datetime.now()})
+        else:
+            self.write({'state': 'audited', 'audit_date': datetime.datetime.now()})
 
     @api.multi
     def action_back_to_to_audited(self):  # 出纳退回给财务审核
@@ -589,6 +622,33 @@ class MonthApplication(models.Model):
     @api.multi
     def action_cashier_expenses(self):  # 出纳放款结束流程
         self.write({'state': 'done'})
+
+    @api.multi
+    def function_countersign_expenses(self): # 高层会签
+        employee = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
+        if employee and employee is not None:
+            expense_id = self
+            countersign = self.env['hs.expense.countersign.month'].search(
+                [('employee_id', '=', employee.id), ('expense_id', '=', expense_id.id)], limit=1)
+            if countersign and countersign is not None:
+                countersign.write({'is_approved': True})
+            else:
+                raise UserError(_("Some errors have occurred in the system!"))
+
+            if not any(sign.is_approved is False
+                       for sign in self.env['hs.expense.countersign.month'].search([('expense_id', '=', expense_id.id)])):
+                self.write({'complete_countersign': True, 'state': 'audited'})
+                # self.action_done_expenses()
+        return True
+
+
+class CounterSignMonth(models.Model):
+    _name = 'hs.expense.countersign.month'
+    _description = 'Month Countersign'
+
+    employee_id = fields.Many2one('hs.base.employee', string='Employee', required=True)
+    expense_id = fields.Many2one('hs.expense.month.application', string='Month Application')
+    is_approved = fields.Boolean(default=False)
 
 
 class ExpenseConfirmDialog(models.TransientModel): # 营销员点确认从报告状态转成确认状态/待审核状态
