@@ -589,6 +589,10 @@ class SpecialApplication(models.Model):
         self.write({'state': 'done'})
         return True
 
+    @api.multi
+    def action_back_to_to_audited(self):  # 出纳退回给财务审核
+        self.write({'state': 'confirmed'})
+
 
 class CounterSign(models.Model):
     _name = 'hs.expense.countersign'

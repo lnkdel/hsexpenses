@@ -98,7 +98,7 @@
                                 </field>
                             </page>
                         </notebook>
-                        <group string="Audit Information" attrs="{'invisible':[('state', 'not in', ['to_audited', 'done', 'audited'])]}">
+                        <group string="Audit Information" attrs="{'invisible':[('state', 'not in', ['to_audited', 'done', 'audited', 'countersign'])]}">
                             <group>
                                 <!--<field name="audit_amount" attrs="{'readonly': [('state', 'not in', ['to_audited'])], 'required':[('state', '=', 'to_audited')]}"/>-->
                                 <field name="audit_amount" attrs="{'readonly': ['|', ('current_user_is_financial', '=', False), ('state', '!=', 'to_audited')], 'required':[('state', '=', 'to_audited')]}"/>

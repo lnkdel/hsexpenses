@@ -426,6 +426,7 @@
                         <button name="action_back_to_confirm" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','confirmed')]}" groups="hs_expenses.group_hs_expenses_financial_officer"/>
 
                         <!--cashier-->
+                        <button name="action_back_to_to_audited" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier" confirm="Are you sure you want to do this?"/>
                         <!--<button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier"/>-->
                         <button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('state','!=', 'audited'), ('audit_amount', '&gt;=', 5000)]}" groups="hs_expenses.group_hs_expenses_cashier"/>
                         <button name="action_cashier_expenses" string="Submit To Sign" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('complete_countersign', '=', True), ('state','!=', 'audited'), ('audit_amount', '&lt;', 5000)]}" groups="hs_expenses.group_hs_expenses_cashier"/>
