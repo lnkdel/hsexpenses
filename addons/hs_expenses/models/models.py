@@ -76,6 +76,9 @@ class Seller(models.Model):
             today = fields.Date.today()
             year = today.year
             month = today.month - 1
+            if month == 0:
+                year = year - 1
+                month = 12
 
             last_month_benefit = self.env['hs.sale.benefit'].sudo().\
                 search([('employee_id', '=', seller.id), ('year', '=', year), ('month', '=', month)])
