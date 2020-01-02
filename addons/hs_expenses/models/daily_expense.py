@@ -3,6 +3,7 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 import datetime
+import calendar
 
 
 class BaseApplication(models.AbstractModel):
@@ -505,17 +506,25 @@ class MonthApplication(models.Model):
     @api.multi
     def action_submit_expenses(self): # 营销员提交草稿到报告状态
         today = fields.Date.today()
-        day = today.day
-        month = today.month
+        # day = today.day
+        # month = today.month
         bill_date = self.bill_date
 
-        # if month - bill_date.month != 1 and today.day > 7:
-        #     raise UserError(_("Please submit by the 10th of the next month of bill date."))
+        days_nums_of_bill_date = calendar.monthrange(bill_date.year, bill_date.month)[1]
+        first_day_of_bill_date = datetime.date(bill_date.year, bill_date.month, 1)
+        seven_day_of_next_bill_date = first_day_of_bill_date + datetime.timedelta(days= days_nums_of_bill_date + 6)
 
-        if month - bill_date.month == 1 and today.day <= 7:
+        if today.year == seven_day_of_next_bill_date.year and \
+                today.month == seven_day_of_next_bill_date.month and \
+                today.day <= seven_day_of_next_bill_date.day:
             pass
         else:
             raise UserError(_("Please submit by the 7th of the next month of bill date."))
+
+        # if month - bill_date.month == 1 and today.day <= 7:
+        #     pass
+        # else:
+        #     raise UserError(_("Please submit by the 7th of the next month of bill date."))
 
         # 判断额度是否足够
         current_month_quota_remained = self.seller_id.current_month_quota_remained
