@@ -314,6 +314,7 @@ class SpecialApplication(models.Model):
     # attachment_file_name = fields.Char(string='Attachment')
     # attachment_file = fields.Binary(string='Attachment', attachment=True)
     attachment_ids = fields.Many2many('ir.attachment', 'hs_expense_special_app_rel', 'special_app_id', 'attachment_id', string='Attachments')
+    audit_date = fields.Datetime(string='Audit Date')
 
     @api.model
     def create(self, vals):
@@ -540,9 +541,9 @@ class SpecialApplication(models.Model):
         self.audited_deduction_amount = self.audit_amount
 
         if self.audit_amount < 5000:
-            self.write({'state': 'audited'})
+            self.write({'state': 'audited', 'audit_date': datetime.now()})
         else:
-            self.write({'state': 'countersign'})
+            self.write({'state': 'countersign', 'audit_date': datetime.now()})
         return True
 
     @api.multi

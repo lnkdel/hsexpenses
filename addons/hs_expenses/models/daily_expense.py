@@ -558,7 +558,7 @@ class MonthApplication(models.Model):
             self.is_exceed = False
             msg = _('Your monthly quota is sufficient. '
                     'Click Confirm to submit to the financial staff for review.') # 您当月额度足够，点击确定提交给财务人员审核
-        
+
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'hs.expense.confirm.dialog',

@@ -151,6 +151,7 @@ msgstr "核减金额"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_base_application__audit_date
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_month_application__audit_date
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_ordinary_application__audit_date
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_special_application__audit_date
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_application__audit_date
 msgid "Audit Date"
 msgstr "审核日期"
