@@ -42,6 +42,13 @@ class BaseApplication(models.AbstractModel):
     bank_account = fields.Char(string='Bank Account')
     audit_date = fields.Datetime(string='Audit Date')
 
+    driver_type = fields.Selection([('BD - VISIT', 'Business Development - Visit'),
+                                    ('BD - ENTERTAIN', 'Business Development - Entertain'),
+                                    ('OP', 'Order Processing'),
+                                    ('QP', 'Quality Processing'), ], string="Driver Type", copy=False, index=True,
+                                   required=True)
+    customer_name = fields.Char(string="Customer Name", required=True)
+
     @api.model
     def create(self, values):
         if values.get('travel_detail_ids') is not None:
@@ -198,6 +205,7 @@ class TravelApplication(models.Model):
     current_user_is_financial = fields.Boolean(compute="_compute_current_user_is_financial")
     is_exceed = fields.Boolean(related='month_application_id.is_exceed')
 
+
     @api.model
     def create(self, values):
         if values.get('name') is None or values.get('name') is False:
@@ -275,6 +283,7 @@ class OrdinaryApplication(models.Model):
     is_exceed = fields.Boolean(related='month_application_id.is_exceed')
     happen_date = fields.Date(string='Happen Date', required=True,
                                  default=lambda self: fields.Date.context_today(self))
+
 
     @api.model
     def create(self, values):

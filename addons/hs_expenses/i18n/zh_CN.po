@@ -2231,3 +2231,45 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:hs_expenses.report_expense_month_travel
 msgid "银行账户"
 msgstr ""
+
+#. module: hs_expenses
+#: selection:hs.expense.base.application,driver_type:0
+#: selection:hs.expense.ordinary.application,driver_type:0
+#: selection:hs.expense.travel.application,driver_type:0
+msgid "Business Development - Entertain"
+msgstr "业务开拓-招待"
+
+#. module: hs_expenses
+#: selection:hs.expense.base.application,driver_type:0
+#: selection:hs.expense.ordinary.application,driver_type:0
+#: selection:hs.expense.travel.application,driver_type:0
+msgid "Business Development - Visit"
+msgstr "业务开拓-现场拜访"
+
+#. module: hs_expenses
+#: selection:hs.expense.base.application,driver_type:0
+#: selection:hs.expense.ordinary.application,driver_type:0
+#: selection:hs.expense.travel.application,driver_type:0
+msgid "Order Processing"
+msgstr "订单处理"
+
+#. module: hs_expenses
+#: selection:hs.expense.base.application,driver_type:0
+#: selection:hs.expense.ordinary.application,driver_type:0
+#: selection:hs.expense.travel.application,driver_type:0
+msgid "Quality Processing"
+msgstr "质量处理"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_base_application__customer_name
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_ordinary_application__customer_name
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_application__customer_name
+msgid "Customer Name"
+msgstr "客户名称"
+
+#. module: hs_expenses
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_base_application__driver_type
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_ordinary_application__driver_type
+#: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_application__driver_type
+msgid "Driver Type"
+msgstr "动因类别"

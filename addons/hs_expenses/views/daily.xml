@@ -18,6 +18,8 @@
                     <field name="city_car_total_cost"/>
                     <field name="total_cost"/>
                     <field name="audit_amount"/>
+                    <field name="driver_type"/>
+                    <field name="customer_name"/>
                 </tree>
             </field>
         </record>
@@ -41,12 +43,14 @@
                             <group>
                                 <field name="applicant_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="applicant_department_id"/>
+                                <field name="driver_type" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="sale_area_id"/>
                                 <field name="cause" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </group>
                             <group>
                                 <field name="applicant_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="destination_city" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="customer_name" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="sale_market_id"/>
                                 <field name="application_remark" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </group>
@@ -187,6 +191,8 @@
                     <field name="happen_date"/>
                     <field name="applicant_department_id"/>
                     <field name="state"/>
+                    <field name="driver_type"/>
+                    <field name="customer_name"/>
                 </tree>
             </field>
         </record>
@@ -206,12 +212,14 @@
                             <group>
                                 <field name="applicant_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="applicant_department_id"/>
+                                <field name="driver_type" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="sale_area_id"/>
                                 <field name="cause" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </group>
                             <group>
                                 <field name="applicant_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="happen_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="customer_name" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="applicant_amount" max="2000" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="sale_market_id"/>
                                 <field name="application_remark" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
