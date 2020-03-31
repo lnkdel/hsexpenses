@@ -2273,3 +2273,24 @@ msgstr "客户名称"
 #: model:ir.model.fields,field_description:hs_expenses.field_hs_expense_travel_application__driver_type
 msgid "Driver Type"
 msgstr "动因类别"
+
+#. module: hs_expenses
+#: selection:hs.expense.base.application,driver_type:0
+#: selection:hs.expense.ordinary.application,driver_type:0
+#: selection:hs.expense.travel.application,driver_type:0
+msgid "Project Support"
+msgstr "项目支持"
+
+#. module: hs_expenses
+#: selection:hs.expense.base.application,driver_type:0
+#: selection:hs.expense.ordinary.application,driver_type:0
+#: selection:hs.expense.travel.application,driver_type:0
+msgid "Tracking Money"
+msgstr "跟踪回款"
+
+#. module: hs_expenses
+#: selection:hs.expense.base.application,driver_type:0
+#: selection:hs.expense.ordinary.application,driver_type:0
+#: selection:hs.expense.travel.application,driver_type:0
+msgid "Conference Forum"
+msgstr "会议论坛"

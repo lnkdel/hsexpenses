@@ -45,7 +45,10 @@ class BaseApplication(models.AbstractModel):
     driver_type = fields.Selection([('BD - VISIT', 'Business Development - Visit'),
                                     ('BD - ENTERTAIN', 'Business Development - Entertain'),
                                     ('OP', 'Order Processing'),
-                                    ('QP', 'Quality Processing'), ], string="Driver Type", copy=False, index=True,
+                                    ('QP', 'Quality Processing'),
+                                    ('PS', 'Project Support'),
+                                    ('TM', 'Tracking Money'),
+                                    ('CF', 'Conference Forum'),], string="Driver Type", copy=False, index=True,
                                    required=True)
     customer_name = fields.Char(string="Customer Name", required=True)
 
