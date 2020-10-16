@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_hs_base_project_tree">
+          <field name="name">hs.base.project.tree</field>
+          <field name="model">hs.base.project</field>
+          <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="sequence"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="view_hs_base_project_form" model="ir.ui.view">
+            <field name="name">hs.base.project.form</field>
+            <field name="model">hs.base.project</field>
+            <field name="arch" type="xml">
+                <form string="Project">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="active"/>
+                            </group>
+                            <group>
+                                <field name="sequence"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hs_base_project" model="ir.actions.act_window">
+            <field name="name">Project</field>
+            <field name="res_model">hs.base.project</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+            id="menu_hs_base_project"
+            action="action_hs_base_project"
+            parent="menu_sale"
+            sequence="0"/>
+
+    </data>
+</odoo>

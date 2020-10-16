@@ -1,0 +1,173 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_entertain_application_tree">
+          <field name="name">hs.expense.v2.entertain.application.tree</field>
+          <field name="model">hs.expense.v2.entertain.application</field>
+          <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="applicant_id"/>
+                <field name="applicant_date"/>
+                <field name="applicant_department_id"/>
+                <field name="entertain_date"/>
+                <field name="entertain_company_id"/>
+                <field name="applicant_amount"/>
+                <field name="state"/>
+                <field name="expense_category_ids"/>
+                <field name="project_id"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="view_entertain_application_form" model="ir.ui.view">
+            <field name="name">hs.expense.v2.entertain.application.form</field>
+            <field name="model">hs.expense.v2.entertain.application</field>
+            <field name="arch" type="xml">
+                <form string="Entertain Application">
+                    <header>
+                        <!--seller-->
+                        <button name="action_submit_expenses" string="Submit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','draft')]}" groups="hs_expenses.group_hs_expenses_seller" confirm="Are you sure you want to do this?"/>
+
+                        <!--reviewer-->
+                        <button name="action_reported2_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 4), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_other_reviewer" confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 4), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_other_reviewer" confirm="Are you sure you want to do this?"/>
+
+                        <button name="action_reported2_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 1), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_quality_reviewer" confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 1), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_quality_reviewer" confirm="Are you sure you want to do this?"/>
+
+                        <button name="action_reported2_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 2), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_contract_reviewer" confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 2), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_contract_reviewer" confirm="Are you sure you want to do this?"/>
+
+                        <button name="action_reported2_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 3), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_project_reviewer" confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 3), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_project_reviewer" confirm="Are you sure you want to do this?"/>
+
+                        <!--vice-president-->
+                        <button name="action_approved_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','reported2')]}" groups="hs_expenses_v2.group_hs_expenses_vice_president" confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','reported2')]}" groups="hs_expenses_v2.group_hs_expenses_vice_president" confirm="Are you sure you want to do this?"/>
+
+                        <!--seller-->
+                        <button name="action_confirm_expenses" string="Confirm" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','approved')]}" groups="hs_expenses.group_hs_expenses_seller" confirm="Are you sure you want to do this?"/>
+
+
+                        <!--financial-->
+                        <button name="action_audit_expenses" string="Audit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','confirmed')]}" groups="hs_expenses.group_hs_expenses_financial_officer" confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_confirm" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','confirmed')]}" groups="hs_expenses.group_hs_expenses_financial_officer" confirm="Are you sure you want to do this?"/>
+
+                        <!--cashier-->
+                        <button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier" confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_to_audited" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier" confirm="Are you sure you want to do this?"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,reported,reported2,approved,confirmed,audited,done"/>
+                    </header>
+                    <sheet>
+                        <group string="Entertain Application Information">
+                            <group>
+                                <field name="expense_category_ids" widget="many2many_tags" options="{'no_create_edit': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="applicant_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="sale_area_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="sale_market_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="project_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="entertain_company_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="entertain_res_user_ids" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="attachment_ids" mode="kanban" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                            </group>
+                            <group>
+                                <field name="driver_type_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="applicant_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="applicant_department_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="applicant_amount" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="entertain_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="cause" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="application_remark" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="current_sign_completed" invisible="1"/>
+                                <field name="complete_countersign" invisible="1"/>
+                            </group>
+                        </group>
+                        <group string="Reimbursement Information">
+                            <group>
+                                <field name="reimbursement_person_id" attrs="{'readonly': [('state', 'not in', ['draft', 'approved'])]}"/>
+                                <field name="bank_name" attrs="{'readonly': [('state', 'not in', ['draft', 'approved'])]}"/>
+                                <field name="reimbursement_amount" attrs="{'readonly': [('state', 'not in', ['draft', 'approved'])]}"/>
+                            </group>
+                            <group>
+                                <field name="reimbursement_payment_method" attrs="{'readonly': [('state', 'not in', ['draft', 'approved'])]}"/>
+                                <field name="bank_account" attrs="{'readonly': [('state', 'not in', ['draft', 'approved'])]}"/>
+                                <field name="reimbursement_remark" attrs="{'readonly': [('state', 'not in', ['draft', 'approved'])]}"/>
+                            </group>
+                        </group>
+                        <group string="Audit Information" attrs="{'invisible':[('state', 'not in', ['confirmed', 'audited', 'done', 'countersign'])]}">
+                            <group>
+                                <!--<field name="audit_amount" attrs="{'readonly': [('state', 'not in', ['confirmed'])], 'required':[('state', '=', 'confirmed')]}"/>-->
+                                <field name="audit_amount" attrs="{'readonly': [('current_user_is_financial', '=', False)], 'required':[('state', '=', 'confirmed')]}"/>
+                                <field name="current_user_is_financial" invisible="1"/>
+                            </group>
+                            <group></group>
+                        </group>
+
+                        <notebook>
+                            <page string="Countersign Information" attrs="{'invisible': ['|', ('state', 'in', ['draft'])]}">
+                                <field name="countersign_ids" readonly="1">
+                                    <tree>
+                                        <field name="employee_id"/>
+                                        <field name="is_approved"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="entertain_application_search" model="ir.ui.view">
+           <field name="name">hs.expense.v2.entertain.application.search</field>
+           <field name="model">hs.expense.v2.entertain.application</field>
+            <field name="arch" type="xml">
+                <search string="Entertain Applications">
+                    <field name="name" />
+                    <field name="applicant_id" />
+                    <filter string="Current Month" name="cmonth" domain="[('applicant_date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-01'))]" />
+                    <filter string="Last Month" name="lmonth" domain="[('applicant_date', '&gt;=', (datetime.datetime.now().replace(day=1)-datetime.timedelta(days=1)).strftime('%Y-%m-01')), ('applicant_date', '&lt;', datetime.datetime.now().strftime('%Y-%m-01'))]" />
+                </search>
+           </field>
+        </record>
+
+        <record id="action_entertain_application" model="ir.actions.act_window">
+            <field name="name">Entertain Application</field>
+            <field name="res_model">hs.expense.v2.entertain.application</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="view_id" eval="False"/>
+            <field name="context">{'search_default_cmonth': True}</field>
+        </record>
+
+        <menuitem
+            id="menu_entertain_application"
+            action="action_entertain_application"
+            parent="hs_v2_entertain_expenses_management_menu"
+            sequence="0"/>
+
+        <record id="batch_end_application_wizard_view" model="ir.ui.view">
+            <field name="name">hs.expense.v2.batch.end.wizard</field>
+            <field name="model">hs.expense.v2.batch.end.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Batch End Application Wizard">
+                    <notebook>
+                        <page string="Batch End Application">
+                            <field name="application_ids"/>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button type="object" name="batch_end_button" string="Batch End" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window id="batch_end_application_wizard_action" name="Batch End Wizard"
+                    src_model="hs.expense.v2.entertain.application"
+                    res_model="hs.expense.v2.batch.end.wizard" view_mode="form" target="new" multi="True"
+                    groups="hs_expenses.group_hs_expenses_cashier"/>
+    </data>
+</odoo>

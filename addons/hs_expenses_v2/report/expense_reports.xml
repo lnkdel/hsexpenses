@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <report
+            id="action_report_hs_expenses_v2_travel"
+            string="Travel Report"
+            model="hs.expense.v2.travel.application"
+            report_type="qweb-pdf"
+            name="hs_expenses_v2.report_expense_v2_travel"
+            file="hs_expenses_v2.report_expense_v2_travel"
+            paperformat="hs_expenses.paperformat_month_expense"
+            print_report_name="'Travel Expenses - %s - %s' % (object.applicant_id.name, (object.name).replace('/', ''))"
+        />
+
+        <report
+            id="action_report_hs_expenses_v2_entertain"
+            string="Entertain Report"
+            model="hs.expense.v2.entertain.application"
+            report_type="qweb-pdf"
+            name="hs_expenses_v2.report_expense_v2_entertain"
+            file="hs_expenses_v2.report_expense_v2_entertain"
+            paperformat="hs_expenses.paperformat_month_expense"
+            print_report_name="'Entertain Expenses - %s - %s' % (object.applicant_id.name, (object.name).replace('/', ''))"
+        />
+
+        <report
+            id="action_report_hs_expenses_v2_entertain_list"
+            string="Entertain Report List"
+            model="hs.expense.v2.entertain.application"
+            report_type="qweb-pdf"
+            name="hs_expenses_v2.report_expense_v2_entertain_list"
+            file="hs_expenses_v2.report_expense_v2_entertain_list"
+            paperformat="hs_expenses.paperformat_month_expense"
+            print_report_name="Entertain Expenses List"
+        />
+    </data>
+</odoo>

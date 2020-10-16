@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_hs_expenses_vice_president" model="res.groups">
+            <field name="name">[HS Expenses] Vice President</field>
+            <field name="category_id" ref="base.module_category_hengshen_expense"/>
+            <field name="implied_ids" eval="[(4, ref('hs_expenses.group_hs_expenses_user'))]"/>
+            <field name="comment">The user will be able to reviewed the application.</field>
+        </record>
+    </data>
+</odoo>

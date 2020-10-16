@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="hs_expense_v2_driver_type_1" model="hs.base.driver.type">
+            <field name="name">C01 客户关系维护</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_2" model="hs.base.driver.type">
+            <field name="name">C02 新客户开发</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_3" model="hs.base.driver.type">
+            <field name="name">C03 客诉处理</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_4" model="hs.base.driver.type">
+            <field name="name">C04 客户发货验收开票</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_5" model="hs.base.driver.type">
+            <field name="name">C05 项目申报验收跟踪</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="hs_expense_v2_driver_type_6" model="hs.base.driver.type">
+            <field name="name">C06 客户回款跟踪</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_7" model="hs.base.driver.type">
+            <field name="name">C07 诉讼事宜</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_8" model="hs.base.driver.type">
+            <field name="name">C08 行业会议论坛</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_9" model="hs.base.driver.type">
+            <field name="name">C09 展会事宜</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_10" model="hs.base.driver.type">
+            <field name="name">C10 政府关系维护</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="hs_expense_v2_driver_type_11" model="hs.base.driver.type">
+            <field name="name">C11 新供应商开发</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_12" model="hs.base.driver.type">
+            <field name="name">C12 采购质量跟踪</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_13" model="hs.base.driver.type">
+            <field name="name">C13 集团事宜</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_14" model="hs.base.driver.type">
+            <field name="name">C14 证券事宜</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_15" model="hs.base.driver.type">
+            <field name="name">C15 体系认证</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+
+
+        <record id="hs_expense_v2_driver_type_16" model="hs.base.driver.type">
+            <field name="name">C16 广告宣传</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_17" model="hs.base.driver.type">
+            <field name="name">C17 党团活动</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_18" model="hs.base.driver.type">
+            <field name="name">C18 环境保护</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_19" model="hs.base.driver.type">
+            <field name="name">C19 安全生产</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_20" model="hs.base.driver.type">
+            <field name="name">C20 年会</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="hs_expense_v2_driver_type_21" model="hs.base.driver.type">
+            <field name="name">C21 保密专项</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+        <record id="hs_expense_v2_driver_type_22" model="hs.base.driver.type">
+            <field name="name">C22 部门庶务</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+</odoo>

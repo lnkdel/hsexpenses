@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <menuitem
+            id="menu_hs_sale_seller"
+            action="hs_expenses.action_sale_seller"
+            parent="menu_sale"
+            sequence="0"/>
+        <menuitem
+            id="menu_hs_sale_market"
+            action="hs_expenses.action_hs_sale_market"
+            parent="menu_sale"
+            sequence="1"/>
+        <menuitem
+            id="menu_hs_sale_area"
+            action="hs_expenses.action_hs_sale_area"
+            parent="menu_sale"
+            sequence="2"/>
+        <!--<menuitem-->
+            <!--id="menu_hs_sale_benefit"-->
+            <!--action="hs_expenses.action_hs_sale_benefit"-->
+            <!--parent="menu_sale"-->
+            <!--sequence="3"/>-->
+        <menuitem
+            id="menu_hs_employee_level"
+            action="hs_expenses.action_hs_employee_level"
+            parent="menu_sale"
+            sequence="4"/>
+
+        <menuitem
+            id="menu_hs_expense_travel_standard"
+            action="hs_expenses.action_hs_expense_travel_standard"
+            parent="menu_travel"
+            sequence="0"/>
+        <menuitem
+            id="menu_hs_city_level"
+            action="hs_expenses.action_hs_city_level"
+            parent="menu_travel"
+            sequence="1"/>
+        <menuitem
+            id="menu_hs_city"
+            action="hs_expenses.action_hs_city"
+            parent="menu_travel"
+            sequence="2"/>
+
+        <menuitem
+            id="menu_entertain_company"
+            action="hs_expenses.action_entertain_company"
+            parent="menu_entertain"
+            sequence="0"/>
+        <menuitem
+            id="menu_entertain_user"
+            action="hs_expenses.action_entertain_user"
+            parent="menu_entertain"
+            sequence="1"/>
+    </data>
+</odoo>
