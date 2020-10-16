@@ -1,0 +1,992 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* hs_expenses_v2
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-16 16:45+0000\n"
+"PO-Revision-Date: 2020-10-16 16:45+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_driver_type__active
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_project__active
+msgid "Active"
+msgstr "有效"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__applicant_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__applicant_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__applicant_id
+msgid "Applicant"
+msgstr "申请人"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__applicant_amount
+msgid "Applicant Amount"
+msgstr "申请金额"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__applicant_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__applicant_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__applicant_date
+msgid "Application Date"
+msgstr "申请日期"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__application_remark
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__application_remark
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__application_remark
+msgid "Application Remark"
+msgstr "申请单备注"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
+msgid "Approve"
+msgstr "批准"
+
+#. module: hs_expenses_v2
+#: selection:hs.expense.v2.entertain.application,state:0
+msgid "Approved"
+msgstr "已批准"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+msgid "Are you sure you want to do this?"
+msgstr "是否确定此操作？"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__attachment_ids
+msgid "Attachments"
+msgstr "附件"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+msgid "Audit"
+msgstr "审核"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__audit_amount
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__audit_amount
+msgid "Audit Amount"
+msgstr "审核金额"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__audit_cut_amount
+msgid "Audit Cut Amount"
+msgstr "核减金额"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__audit_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__audit_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__audit_date
+msgid "Audit Date"
+msgstr "审核日期"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+msgid "Audit Information"
+msgstr "财务审核信息"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__audit_remark
+msgid "Audit Remark"
+msgstr "审核备注"
+
+#. module: hs_expenses_v2
+#: selection:hs.expense.v2.entertain.application,state:0
+#: selection:hs.expense.v2.travel.application,state:0
+msgid "Audited"
+msgstr "已审核"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+msgid "Back"
+msgstr "退回"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__bank_account
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__bank_account
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__bank_account
+msgid "Bank Account"
+msgstr "银行账户"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__bank_name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__bank_name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__bank_name
+msgid "Bank Name"
+msgstr "开户行"
+
+#. module: hs_expenses_v2
+#: model:ir.model,name:hs_expenses_v2.model_hs_expense_v2_base_application
+msgid "Base Application"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.batch_end_application_wizard_view
+msgid "Batch End"
+msgstr "批量结束"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.batch_end_application_wizard_view
+msgid "Batch End Application"
+msgstr "批量结束单据"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.batch_end_application_wizard_view
+msgid "Batch End Application Wizard"
+msgstr "批量结束向导"
+
+#. module: hs_expenses_v2
+#: model:ir.actions.act_window,name:hs_expenses_v2.batch_end_application_wizard_action
+msgid "Batch End Wizard"
+msgstr "批量结束向导"
+
+#. module: hs_expenses_v2
+#: model:ir.model,name:hs_expenses_v2.model_hs_expense_v2_batch_end_wizard
+msgid "Batch end application wizard"
+msgstr "批量结束向导"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__name
+msgid "Bill Number"
+msgstr "单据号"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.batch_end_application_wizard_view
+msgid "Cancel"
+msgstr "取消"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__car_cost
+msgid "Car Cost"
+msgstr "交通费"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__car_cost_standard
+msgid "Car Cost Standard"
+msgstr "交通费标准"
+
+#. module: hs_expenses_v2
+#: selection:hs.expense.v2.base.application,reimbursement_payment_method:0
+#: selection:hs.expense.v2.entertain.application,reimbursement_payment_method:0
+#: selection:hs.expense.v2.travel.application,reimbursement_payment_method:0
+msgid "Cash"
+msgstr "现金"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__expense_category_ids
+msgid "Category"
+msgstr "类别"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__cause
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__cause
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__cause
+msgid "Cause"
+msgstr "事由"
+
+#. module: hs_expenses_v2
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_hs_city
+msgid "City"
+msgstr "城市"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__city_car_cost
+msgid "City Car Cost"
+msgstr "市内交通"
+
+#. module: hs_expenses_v2
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_hs_city_level
+msgid "City Level"
+msgstr "城市级别"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__complete_countersign
+msgid "Complete Countersign"
+msgstr "完成会签"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
+msgid "Confirm"
+msgstr "确认"
+
+#. module: hs_expenses_v2
+#: selection:hs.expense.v2.entertain.application,state:0
+msgid "Confirmed"
+msgstr "已确认"
+
+#. module: hs_expenses_v2
+#: selection:hs.expense.v2.entertain.application,state:0
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__countersign_ids
+msgid "Countersign"
+msgstr "会签"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
+msgid "Countersign Information"
+msgstr "会签信息"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_driver_type__create_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_project__create_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_batch_end_wizard__create_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_countersign_entertain__create_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__create_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__create_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__create_uid
+msgid "Created by"
+msgstr "创建人"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_driver_type__create_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_project__create_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_batch_end_wizard__create_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_countersign_entertain__create_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__create_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__create_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__create_date
+msgid "Created on"
+msgstr "创建时间"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.entertain_application_search
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.travel_application_v2_search
+msgid "Current Month"
+msgstr "当月"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__current_sign_completed
+msgid "Current Sign Completed"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__current_user_is_financial
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__current_user_is_financial
+msgid "Current User Is Financial"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__customer_name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__customer_name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__customer_name
+msgid "Customer Name"
+msgstr "客户名称"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__applicant_department_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__applicant_department_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__applicant_department_id
+msgid "Department"
+msgstr "部门"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__destination_city
+msgid "Destination City"
+msgstr "目的地"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_driver_type__display_name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_project__display_name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__display_name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_batch_end_wizard__display_name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_countersign_entertain__display_name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__display_name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__display_name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+msgid "Done"
+msgstr "完成"
+
+#. module: hs_expenses_v2
+#: model:ir.model,name:hs_expenses_v2.model_hs_base_driver_type
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__driver_type_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__driver_type_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__driver_type_id
+msgid "Driver Type"
+msgstr "动因类别"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_countersign_entertain__employee_id
+msgid "Employee"
+msgstr "员工"
+
+#. module: hs_expenses_v2
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_hs_employee_level
+msgid "Employee Level"
+msgstr "员工级别"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__end_date
+msgid "End Date"
+msgstr "结束日期"
+
+#. module: hs_expenses_v2
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_entertain
+msgid "Entertain"
+msgstr "招待"
+
+#. module: hs_expenses_v2
+#: model:ir.actions.act_window,name:hs_expenses_v2.action_entertain_application
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_countersign_entertain__expense_id
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_entertain_application
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
+msgid "Entertain Application"
+msgstr "招待申请"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
+msgid "Entertain Application Information"
+msgstr "招待申请信息"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_batch_end_wizard__application_ids
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.entertain_application_search
+msgid "Entertain Applications"
+msgstr "招待申请"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__entertain_company_id
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_entertain_company
+msgid "Entertain Company"
+msgstr "招待公司"
+
+#. module: hs_expenses_v2
+#: model:ir.model,name:hs_expenses_v2.model_hs_expense_v2_countersign_entertain
+msgid "Entertain Countersign"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__entertain_date
+msgid "Entertain Date"
+msgstr "招待日期"
+
+#. module: hs_expenses_v2
+#: model:ir.ui.menu,name:hs_expenses_v2.hs_v2_entertain_expenses_management_menu
+msgid "Entertain Expenses"
+msgstr "招待费用"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__entertain_res_user_ids
+msgid "Entertain Person"
+msgstr "招待人员"
+
+#. module: hs_expenses_v2
+#: model:ir.actions.report,name:hs_expenses_v2.action_report_hs_expenses_v2_entertain
+msgid "Entertain Report"
+msgstr "招待费用报表"
+
+#. module: hs_expenses_v2
+#: model:ir.actions.report,name:hs_expenses_v2.action_report_hs_expenses_v2_entertain_list
+msgid "Entertain Report List"
+msgstr "招待费用汇总报表"
+
+#. module: hs_expenses_v2
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_entertain_user
+msgid "Entertain User"
+msgstr "招待人员"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__from_city
+msgid "From City"
+msgstr "出发地"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__group_text
+msgid "Group Text"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__hotel_cost
+msgid "Hotel Cost"
+msgstr "住宿费"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__hotel_cost_standard
+msgid "Hotel Cost Standard"
+msgstr "住宿费标准"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_driver_type__id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_project__id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_batch_end_wizard__id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_countersign_entertain__id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__id
+msgid "ID"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_countersign_entertain__is_approved
+msgid "Is Approved"
+msgstr "是否批准"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_driver_type____last_update
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_project____last_update
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application____last_update
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_batch_end_wizard____last_update
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_countersign_entertain____last_update
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application____last_update
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application____last_update
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail____last_update
+msgid "Last Modified on"
+msgstr "最后修改日"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.entertain_application_search
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.travel_application_v2_search
+msgid "Last Month"
+msgstr "上月"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_driver_type__write_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_project__write_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_batch_end_wizard__write_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_countersign_entertain__write_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__write_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__write_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__write_uid
+msgid "Last Updated by"
+msgstr "最后更新者"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_driver_type__write_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_project__write_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_batch_end_wizard__write_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_countersign_entertain__write_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__write_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__write_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__write_date
+msgid "Last Updated on"
+msgstr "最后更新时间"
+
+#. module: hs_expenses_v2
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_v2_hs_expenses_root
+msgid "Marketing Expenses V2"
+msgstr "营销费用V2"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__meal_cost
+msgid "Meal Cost"
+msgstr "伙食费"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__meal_cost_standard
+msgid "Meal Cost Standard"
+msgstr "伙食费标准"
+
+#. module: hs_expenses_v2
+#: selection:hs.expense.v2.base.application,reimbursement_payment_method:0
+#: selection:hs.expense.v2.entertain.application,reimbursement_payment_method:0
+#: selection:hs.expense.v2.travel.application,reimbursement_payment_method:0
+msgid "Money Transfer"
+msgstr "银行转帐"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.travel_application_v2_search
+msgid "Month Applications"
+msgstr "月差旅和普通报销单"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_driver_type__name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_project__name
+msgid "Name"
+msgstr "名称"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__number_of_days
+msgid "Number Of Days"
+msgstr "天数"
+
+#. module: hs_expenses_v2
+#: selection:hs.expense.v2.entertain.application,state:0
+#: selection:hs.expense.v2.travel.application,state:0
+msgid "Paid"
+msgstr "已支付"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__reimbursement_payment_method
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__reimbursement_payment_method
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__reimbursement_payment_method
+msgid "Payment Method"
+msgstr "支付方式"
+
+#. module: hs_expenses_v2
+#: code:addons/hs_expenses_v2/models/entertain.py:254
+#: code:addons/hs_expenses_v2/models/travel.py:283
+#, python-format
+msgid "Please enter the correct audit amount!"
+msgstr "请输入审核金额!"
+
+#. module: hs_expenses_v2
+#: model:ir.actions.act_window,name:hs_expenses_v2.action_hs_base_project
+#: model:ir.model,name:hs_expenses_v2.model_hs_base_project
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__project_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__project_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__project_id
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_hs_base_project
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_hs_base_project_form
+msgid "Project"
+msgstr "项目"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__reimbursement_amount
+msgid "Reimbursement Amount"
+msgstr "报销金额"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+msgid "Reimbursement Information"
+msgstr "报销信息"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__reimbursement_person_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__reimbursement_person_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__reimbursement_person_id
+msgid "Reimbursement Person"
+msgstr "报销人员"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__reimbursement_remark
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__reimbursement_remark
+msgid "Reimbursement Remark"
+msgstr "报销备注"
+
+#. module: hs_expenses_v2
+#: code:addons/hs_expenses_v2/models/entertain.py:46
+#: code:addons/hs_expenses_v2/models/entertain.py:236
+#, python-format
+msgid "Reimbursement amount must be less than or equal to the application amount!"
+msgstr "报销金额必须小于或者等于申请金额！"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__sale_area_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__sale_area_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__sale_area_id
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_hs_sale_area
+msgid "Sale Area"
+msgstr "销售区域"
+
+#. module: hs_expenses_v2
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_sale
+msgid "Sale Management"
+msgstr "销售管理"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_base_application__sale_market_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__sale_market_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__sale_market_id
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_hs_sale_market
+msgid "Sale Market"
+msgstr "销售市场"
+
+#. module: hs_expenses_v2
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_hs_sale_seller
+msgid "Seller"
+msgstr "营销员"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_driver_type__sequence
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_base_project__sequence
+msgid "Sequence"
+msgstr "序号"
+
+#. module: hs_expenses_v2
+#: model:ir.ui.menu,name:hs_expenses_v2.setting_menu
+msgid "Settings"
+msgstr "设置"
+
+#. module: hs_expenses_v2
+#: code:addons/hs_expenses_v2/models/entertain.py:210
+#: code:addons/hs_expenses_v2/models/entertain.py:276
+#, python-format
+msgid "Some errors have occurred in the system!"
+msgstr "系统发生错误！"
+
+#. module: hs_expenses_v2
+#: model:ir.model,name:hs_expenses_v2.model_hs_expense_v2_entertain_application
+msgid "Entertain application and reimbursement form"
+msgstr "招待费用申请报销单"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__start_date
+msgid "Start Date"
+msgstr "开始日期"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__state
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__state
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__state
+msgid "Status"
+msgstr "状态"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,help:hs_expenses_v2.field_hs_expense_v2_entertain_application__state
+#: model:ir.model.fields,help:hs_expenses_v2.field_hs_expense_v2_travel_application__state
+#: model:ir.model.fields,help:hs_expenses_v2.field_hs_expense_v2_travel_detail__state
+msgid "Status of the expense."
+msgstr "费用状态"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+msgid "Submit"
+msgstr "提交"
+
+#. module: hs_expenses_v2
+#: selection:hs.expense.v2.entertain.application,state:0
+msgid "Submitted"
+msgstr "已提交"
+
+#. module: hs_expenses_v2
+#: selection:hs.expense.v2.entertain.application,state:0
+msgid "Submitted2"
+msgstr "已审阅"
+
+#. module: hs_expenses_v2
+#: code:addons/hs_expenses_v2/models/travel.py:64
+#: code:addons/hs_expenses_v2/models/travel.py:255
+#, python-format
+msgid "The end date of the trip must be in the current month."
+msgstr "旅程的结束日期必须在当月。"
+
+#. module: hs_expenses_v2
+#: model:res.groups,comment:hs_expenses_v2.group_hs_expenses_vice_president
+msgid "The user will be able to reviewed the application."
+msgstr "用户可以审核申请单。"
+
+#. module: hs_expenses_v2
+#: selection:hs.expense.v2.travel.application,state:0
+msgid "To Audited"
+msgstr "待审核"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__to_city
+msgid "To City"
+msgstr "到达城市"
+
+#. module: hs_expenses_v2
+#: selection:hs.expense.v2.entertain.application,state:0
+#: selection:hs.expense.v2.travel.application,state:0
+msgid "To Submit"
+msgstr "待提交"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__car_total_cost
+msgid "Total Car Cost"
+msgstr "交通费合计"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__city_car_total_cost
+msgid "Total City Car Cost"
+msgstr "市内交通合计"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__total_cost
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__total_cost
+msgid "Total Cost"
+msgstr "费用合计"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__hotel_total_cost
+msgid "Total Hotel Cost"
+msgstr "住宿费合计"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__meal_total_cost
+msgid "Total Meal Cost"
+msgstr "伙食费合计"
+
+#. module: hs_expenses_v2
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_travel
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_travel_application_v2
+msgid "Travel"
+msgstr "差旅"
+
+#. module: hs_expenses_v2
+#: model:ir.actions.act_window,name:hs_expenses_v2.action_travel_application_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__travel_application_id
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_tree
+msgid "Travel Application"
+msgstr "差旅报销申请单"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_detail_v2_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_detail_v2_tree
+msgid "Travel Detail"
+msgstr "差旅明细"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__travel_detail_ids
+msgid "Travel Details"
+msgstr "差旅明细"
+
+#. module: hs_expenses_v2
+#: model:ir.ui.menu,name:hs_expenses_v2.hs_v2_travel_expenses_management_menu
+msgid "Travel Expenses"
+msgstr "差旅费用"
+
+#. module: hs_expenses_v2
+#: model:ir.actions.report,name:hs_expenses_v2.action_report_hs_expenses_v2_travel
+msgid "Travel Report"
+msgstr "差旅报销报表"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__travel_standard_id
+#: model:ir.ui.menu,name:hs_expenses_v2.menu_hs_expense_travel_standard
+msgid "Travel Standard"
+msgstr "出差费用标准"
+
+#. module: hs_expenses_v2
+#: model:ir.model,name:hs_expenses_v2.model_hs_expense_v2_travel_detail
+msgid "Travel detail"
+msgstr "差旅明细"
+
+#. module: hs_expenses_v2
+#: model:ir.model,name:hs_expenses_v2.model_hs_expense_v2_travel_application
+msgid "Travel expenses reimbursement form"
+msgstr "差旅费用申请报销单"
+
+#. module: hs_expenses_v2
+#: code:addons/hs_expenses_v2/models/entertain.py:200
+#: code:addons/hs_expenses_v2/models/entertain.py:221
+#, python-format
+msgid "You cannot approve twice the same line!"
+msgstr "同一条记录你不能批准两次！"
+
+#. module: hs_expenses_v2
+#: code:addons/hs_expenses_v2/models/entertain.py:244
+#: code:addons/hs_expenses_v2/models/entertain.py:251
+#: code:addons/hs_expenses_v2/models/entertain.py:262
+#: code:addons/hs_expenses_v2/models/entertain.py:288
+#, python-format
+msgid "You cannot audit twice the same line!"
+msgstr "同一条记录你不能审核两次！"
+
+#. module: hs_expenses_v2
+#: code:addons/hs_expenses_v2/models/entertain.py:233
+#, python-format
+msgid "You cannot confirm twice the same line!"
+msgstr "同一条记录你不能确认两次！"
+
+#. module: hs_expenses_v2
+#: code:addons/hs_expenses_v2/models/entertain.py:154
+#: code:addons/hs_expenses_v2/models/travel.py:267
+#, python-format
+msgid "You cannot delete a posted or approved expense."
+msgstr "你不能删除已经提交的记录。"
+
+#. module: hs_expenses_v2
+#: code:addons/hs_expenses_v2/models/entertain.py:156
+#: code:addons/hs_expenses_v2/models/travel.py:269
+#, python-format
+msgid "You cannot delete the expense!"
+msgstr "你不能删除该条记录！"
+
+#. module: hs_expenses_v2
+#: code:addons/hs_expenses_v2/models/entertain.py:162
+#, python-format
+msgid "You cannot report twice the same line!"
+msgstr "同一条记录你不能报告两次！"
+
+#. module: hs_expenses_v2
+#: model:res.groups,name:hs_expenses_v2.group_hs_expenses_vice_president
+msgid "[HS Expenses] Vice President"
+msgstr "[恒神费用] 副总裁"
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "事由"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "交通费"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "伙食费"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "住宿费"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "出发地"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "到达城市"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain_list
+msgid "单据号"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "合计"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "备注"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "审核备注"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain_list
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "审核金额"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "差旅报销单"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "差旅明细"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "市内交通"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "开始日期"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "开户行"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "报销人员"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "报销信息"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
+msgid "招待报销单"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain_list
+msgid "招待日期"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "支付方式"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "核减金额"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain_list
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "申请人"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain_list
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "申请日期"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain_list
+msgid "申请金额"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "目的地"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "结束日期"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "财务审核信息"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain_list
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "部门"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
+msgid "金额"
+msgstr ""
+
+#. module: hs_expenses_v2
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
+msgid "银行账户"
+msgstr ""

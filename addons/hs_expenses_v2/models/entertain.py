@@ -8,7 +8,7 @@ from datetime import datetime
 class EntertainApplication(models.Model):
     _name = 'hs.expense.v2.entertain.application'
     _inherit = 'hs.expense.v2.base.application'
-    _description = 'Special & Ordinary application and reimbursement form'
+    _description = 'Entertain application and reimbursement form'
     _order = 'applicant_date desc, id desc'
 
     @api.model

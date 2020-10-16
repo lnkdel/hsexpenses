@@ -56,12 +56,12 @@ class BaseApplication(models.AbstractModel):
 
     @api.model
     def create(self, values):
-        if values.get('travel_detail_ids') is not None:
-            for detail in values.get('travel_detail_ids'):
-                end = datetime.datetime.strptime(detail[2]['end_date'], '%Y-%m-%d').date()
-                today = datetime.datetime.today()
-                if today.month != end.month:
-                    raise UserError(_("The end date of the trip must be in the current month."))
+        # if values.get('travel_detail_ids') is not None:
+        #     for detail in values.get('travel_detail_ids'):
+        #         end = datetime.datetime.strptime(detail[2]['end_date'], '%Y-%m-%d').date()
+        #         today = datetime.datetime.today()
+        #         if today.month != end.month:
+        #             raise UserError(_("The end date of the trip must be in the current month."))
         return super(BaseApplication, self).create(values)
 
 
@@ -247,12 +247,12 @@ class TravelApplication(models.Model):
                 name = self.env['ir.sequence'].next_by_code('hs.expense.v2.travel.app.no')
             values['name'] = name
 
-        if values.get('travel_detail_ids') is not None:
-            for detail in values.get('travel_detail_ids'):
-                end = datetime.datetime.strptime(detail[2]['end_date'], '%Y-%m-%d').date()
-                today = datetime.datetime.today()
-                if today.month != end.month:
-                    raise UserError(_("The end date of the trip must be in the current month."))
+        # if values.get('travel_detail_ids') is not None:
+        #     for detail in values.get('travel_detail_ids'):
+        #         end = datetime.datetime.strptime(detail[2]['end_date'], '%Y-%m-%d').date()
+        #         today = datetime.datetime.today()
+        #         if today.month != end.month:
+        #             raise UserError(_("The end date of the trip must be in the current month."))
         return super(TravelApplication, self).create(values)
 
     @api.multi
