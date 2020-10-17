@@ -143,8 +143,8 @@ class EntertainApplication(models.Model):
                 })
                 name = self.env['ir.sequence'].next_by_code('hs.expense.v2.entertain.app.no')
             vals['name'] = name
-        if vals.get('customer_name') is None:
-            vals['customer_name'] = vals.get('customer_company_no') or 'xx'
+        # if vals.get('customer_name') is None:
+        #     vals['customer_name'] = vals.get('customer_company_no') or 'xx'
         return super(EntertainApplication, self).create(vals)
 
     @api.multi

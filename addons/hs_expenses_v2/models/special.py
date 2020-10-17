@@ -53,8 +53,8 @@ class SpecialApplication(models.Model):
     def _compute_current_user_is_financial(self):
         self.current_user_is_financial = self.user_has_groups('hs_expenses.group_hs_expenses_financial_officer')
 
-    customer_company_no = fields.Many2one('hs.base.customer.number', required=True, string='Customer Company Number')
-    customer_count = fields.Integer(string='Customer Count', default=1)
+    customer_company_no = fields.Many2one('hs.base.customer.number', string='Customer Company Number')
+    customer_count = fields.Integer(string='Customer Count', default=0)
 
     entertain_date = fields.Date(string='Entertain Date', required=True,
                                  default=lambda self: fields.Date.context_today(self))
@@ -116,9 +116,8 @@ class SpecialApplication(models.Model):
                 })
                 name = self.env['ir.sequence'].next_by_code('hs.expense.v2.special.app.no')
             vals['name'] = name
-            if vals.get('customer_name') is None:
-                vals['customer_name'] = vals.get('customer_company_no') or 'xx'
-
+            if vals.get('expense_category_ids') is None:
+                vals['expense_category_ids'] = [[6, False, [3]]]
         return super(SpecialApplication, self).create(vals)
 
     @api.multi

@@ -68,26 +68,26 @@
             <field name="domain_force">[('state', 'in', ['reported'])]</field>
             <field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_other_reviewer'))]"/>
         </record>
-        <record id="hs_expense_v2_special_other_reviewer_rule" model="ir.rule">
-            <field name="name">other reviewer can be update the application</field>
-            <field name="model_id" ref="model_hs_expense_v2_special_application"/>
-            <field name="perm_read" eval="1" />
-            <field name="perm_write" eval="0" />
-            <field name="perm_create" eval="0" />
-            <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('expense_category_ids', 'in', 4)]</field>
-            <field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_other_reviewer'))]"/>
-        </record>
-        <record id="hs_expense_v2_special_other_reviewer_w_rule" model="ir.rule">
-            <field name="name">other reviewer can be update the application</field>
-            <field name="model_id" ref="model_hs_expense_v2_special_application"/>
-            <field name="perm_read" eval="0" />
-            <field name="perm_write" eval="1" />
-            <field name="perm_create" eval="0" />
-            <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('state', 'in', ['reported'])]</field>
-            <field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_other_reviewer'))]"/>
-        </record>
+        <!--<record id="hs_expense_v2_special_other_reviewer_rule" model="ir.rule">-->
+            <!--<field name="name">other reviewer can be update the application</field>-->
+            <!--<field name="model_id" ref="model_hs_expense_v2_special_application"/>-->
+            <!--<field name="perm_read" eval="1" />-->
+            <!--<field name="perm_write" eval="0" />-->
+            <!--<field name="perm_create" eval="0" />-->
+            <!--<field name="perm_unlink" eval="0" />-->
+            <!--<field name="domain_force">[('expense_category_ids', 'in', 4)]</field>-->
+            <!--<field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_other_reviewer'))]"/>-->
+        <!--</record>-->
+        <!--<record id="hs_expense_v2_special_other_reviewer_w_rule" model="ir.rule">-->
+            <!--<field name="name">other reviewer can be update the application</field>-->
+            <!--<field name="model_id" ref="model_hs_expense_v2_special_application"/>-->
+            <!--<field name="perm_read" eval="0" />-->
+            <!--<field name="perm_write" eval="1" />-->
+            <!--<field name="perm_create" eval="0" />-->
+            <!--<field name="perm_unlink" eval="0" />-->
+            <!--<field name="domain_force">[('state', 'in', ['reported'])]</field>-->
+            <!--<field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_other_reviewer'))]"/>-->
+        <!--</record>-->
 
 
         <record id="hs_expense_v2_entertain_quality_reviewer_rule" model="ir.rule">
@@ -110,26 +110,26 @@
             <field name="domain_force">[('state', 'in', ['reported'])]</field>
             <field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_quality_reviewer'))]"/>
         </record>
-        <record id="hs_expense_v2_special_quality_reviewer_rule" model="ir.rule">
-            <field name="name">quality reviewer can be update the application</field>
-            <field name="model_id" ref="model_hs_expense_v2_special_application"/>
-            <field name="perm_read" eval="1" />
-            <field name="perm_write" eval="0" />
-            <field name="perm_create" eval="0" />
-            <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('expense_category_ids', 'in', 1)]</field>
-            <field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_quality_reviewer'))]"/>
-        </record>
-        <record id="hs_expense_v2_special_quality_reviewer_w_rule" model="ir.rule">
-            <field name="name">quality reviewer can be update the application</field>
-            <field name="model_id" ref="model_hs_expense_v2_special_application"/>
-            <field name="perm_read" eval="0" />
-            <field name="perm_write" eval="1" />
-            <field name="perm_create" eval="0" />
-            <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('state', 'in', ['reported'])]</field>
-            <field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_quality_reviewer'))]"/>
-        </record>
+        <!--<record id="hs_expense_v2_special_quality_reviewer_rule" model="ir.rule">-->
+            <!--<field name="name">quality reviewer can be update the application</field>-->
+            <!--<field name="model_id" ref="model_hs_expense_v2_special_application"/>-->
+            <!--<field name="perm_read" eval="1" />-->
+            <!--<field name="perm_write" eval="0" />-->
+            <!--<field name="perm_create" eval="0" />-->
+            <!--<field name="perm_unlink" eval="0" />-->
+            <!--<field name="domain_force">[('expense_category_ids', 'in', 1)]</field>-->
+            <!--<field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_quality_reviewer'))]"/>-->
+        <!--</record>-->
+        <!--<record id="hs_expense_v2_special_quality_reviewer_w_rule" model="ir.rule">-->
+            <!--<field name="name">quality reviewer can be update the application</field>-->
+            <!--<field name="model_id" ref="model_hs_expense_v2_special_application"/>-->
+            <!--<field name="perm_read" eval="0" />-->
+            <!--<field name="perm_write" eval="1" />-->
+            <!--<field name="perm_create" eval="0" />-->
+            <!--<field name="perm_unlink" eval="0" />-->
+            <!--<field name="domain_force">[('state', 'in', ['reported'])]</field>-->
+            <!--<field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_quality_reviewer'))]"/>-->
+        <!--</record>-->
 
         <record id="hs_expense_v2_entertain_contract_reviewer_rule" model="ir.rule">
             <field name="name">contract reviewer can be update the application</field>
@@ -151,26 +151,26 @@
             <field name="domain_force">[('state', 'in', ['reported'])]</field>
             <field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_contract_reviewer'))]"/>
         </record>
-        <record id="hs_expense_v2_special_contract_reviewer_rule" model="ir.rule">
-            <field name="name">contract reviewer can be update the application</field>
-            <field name="model_id" ref="model_hs_expense_v2_special_application"/>
-            <field name="perm_read" eval="1" />
-            <field name="perm_write" eval="0" />
-            <field name="perm_create" eval="0" />
-            <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('expense_category_ids', 'in', 2)]</field>
-            <field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_contract_reviewer'))]"/>
-        </record>
-        <record id="hs_expense_v2_special_contract_reviewer_w_rule" model="ir.rule">
-            <field name="name">contract reviewer can be update the application</field>
-            <field name="model_id" ref="model_hs_expense_v2_special_application"/>
-            <field name="perm_read" eval="0" />
-            <field name="perm_write" eval="1" />
-            <field name="perm_create" eval="0" />
-            <field name="perm_unlink" eval="0" />
-            <field name="domain_force">[('state', 'in', ['reported'])]</field>
-            <field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_contract_reviewer'))]"/>
-        </record>
+        <!--<record id="hs_expense_v2_special_contract_reviewer_rule" model="ir.rule">-->
+            <!--<field name="name">contract reviewer can be update the application</field>-->
+            <!--<field name="model_id" ref="model_hs_expense_v2_special_application"/>-->
+            <!--<field name="perm_read" eval="1" />-->
+            <!--<field name="perm_write" eval="0" />-->
+            <!--<field name="perm_create" eval="0" />-->
+            <!--<field name="perm_unlink" eval="0" />-->
+            <!--<field name="domain_force">[('expense_category_ids', 'in', 2)]</field>-->
+            <!--<field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_contract_reviewer'))]"/>-->
+        <!--</record>-->
+        <!--<record id="hs_expense_v2_special_contract_reviewer_w_rule" model="ir.rule">-->
+            <!--<field name="name">contract reviewer can be update the application</field>-->
+            <!--<field name="model_id" ref="model_hs_expense_v2_special_application"/>-->
+            <!--<field name="perm_read" eval="0" />-->
+            <!--<field name="perm_write" eval="1" />-->
+            <!--<field name="perm_create" eval="0" />-->
+            <!--<field name="perm_unlink" eval="0" />-->
+            <!--<field name="domain_force">[('state', 'in', ['reported'])]</field>-->
+            <!--<field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_contract_reviewer'))]"/>-->
+        <!--</record>-->
 
         <record id="hs_expense_v2_travel_project_reviewer_rule" model="ir.rule">
             <field name="name">project reviewer can be update the application</field>

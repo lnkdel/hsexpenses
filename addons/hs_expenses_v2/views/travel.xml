@@ -19,7 +19,7 @@
                     <field name="total_cost"/>
                     <field name="audit_amount"/>
                     <field name="driver_type_id"/>
-                    <field name="customer_name"/>
+                    <field name="customer_company_no"/>
                     <field name="project_id"/>
                 </tree>
             </field>
@@ -61,7 +61,7 @@
                             <group>
                                 <field name="applicant_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="destination_city" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                                <field name="customer_name" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="customer_company_no" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="application_remark" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </group>
                         </group>

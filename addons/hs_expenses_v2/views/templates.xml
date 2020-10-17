@@ -26,7 +26,7 @@
                                         <td>动因类别</td>
                                         <td><span t-field="travel.driver_type_id" /></td>
                                         <td>客户名称</td>
-                                        <td><span t-field="travel.customer_name" /></td>
+                                        <td><span t-field="travel.customer_company_no" /></td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>销售区域</td>

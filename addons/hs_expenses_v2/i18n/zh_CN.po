@@ -345,6 +345,7 @@ msgstr ""
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__customer_company_no
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__customer_company_no
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__customer_company_no
 msgid "Customer Company Number"
 msgstr "客户公司编码"
 

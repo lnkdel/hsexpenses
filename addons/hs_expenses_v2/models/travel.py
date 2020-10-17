@@ -51,7 +51,8 @@ class BaseApplication(models.AbstractModel):
     #                                 ('CF', 'Conference Forum'),], string="Driver Type", copy=False, index=True,
     #                                required=True)
     driver_type_id = fields.Many2one("hs.base.driver.type", string="Driver Type", required=True)
-    customer_name = fields.Char(string="Customer Name", required=True)
+    # customer_name = fields.Char(string="Customer Name", required=True)
+    # customer_company_no = fields.Many2one('hs.base.customer.number', required=True, string='Customer Company Number')
     project_id = fields.Many2one('hs.base.project', string='Project')
 
     @api.model
@@ -212,6 +213,7 @@ class TravelApplication(models.Model):
     audit_cut_amount = fields.Float("Audit Cut Amount", digits=(16, 2), compute="_compute_audit_amount")
     audit_remark = fields.Text(string="Audit Remark")
     current_user_is_financial = fields.Boolean(compute="_compute_current_user_is_financial")
+    customer_company_no = fields.Many2one('hs.base.customer.number', required=True, string='Customer Company Number')
     # group_text = fields.Html(compute="_compute_group_text")
 
     @api.multi
