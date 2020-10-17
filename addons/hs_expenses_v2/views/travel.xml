@@ -77,6 +77,7 @@
                                             <field name="car_cost" sum="Car Cost" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                             <field name="meal_cost" sum="Meal Cost" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                             <field name="hotel_cost" sum="Hotel Cost" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                            <field name="city_car_cost" sum="City Car Cost" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                             <field name="total_cost" sum="Total Cost" />
                                             <field name="audit_cut_amount" sum="Audit Cut Cost" attrs="{'readonly': [('state', '!=', 'to_audited')]}"/>
                                             <field name="audit_cut_remark" attrs="{'readonly': [('state', '!=', 'to_audited')]}"/>
