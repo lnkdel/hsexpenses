@@ -28,8 +28,8 @@
             string="Special Report"
             model="hs.expense.v2.special.application"
             report_type="qweb-pdf"
-            name="hs_expenses_v2.report_expense_v2_entertain"
-            file="hs_expenses_v2.report_expense_v2_entertain"
+            name="hs_expenses_v2.report_expense_v2_special"
+            file="hs_expenses_v2.report_expense_v2_special"
             paperformat="hs_expenses.paperformat_month_expense"
             print_report_name="'Special Expenses - %s - %s' % (object.applicant_id.name, (object.name).replace('/', ''))"
         />
