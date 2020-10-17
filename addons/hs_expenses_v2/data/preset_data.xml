@@ -7,7 +7,7 @@
             <field name="active">True</field>
         </record>
         <record id="hs_expense_v2_driver_type_2" model="hs.base.driver.type">
-            <field name="name">C02 新客户开发</field>
+            <field name="name">C02 新业务开拓</field>
             <field name="sequence">10</field>
             <field name="active">True</field>
         </record>
