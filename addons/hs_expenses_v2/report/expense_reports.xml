@@ -24,6 +24,17 @@
         />
 
         <report
+            id="action_report_hs_expenses_v2_special"
+            string="Special Report"
+            model="hs.expense.v2.special.application"
+            report_type="qweb-pdf"
+            name="hs_expenses_v2.report_expense_v2_entertain"
+            file="hs_expenses_v2.report_expense_v2_entertain"
+            paperformat="hs_expenses.paperformat_month_expense"
+            print_report_name="'Special Expenses - %s - %s' % (object.applicant_id.name, (object.name).replace('/', ''))"
+        />
+
+        <report
             id="action_report_hs_expenses_v2_entertain_list"
             string="Entertain Report List"
             model="hs.expense.v2.entertain.application"
@@ -32,6 +43,16 @@
             file="hs_expenses_v2.report_expense_v2_entertain_list"
             paperformat="hs_expenses.paperformat_month_expense"
             print_report_name="Entertain Expenses List"
+        />
+        <report
+            id="action_report_hs_expenses_v2_special_list"
+            string="Special Report List"
+            model="hs.expense.v2.special.application"
+            report_type="qweb-pdf"
+            name="hs_expenses_v2.report_expense_v2_special_list"
+            file="hs_expenses_v2.report_expense_v2_special_list"
+            paperformat="hs_expenses.paperformat_month_expense"
+            print_report_name="Special Expenses List"
         />
     </data>
 </odoo>

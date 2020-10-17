@@ -34,6 +34,7 @@
         'views/v1_menu.xml',
         'views/travel.xml',
         'views/entertain.xml',
+        'views/special.xml',
         'views/templates.xml',
     ],
     'installable': True,

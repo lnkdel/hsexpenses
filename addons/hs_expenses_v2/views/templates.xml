@@ -23,10 +23,28 @@
                                         <td><span t-field="travel.destination_city" /></td>
                                     </tr>
                                     <tr style="height: 30px;">
+                                        <td>动因类别</td>
+                                        <td><span t-field="travel.driver_type_id" /></td>
+                                        <td>客户名称</td>
+                                        <td><span t-field="travel.customer_name" /></td>
+                                    </tr>
+                                    <tr style="height: 30px;">
+                                        <td>销售区域</td>
+                                        <td><span t-field="travel.sale_area_id" /></td>
+                                        <td>申请单备注</td>
+                                        <td><span t-field="travel.application_remark" /></td>
+                                    </tr>
+                                    <tr style="height: 30px;">
+                                        <td>销售市场</td>
+                                        <td><span t-field="travel.sale_market_id" /></td>
+                                        <td>项目</td>
+                                        <td><span t-field="travel.project_id" /></td>
+                                    </tr>
+                                    <tr style="height: 30px;">
                                         <td>事由</td>
                                         <td><span t-field="travel.cause" /></td>
-                                        <td>备注</td>
-                                        <td><span t-field="travel.reimbursement_remark" /></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 </table>
                             </div>
@@ -227,6 +245,143 @@
             <t t-call="web.html_container">
                 <t t-call="web.external_layout">
                     <div style="padding-top:80px;">
+                        <div style="width:100%; text-align:center; font-size:20px;">招待费用报销</div>
+                        <table style="border-collapse:collapse; border-spacing:0; border-left:1px solid #888; border-top:1px solid #888; width:98%;">
+                            <thead>
+                                <tr>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">单据号</th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">申请人</th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:15%;">申请日期</th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">部门</th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:15%;">招待日期</th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">申请金额</th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">审核金额</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="docs" t-as="o">
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                        <span t-field="o.name"/>
+                                    </td>
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:100px;">
+                                        <span t-field="o.applicant_id"/>
+                                    </td>
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                        <span t-field="o.applicant_date"/></td>
+
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                        <span t-field="o.applicant_department_id"/>
+                                    </td>
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                        <span t-field="o.entertain_date"/>
+                                    </td>
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                        <span t-field="o.applicant_amount"/>
+                                    </td>
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                        <span t-field="o.audit_amount"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+
+                                    </td>
+
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                        <t t-esc="sum(l.applicant_amount for l in docs)"/>
+                                    </td>
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                        <t t-esc="sum(l.audit_amount for l in docs)"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <template id="report_expense_v2_special">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div style="margin:0 auto;width:300px;height:80px; font-size:24px; font-weight:bold; text-align:center;">
+                                招待报销单<p t-field="o.name"/>
+                            </div>
+                            <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
+                                <table style="width:100%;">
+                                    <tr style="height: 30px;">
+                                        <td width="10%">申请人</td>
+                                        <td width="40%"><span t-field="o.applicant_id" /></td>
+                                        <td width="10%">申请日期</td>
+                                        <td width="40%"><span t-field="o.applicant_date" /></td>
+                                    </tr>
+                                    <tr style="height: 30px;">
+                                        <td>部门</td>
+                                        <td><span t-field="o.applicant_department_id" /></td>
+                                        <td>招待日期</td>
+                                        <td><span t-field="o.entertain_date" /></td>
+                                    </tr>
+                                    <tr style="height: 30px;">
+                                        <td>事由</td>
+                                        <td><span t-field="o.cause" /></td>
+                                        <td>备注</td>
+                                        <td><span t-field="o.reimbursement_remark" /></td>
+                                    </tr>
+                                    <tr style="height: 30px;">
+                                        <td>金额</td>
+                                        <td><span t-field="o.applicant_amount" /></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:20px; padding-bottom:10px;">
+                                财务审核信息
+                            </div>
+                            <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
+                                <table style="width:100%;">
+                                    <tr style="height: 30px;">
+                                        <td width="10%">审核金额</td>
+                                        <td width="40%"><span t-field="o.audit_amount" /></td>
+                                        <td width="10%"></td>
+                                        <td width="40%"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:20px; padding-bottom:10px;">
+                                报销信息
+                            </div>
+                            <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
+                                <table style="width:100%;">
+                                    <tr style="height: 30px;">
+                                        <td width="10%">报销人员</td>
+                                        <td width="40%"><span t-field="o.reimbursement_person_id" /></td>
+                                        <td width="10%">支付方式</td>
+                                        <td width="40%"><span t-field="o.reimbursement_payment_method" /></td>
+                                    </tr>
+                                    <tr style="height: 30px;">
+                                        <td>开户行</td>
+                                        <td><span t-field="o.bank_name" /></td>
+                                        <td>银行账户</td>
+                                        <td><span t-field="o.bank_account" /></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+
+                </t>
+            </t>
+        </template>
+
+        <template id="report_expense_v2_special_list">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div style="padding-top:80px;">
+                        <div style="width:100%; text-align:center; font-size:20px;">特殊费用报销</div>
                         <table style="border-collapse:collapse; border-spacing:0; border-left:1px solid #888; border-top:1px solid #888; width:98%;">
                             <thead>
                                 <tr>

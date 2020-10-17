@@ -19,6 +19,12 @@
                 sequence="1"/>
 
         <menuitem
+                id="hs_v2_special_expenses_management_menu"
+                name="Special Expenses"
+                parent="menu_v2_hs_expenses_root"
+                sequence="1"/>
+
+        <menuitem
                 id="setting_menu"
                 name="Settings"
                 parent="menu_v2_hs_expenses_root"

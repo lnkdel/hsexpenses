@@ -68,8 +68,23 @@
                         <group>
                             <notebook>
                                 <page string="Travel Detail">
-                                    <field name="travel_detail_ids" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                                    <field name="group_text"/>
+                                    <field name="travel_detail_ids">
+                                        <tree editable="bottom">
+                                            <field name="start_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                            <field name="end_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                            <field name="from_city" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                            <field name="to_city" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                            <field name="car_cost" sum="Car Cost" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                            <field name="meal_cost" sum="Meal Cost" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                            <field name="hotel_cost" sum="Hotel Cost" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                            <field name="total_cost" sum="Total Cost" />
+                                            <field name="audit_cut_amount" sum="Audit Cut Cost" attrs="{'readonly': [('state', '!=', 'to_audited')]}"/>
+                                            <field name="audit_cut_remark" attrs="{'readonly': [('state', '!=', 'to_audited')]}"/>
+                                            <field name="audit_amount" sum="Audit Cost" attrs="{'readonly': [('state', '!=', 'to_audited')]}"/>
+                                            <field name="state" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                    <!--<field name="group_text"/>-->
                                 </page>
                             </notebook>
                         </group>
@@ -126,7 +141,8 @@
                 <!-- More details about what a user can do with this object will be OK -->
               </p>
             </field>
-            <field name="context">{'search_default_lmonth': True}</field>
+            <!--<field name="context">{'search_default_lmonth': True}</field>-->
+            <field name="context">{'search_default_cmonth': True}</field>
         </record>
 
 
@@ -134,7 +150,7 @@
             <field name="name">hs.expense.v2.travel.detail.tree</field>
             <field name="model">hs.expense.v2.travel.detail</field>
             <field name="arch" type="xml">
-                <tree string="Travel Detail">
+                <tree string="Travel Detail" editable="bottom">
                     <field name="start_date"/>
                     <field name="end_date"/>
                     <field name="from_city"/>
@@ -179,10 +195,32 @@
 
         <menuitem
             id="menu_travel_application_v2"
-            name="Travel"
+            name="Travel Expense Management"
             action="action_travel_application_v2"
             parent="hs_v2_travel_expenses_management_menu"
             sequence="0"/>
+
+        <record id="batch_end_travel_application_wizard_view" model="ir.ui.view">
+            <field name="name">hs.expense.v2.batch.end.travel.wizard</field>
+            <field name="model">hs.expense.v2.batch.end.travel.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Batch End Travel Application Wizard">
+                    <notebook>
+                        <page string="Batch End Travel Application">
+                            <field name="application_ids"/>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button type="object" name="batch_end_button" string="Batch End" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window id="batch_end_travel_application_wizard_view" name="Batch End Wizard"
+                    src_model="hs.expense.v2.travel.application"
+                    res_model="hs.expense.v2.batch.end.travel.wizard" view_mode="form" target="new" multi="True"
+                    groups="hs_expenses.group_hs_expenses_cashier"/>
 
     </data>
 </odoo>

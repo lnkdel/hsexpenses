@@ -1,8 +1,8 @@
 <odoo>
     <data>
-        <record model="ir.ui.view" id="view_entertain_application_tree">
-          <field name="name">hs.expense.v2.entertain.application.tree</field>
-          <field name="model">hs.expense.v2.entertain.application</field>
+        <record model="ir.ui.view" id="view_special_application_tree">
+          <field name="name">hs.expense.v2.special.application.tree</field>
+          <field name="model">hs.expense.v2.special.application</field>
           <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
@@ -20,11 +20,11 @@
           </field>
         </record>
 
-        <record id="view_entertain_application_form" model="ir.ui.view">
-            <field name="name">hs.expense.v2.entertain.application.form</field>
-            <field name="model">hs.expense.v2.entertain.application</field>
+        <record id="view_special_application_form" model="ir.ui.view">
+            <field name="name">hs.expense.v2.special.application.form</field>
+            <field name="model">hs.expense.v2.special.application</field>
             <field name="arch" type="xml">
-                <form string="Entertain Application">
+                <form string="Special Application">
                     <header>
                         <!--seller-->
                         <button name="action_submit_expenses" string="Submit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','draft')]}" groups="hs_expenses.group_hs_expenses_seller" confirm="Are you sure you want to do this?"/>
@@ -61,7 +61,7 @@
                         <field name="state" widget="statusbar" statusbar_visible="draft,reported,reported2,approved,confirmed,audited,done"/>
                     </header>
                     <sheet>
-                        <group string="Entertain Application Information">
+                        <group string="Special Application Information">
                             <group>
                                 <field name="expense_category_ids" widget="many2many_tags" options="{'no_create_edit': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="applicant_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
@@ -98,7 +98,6 @@
                         </group>
                         <group string="Audit Information" attrs="{'invisible':[('state', 'not in', ['confirmed', 'audited', 'done', 'countersign'])]}">
                             <group>
-                                <!--<field name="audit_amount" attrs="{'readonly': [('state', 'not in', ['confirmed'])], 'required':[('state', '=', 'confirmed')]}"/>-->
                                 <field name="audit_amount" attrs="{'readonly': [('current_user_is_financial', '=', False)], 'required':[('state', '=', 'confirmed')]}"/>
                                 <field name="current_user_is_financial" invisible="1"/>
                             </group>
@@ -120,11 +119,11 @@
             </field>
         </record>
 
-        <record id="entertain_application_search" model="ir.ui.view">
-           <field name="name">hs.expense.v2.entertain.application.search</field>
-           <field name="model">hs.expense.v2.entertain.application</field>
+        <record id="special_application_search" model="ir.ui.view">
+           <field name="name">hs.expense.v2.special.application.search</field>
+           <field name="model">hs.expense.v2.special.application</field>
             <field name="arch" type="xml">
-                <search string="Entertain Applications">
+                <search string="Special Applications">
                     <field name="name" />
                     <field name="applicant_id" />
                     <filter string="Current Month" name="cmonth" domain="[('applicant_date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-01'))]" />
@@ -133,9 +132,9 @@
            </field>
         </record>
 
-        <record id="action_entertain_application" model="ir.actions.act_window">
-            <field name="name">Entertain Application</field>
-            <field name="res_model">hs.expense.v2.entertain.application</field>
+        <record id="action_special_application" model="ir.actions.act_window">
+            <field name="name">Special Application</field>
+            <field name="res_model">hs.expense.v2.special.application</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[]</field>
@@ -144,10 +143,10 @@
         </record>
 
         <menuitem
-            id="menu_entertain_application"
-            name="Entertain Expense Management"
-            action="action_entertain_application"
-            parent="hs_v2_entertain_expenses_management_menu"
+            id="menu_special_application"
+            action="action_special_application"
+            name="Special Expense Management"
+            parent="hs_v2_special_expenses_management_menu"
             sequence="0"/>
 
         <record id="batch_end_application_wizard_view" model="ir.ui.view">
@@ -168,7 +167,7 @@
             </field>
         </record>
         <act_window id="batch_end_application_wizard_action" name="Batch End Wizard"
-                    src_model="hs.expense.v2.entertain.application"
+                    src_model="hs.expense.v2.special.application"
                     res_model="hs.expense.v2.batch.end.wizard" view_mode="form" target="new" multi="True"
                     groups="hs_expenses.group_hs_expenses_cashier"/>
     </data>

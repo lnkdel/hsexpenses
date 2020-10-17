@@ -20,3 +20,12 @@ class DriverType(models.Model):
     name = fields.Char(required=True)
     sequence = fields.Integer(string="Sequence", default=10)
     active = fields.Boolean(string='Active', default=True)
+
+
+class CustomerCompanyNO(models.Model):
+    _name = 'hs.base.customer.number'
+    _description = 'Customer Number'
+
+    name = fields.Char(required=True)
+    sequence = fields.Integer(string="Sequence", default=10)
+    active = fields.Boolean(string='Active', default=True)

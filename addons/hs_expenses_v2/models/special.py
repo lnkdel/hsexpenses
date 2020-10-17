@@ -5,33 +5,15 @@ from odoo.exceptions import UserError, ValidationError
 from datetime import datetime
 
 
-class EntertainApplication(models.Model):
-    _name = 'hs.expense.v2.entertain.application'
+class SpecialApplication(models.Model):
+    _name = 'hs.expense.v2.special.application'
     _inherit = 'hs.expense.v2.base.application'
-    _description = 'Entertain application and reimbursement form'
+    _description = 'Special application and reimbursement form'
     _order = 'applicant_date desc, id desc'
 
     @api.model
     def _get_default_employee(self):
         return self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
-
-    def _get_company_partner_domain(self):
-        ids = []
-        if self.entertain_company_id:
-            ids = [self.entertain_company_id.partner_id.id]
-        else:
-            ids = [x['partner_id'][0] for x in self.env['hs.expense.entertain.company'].sudo().search_read(
-                [(1, '=', 1)], ['partner_id'])]
-        return [('partner_id.parent_id', 'in', ids)]
-
-    @api.onchange('entertain_company_id')
-    def onchange_entertain_company_id(self):
-        if self.entertain_res_user_ids:
-            self.entertain_res_user_ids = None
-        result = {}
-        domain = self._get_company_partner_domain()
-        result['domain'] = {'entertain_res_user_ids': domain}
-        return result
 
     @api.onchange('applicant_amount')
     def onchange_applicant_amount(self):
@@ -71,15 +53,6 @@ class EntertainApplication(models.Model):
     def _compute_current_user_is_financial(self):
         self.current_user_is_financial = self.user_has_groups('hs_expenses.group_hs_expenses_financial_officer')
 
-    # entertain_company_id = fields.Many2one('hs.expense.entertain.company', string='Entertain Company', required=True,
-    #                                        domain="[('is_entertain_company', '=', True)]")
-    # entertain_res_user_ids = fields.Many2many('hs.expense.entertain.user',
-    #                                           'entertain_user_v2_entertain_app_rel',
-    #                                           'entertain_app_id',
-    #                                           'entertain_user_id',
-    #                                           string='Entertain Person',
-    #                                           domain=_get_company_partner_domain)
-
     customer_company_no = fields.Many2one('hs.base.customer.number', required=True, string='Customer Company Number')
     customer_count = fields.Integer(string='Customer Count', default=1)
 
@@ -97,7 +70,7 @@ class EntertainApplication(models.Model):
     current_user_is_financial = fields.Boolean(compute="_compute_current_user_is_financial")
 
     complete_countersign = fields.Boolean(default=False)
-    countersign_ids = fields.One2many('hs.expense.v2.countersign.entertain', 'expense_id', string='Countersign',
+    countersign_ids = fields.One2many('hs.expense.v2.countersign.special', 'expense_id', string='Countersign',
                                       readonly=True)
 
     current_sign_completed = fields.Boolean(compute='_compute_current_sign_completed')
@@ -115,15 +88,15 @@ class EntertainApplication(models.Model):
         help="Status of the expense.")
 
     expense_category_ids = fields.Many2many(comodel_name="hs.expense.category",
-                                            relation="hs_expense_entertain_category_rel",
-                                            column1="entertain_id",
+                                            relation="hs_expense_v2_special_category_rel",
+                                            column1="special_id",
                                             column2="category_id",
                                             string="Category",
                                             required=True)
 
     attachment_ids = fields.Many2many('ir.attachment',
-                                      'hs_expense_entertain_app_rel',
-                                      'entertain_app_id',
+                                      'hs_expense_v2_special_app_rel',
+                                      'special_app_id',
                                       'attachment_id',
                                       string='Attachments')
     project_id = fields.Many2one('hs.base.project', string='Project')
@@ -131,25 +104,26 @@ class EntertainApplication(models.Model):
     @api.model
     def create(self, vals):
         if vals.get('name') is None:
-            name = self.env['ir.sequence'].next_by_code('hs.expense.v2.entertain.app.no')
+            name = self.env['ir.sequence'].next_by_code('hs.expense.v2.special.app.no')
             if not name:
                 self.env['ir.sequence'].sudo().create({
                     'number_next': 1,
                     'number_increment': 1,
                     'padding': 7,
-                    'prefix': 'E',
-                    'name': 'Entertain Application NO.',
-                    'code': 'hs.expense.v2.entertain.app.no',
+                    'prefix': 'S',
+                    'name': 'Special Application NO.',
+                    'code': 'hs.expense.v2.special.app.no',
                 })
-                name = self.env['ir.sequence'].next_by_code('hs.expense.v2.entertain.app.no')
+                name = self.env['ir.sequence'].next_by_code('hs.expense.v2.special.app.no')
             vals['name'] = name
-        if vals.get('customer_name') is None:
-            vals['customer_name'] = vals.get('customer_company_no') or 'xx'
-        return super(EntertainApplication, self).create(vals)
+            if vals.get('customer_name') is None:
+                vals['customer_name'] = vals.get('customer_company_no') or 'xx'
+
+        return super(SpecialApplication, self).create(vals)
 
     @api.multi
     def write(self, vals):
-        return super(EntertainApplication, self).write(vals)
+        return super(SpecialApplication, self).write(vals)
 
     @api.multi
     def unlink(self):
@@ -158,14 +132,14 @@ class EntertainApplication(models.Model):
                 raise UserError(_('You cannot delete a posted or approved expense.'))
             if expense.create_uid.id != self.env.uid:
                 raise UserError(_("You cannot delete the expense!"))
-        return super(EntertainApplication, self).unlink()
+        return super(SpecialApplication, self).unlink()
 
     @api.multi
     def action_submit_expenses(self): # 营销人员草稿状态提交到领导审批
         if any(expense.state != 'draft' for expense in self):
             raise UserError(_("You cannot report twice the same line!"))
 
-        countersign = self.env['hs.expense.v2.countersign.entertain']
+        countersign = self.env['hs.expense.v2.countersign.special']
         reviewers = []
 
         for category in self.expense_category_ids:
@@ -206,7 +180,7 @@ class EntertainApplication(models.Model):
         employee = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
         if employee and employee is not None:
             expense_id = self
-            countersign = self.env['hs.expense.v2.countersign.entertain'].search(
+            countersign = self.env['hs.expense.v2.countersign.special'].search(
                 [('employee_id', '=', employee.id), ('expense_id', '=', expense_id.id)], limit=1)
             if countersign and countersign is not None:
                 countersign.write({'is_approved': True})
@@ -214,7 +188,7 @@ class EntertainApplication(models.Model):
                 raise UserError(_("Some errors have occurred in the system!"))
 
             if not any(sign.is_approved is False
-                       for sign in self.env['hs.expense.v2.countersign.entertain'].search([('expense_id', '=', expense_id.id)])):
+                       for sign in self.env['hs.expense.v2.countersign.special'].search([('expense_id', '=', expense_id.id)])):
                 self.write({'complete_countersign': True, 'state': 'reported2'})
 
         return True
@@ -272,7 +246,7 @@ class EntertainApplication(models.Model):
         employee = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
         if employee and employee is not None:
             expense_id = self
-            countersign = self.env['hs.expense.v2.countersign.entertain'].search(
+            countersign = self.env['hs.expense.v2.countersign.special'].search(
                 [('employee_id', '=', employee.id), ('expense_id', '=', expense_id.id)], limit=1)
             if countersign and countersign is not None:
                 countersign.write({'is_approved': True})
@@ -281,7 +255,7 @@ class EntertainApplication(models.Model):
 
             if not any(sign.is_approved is False
                        for sign in
-                       self.env['hs.expense.v2.countersign.entertain'].search([('expense_id', '=', expense_id.id)])):
+                       self.env['hs.expense.v2.countersign.special'].search([('expense_id', '=', expense_id.id)])):
                 self.write({'complete_countersign': True, 'state': 'audited'})
                 # self.action_done_expenses()
         return True
@@ -303,18 +277,18 @@ class BatchEndApplicationWizard(models.TransientModel):
     _name = 'hs.expense.v2.batch.end.wizard'
     _description = 'Batch end application wizard'
 
-    application_ids = fields.Many2many(comodel_name='hs.expense.v2.entertain.application',
-                                       relation="hs_expense_v2_end_wizard_entertain_rel",
+    application_ids = fields.Many2many(comodel_name='hs.expense.v2.special.application',
+                                       relation="hs_expense_v2_end_wizard_special_rel",
                                        column1="wizard_id",
                                        column2="application_id",
-                                       string='Entertain Applications')
+                                       string='Special Applications')
 
     @api.model
     def default_get(self, fields):
         res = {}
         active_ids = self._context.get('active_ids')
         if active_ids:
-            applications = self.env['hs.expense.v2.entertain.application'].search_read(
+            applications = self.env['hs.expense.v2.special.application'].search_read(
                 domain=[('id', 'in', active_ids)], fields=['id', 'state'])
             ids = [s['id'] for s in list(filter(lambda s: s['state'] == 'audited', applications))]
             res = {'application_ids': ids}
@@ -324,7 +298,7 @@ class BatchEndApplicationWizard(models.TransientModel):
     def batch_end_button(self):
         self.ensure_one()
         active_ids = self._context.get('active_ids')
-        applications = self.env['hs.expense.v2.entertain.application'].search([
+        applications = self.env['hs.expense.v2.special.application'].search([
             ('id', 'in', active_ids),
             ('state', '=', 'audited')])
         applications.write({'state': 'done'})
@@ -332,9 +306,9 @@ class BatchEndApplicationWizard(models.TransientModel):
 
 
 class CounterSignMonthV2(models.Model):
-    _name = 'hs.expense.v2.countersign.entertain'
-    _description = 'Entertain Countersign'
+    _name = 'hs.expense.v2.countersign.special'
+    _description = 'Special Countersign'
 
     employee_id = fields.Many2one('hs.base.employee', string='Employee', required=True)
-    expense_id = fields.Many2one('hs.expense.v2.entertain.application', string='Entertain Application')
+    expense_id = fields.Many2one('hs.expense.v2.special.application', string='Special Application')
     is_approved = fields.Boolean(default=False)

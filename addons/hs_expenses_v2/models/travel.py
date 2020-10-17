@@ -89,6 +89,12 @@ class TravelDetail(models.Model):
         for detail in self:
             detail.total_cost = detail.meal_cost + detail.hotel_cost + detail.car_cost + detail.city_car_cost
 
+    @api.onchange('audit_cut_amount')
+    def _onchange_audit_cut_amount(self):
+        for de in self:
+            de.audit_amount = de.total_cost - de.audit_cut_amount
+            # de.travel_application_id.audit_cut_amount += de.audit_cut_amount
+
     start_date = fields.Date(string='Start Date', required=True, default=lambda self: fields.Date.context_today(self))
     end_date = fields.Date(string='End Date', required=True, default=lambda self: fields.Date.context_today(self))
     from_city = fields.Many2one("hs.base.city", string="From City", required=True)
@@ -105,8 +111,6 @@ class TravelDetail(models.Model):
     city_car_cost = fields.Float("City Car Cost", digits=(16, 2))
     state = fields.Selection([
         ('draft', 'To Submit'),
-        ('reported', 'Submitted'),
-        ('to_approved', 'To Approved'),
         ('to_audited', 'To Audited'),
         ('audited', 'Audited'),
         ('done', 'Paid')
@@ -115,6 +119,9 @@ class TravelDetail(models.Model):
         help="Status of the expense.")
 
     total_cost = fields.Float("Total Cost", compute="_compute_total_cost", digits=(16, 2))
+    audit_cut_amount = fields.Float("Audit Cut Amount", digits=(16, 2))
+    audit_cut_remark = fields.Text(string="Audit Cut Remark")
+    audit_amount = fields.Float("Audit Amount", digits=(16, 2))
 
     @api.model
     def create(self, values):
@@ -132,6 +139,14 @@ class TravelApplication(models.Model):
     _inherit = 'hs.expense.v2.base.application'
     _description = 'Travel expenses reimbursement form'
     _order = 'applicant_date desc, id desc'
+
+    @api.depends('travel_detail_ids')
+    def _compute_audit_amount(self):
+        for travel in self:
+            if travel.travel_detail_ids is not None or travel.travel_detail_ids is not False:
+                for detail in travel.travel_detail_ids:
+                    travel.audit_amount += detail.audit_amount
+                    travel.audit_cut_amount += detail.audit_cut_amount
 
     @api.depends('travel_detail_ids')
     def _compute_meal_total_cost(self):
@@ -167,11 +182,6 @@ class TravelApplication(models.Model):
             travel.total_cost = travel.meal_total_cost + travel.hotel_total_cost \
                                 + travel.car_total_cost + travel.city_car_total_cost
 
-    @api.depends('month_application_id')
-    def _compute_state(self):
-        for travel in self:
-            travel.state = travel.month_application_id.state
-
     def _compute_current_user_is_financial(self):
         self.current_user_is_financial = self.user_has_groups('hs_expenses.group_hs_expenses_financial_officer')
 
@@ -191,18 +201,18 @@ class TravelApplication(models.Model):
         help="Status of the expense.")
 
     reimbursement_remark = fields.Text(string="Reimbursement Remark")
-    # month_application_id = fields.Many2one(comodel_name="hs.expense.month.application", string="Month Application",
-    #                                        required=False, )
+
     meal_total_cost = fields.Float("Total Meal Cost", compute="_compute_meal_total_cost", digits=(16, 2))
     hotel_total_cost = fields.Float("Total Hotel Cost", compute="_compute_hotel_total_cost", digits=(16, 2))
     car_total_cost = fields.Float("Total Car Cost", compute="_compute_car_total_cost", digits=(16, 2))
     city_car_total_cost = fields.Float("Total City Car Cost", compute="_compute_city_car_total_cost", digits=(16, 2))
     total_cost = fields.Float("Total Cost", compute="_compute_total_cost", digits=(16, 2))
-    audit_amount = fields.Float("Audit Amount", digits=(16, 2))
-    audit_cut_amount = fields.Float("Audit Cut Amount", digits=(16, 2))
+
+    audit_amount = fields.Float("Audit Amount", digits=(16, 2), compute="_compute_audit_amount")
+    audit_cut_amount = fields.Float("Audit Cut Amount", digits=(16, 2), compute="_compute_audit_amount")
     audit_remark = fields.Text(string="Audit Remark")
     current_user_is_financial = fields.Boolean(compute="_compute_current_user_is_financial")
-    group_text = fields.Html(compute="_compute_group_text")
+    # group_text = fields.Html(compute="_compute_group_text")
 
     @api.multi
     @api.depends('travel_detail_ids')
@@ -229,7 +239,6 @@ class TravelApplication(models.Model):
                                                   '%.2f' % rec.city_car_total_cost,
                                                   '%.2f' % rec.total_cost)
             rec.group_text = text
-
 
     @api.model
     def create(self, values):
@@ -275,6 +284,11 @@ class TravelApplication(models.Model):
 
     @api.multi
     def action_back_to_draft(self):
+        self.audit_cut_amount = 0
+        self.audit_amount = 0
+        for de in self.sudo().travel_detail_ids:
+            de.audit_cut_amount = 0
+            de.audit_amount = 0
         self.write({'state': 'draft'})
 
     @api.multi
@@ -290,3 +304,35 @@ class TravelApplication(models.Model):
     @api.multi
     def action_cashier_expenses(self):
         self.write({'state': 'done'})
+
+
+class BatchEndTravelApplicationWizard(models.TransientModel):
+    _name = 'hs.expense.v2.batch.end.travel.wizard'
+    _description = 'Batch end travel application wizard'
+
+    application_ids = fields.Many2many(comodel_name='hs.expense.v2.travel.application',
+                                       relation="hs_expense_v2_end_travel_wizard_entertain_rel",
+                                       column1="wizard_id",
+                                       column2="application_id",
+                                       string='Travel Applications')
+
+    @api.model
+    def default_get(self, fields):
+        res = {}
+        active_ids = self._context.get('active_ids')
+        if active_ids:
+            applications = self.env['hs.expense.v2.travel.application'].search_read(
+                domain=[('id', 'in', active_ids)], fields=['id', 'state'])
+            ids = [s['id'] for s in list(filter(lambda s: s['state'] == 'audited', applications))]
+            res = {'application_ids': ids}
+        return res
+
+    @api.multi
+    def batch_end_button(self):
+        self.ensure_one()
+        active_ids = self._context.get('active_ids')
+        applications = self.env['hs.expense.v2.travel.application'].search([
+            ('id', 'in', active_ids),
+            ('state', '=', 'audited')])
+        applications.write({'state': 'done'})
+        return {'type': 'ir.actions.act_window_close'}
