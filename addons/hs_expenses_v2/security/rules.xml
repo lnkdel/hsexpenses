@@ -172,7 +172,7 @@
             <!--<field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_contract_reviewer'))]"/>-->
         <!--</record>-->
 
-        <record id="hs_expense_v2_travel_project_reviewer_rule" model="ir.rule">
+        <record id="hs_expense_v2_entertain_project_reviewer_rule" model="ir.rule">
             <field name="name">project reviewer can be update the application</field>
             <field name="model_id" ref="model_hs_expense_v2_entertain_application"/>
             <field name="perm_read" eval="1" />
@@ -192,7 +192,7 @@
             <field name="domain_force">[('state', 'in', ['reported'])]</field>
             <field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_project_reviewer'))]"/>
         </record>
-        <record id="hs_expense_v2_travel_project_reviewer_rule" model="ir.rule">
+        <record id="hs_expense_v2_special_project_reviewer_rule" model="ir.rule">
             <field name="name">project reviewer can be update the application</field>
             <field name="model_id" ref="model_hs_expense_v2_special_application"/>
             <field name="perm_read" eval="1" />
