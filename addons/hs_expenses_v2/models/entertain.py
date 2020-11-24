@@ -195,7 +195,11 @@ class EntertainApplication(models.Model):
                             'employee_id': employee.id,
                             'expense_id': self.id
                         })
-        self.write({'state': 'reported'})
+
+        if not any(sign.is_approved is True for sign in countersign.sudo().search([('expense_id', '=', self.id)])):
+            self.write({'state': 'reported'})
+        else:
+            self.write({'state': 'reported2'})
         return True
 
     @api.multi
