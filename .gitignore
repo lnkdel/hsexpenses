@@ -3,10 +3,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
 # C extensions
 *.so
-
+expenses.conf
 # Distribution / packaging
 .Python
 env/
@@ -100,3 +99,4 @@ ENV/
 
 # mypy
 .mypy_cache/
+

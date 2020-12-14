@@ -303,8 +303,8 @@ class EntertainApplication(models.Model):
         self.write({'state': 'confirmed'})
 
 
-class BatchEndApplicationWizard(models.TransientModel):
-    _name = 'hs.expense.v2.batch.end.wizard'
+class BatchEndEntertainApplicationWizard(models.TransientModel):
+    _name = 'hs.expense.v2.entertain.batch.end.wizard'
     _description = 'Batch end application wizard'
 
     application_ids = fields.Many2many(comodel_name='hs.expense.v2.entertain.application',
