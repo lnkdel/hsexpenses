@@ -305,7 +305,7 @@ class EntertainApplication(models.Model):
         self.write({'state': 'confirmed'})
 
 
-class BackDialog(models.Model):
+class BackDialog(models.TransientModel):
     _name = 'hs.expense.v2.entertain.back.dialog'
     _description = 'Back Dialog'
 
@@ -319,8 +319,8 @@ class BackDialog(models.Model):
     expense_id = fields.Many2one('hs.expense.v2.entertain.application', string='Entertain Application')
 
     def do_confirm(self):
-        self.create({'cause': self.cause, 'operator': self.operator, 'operate_date': self.operate_date,
-                     'expense_id': self.expense_id})
+        # self.expense_id=
+        pass
 
 
 class BatchEndEntertainApplicationWizard(models.TransientModel):

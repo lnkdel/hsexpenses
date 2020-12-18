@@ -2,7 +2,7 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
-import datetime
+from datetime import datetime
 import calendar
 
 
@@ -297,7 +297,7 @@ class TravelApplication(models.Model):
     def action_audit_expenses(self):
         if self.audit_amount <= 0:
             raise UserError(_("Please enter the correct audit amount!"))
-        self.write({'state': 'audited'})
+        self.write({'state': 'audited', 'audit_date': datetime.now()})
 
     @api.multi
     def action_back_to_to_audited(self):
