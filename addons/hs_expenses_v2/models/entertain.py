@@ -99,6 +99,7 @@ class EntertainApplication(models.Model):
     complete_countersign = fields.Boolean(default=False)
     countersign_ids = fields.One2many('hs.expense.v2.countersign.entertain', 'expense_id', string='Countersign',
                                       readonly=True)
+    # back_ids = fields.One2many('hs.expense.v2.entertain.back.dialog', 'expense_id', string='Back List', readonly=True)
 
     current_sign_completed = fields.Boolean(compute='_compute_current_sign_completed')
 
@@ -196,10 +197,11 @@ class EntertainApplication(models.Model):
                             'expense_id': self.id
                         })
 
-        if not any(sign.is_approved is True for sign in countersign.sudo().search([('expense_id', '=', self.id)])):
-            self.write({'state': 'reported'})
-        else:
+        # if not any(sign.is_approved is True for sign in countersign.sudo().search([('expense_id', '=', self.id)])):
+        if all(sign.is_approved is True for sign in countersign.sudo().search([('expense_id', '=', self.id)])):
             self.write({'state': 'reported2'})
+        else:
+            self.write({'state': 'reported'})
         return True
 
     @api.multi
@@ -301,6 +303,24 @@ class EntertainApplication(models.Model):
     @api.multi
     def action_back_to_to_audited(self):  # 出纳退回给财务审核
         self.write({'state': 'confirmed'})
+
+
+class BackDialog(models.Model):
+    _name = 'hs.expense.v2.entertain.back.dialog'
+    _description = 'Back Dialog'
+
+    @api.model
+    def _get_default_employee(self):
+        return self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
+
+    cause = fields.Text()
+    operator = fields.Many2one('hs.base.employee', string='Applicant', required=True, default=_get_default_employee)
+    operate_date = fields.Datetime(string='Operate Date', default=datetime.now().strftime('%Y-%m-%d'))
+    expense_id = fields.Many2one('hs.expense.v2.entertain.application', string='Entertain Application')
+
+    def do_confirm(self):
+        self.create({'cause': self.cause, 'operator': self.operator, 'operate_date': self.operate_date,
+                     'expense_id': self.expense_id})
 
 
 class BatchEndEntertainApplicationWizard(models.TransientModel):

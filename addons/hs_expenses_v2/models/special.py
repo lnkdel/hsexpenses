@@ -169,10 +169,11 @@ class SpecialApplication(models.Model):
                             'expense_id': self.id
                         })
 
-        if not any(sign.is_approved is True for sign in countersign.sudo().search([('expense_id', '=', self.id)])):
-            self.write({'state': 'reported'})
-        else:
+        # if not any(sign.is_approved is True for sign in countersign.sudo().search([('expense_id', '=', self.id)])):
+        if all(sign.is_approved is True for sign in countersign.sudo().search([('expense_id', '=', self.id)])):
             self.write({'state': 'reported2'})
+        else:
+            self.write({'state': 'reported'})
         return True
 
     @api.multi

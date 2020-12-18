@@ -5,7 +5,7 @@ __pycache__/
 *$py.class
 # C extensions
 *.so
-expenses.conf
+hsexpenses.conf
 # Distribution / packaging
 .Python
 env/
