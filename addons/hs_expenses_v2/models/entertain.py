@@ -128,6 +128,7 @@ class EntertainApplication(models.Model):
                                       'attachment_id',
                                       string='Attachments')
     project_id = fields.Many2one('hs.base.project', string='Project')
+    entertain_remark = fields.Text(string="Entertain Remark", default="单位：\n部门、职位及人员：\n")
 
     @api.model
     def create(self, vals):
@@ -144,12 +145,53 @@ class EntertainApplication(models.Model):
                 })
                 name = self.env['ir.sequence'].next_by_code('hs.expense.v2.entertain.app.no')
             vals['name'] = name
-        # if vals.get('customer_name') is None:
-        #     vals['customer_name'] = vals.get('customer_company_no') or 'xx'
+
+        entertain_remark = vals.get('entertain_remark')
+        is_pass = True
+        if entertain_remark is None:
+            raise UserError(_('Please input the entertain information on the field of entertain_remark.'))
+        else:
+            entertain_remark = entertain_remark.strip()
+            if entertain_remark.find('单位：') > -1 and entertain_remark.find('部门、职位及人员：') > -1:
+                infos = entertain_remark.split('\n')
+                for info in infos:
+                    if info.find('：') > 0:
+                        if info.split('：')[1].strip() is '':
+                            is_pass = False
+                            break
+                    else:
+                        is_pass = False
+                        break
+            else:
+                is_pass = False
+        if not is_pass:
+            raise UserError(_('Please input the entertain information on the field of entertain_remark.'))
         return super(EntertainApplication, self).create(vals)
 
     @api.multi
     def write(self, vals):
+        is_pass = True
+        entertain_remark = ''
+        if vals.get('entertain_remark') is None:
+            entertain_remark = self.entertain_remark
+        else:
+            entertain_remark = vals.get('entertain_remark').strip()
+
+        if entertain_remark.find('单位：') > -1 and entertain_remark.find('部门、职位及人员：') > -1:
+            infos = entertain_remark.split('\n', 1)
+            for info in infos:
+                if info.find('：') > 0:
+                    if info.split('：')[1].strip() is '':
+                        is_pass = False
+                        break
+                else:
+                    is_pass = False
+                    break
+        else:
+            is_pass = False
+
+        if not is_pass:
+            raise UserError(_('Please input the entertain information on the field of entertain_remark.'))
         return super(EntertainApplication, self).write(vals)
 
     @api.multi

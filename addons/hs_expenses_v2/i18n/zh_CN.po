@@ -1247,3 +1247,17 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_travel
 msgid "项目"
 msgstr ""
+
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__entertain_remark
+msgid "Entertain Remark"
+msgstr "招待备注"
+
+#. module: hs_expenses_v2
+#: code:addons/hs_expenses_v2/models/entertain.py:152
+#: code:addons/hs_expenses_v2/models/entertain.py:168
+#: code:addons/hs_expenses_v2/models/entertain.py:194
+#, python-format
+msgid "Please input the entertain information on the field of entertain_remark."
+msgstr "请在招待备注内按要求填写单位、部门、职位及人员等信息！"

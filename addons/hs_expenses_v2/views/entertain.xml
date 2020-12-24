@@ -82,6 +82,7 @@
                                 <field name="application_remark" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="current_sign_completed" invisible="1"/>
                                 <field name="complete_countersign" invisible="1"/>
+                                <field name="entertain_remark" attrs="{'readonly': [('state', '!=', 'draft')],  'required':[('state', '=', 'draft')]}"/>
                             </group>
                         </group>
                         <group string="Reimbursement Information">
