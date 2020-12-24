@@ -170,28 +170,29 @@ class EntertainApplication(models.Model):
 
     @api.multi
     def write(self, vals):
-        is_pass = True
-        entertain_remark = ''
-        if vals.get('entertain_remark') is None:
-            entertain_remark = self.entertain_remark
-        else:
-            entertain_remark = vals.get('entertain_remark').strip()
+        if self.state == 'draft':
+            is_pass = True
+            entertain_remark = ''
+            if vals.get('entertain_remark') is None:
+                entertain_remark = self.entertain_remark
+            else:
+                entertain_remark = vals.get('entertain_remark').strip()
 
-        if entertain_remark.find('单位：') > -1 and entertain_remark.find('部门、职位及人员：') > -1:
-            infos = entertain_remark.split('\n', 1)
-            for info in infos:
-                if info.find('：') > 0:
-                    if info.split('：')[1].strip() is '':
+            if entertain_remark.find('单位：') > -1 and entertain_remark.find('部门、职位及人员：') > -1:
+                infos = entertain_remark.split('\n', 1)
+                for info in infos:
+                    if info.find('：') > 0:
+                        if info.split('：')[1].strip() is '':
+                            is_pass = False
+                            break
+                    else:
                         is_pass = False
                         break
-                else:
-                    is_pass = False
-                    break
-        else:
-            is_pass = False
+            else:
+                is_pass = False
 
-        if not is_pass:
-            raise UserError(_('Please input the entertain information on the field of entertain_remark.'))
+            if not is_pass:
+                raise UserError(_('Please input the entertain information on the field of entertain_remark.'))
         return super(EntertainApplication, self).write(vals)
 
     @api.multi
