@@ -1287,3 +1287,8 @@ msgstr "已有机会"
 #: selection:hs.expense.v2.entertain.application,cause_type:0
 msgid "Potential"
 msgstr "潜在可能"
+
+#. module: hs_expenses_v2
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__cause_type
+msgid "Cause Type"
+msgstr "事由类别"
