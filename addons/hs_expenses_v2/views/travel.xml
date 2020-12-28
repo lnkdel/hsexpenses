@@ -63,6 +63,7 @@
                                 <field name="destination_city" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="customer_company_no" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="application_remark" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="nucleic_acid_testing_amount" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </group>
                         </group>
                         <group>

@@ -78,6 +78,7 @@
                                 <field name="applicant_department_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="applicant_amount" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="entertain_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="cause_type" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="cause" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="application_remark" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="current_sign_completed" invisible="1"/>

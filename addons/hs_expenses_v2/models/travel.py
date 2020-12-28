@@ -148,6 +148,7 @@ class TravelApplication(models.Model):
                 for detail in travel.travel_detail_ids:
                     travel.audit_amount += detail.audit_amount
                     travel.audit_cut_amount += detail.audit_cut_amount
+            travel.audit_amount += travel.nucleic_acid_testing_amount
 
     @api.depends('travel_detail_ids')
     def _compute_meal_total_cost(self):
@@ -181,7 +182,8 @@ class TravelApplication(models.Model):
     def _compute_total_cost(self):
         for travel in self:
             travel.total_cost = travel.meal_total_cost + travel.hotel_total_cost \
-                                + travel.car_total_cost + travel.city_car_total_cost
+                                + travel.car_total_cost + travel.city_car_total_cost \
+                                + travel.nucleic_acid_testing_amount
 
     def _compute_current_user_is_financial(self):
         self.current_user_is_financial = self.user_has_groups('hs_expenses.group_hs_expenses_financial_officer')
@@ -215,6 +217,7 @@ class TravelApplication(models.Model):
     current_user_is_financial = fields.Boolean(compute="_compute_current_user_is_financial")
     customer_company_no = fields.Many2one('hs.base.customer.number', required=True, string='Customer Company Number')
     # group_text = fields.Html(compute="_compute_group_text")
+    nucleic_acid_testing_amount = fields.Float("Nucleic Acid Testing Fee", digits=(16, 2))
 
     @api.multi
     @api.depends('travel_detail_ids')

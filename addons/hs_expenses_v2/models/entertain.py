@@ -130,6 +130,13 @@ class EntertainApplication(models.Model):
     project_id = fields.Many2one('hs.base.project', string='Project')
     entertain_remark = fields.Text(string="Entertain Remark", default="单位：\n部门、职位及人员：\n")
 
+    cause_type = fields.Selection([
+        ('bos', 'Business on sale'),
+        ('pa', 'Project approval'),
+        ('ho', 'Have opportunities'),
+        ('potential', 'Potential')
+    ], string='Cause Type', default='bos', required=True)
+
     @api.model
     def create(self, vals):
         if vals.get('name') is None:

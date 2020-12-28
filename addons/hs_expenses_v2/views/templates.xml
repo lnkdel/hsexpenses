@@ -43,8 +43,8 @@
                                     <tr style="height: 30px;">
                                         <td>事由</td>
                                         <td><span t-field="travel.cause" /></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>核算检测费用</td>
+                                        <td><span t-field="travel.nucleic_acid_testing_amount" /></td>
                                     </tr>
                                 </table>
                             </div>
