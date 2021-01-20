@@ -2,7 +2,9 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
-from datetime import datetime
+# from datetime import datetime
+import datetime
+from datetime import date
 import calendar
 
 
@@ -218,6 +220,7 @@ class TravelApplication(models.Model):
     customer_company_no = fields.Many2one('hs.base.customer.number', required=True, string='Customer Company Number')
     # group_text = fields.Html(compute="_compute_group_text")
     nucleic_acid_testing_amount = fields.Float("Nucleic Acid Testing Fee", digits=(16, 2))
+    reason = fields.Text()
 
     @api.multi
     @api.depends('travel_detail_ids')
@@ -294,21 +297,87 @@ class TravelApplication(models.Model):
         for de in self.sudo().travel_detail_ids:
             de.audit_cut_amount = 0
             de.audit_amount = 0
-        self.write({'state': 'draft'})
+        # self.write({'state': 'draft'})
+
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'hs.expense.v2.travel.back.wizard',
+            'name': '退回向导',
+            'view_mode': 'form',
+            'context': {
+                'travel_id': self.id,
+                'default_state': 'draft',
+            },
+            'target': 'new'
+        }
 
     @api.multi
     def action_audit_expenses(self):
         if self.audit_amount <= 0:
             raise UserError(_("Please enter the correct audit amount!"))
-        self.write({'state': 'audited', 'audit_date': datetime.now()})
+        self.write({'state': 'audited', 'audit_date': datetime.datetime.now()})
 
     @api.multi
     def action_back_to_to_audited(self):
-        self.write({'state': 'to_audited'})
+        # self.write({'state': 'to_audited'})
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'hs.expense.v2.travel.back.wizard',
+            'name': '退回向导',
+            'view_mode': 'form',
+            'context': {
+                'travel_id': self.id,
+                'default_state': 'to_audited',
+            },
+            'target': 'new'
+        }
 
     @api.multi
     def action_cashier_expenses(self):
         self.write({'state': 'done'})
+
+
+class TravelApplicationBackWizard(models.TransientModel):
+    _name = 'hs.expense.v2.travel.back.wizard'
+    _description = 'Travel application back wizard'
+
+    reason = fields.Text()
+    state = fields.Selection([
+        ('draft', 'To Submit'),
+        ('to_audited', 'To Audited'),
+        ('audited', 'Audited'),
+        ('done', 'Paid')
+    ], string='Status', copy=False, index=True, readonly=True, store=True, default='draft',
+        help="Status of the expense.")
+
+    def _tranlate_state_name(self, name):
+        if name == 'draft':
+            return '待提交'
+        elif name == 'to_audited':
+            return '待审核'
+        elif name == 'audited':
+            return '已审核'
+        elif name == 'done':
+            return '已支付'
+
+    def save_button(self):
+        travel_id = self.env.context.get('travel_id')
+        travel = self.env['hs.expense.v2.travel.application'].browse(int(travel_id))
+        operator = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
+
+        origin_state = self._tranlate_state_name(travel.state)
+        now_state = self._tranlate_state_name(self.state)
+
+        reason_text = '备注: %s - %s \n%s ---> %s\n%s' % \
+                      (operator.complete_name,
+                       (datetime.datetime.now()+datetime.timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S'),
+                       origin_state,
+                       now_state,
+                       self.reason if self.reason else '无')
+        if travel.reason:
+            reason_text = travel.reason + '\n\n' + reason_text
+        travel.write({'reason': reason_text, 'state': self.state})
+        return True
 
 
 class BatchEndTravelApplicationWizard(models.TransientModel):

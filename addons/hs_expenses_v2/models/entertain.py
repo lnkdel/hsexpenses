@@ -2,7 +2,10 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
-from datetime import datetime
+# from datetime import datetime
+
+import datetime
+from datetime import date
 
 
 class EntertainApplication(models.Model):
@@ -136,6 +139,7 @@ class EntertainApplication(models.Model):
         ('ho', 'Have opportunities'),
         ('potential', 'Potential')
     ], string='Cause Type', default='bos', required=True)
+    reason = fields.Text()
 
     @api.model
     def create(self, vals):
@@ -284,8 +288,19 @@ class EntertainApplication(models.Model):
 
     @api.multi
     def action_back_to_draft(self):
-        self.write({'state': 'draft'})
-        return True
+        # self.write({'state': 'draft'})
+        # return True
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'hs.expense.v2.entertain.back.wizard',
+            'name': '退回向导',
+            'view_mode': 'form',
+            'context': {
+                'application_id': self.id,
+                'default_state': 'draft',
+            },
+            'target': 'new'
+        }
 
     @api.multi
     def action_confirm_expenses(self): # 报销经办人填写好后提交到财务审批
@@ -300,10 +315,21 @@ class EntertainApplication(models.Model):
 
     @api.multi
     def action_back_to_confirm(self): # 财务退回上一步
-        if any(expense.state != 'confirmed' for expense in self):
-            raise UserError(_("You cannot audit twice the same line!"))
-        self.write({'state': 'approved'})
-        return True
+        # if any(expense.state != 'confirmed' for expense in self):
+        #     raise UserError(_("You cannot audit twice the same line!"))
+        # self.write({'state': 'approved'})
+        # return True
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'hs.expense.v2.entertain.back.wizard',
+            'name': '退回向导',
+            'view_mode': 'form',
+            'context': {
+                'application_id': self.id,
+                'default_state': 'approved',
+            },
+            'target': 'new'
+        }
 
     @api.multi
     def action_audit_expenses(self): # 财务审核完成，提交给出纳
@@ -313,7 +339,7 @@ class EntertainApplication(models.Model):
         if self.audit_amount <= 0:
             raise UserError(_("Please enter the correct audit amount!"))
 
-        self.write({'state': 'audited', 'audit_date': datetime.now()})
+        self.write({'state': 'audited', 'audit_date': datetime.datetime.now()})
         return True
 
     @api.multi
@@ -352,25 +378,73 @@ class EntertainApplication(models.Model):
 
     @api.multi
     def action_back_to_to_audited(self):  # 出纳退回给财务审核
-        self.write({'state': 'confirmed'})
+        # self.write({'state': 'confirmed'})
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'hs.expense.v2.entertain.back.wizard',
+            'name': '退回向导',
+            'view_mode': 'form',
+            'context': {
+                'application_id': self.id,
+                'default_state': 'confirmed',
+            },
+            'target': 'new'
+        }
 
 
-class BackDialog(models.TransientModel):
-    _name = 'hs.expense.v2.entertain.back.dialog'
-    _description = 'Back Dialog'
+class EntertainApplicationBackWizard(models.TransientModel):
+    _name = 'hs.expense.v2.entertain.back.wizard'
+    _description = 'Entertain application back wizard'
 
-    @api.model
-    def _get_default_employee(self):
-        return self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
+    reason = fields.Text()
+    state = fields.Selection([
+        ('draft', 'To Submit'),
+        ('reported', 'Submitted'),
+        ('reported2', 'Submitted2'),
+        ('approved', 'Approved'),
+        ('confirmed', 'Confirmed'),
+        ('audited', 'Audited'),
+        ('countersign', 'Countersign'),
+        ('done', 'Paid')
+    ], string='Status', copy=False, index=True, readonly=True, store=True, default='draft',
+        help="Status of the expense.")
 
-    cause = fields.Text()
-    operator = fields.Many2one('hs.base.employee', string='Applicant', required=True, default=_get_default_employee)
-    operate_date = fields.Datetime(string='Operate Date', default=datetime.now().strftime('%Y-%m-%d'))
-    expense_id = fields.Many2one('hs.expense.v2.entertain.application', string='Entertain Application')
+    def _tranlate_state_name(self, name):
+        if name == 'draft':
+            return '待提交'
+        elif name == 'reported':
+            return '已提交'
+        elif name == 'reported2':
+            return '已审阅'
+        elif name == 'approved':
+            return '已批准'
+        elif name == 'confirmed':
+            return '已确认'
+        elif name == 'audited':
+            return '已审核'
+        elif name == 'countersign':
+            return '会签'
+        elif name == 'done':
+            return '已支付'
 
-    def do_confirm(self):
-        # self.expense_id=
-        pass
+    def save_button(self):
+        application_id = self.env.context.get('application_id')
+        app = self.env['hs.expense.v2.entertain.application'].browse(int(application_id))
+        operator = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
+
+        origin_state = self._tranlate_state_name(app.state)
+        now_state = self._tranlate_state_name(self.state)
+
+        reason_text = '备注: %s - %s \n%s ---> %s\n%s' % \
+                      (operator.complete_name,
+                       (datetime.datetime.now()+datetime.timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S'),
+                       origin_state,
+                       now_state,
+                       self.reason if self.reason else '无')
+        if app.reason:
+            reason_text = app.reason + '\n\n' + reason_text
+        app.write({'reason': reason_text, 'state': self.state})
+        return True
 
 
 class BatchEndEntertainApplicationWizard(models.TransientModel):

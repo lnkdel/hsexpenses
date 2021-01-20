@@ -34,10 +34,10 @@
                     <header>
                         <button name="action_submit_expenses" string="Submit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','draft')]}" groups="hs_expenses.group_hs_expenses_seller" confirm="Are you sure you want to do this?"/>
 
-                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','to_audited')]}" groups="hs_expenses.group_hs_expenses_financial_officer" confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','to_audited')]}" groups="hs_expenses.group_hs_expenses_financial_officer" />
                         <button name="action_audit_expenses" string="Audit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','to_audited')]}" groups="hs_expenses.group_hs_expenses_financial_officer" confirm="Are you sure you want to do this?"/>
 
-                        <button name="action_back_to_to_audited" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier" confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_to_audited" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier" />
                         <button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier" confirm="Are you sure you want to do this?"/>
 
                         <field name="state" widget="statusbar" statusbar_visible="draft,to_audited,audited,done" />
@@ -54,7 +54,7 @@
                                 <field name="applicant_department_id"/>
                                 <field name="driver_type_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="sale_area_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                                <field name="sale_market_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="sale_market_id" attrs="{'readonly': [('state', '!=', 'draft')], 'required':[('state', '=', 'draft')]}"/>
                                 <field name="project_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="cause" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </group>
@@ -112,6 +112,11 @@
                             </group>
 
                         </group>
+                        <notebook>
+                            <page string="退回记录">
+                                <field name="reason" attrs="{'readonly': True}" options="{'no_create_edit': True}"/>
+                            </page>
+                        </notebook>
                     </sheet>
 
                 </form>
@@ -224,5 +229,18 @@
                     res_model="hs.expense.v2.batch.end.travel.wizard" view_mode="form" target="new" multi="True"
                     groups="hs_expenses.group_hs_expenses_cashier"/>
 
+        <record model="ir.ui.view" id="hs_expense_v2_travel_back_wizard_view">
+            <field name="name">Travel Application Wizard</field>
+            <field name="model">hs.expense.v2.travel.back.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Travel Application Back Wizard">
+                    <field name="reason" placeholder="此处填写退回原因！"/>
+                    <footer>
+                        <button type="object" name="save_button" string="确认" class="oe_highlight" confirm="是否确定此操作？"/>
+                        <button special="cancel" string="取消"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
     </data>
 </odoo>

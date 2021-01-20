@@ -31,11 +31,11 @@
 
                         <!--reviewer-->
                         <button name="action_reported2_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','reported')]}" groups="hs_expenses.group_hs_expenses_project_reviewer" confirm="Are you sure you want to do this?"/>
-                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','reported')]}" groups="hs_expenses.group_hs_expenses_project_reviewer" confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','reported')]}" groups="hs_expenses.group_hs_expenses_project_reviewer"/>
 
                         <!--vice-president-->
                         <button name="action_approved_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','reported2')]}" groups="hs_expenses_v2.group_hs_expenses_vice_president" confirm="Are you sure you want to do this?"/>
-                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','reported2')]}" groups="hs_expenses_v2.group_hs_expenses_vice_president" confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','reported2')]}" groups="hs_expenses_v2.group_hs_expenses_vice_president"/>
 
                         <!--seller-->
                         <button name="action_confirm_expenses" string="Confirm" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','approved')]}" groups="hs_expenses.group_hs_expenses_seller" confirm="Are you sure you want to do this?"/>
@@ -43,11 +43,11 @@
 
                         <!--financial-->
                         <button name="action_audit_expenses" string="Audit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','confirmed')]}" groups="hs_expenses.group_hs_expenses_financial_officer" confirm="Are you sure you want to do this?"/>
-                        <button name="action_back_to_confirm" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','confirmed')]}" groups="hs_expenses.group_hs_expenses_financial_officer" confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_confirm" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','confirmed')]}" groups="hs_expenses.group_hs_expenses_financial_officer"/>
 
                         <!--cashier-->
                         <button name="action_cashier_expenses" string="Done" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier" confirm="Are you sure you want to do this?"/>
-                        <button name="action_back_to_to_audited" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier" confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_to_audited" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier"/>
 
                         <field name="state" widget="statusbar" statusbar_visible="draft,reported,reported2,approved,confirmed,audited,done"/>
                     </header>
@@ -57,7 +57,7 @@
                                 <!--<field name="expense_category_ids" widget="many2many_tags" options="{'no_create_edit': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
                                 <field name="applicant_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="sale_area_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
-                                <field name="sale_market_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="sale_market_id" attrs="{'readonly': [('state', '!=', 'draft')], 'required':[('state', '=', 'draft')]}" />
                                 <field name="project_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="customer_company_no" attrs="{'readonly': [('state', '!=', 'draft')],'required':False}" />
                                 <field name="customer_count" attrs="{'readonly': [('state', '!=', 'draft')]}" />
@@ -103,6 +103,11 @@
                                         <field name="is_approved"/>
                                     </tree>
                                 </field>
+                            </page>
+                        </notebook>
+                        <notebook>
+                            <page string="退回记录">
+                                <field name="reason" attrs="{'readonly': True}" options="{'no_create_edit': True}"/>
                             </page>
                         </notebook>
                     </sheet>
@@ -161,5 +166,19 @@
                     src_model="hs.expense.v2.special.application"
                     res_model="hs.expense.v2.batch.end.wizard" view_mode="form" target="new" multi="True"
                     groups="hs_expenses.group_hs_expenses_cashier"/>
+
+        <record model="ir.ui.view" id="hs_expense_v2_special_back_wizard_view">
+            <field name="name">Special Application Wizard</field>
+            <field name="model">hs.expense.v2.special.back.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Special Application Back Wizard">
+                    <field name="reason" placeholder="此处填写退回原因！"/>
+                    <footer>
+                        <button type="object" name="save_button" string="确认" class="oe_highlight" confirm="是否确定此操作？"/>
+                        <button special="cancel" string="取消"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
     </data>
 </odoo>
