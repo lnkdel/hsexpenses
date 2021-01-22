@@ -408,5 +408,6 @@ class BatchEndTravelApplicationWizard(models.TransientModel):
         applications = self.env['hs.expense.v2.travel.application'].search([
             ('id', 'in', active_ids),
             ('state', '=', 'audited')])
-        applications.write({'state': 'done'})
+        for app in applications:
+            app.write({'state': 'done'})
         return {'type': 'ir.actions.act_window_close'}
