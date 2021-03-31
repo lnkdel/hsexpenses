@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="base.module_category_hengshen_sales" model="ir.module.category">
+            <field name="name">HengShen Sales</field>
+            <field name="sequence" eval="20" />
+        </record>
+
+        <record id="group_hs_sales_user" model="res.groups">
+            <field name="name">[HS Sales] User</field>
+            <field name="category_id" ref="base.module_category_hengshen_sales"/>
+            <field name="comment">The user will be able to see all records in hs_sales_lead module.</field>
+        </record>
+
+        <record id="group_hs_sales_manager" model="res.groups">
+            <field name="name">[HS Sales] Manager</field>
+            <field name="comment">The user will have access to the manage all records in hs_sales_lead module.</field>
+            <field name="category_id" ref="base.module_category_hengshen_sales"/>
+            <field name="implied_ids" eval="[
+            (4, ref('group_hs_sales_user')),]"/>
+        </record>
+    </data>
+</odoo>

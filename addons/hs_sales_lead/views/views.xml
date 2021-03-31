@@ -1,0 +1,168 @@
+<odoo>
+  <data>
+    <menuitem
+            id="menu_hs_sales_lead_root"
+            name="销售机会"
+            sequence="13"/>
+
+    <menuitem
+            id="setting_menu"
+            name="设置"
+            parent="menu_hs_sales_lead_root"
+            sequence="9999"/>
+
+    <record id="view_hs_sales_customer_tree" model="ir.ui.view">
+        <field name="name">hs.sales.customer.tree</field>
+        <field name="model">hs.sales.customer</field>
+        <field name="arch" type="xml">
+            <tree string="客户">
+                <field name="name"/>
+                <field name="group_id"/>
+                <field name="address"/>
+                <field name="user_name"/>
+                <field name="contact_name"/>
+                <field name="contact_title"/>
+                <field name="contact_number"/>
+                <field name="contact_email"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hs_sales_customer_form" model="ir.ui.view">
+        <field name="name">hs.sales.customer.form</field>
+        <field name="model">hs.sales.customer</field>
+        <field name="arch" type="xml">
+            <form string="客户">
+                <sheet>
+                  <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="address"/>
+                        <field name="contact_name"/>
+                        <field name="contact_number"/>
+                    </group>
+                    <group>
+                        <field name="group_id"/>
+                        <field name="user_name"/>
+                        <field name="contact_title"/>
+                        <field name="contact_email"/>
+                    </group>
+                  </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hs_sales_customer" model="ir.actions.act_window">
+        <field name="name">客户</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hs.sales.customer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="view_id" eval="False"/>
+    </record>
+
+    <menuitem
+            id="menu_hs_sales_customer"
+            action="action_hs_sales_customer"
+            parent="setting_menu"
+            sequence="0"/>
+
+    <record id="view_hs_sales_lead_tree" model="ir.ui.view">
+        <field name="name">hs.sales.lead.tree</field>
+        <field name="model">hs.sales.lead</field>
+        <field name="arch" type="xml">
+            <tree string="销售机会">
+                <field name="shrink_name"/>
+                <field name="name" invisible="1"/>
+                <field name="state"/>
+                <field name="sale_manager_id"/>
+                <field name="lead_number"/>
+                <field name="lead_value"/>
+                <field name="success_probability"/>
+                <field name="priority"/>
+                <field name="sale_market_id"/>
+                <field name="customer_id"/>
+                <field name="source"/>
+                <field name="completion_time"/>
+                <field name="technical_service_manager_id"/>
+                <field name="customer_service_manager_id"/>
+                <field name="reason"/>
+                <field name="remark"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_hs_sales_lead_form" model="ir.ui.view">
+        <field name="name">hs.sales.lead.form</field>
+        <field name="model">hs.sales.lead</field>
+        <field name="arch" type="xml">
+            <form string="销售机会">
+              <header>
+                <field name="state" widget="statusbar"  options="{'clickable': '1'}" />
+              </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                      <group>
+                        <field name="sale_manager_id"/>
+                        <field name="priority"/>
+                        <field name="customer_id"/>
+                        <field name="completion_time"/>
+                        <field name="customer_service_manager_id"/>
+                        <field name="remark"/>
+                      </group>
+                      <group>
+                        <field name="lead_value"/>
+                        <field name="success_probability"/>
+                        <field name="sale_market_id"/>
+                        <field name="source"/>
+                        <field name="technical_service_manager_id"/>
+                        <field name="reason"/>
+                      </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="hs_sales_lead_search" model="ir.ui.view">
+       <field name="name">hs.sales.lead.search</field>
+       <field name="model">hs.sales.lead</field>
+        <field name="arch" type="xml">
+            <search string="销售机会">
+              <field name="name" />
+              <field name="sale_manager_id" />
+              <filter string="Current Month" name="cmonth" domain="[('create_date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-01'))]" />
+              <filter string="Last Month" name="lmonth" domain="[('create_date', '&gt;=', (datetime.datetime.now().replace(day=1)-datetime.timedelta(days=1)).strftime('%Y-%m-01')), ('create_date', '&lt;', datetime.datetime.now().strftime('%Y-%m-01'))]" />
+            </search>
+       </field>
+    </record>
+    <record id="action_hs_sales_lead" model="ir.actions.act_window">
+        <field name="name">销售机会</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hs.sales.lead</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+        <field name="context">{'search_default_cmonth': True}</field>
+    </record>
+
+    <menuitem
+            id="hs_sales_lead_management_menu"
+            name="销售机会管理"
+            parent="menu_hs_sales_lead_root"
+            action="action_hs_sales_lead"
+            sequence="1"/>
+
+  </data>
+</odoo>

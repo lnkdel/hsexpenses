@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+customer_group_hs_sales_manager,customer group_hs_sales_manager,model_hs_sales_customer,group_hs_sales_manager,1,1,1,1
+sales_lead_group_hs_sales_manager,sales_lead group_hs_sales_manager,model_hs_sales_lead,group_hs_sales_manager,1,1,1,1

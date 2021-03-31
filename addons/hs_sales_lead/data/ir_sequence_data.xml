@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="seq_hs_sales_lead" model="ir.sequence">
+            <field name="name">Sales Lead NO.</field>
+            <field name="code">hs.sales.lead.no</field>
+            <field name="prefix">L</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="padding">7</field>
+        </record>
+    </data>
+</odoo>
