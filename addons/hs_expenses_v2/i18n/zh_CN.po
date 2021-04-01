@@ -1266,7 +1266,7 @@ msgstr "请在招待备注内按要求填写单位、部门、职位及人员等
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__nucleic_acid_testing_amount
 msgid "Nucleic Acid Testing Fee"
-msgstr "核算检测费用"
+msgstr "核酸检测费用"
 
 #. module: hs_expenses_v2
 #: selection:hs.expense.v2.entertain.application,cause_type:0
