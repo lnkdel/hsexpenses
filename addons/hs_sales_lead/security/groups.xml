@@ -12,6 +12,13 @@
             <field name="category_id" ref="base.module_category_hengshen_sales"/>
             <field name="comment">The user will be able to manage all records in hs_sales_lead module.</field>
         </record>
+
+        <record id="group_hs_sales_customer_services_manager" model="res.groups">
+            <field name="name">[HS Expenses] 客户服务经理</field>
+            <field name="category_id" ref="base.module_category_hengshen_sales"/>
+            <field name="comment">The user will be able to reviewed the application.</field>
+        </record>
+
         <record id="base.user_root" model="res.users">
             <field name="groups_id" eval="[(4, ref('group_hs_sales_manager'))]"/>
         </record>

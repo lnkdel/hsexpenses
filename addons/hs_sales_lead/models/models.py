@@ -9,12 +9,13 @@ class SalesLead(models.Model):
     _inherit = ['mail.thread']
     _rec_name = 'lead_number'
     _description = 'Sales Lead'
+    _order = 'lead_number DESC'
 
     @api.model
     def _get_default_employee(self):
         return self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
 
-    name = fields.Char(required=True, track_visibility='onchange')
+    name = fields.Char(required=True, string="机会点名称", track_visibility='onchange')
     state = fields.Selection(string="状态", selection=[
         ('Open', 'Open-开始'),
         ('Active', 'Active-进行中'),
@@ -25,13 +26,15 @@ class SalesLead(models.Model):
                                    default=_get_default_employee, track_visibility='onchange')
     lead_number = fields.Char(string="机会编号", required=True, )
     lead_value = fields.Float(string="机会价值",  required=True, track_visibility='onchange' )
-    success_probability = fields.Float(string="成功概率", required=True, default=50, track_visibility='onchange')
+    success_probability = fields.Float(string="成功概率", required=True, default=50,
+                                       track_visibility='onchange')
     priority = fields.Selection(string="优先级", selection=[
         ('low', 'Low'),
         ('medium', 'Medium'),
         ('high', 'High'),], required=True, default="medium", track_visibility='onchange')
-    sale_market_id = fields.Many2one('hs.sale.market', string='应用市场', track_visibility='onchange')
-    customer_id = fields.Many2one(comodel_name="hs.sales.customer", string="客户", required=True,
+    sale_market_id = fields.Many2one('hs.sale.market', string='应用市场', required=True,
+                                     track_visibility='onchange')
+    customer_id = fields.Many2one(comodel_name="hs.sales.customer", string="客户名称", required=True,
                                   track_visibility='onchange' )
     source = fields.Selection(string="机会来源", selection=[
         ('introduction', '现有客户介绍'),
@@ -54,13 +57,16 @@ class SalesLead(models.Model):
         ('time', '交期不胜任'),
     ], required=False, track_visibility='onchange' )
     remark = fields.Text(string="备注", required=False, )
+    lead_description = fields.Text(string="机会价值描述", required=False, )
     shrink_name = fields.Char(string='Name', compute='_compute_shrink_name')
 
-    user_name = fields.Char(string="最终用户名", required=False, )
+    user_name = fields.Char(string="最终用户名称", required=False, )
     contact_name = fields.Char(string="联系人名称", required=True)
-    contact_title = fields.Char(string="联系人职务", required=False, )
+    contact_title = fields.Char(string="联系人职务", required=True, )
     contact_number = fields.Char(string="联系人电话", required=True, )
     contact_email = fields.Char(string="电子邮箱", required=False, )
+    customer_city = fields.Char(string="客户所在省市", required=True, )
+    customer_address = fields.Char(string="客户详细地址", required=True, )
 
     @api.model
     def create(self, values):
@@ -92,5 +98,12 @@ class SalesLead(models.Model):
             rec.contact_title = rec.customer_id.contact_title
             rec.contact_number = rec.customer_id.contact_number
             rec.contact_email = rec.customer_id.contact_email
+            address = rec.customer_id.address
+            rec.customer_address = address
+            rec.customer_city = ''
+            if address:
+                index = address.find('市')
+                rec.customer_city = address[:index+1]
+
 
 
