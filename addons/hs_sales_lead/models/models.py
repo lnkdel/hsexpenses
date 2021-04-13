@@ -26,7 +26,7 @@ class SalesLead(models.Model):
                                    default=_get_default_employee, track_visibility='onchange')
     lead_number = fields.Char(string="机会编号", required=True, )
     lead_value = fields.Float(string="机会价值",  required=True, track_visibility='onchange' )
-    success_probability = fields.Float(string="成功概率", required=True, default=50,
+    success_probability = fields.Float(string="成功概率(%)", required=True, default=50,
                                        track_visibility='onchange')
     priority = fields.Selection(string="优先级", selection=[
         ('low', 'Low'),
@@ -41,7 +41,9 @@ class SalesLead(models.Model):
         ('new', '现有客户新项目'),
         ('expo', '研讨会/展会'),
         ('university', '科研院所/大学推荐'), ], required=True, track_visibility='onchange')
-    completion_time = fields.Datetime(string="计划完成时间", required=True, default=fields.Datetime.now(), track_visibility='onchange')
+    completion_time = fields.Date(string='计划完成时间', required=True,
+                                  default=lambda self: fields.Date.context_today(self),
+                                  track_visibility='onchange')
     technical_service_manager_id = fields.Many2one('hs.base.employee',
                                                    string='技术服务经理',
                                                    domain=['|', ('department_id.name', 'ilike', '营销'), ('department_id.parent_id.name', 'ilike', '营销')],
@@ -58,7 +60,7 @@ class SalesLead(models.Model):
     ], required=False, track_visibility='onchange' )
     remark = fields.Text(string="备注", required=False, )
     lead_description = fields.Text(string="机会价值描述", required=False, )
-    shrink_name = fields.Char(string='Name', compute='_compute_shrink_name')
+    shrink_name = fields.Char(string='机会点名称', compute='_compute_shrink_name')
 
     user_name = fields.Char(string="最终用户名称", required=False, )
     contact_name = fields.Char(string="联系人名称", required=True)
@@ -89,7 +91,7 @@ class SalesLead(models.Model):
     @api.depends('name')
     def _compute_shrink_name(self):
         for rec in self:
-            rec.shrink_name = (rec.name[:10]+'...') if len(rec.name)>20 else rec.name
+            rec.shrink_name = (rec.name[:20]+'...') if len(rec.name)>20 else rec.name
 
     @api.onchange('customer_id')
     def _onchange_customer_id(self):
@@ -103,7 +105,12 @@ class SalesLead(models.Model):
             rec.customer_city = ''
             if address:
                 index = address.find('市')
-                rec.customer_city = address[:index+1]
+                if index != -1:
+                    rec.customer_city = address[:index+1]
+                else:
+                    rec.customer_city = rec.customer_id.city
+            else:
+                rec.customer_city = rec.customer_id.city
 
 
 

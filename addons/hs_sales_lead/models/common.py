@@ -9,7 +9,8 @@ class Customer(models.Model):
 
     name = fields.Char(string="客户名称", required=True, )
     group_id = fields.Many2one(comodel_name="hs.sales.customer", string="客户所属集团", required=False,)
-    address = fields.Char(string="所在地", required=True, )
+    city = fields.Char(string="所在省市", required=True, )
+    address = fields.Char(string="详细地址", required=True, )
     contact_name = fields.Char(string="联系人名称", required=False, )
     contact_title = fields.Char(string="联系人职务", required=False, )
     contact_number = fields.Char(string="联系人电话", required=False, )
