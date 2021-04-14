@@ -106,11 +106,11 @@
              <field name="view_id" ref="view_hs_sale_seller_tree"/>
         </record>
 
-        <menuitem
-            id="menu_hs_sale_seller"
-            action="action_sale_seller"
-            parent="menu_sale"
-            sequence="0"/>
+        <!--<menuitem-->
+            <!--id="menu_hs_sale_seller"-->
+            <!--action="action_sale_seller"-->
+            <!--parent="menu_sale"-->
+            <!--sequence="0"/>-->
 
         <record model="ir.ui.view" id="view_hs_sale_market_tree">
           <field name="name">hs.sale.market.tree</field>

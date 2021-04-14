@@ -1,10 +1,10 @@
 <odoo>
     <data>
-        <menuitem
-            id="menu_hs_sale_seller"
-            action="hs_expenses.action_sale_seller"
-            parent="menu_sale"
-            sequence="0"/>
+        <!--<menuitem-->
+            <!--id="menu_hs_sale_seller"-->
+            <!--action="hs_expenses.action_sale_seller"-->
+            <!--parent="menu_sale"-->
+            <!--sequence="0"/>-->
         <menuitem
             id="menu_hs_sale_market"
             action="hs_expenses.action_hs_sale_market"
