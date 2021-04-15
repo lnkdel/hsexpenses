@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
+    <data noupdate="1">
         <record id="seq_hs_sales_lead" model="ir.sequence">
             <field name="name">Sales Lead NO.</field>
             <field name="code">hs.sales.lead.no</field>

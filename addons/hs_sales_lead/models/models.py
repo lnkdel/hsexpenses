@@ -74,17 +74,8 @@ class SalesLead(models.Model):
     def create(self, values):
         if values.get('lead_number') is None or values.get('lead_number') is False:
             lead_number = self.env['ir.sequence'].next_by_code('hs.sales.lead.no')
-            if not lead_number:
-                self.env['ir.sequence'].sudo().create({
-                    'number_next': 1,
-                    'number_increment': 1,
-                    'padding': 7,
-                    'prefix': 'L',
-                    'name': 'Sales Lead NO.',
-                    'code': 'hs.sales.lead.no',
-                })
-                lead_number = self.env['ir.sequence'].next_by_code('hs.sales.lead.no')
             values['lead_number'] = lead_number
+
         return super(SalesLead, self).create(values)
     
     @api.one
