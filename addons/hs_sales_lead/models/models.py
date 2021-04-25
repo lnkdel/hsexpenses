@@ -69,6 +69,7 @@ class SalesLead(models.Model):
     contact_email = fields.Char(string="电子邮箱", required=False, )
     customer_city = fields.Char(string="客户所在省市", required=True, )
     customer_address = fields.Char(string="客户详细地址", required=True, )
+    color = fields.Integer()
 
     @api.model
     def create(self, values):
@@ -102,6 +103,20 @@ class SalesLead(models.Model):
                     rec.customer_city = rec.customer_id.city
             else:
                 rec.customer_city = rec.customer_id.city
+
+    def show_lead_detail_form(self):
+        self.ensure_one()
+        action = {
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'target': self,
+            'res_model': 'hs.sales.lead',
+            'res_id': self.id,
+            'name': 'Sales Lead'
+        }
+        return action
+
 
 
 
