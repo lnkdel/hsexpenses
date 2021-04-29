@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hs_sales_quality_feedback_hs_sales_quality_feedback,hs_sales_quality_feedback.hs_sales_quality_feedback,model_hs_sales_quality_feedback_hs_sales_quality_feedback,,1,0,0,0

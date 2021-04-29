@@ -1,0 +1,290 @@
+<odoo>
+  <data>
+    <menuitem
+            id="menu_hs_sales_notes_root"
+            name="工作日志"
+            sequence="14"/>
+
+      <menuitem
+            id="setting_menu"
+            name="设置"
+            parent="menu_hs_sales_notes_root"
+            sequence="9999"/>
+
+      <record id="view_hs_sales_province_tree" model="ir.ui.view">
+          <field name="name">hs.sales.province.tree</field>
+          <field name="model">hs.sales.province</field>
+          <field name="arch" type="xml">
+              <tree string="省">
+                  <field name="name"/>
+                  <field name="province_number"/>
+              </tree>
+          </field>
+      </record>
+
+      <record id="view_hs_sales_province_form" model="ir.ui.view">
+          <field name="name">hs.sales.province.form</field>
+          <field name="model">hs.sales.province</field>
+          <field name="arch" type="xml">
+              <form string="省">
+                  <sheet>
+                      <group>
+                          <group>
+                              <field name="name"/>
+                          </group>
+                          <group>
+                              <field name="province_number"/>
+                          </group>
+                      </group>
+                  </sheet>
+              </form>
+          </field>
+      </record>
+
+      <record id="hs_sales_province_search" model="ir.ui.view">
+       <field name="name">hs.sales.province.search</field>
+       <field name="model">hs.sales.province</field>
+        <field name="arch" type="xml">
+            <search string="省">
+              <field name="name" />
+              <field name="province_number" />
+            </search>
+       </field>
+    </record>
+
+      <record id="action_hs_sales_province" model="ir.actions.act_window">
+          <field name="name">省</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">hs.sales.province</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              <!-- Add Text Here -->
+            </p><p>
+              <!-- More details about what a user can do with this object will be OK -->
+            </p>
+          </field>
+      </record>
+
+      <!--<menuitem-->
+            <!--id="menu_hs_sales_province"-->
+            <!--action="action_hs_sales_province"-->
+            <!--parent="setting_menu"-->
+            <!--sequence="0"/>-->
+
+
+      <record id="view_hs_sales_city_tree" model="ir.ui.view">
+          <field name="name">hs.sales.city.tree</field>
+          <field name="model">hs.sales.city</field>
+          <field name="arch" type="xml">
+              <tree string="市">
+                  <field name="province_id"/>
+                  <!--<field name="province_number"/>-->
+                  <field name="name"/>
+                  <field name="city_number"/>
+              </tree>
+          </field>
+      </record>
+
+      <record id="view_hs_sales_city_form" model="ir.ui.view">
+          <field name="name">hs.sales.city.form</field>
+          <field name="model">hs.sales.city</field>
+          <field name="arch" type="xml">
+              <form string="市">
+                  <sheet>
+                      <group>
+                          <group>
+                              <field name="name"/>
+                              <field name="city_number"/>
+                          </group>
+                          <group>
+                              <field name="province_id"/>
+                              <field name="province_number"/>
+                          </group>
+                      </group>
+                  </sheet>
+              </form>
+          </field>
+      </record>
+
+      <record id="hs_sales_city_search" model="ir.ui.view">
+       <field name="name">hs.sales.city.search</field>
+       <field name="model">hs.sales.city</field>
+        <field name="arch" type="xml">
+            <search string="市">
+              <field name="name" />
+                <field name="city_number" />
+              <field name="province_id" />
+            </search>
+       </field>
+    </record>
+
+      <record id="action_hs_sales_city" model="ir.actions.act_window">
+          <field name="name">市</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">hs.sales.city</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              <!-- Add Text Here -->
+            </p><p>
+              <!-- More details about what a user can do with this object will be OK -->
+            </p>
+          </field>
+      </record>
+
+      <!--<menuitem-->
+            <!--id="menu_hs_sales_city"-->
+            <!--action="action_hs_sales_city"-->
+            <!--parent="setting_menu"-->
+            <!--sequence="1"/>-->
+
+      <record id="batch_deal_province_wizard_view" model="ir.ui.view">
+            <field name="name">hs.sales.batch.deal.province.wizard</field>
+            <field name="model">hs.sales.batch.deal.province.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Batch Deal">
+                    <notebook>
+                        <page string="Batch Deal">
+                            <field name="city_ids"/>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button type="object" name="batch_end_button" string="Batch End" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+      <act_window id="batch_deal_province_wizard_action" name="Batch Wizard"
+                    src_model="hs.sales.city"
+                    res_model="hs.sales.batch.deal.province.wizard" view_mode="form" target="new" multi="True"
+                    groups="group_hs_sales_notes_manager"/>
+
+      <record id="view_hs_sales_note_tree" model="ir.ui.view">
+          <field name="name">hs.sales.note.tree</field>
+          <field name="model">hs.sales.note</field>
+          <field name="arch" type="xml">
+              <tree string="日志">
+                  <field name="name"/>
+                  <field name="workday"/>
+                  <field name="employee_id"/>
+                  <field name="province_id"/>
+                  <field name="city_id"/>
+                  <field name="customer_id"/>
+                  <field name="contact_name"/>
+                  <field name="contact_title"/>
+                  <field name="contact_number"/>
+                  <field name="work_category"/>
+              </tree>
+          </field>
+      </record>
+
+      <record id="view_hs_sales_note_form" model="ir.ui.view">
+          <field name="name">hs.sales.note.form</field>
+          <field name="model">hs.sales.note</field>
+          <field name="arch" type="xml">
+              <form string="日志">
+                  <sheet>
+                      <div class="oe_title">
+                          <label for="name" class="oe_edit_only"/>
+                          <h1>
+                              <field name="name" placeholder="标题"/>
+                          </h1>
+                      </div>
+                      <group>
+                          <group>
+                              <field name="workday"/>
+                              <field name="province_id"/>
+                              <field name="customer_id"/>
+                              <field name="contact_title"/>
+                              <field name="work_category"/>
+                          </group>
+                          <group>
+                              <field name="employee_id"/>
+                              <field name="city_id"/>
+                              <field name="contact_name"/>
+                              <field name="contact_number"/>
+                          </group>
+                      </group>
+                      <notebook>
+                          <page string="描述">
+                              <group>
+                                  <field name="description"/>
+                              </group>
+                          </page>
+                      </notebook>
+                      <group name="group_log_access">
+                          <group>
+                              <field name="create_date" readonly="1"/>
+                              <field name="create_uid" readonly="1"/>
+                          </group>
+                          <group>
+                              <field name="write_date" readonly="1"/>
+                              <field name="write_date" readonly="1"/>
+                          </group>
+                      </group>
+                  </sheet>
+                  <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                  </div>
+              </form>
+          </field>
+      </record>
+
+      <record id="view_hs_sales_note_calendar" model="ir.ui.view">
+          <field name="name">hs.sales.note.calendar</field>
+          <field name="model">hs.sales.note</field>
+          <field name="arch" type="xml">
+              <calendar string="Calendar View" date_start="workday" color="employee_id">
+              <!--<calendar string="工作日志" color="employee_id" date_start="workday" mode="month" auick_add="False">-->
+                  <field name="name"/>
+                  <field name="employee_id"/>
+                  <field name="customer_id"/>
+              </calendar>
+          </field>
+      </record>
+
+      <record id="hs_sales_note_search" model="ir.ui.view">
+          <field name="name">hs.sales.note.filter</field>
+          <field name="model">hs.sales.note</field>
+          <field name="arch" type="xml">
+              <search string="工作日志">
+                  <field name="name"/>
+                  <field name="employee_id"/>
+                  <field name="province_id"/>
+                  <field name="city_id"/>
+                  <field name="customer_id"/>
+                  <field name="description"/>
+                  <!--<group expand="0" string="分组">-->
+                      <!--<filter string="工作类型" domain="[]" context="{'group_by': 'work_category'}" />-->
+                      <!--<filter string="员工" domain="[]" context="{'group_by': 'employee_id'}" />-->
+                      <!--<filter string="客户" domain="[]" context="{'group_by': 'customer_id'}" />-->
+                  <!--</group>-->
+              </search>
+          </field>
+      </record>
+
+      <record id="action_hs_sales_note" model="ir.actions.act_window">
+          <field name="name">工作日志</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">hs.sales.note</field>
+          <field name="view_mode">calendar,tree,form</field>
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              <!-- Add Text Here -->
+            </p><p>
+              <!-- More details about what a user can do with this object will be OK -->
+            </p>
+          </field>
+      </record>
+
+      <menuitem
+            id="menu_hs_sales_note"
+            action="action_hs_sales_note"
+            parent="menu_hs_sales_notes_root"
+            sequence="1"/>
+
+  </data>
+</odoo>

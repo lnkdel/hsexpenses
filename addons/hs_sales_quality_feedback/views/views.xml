@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="hs_sales_quality_feedback.list">
+      <field name="name">hs_sales_quality_feedback list</field>
+      <field name="model">hs_sales_quality_feedback.hs_sales_quality_feedback</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="hs_sales_quality_feedback.action_window">
+      <field name="name">hs_sales_quality_feedback window</field>
+      <field name="res_model">hs_sales_quality_feedback.hs_sales_quality_feedback</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="hs_sales_quality_feedback.action_server">
+      <field name="name">hs_sales_quality_feedback server</field>
+      <field name="model_id" ref="model_hs_sales_quality_feedback_hs_sales_quality_feedback"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="hs_sales_quality_feedback" id="hs_sales_quality_feedback.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="hs_sales_quality_feedback.menu_1" parent="hs_sales_quality_feedback.menu_root"/>
+    <menuitem name="Menu 2" id="hs_sales_quality_feedback.menu_2" parent="hs_sales_quality_feedback.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="hs_sales_quality_feedback.menu_1_list" parent="hs_sales_quality_feedback.menu_1"
+              action="hs_sales_quality_feedback.action_window"/>
+    <menuitem name="Server to list" id="hs_sales_quality_feedback" parent="hs_sales_quality_feedback.menu_2"
+              action="hs_sales_quality_feedback.action_server"/>
+    -->
+  </data>
+</odoo>

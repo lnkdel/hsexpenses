@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+province_group_hs_sales_notes_manager,province group_hs_sales_notes_manager,model_hs_sales_province,group_hs_sales_notes_manager,1,1,1,1
+province_group_hs_expenses_seller,province group_hs_expenses_seller,model_hs_sales_province,hs_expenses.group_hs_expenses_seller,1,0,0,0
+
+city_group_hs_sales_notes_manager,city group_hs_sales_notes_manager,model_hs_sales_city,group_hs_sales_notes_manager,1,1,1,1
+city_group_hs_expenses_seller,city group_hs_expenses_seller,model_hs_sales_city,hs_expenses.group_hs_expenses_seller,1,0,0,0
+
+note_group_hs_sales_notes_manager,note group_hs_sales_notes_manager,model_hs_sales_note,group_hs_sales_notes_manager,1,1,1,1
+note_group_hs_expenses_seller,note group_hs_expenses_seller,model_hs_sales_note,hs_expenses.group_hs_expenses_seller,1,1,1,1

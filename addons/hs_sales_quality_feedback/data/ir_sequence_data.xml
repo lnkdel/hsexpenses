@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_hs_sales_quality_feedback" model="ir.sequence">
+            <field name="name">Quality Feedback NO.</field>
+            <field name="code">hs.sales.quality.feedback.no</field>
+            <field name="prefix">QF</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="padding">7</field>
+        </record>
+    </data>
+</odoo>

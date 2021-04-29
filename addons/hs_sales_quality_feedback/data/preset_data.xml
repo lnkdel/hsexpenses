@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="hs.sales.customer.attitude" id="hs_sales_customer_attitude_rework">
+            <field name="name">返工、返修</field>
+            <field name="sequence">0</field>
+            <field name="active">TRUE</field>
+        </record>
+
+        <record model="hs.sales.customer.attitude" id="hs_sales_customer_attitude_exchange">
+            <field name="name">退换货</field>
+            <field name="sequence">0</field>
+            <field name="active">TRUE</field>
+        </record>
+
+        <record model="hs.sales.customer.attitude" id="hs_sales_customer_attitude_return">
+            <field name="name">退货</field>
+            <field name="sequence">0</field>
+            <field name="active">TRUE</field>
+        </record>
+
+        <record model="hs.sales.customer.attitude" id="hs_sales_customer_attitude_replenish">
+            <field name="name">补货</field>
+            <field name="sequence">0</field>
+            <field name="active">TRUE</field>
+        </record>
+
+        <record model="hs.sales.customer.attitude" id="hs_sales_customer_attitude_compensate">
+            <field name="name">赔偿</field>
+            <field name="sequence">0</field>
+            <field name="active">TRUE</field>
+        </record>
+
+        <record model="hs.sales.customer.attitude" id="hs_sales_customer_attitude_accept">
+            <field name="name">让步接收</field>
+            <field name="sequence">0</field>
+            <field name="active">TRUE</field>
+        </record>
+
+        <record model="hs.sales.customer.attitude" id="hs_sales_customer_attitude_demotion">
+            <field name="name">降级使用</field>
+            <field name="sequence">0</field>
+            <field name="active">TRUE</field>
+        </record>
+    </data>
+</odoo>
