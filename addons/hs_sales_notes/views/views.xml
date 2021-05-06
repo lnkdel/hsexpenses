@@ -168,6 +168,7 @@
               <tree string="日志">
                   <field name="name"/>
                   <field name="workday"/>
+                  <field name="date_to"/>
                   <field name="employee_id"/>
                   <field name="province_id"/>
                   <field name="city_id"/>
@@ -196,13 +197,14 @@
                           <group>
                               <field name="workday"/>
                               <field name="province_id"/>
-                              <field name="customer_id"/>
+                              <field name="employee_id"/>
                               <field name="contact_title"/>
                               <field name="work_category"/>
                           </group>
                           <group>
-                              <field name="employee_id"/>
+                              <field name="date_to"/>
                               <field name="city_id"/>
+                              <field name="customer_id"/>
                               <field name="contact_name"/>
                               <field name="contact_number"/>
                           </group>
@@ -237,7 +239,7 @@
           <field name="name">hs.sales.note.calendar</field>
           <field name="model">hs.sales.note</field>
           <field name="arch" type="xml">
-              <calendar string="Calendar View" date_start="workday" color="employee_id">
+              <calendar string="Calendar View" date_start="workday" date_stop="date_to" color="employee_id">
               <!--<calendar string="工作日志" color="employee_id" date_start="workday" mode="month" auick_add="False">-->
                   <field name="name"/>
                   <field name="employee_id"/>

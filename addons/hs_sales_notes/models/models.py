@@ -78,7 +78,9 @@ class HSSalesNote(models.Model):
         return self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
 
     name = fields.Char(string='标题', required=True, track_visibility='onchange')
-    workday = fields.Datetime(string='时间', required=True, default=fields.Datetime.now,
+    workday = fields.Datetime(string='开始时间', required=True, default=fields.Datetime.now,
+                              track_visibility='onchange')
+    date_to = fields.Datetime(string='截止时间', required=True, default=fields.Datetime.now,
                               track_visibility='onchange')
     employee_id = fields.Many2one('hs.base.employee', string='员工', required=True,
                                   default=_get_default_employee,
