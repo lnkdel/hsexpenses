@@ -4,13 +4,18 @@
         <menuitem
             id="menu_hs_expenses_root"
             name="Marketing Expenses"
-            sequence="10"/>
+            sequence="10" />
+
+        <record id="hs_expenses.menu_hs_expenses_root" model="ir.ui.menu">
+            <!--<field name="groups_id" eval="[(3, ref('group_hs_expenses_user'))]"/>-->
+            <field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
+        </record>
 
         <menuitem id="hs_special_expenses_management_menu" name="Special Expenses" parent="menu_hs_expenses_root"
-                  sequence="1"></menuitem>
+                  sequence="1" ></menuitem>
 
         <menuitem id="hs_travel_expenses_management_menu" name="Travel Expenses" parent="menu_hs_expenses_root"
-                  sequence="0"></menuitem>
+                  sequence="0" ></menuitem>
 
         <menuitem id="setting_menu" name="Settings" parent="menu_hs_expenses_root" sequence="9999"/>
 
