@@ -57,6 +57,8 @@ class BaseApplication(models.AbstractModel):
     # customer_company_no = fields.Many2one('hs.base.customer.number', required=True, string='Customer Company Number')
     project_id = fields.Many2one('hs.base.project', string='Project')
 
+    feedback_number_id = fields.Many2one(comodel_name="hs.sales.customer.feedback.number", string="客户反馈编码" )
+
     @api.model
     def create(self, values):
         # if values.get('travel_detail_ids') is not None:

@@ -133,6 +133,8 @@ class EntertainApplication(models.Model):
     project_id = fields.Many2one('hs.base.project', string='Project')
     entertain_remark = fields.Text(string="Entertain Remark", default="单位：\n部门、职位及人员：\n")
 
+    feedback_number_id = fields.Many2one(comodel_name="hs.sales.customer.feedback.number", string="客户反馈编码")
+
     cause_type = fields.Selection([
         ('bos', 'Business on sale'),
         ('pa', 'Project approval'),

@@ -29,3 +29,12 @@ class CustomerCompanyNO(models.Model):
     name = fields.Char(required=True)
     sequence = fields.Integer(string="Sequence", default=10)
     active = fields.Boolean(string='Active', default=True)
+
+
+class FeedBackNO(models.Model):
+    _name = 'hs.sales.customer.feedback.number'
+    _description = '客户反馈编码'
+
+    name = fields.Char(required=True)
+    sequence = fields.Integer(string="Sequence", default=10)
+    active = fields.Boolean(string='Active', default=True)

@@ -53,6 +53,7 @@
                                 <field name="applicant_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="applicant_department_id"/>
                                 <field name="driver_type_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="feedback_number_id" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('driver_type_id','!=',3)], 'required':[('driver_type_id', '=', 3)]}"/>
                                 <field name="sale_area_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="sale_market_id" attrs="{'readonly': [('state', '!=', 'draft')], 'required':[('state', '=', 'draft')]}"/>
                                 <field name="project_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>

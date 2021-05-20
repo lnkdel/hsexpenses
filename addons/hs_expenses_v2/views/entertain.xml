@@ -74,6 +74,7 @@
                             </group>
                             <group>
                                 <field name="driver_type_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="feedback_number_id" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('driver_type_id','!=',3)], 'required':[('driver_type_id', '=', 3)]}"/>
                                 <field name="applicant_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="applicant_department_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="applicant_amount" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
