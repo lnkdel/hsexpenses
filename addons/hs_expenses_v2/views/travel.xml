@@ -58,6 +58,7 @@
                                 <field name="sale_market_id" attrs="{'readonly': [('state', '!=', 'draft')], 'required':[('state', '=', 'draft')]}"/>
                                 <field name="project_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="cause" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="attachment_ids" mode="kanban" attrs="{'readonly': [('state', '!=', 'draft')]}" />
                             </group>
                             <group>
                                 <field name="applicant_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>

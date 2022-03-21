@@ -74,6 +74,7 @@ msgstr "是否确定此操作？"
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__attachment_ids
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__attachment_ids
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__attachment_ids
 msgid "Attachments"
 msgstr "附件"
 

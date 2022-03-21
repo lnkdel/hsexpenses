@@ -224,6 +224,12 @@ class TravelApplication(models.Model):
     nucleic_acid_testing_amount = fields.Float("Nucleic Acid Testing Fee", digits=(16, 2))
     reason = fields.Text()
 
+    attachment_ids = fields.Many2many('ir.attachment',
+                                      'hs_expense_travel_app_rel',
+                                      'travel_app_id',
+                                      'attachment_id',
+                                      string='Attachments')
+
     @api.multi
     @api.depends('travel_detail_ids')
     # TODO: update template
