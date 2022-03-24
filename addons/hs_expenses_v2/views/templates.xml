@@ -6,7 +6,7 @@
                     <t t-call="web.external_layout">
                         <div class="page">
                             <!--<div style="margin:0 auto;width:300px;height:80px; font-size:24px; font-weight:bold; text-align:center;">-->
-                            <div style="padding-top:60px;margin:0 auto;width:100%;height:auto; font-size:24px; font-weight:bold; text-align:center;">
+                            <div style="padding-top:50px;margin:0 auto;width:100%;height:auto; font-size:24px; font-weight:bold; text-align:center;">
                                 差旅报销单<p t-field="travel.name"/>
                             </div>
                             <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
@@ -172,7 +172,7 @@
                     <t t-call="web.external_layout">
                         <div class="page">
                             <!--<div style="margin:0 auto;width:300px;height:80px; font-size:24px; font-weight:bold; text-align:center;">-->
-                            <div style="padding-top:60px;margin:0 auto;width:100%;height:auto; font-size:24px; font-weight:bold; text-align:center;">
+                            <div style="padding-top:50px;margin:0 auto;width:100%;height:auto; font-size:24px; font-weight:bold; text-align:center;">
                                 招待报销单<p t-field="o.name"/>
                             </div>
                             <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
@@ -309,7 +309,7 @@
                     <t t-call="web.external_layout">
                         <div class="page">
                             <!--<div style="margin:0 auto;width:300px;height:80px; font-size:24px; font-weight:bold; text-align:center;">-->
-                            <div style="padding-top:60px;margin:0 auto;width:100%;height:auto; font-size:24px; font-weight:bold; text-align:center;">
+                            <div style="padding-top:50px;margin:0 auto;width:100%;height:auto; font-size:24px; font-weight:bold; text-align:center;">
                                 特殊费用单<p t-field="o.name"/>
                             </div>
                             <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
