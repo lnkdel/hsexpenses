@@ -180,6 +180,28 @@
                     res_model="hs.expense.v2.entertain.batch.end.wizard" view_mode="form" target="new" multi="True"
                     groups="hs_expenses.group_hs_expenses_cashier"/>
 
+        <record id="batch_approve_entertain_application_wizard_view" model="ir.ui.view">
+            <field name="name">hs.expense.v2.entertain.batch.approve.wizard</field>
+            <field name="model">hs.expense.v2.entertain.batch.approve.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Batch Approve Application Wizard">
+                    <notebook>
+                        <page string="待批准单据">
+                            <field name="application_ids"/>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button type="object" name="batch_approve_button" string="批准" class="oe_highlight"/>
+                        <button special="cancel" string="取消"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window id="batch_approve_entertain_application_wizard_action" name="批量批准向导"
+                    src_model="hs.expense.v2.entertain.application"
+                    res_model="hs.expense.v2.entertain.batch.approve.wizard" view_mode="form" target="new" multi="True"
+                    groups="hs_expenses_v2.group_hs_expenses_vice_president"/>
+
         <record model="ir.ui.view" id="hs_expense_v2_entertain_back_wizard_view">
             <field name="name">Travel Application Wizard</field>
             <field name="model">hs.expense.v2.entertain.back.wizard</field>

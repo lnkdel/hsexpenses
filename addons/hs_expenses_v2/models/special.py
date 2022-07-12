@@ -367,6 +367,39 @@ class SpecialApplicationBackWizard(models.TransientModel):
         return True
 
 
+class BatchApprovedSpecialApplicationWizard(models.TransientModel): # 王胜利要求批量审批 20220711
+    _name = 'hs.expense.v2.special.batch.approve.wizard'
+    _description = 'Batch approve application wizard'
+
+    application_ids = fields.Many2many(comodel_name='hs.expense.v2.special.application',
+                                       relation="hs_expense_v2_approve_wizard_special_rel",
+                                       column1="wizard_id",
+                                       column2="application_id",
+                                       string='Special Applications')
+
+    @api.model
+    def default_get(self, fields):
+        res = {}
+        active_ids = self._context.get('active_ids')
+        if active_ids:
+            applications = self.env['hs.expense.v2.special.application'].search_read(
+                domain=[('id', 'in', active_ids)], fields=['id', 'state'])
+            ids = [s['id'] for s in list(filter(lambda s: s['state'] == 'reported2', applications))]
+            res = {'application_ids': ids}
+        return res
+
+    @api.multi
+    def batch_approve_button(self):
+        self.ensure_one()
+        active_ids = self._context.get('active_ids')
+        applications = self.env['hs.expense.v2.special.application'].search([
+            ('id', 'in', active_ids),
+            ('state', '=', 'reported2')])
+        for app in applications:
+            app.write({'state': 'approved'})
+        return {'type': 'ir.actions.act_window_close'}
+
+
 class BatchEndApplicationWizard(models.TransientModel):
     _name = 'hs.expense.v2.batch.end.wizard'
     _description = 'Batch end application wizard'
