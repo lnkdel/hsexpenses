@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="base.module_category_hengshen_event" model="ir.module.category">
+            <field name="name">恒神事项</field>
+            <field name="sequence" eval="22" />
+        </record>
+
+        <record id="group_hs_event_tracking_user" model="res.groups">
+            <field name="name">[事项追踪] 用户</field>
+            <field name="category_id" ref="base.module_category_hengshen_event"/>
+            <field name="comment"></field>
+        </record>
+
+        <record id="group_hs_event_tracking_department_user" model="res.groups">
+            <field name="name">[事项追踪] 部门管理员</field>
+            <field name="category_id" ref="base.module_category_hengshen_event"/>
+            <field name="implied_ids" eval="[(4, ref('group_hs_event_tracking_user'))]"/>
+            <field name="comment"></field>
+        </record>
+
+        <record id="group_hs_event_tracking_manager" model="res.groups">
+            <field name="name">[事项追踪] 管理员</field>
+            <field name="category_id" ref="base.module_category_hengshen_event"/>
+            <field name="implied_ids" eval="[
+            (4, ref('group_hs_event_tracking_user')),
+            (4, ref('group_hs_event_tracking_department_user')),]"/>
+            <field name="comment"></field>
+        </record>
+    </data>
+</odoo>

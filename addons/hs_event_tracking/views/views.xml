@@ -1,0 +1,82 @@
+<odoo>
+  <data>
+        <menuitem
+                id="menu_hs_event_tracking_root"
+                name="事项追踪"
+                sequence="19"/>
+
+        <menuitem
+                id="hs_event_tracking_management_menu"
+                name="事项管理"
+                parent="menu_hs_event_tracking_root"
+                sequence="0"/>
+
+        <menuitem
+                id="hs_event_tracking_setting_menu"
+                name="设置"
+                parent="menu_hs_event_tracking_root"
+                sequence="99"/>
+
+      <record id="view_hs_event_category_tree" model="ir.ui.view">
+          <field name="name">hs.event.category.tree</field>
+          <field name="model">hs.event.category</field>
+          <field name="arch" type="xml">
+              <tree string="事项类型">
+                  <field name="name"/>
+                  <field name="sequence"/>
+                  <field name="active"/>
+              </tree>
+          </field>
+      </record>
+
+      <record id="view_hs_event_category_form" model="ir.ui.view">
+          <field name="name">hs.event.category.form</field>
+          <field name="model">hs.event.category</field>
+          <field name="arch" type="xml">
+              <form string="事项类型">
+                  <sheet>
+                      <group>
+                          <group>
+                              <field name="name"/>
+                              <field name="sequence"/>
+                          </group>
+                          <group>
+                              <field name="active"/>
+                          </group>
+                      </group>
+                  </sheet>
+              </form>
+          </field>
+      </record>
+
+      <record id="hs_event_category_search" model="ir.ui.view">
+         <field name="name">hs.event.category.search</field>
+         <field name="model">hs.event.category</field>
+          <field name="arch" type="xml">
+              <search string="事项类型">
+                  <field name="name" />
+                  <field name="sequence"/>
+                  <field name="active"/>
+              </search>
+         </field>
+      </record>
+
+      <record id="action_hs_event_category" model="ir.actions.act_window">
+          <field name="name">事项类型</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">hs.event.category</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              <!-- Add Text Here -->
+            </p><p>
+              <!-- More details about what a user can do with this object will be OK -->
+            </p>
+          </field>
+      </record>
+
+      <menuitem id="menu_hs_event_category" name="事项类型" parent="hs_event_tracking_setting_menu"
+                action="action_hs_event_category" sequence="0"/>
+
+  </data>
+</odoo>

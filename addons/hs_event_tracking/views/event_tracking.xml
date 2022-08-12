@@ -1,0 +1,114 @@
+<odoo>
+    <data>
+        <record id="view_hs_event_tree" model="ir.ui.view">
+          <field name="name">hs.event.tree</field>
+          <field name="model">hs.event</field>
+          <field name="arch" type="xml">
+              <tree string="事项">
+                  <field name="sequence" widget="handle"/>
+                  <field name="name"/>
+                  <field name="start_date"/>
+                  <field name="end_date"/>
+                  <field name="event_category_id"/>
+                  <field name="department_id"/>
+                  <field name="charge_id"/>
+                  <field name="player_ids" widget="many2many_tags"/>
+                  <field name="attachment_ids"/>
+                  <field name="state"/>
+                  <field name="score"/>
+              </tree>
+          </field>
+      </record>
+
+        <record id="view_hs_event_form" model="ir.ui.view">
+          <field name="name">hs.event.form</field>
+          <field name="model">hs.event</field>
+          <field name="arch" type="xml">
+              <form string="事项">
+                  <header>
+                      <button name="action_submit_annotation" string="批注" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','in',['draft'])]}" groups="hs_event_tracking.group_hs_event_tracking_manager" />
+                      <button name="action_submit_score" string="打分" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','done')]}" groups="hs_event_tracking.group_hs_event_tracking_manager" />
+                      <field name="state" widget="statusbar" options="{'clickable': '1'}" statusbar_visible="draft,doing,done" />
+                  </header>
+                  <sheet>
+                      <field name="event_category_id"/>
+                      <div class="oe_title">
+                          <label for="name" class="oe_edit_only"/>
+                          <h1>
+                              <field name="name" placeholder="标题"/>
+                          </h1>
+                      </div>
+                      <group>
+                          <group>
+                              <field name="start_date"/>
+                              <field name="department_id"/>
+                              <field name="player_ids" widget="many2many_tags"/>
+                              <field name="score" style="width:40px; text-align:center;" />
+                          </group>
+                          <group>
+                              <field name="end_date"/>
+                              <field name="charge_id"/>
+                              <field name="attachment_ids" mode="kanban" />
+                          </group>
+                      </group>
+                      <notebook>
+                          <page string="描述">
+                              <group>
+                                  <field name="content"/>
+                              </group>
+                          </page>
+                      </notebook>
+                  </sheet>
+              </form>
+          </field>
+      </record>
+
+        <record id="hs_event_search" model="ir.ui.view">
+         <field name="name">hs.event.search</field>
+         <field name="model">hs.event</field>
+          <field name="arch" type="xml">
+              <search string="事项">
+                  <field name="name" />
+              </search>
+         </field>
+      </record>
+
+        <record id="action_hs_event" model="ir.actions.act_window">
+          <field name="name">事项</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">hs.event</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              <!-- Add Text Here -->
+            </p><p>
+              <!-- More details about what a user can do with this object will be OK -->
+            </p>
+          </field>
+      </record>
+
+        <menuitem id="menu_hs_event" name="追踪事项" parent="hs_event_tracking_management_menu"
+                  action="action_hs_event" sequence="0"/>
+
+        <record model="ir.ui.view" id="hs_event_score_wizard_view">
+            <field name="name">Event Score Wizard</field>
+            <field name="model">hs.event.score.wizard</field>
+            <field name="arch" type="xml">
+                <form string="打分向导">
+
+                    <group>
+                        <group>
+                            <field name="score" />
+                        </group>
+                        <group></group>
+                    </group>
+
+                    <footer>
+                        <button type="object" name="save_button" string="确认" class="oe_highlight" />
+                        <button special="cancel" string="取消"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
