@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-         <record id="base.module_category_hengshen_event" model="ir.module.category">
+        <record id="base.module_category_hengshen_event" model="ir.module.category">
             <field name="name">恒神事项</field>
             <field name="sequence" eval="22" />
         </record>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+         <record id="hs_event_manager_rule" model="ir.rule">
+            <field name="name">manager role for hs event</field>
+            <field name="model_id" ref="model_hs_event"/>
+            <field name="groups" eval="[(4, ref('hs_event_tracking.group_hs_event_tracking_manager'))]"/>
+         </record>
+
+         <record id="hs_event_department_user_rule" model="ir.rule">
+            <field name="name">department user role for hs event</field>
+            <field name="model_id" ref="model_hs_event"/>
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('state', '!=', 'draft'), '|', ('charge_id.user_id', '=', user.id), ('player_ids.user_id', 'child_of', user.id)]</field>
+            <field name="groups" eval="[(4, ref('hs_event_tracking.group_hs_event_tracking_department_user'))]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,94 +1,213 @@
 <odoo>
     <data>
         <record id="view_hs_event_tree" model="ir.ui.view">
-          <field name="name">hs.event.tree</field>
-          <field name="model">hs.event</field>
-          <field name="arch" type="xml">
-              <tree string="事项">
-                  <field name="sequence" widget="handle"/>
-                  <field name="name"/>
-                  <field name="start_date"/>
-                  <field name="end_date"/>
-                  <field name="event_category_id"/>
-                  <field name="department_id"/>
-                  <field name="charge_id"/>
-                  <field name="player_ids" widget="many2many_tags"/>
-                  <field name="attachment_ids"/>
-                  <field name="state"/>
-                  <field name="score"/>
-              </tree>
-          </field>
-      </record>
+            <field name="name">hs.event.tree</field>
+            <field name="model">hs.event</field>
+            <field name="arch" type="xml">
+                <tree string="事项">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="event_category_id"/>
+                    <field name="department_id"/>
+                    <field name="charge_id"/>
+                    <field name="player_ids" widget="many2many_tags"/>
+                    <field name="attachment_ids"/>
+                    <field name="state"/>
+                    <field name="score"/>
+                </tree>
+            </field>
+        </record>
 
         <record id="view_hs_event_form" model="ir.ui.view">
-          <field name="name">hs.event.form</field>
-          <field name="model">hs.event</field>
-          <field name="arch" type="xml">
-              <form string="事项">
-                  <header>
-                      <button name="action_submit_annotation" string="批注" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','in',['draft'])]}" groups="hs_event_tracking.group_hs_event_tracking_manager" />
-                      <button name="action_submit_score" string="打分" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','done')]}" groups="hs_event_tracking.group_hs_event_tracking_manager" />
-                      <field name="state" widget="statusbar" options="{'clickable': '1'}" statusbar_visible="draft,doing,done" />
-                  </header>
-                  <sheet>
-                      <field name="event_category_id"/>
-                      <div class="oe_title">
-                          <label for="name" class="oe_edit_only"/>
-                          <h1>
-                              <field name="name" placeholder="标题"/>
-                          </h1>
-                      </div>
-                      <group>
-                          <group>
-                              <field name="start_date"/>
-                              <field name="department_id"/>
-                              <field name="player_ids" widget="many2many_tags"/>
-                              <field name="score" style="width:40px; text-align:center;" />
-                          </group>
-                          <group>
-                              <field name="end_date"/>
-                              <field name="charge_id"/>
-                              <field name="attachment_ids" mode="kanban" />
-                          </group>
-                      </group>
-                      <notebook>
-                          <page string="描述">
-                              <group>
-                                  <field name="content"/>
-                              </group>
-                          </page>
-                      </notebook>
-                  </sheet>
-              </form>
-          </field>
-      </record>
+            <field name="name">hs.event.form</field>
+            <field name="model">hs.event</field>
+            <field name="arch" type="xml">
+                <form string="事项">
+                    <header>
+                        <button name="action_submit_annotation" string="批注" type="object"
+                                class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','in',['draft'])]}"
+                                groups="hs_event_tracking.group_hs_event_tracking_manager"/>
+                        <button name="action_submit_score" string="打分" type="object"
+                                class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','done')]}"
+                                groups="hs_event_tracking.group_hs_event_tracking_manager"/>
+                        <button name="action_submit_note" string="撰写进度日志" type="object"
+                                class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','doing')]}"
+                                groups="hs_event_tracking.group_hs_event_tracking_department_user"/>
+
+                        <field name="state" widget="statusbar" options="{'clickable': '1'}"
+                               statusbar_visible="draft,doing,done"/>
+                    </header>
+                    <sheet>
+                        <field name="event_category_id" placeholder="事项类型" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        <h1>
+                            <field name="name" placeholder="标题" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="start_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="department_id"/>
+                                <field name="player_ids" widget="many2many_tags" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="score"
+                                       style="width:40px; text-align:center; font-weight: bold; font-size:18px;"/>
+                            </group>
+                            <group>
+                                <field name="end_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="charge_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <!--<field name="attachment_ids" mode="kanban" />-->
+                            </group>
+                        </group>
+                        <div>
+                            <label for="attachment_ids"/>
+                            <field name="attachment_ids" widget="many2many_binary" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </div>
+                        <notebook>
+                            <page string="描述">
+                                <group>
+                                    <field name="content" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                        <notebook>
+                            <page string="进度日志">
+                                <field name="note_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <!--<field name="description"/>-->
+                                        <field name="date_note"/>
+                                        <field name="employee_id"/>
+                                        <field name="percent_complete"/>
+                                        <field name="attachment_ids"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <notebook>
+                            <page string="批注内容">
+                                <field name="annotation_ids" readonly="1">
+                                    <tree>
+                                        <field name="content"/>
+                                        <field name="annotation_date"/>
+                                        <field name="attachment_ids"/>
+                                        <field name="employee_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <group class="group_log_access">
+                            <group>
+                                <field name="create_date" readonly="1"/>
+                                <field name="create_uid" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="write_date" readonly="1"/>
+                                <field name="write_uid" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
 
         <record id="hs_event_search" model="ir.ui.view">
-         <field name="name">hs.event.search</field>
-         <field name="model">hs.event</field>
-          <field name="arch" type="xml">
-              <search string="事项">
-                  <field name="name" />
-              </search>
-         </field>
-      </record>
+            <field name="name">hs.event.search</field>
+            <field name="model">hs.event</field>
+            <field name="arch" type="xml">
+                <search string="事项">
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="department_id"/>
+                    <field name="event_category_id"/>
+                    <filter string="当月" name="cmonth"
+                            domain="[('create_date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-01'))]"/>
+                    <filter string="上月" name="lmonth"
+                            domain="[('create_date', '&gt;=', (datetime.datetime.now().replace(day=1)-datetime.timedelta(days=1)).strftime('%Y-%m-01')), ('create_date', '&lt;', datetime.datetime.now().strftime('%Y-%m-01'))]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="事项类型" name="event_category" domain="[]"
+                                context="{'group_by':'event_category_id'}"/>
+                        <filter string="创建者" name="create_by" domain="[]" context="{'group_by':'create_uid'}"/>
+                        <filter string="责任人" name="charge" domain="[]" context="{'group_by':'charge_id'}"/>
+                        <filter string="部门" name="department" domain="[]" context="{'group_by':'department_id'}"/>
+                        <filter string="状态" name="state" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
 
         <record id="action_hs_event" model="ir.actions.act_window">
-          <field name="name">事项</field>
-          <field name="type">ir.actions.act_window</field>
-          <field name="res_model">hs.event</field>
-          <field name="view_mode">tree,form</field>
-          <field name="help" type="html">
-            <p class="oe_view_nocontent_create">
-              <!-- Add Text Here -->
-            </p><p>
-              <!-- More details about what a user can do with this object will be OK -->
-            </p>
-          </field>
-      </record>
+            <field name="name">事项</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hs.event</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
 
         <menuitem id="menu_hs_event" name="追踪事项" parent="hs_event_tracking_management_menu"
                   action="action_hs_event" sequence="0"/>
+
+        <record id="view_hs_event_annotation_form" model="ir.ui.view">
+            <field name="name">批注</field>
+            <field name="model">hs.event.annotation</field>
+            <field name="arch" type="xml">
+                <form string="批注">
+                    <sheet>
+                        <group colspan="4">
+                            <field name="content"/>
+                        </group>
+                        <group>
+                            <field name="annotation_date"/>
+                        </group>
+                        <group>
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </group>
+                        <group>
+                            <field name="employee_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hs_event_note_form" model="ir.ui.view">
+            <field name="name">进度日志</field>
+            <field name="model">hs.event.note</field>
+            <field name="arch" type="xml">
+                <form string="进度日志">
+                    <sheet>
+                        <group colspan="4">
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="date_note"/>
+                        </group>
+                        <group>
+                            <field name="employee_id"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </group>
+                        <group>
+                            <field name="percent_complete"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
         <record model="ir.ui.view" id="hs_event_score_wizard_view">
             <field name="name">Event Score Wizard</field>
@@ -98,13 +217,90 @@
 
                     <group>
                         <group>
-                            <field name="score" />
+                            <field name="score"/>
                         </group>
                         <group></group>
                     </group>
 
                     <footer>
-                        <button type="object" name="save_button" string="确认" class="oe_highlight" />
+                        <button type="object" name="save_button" string="确认" class="oe_highlight"/>
+                        <button special="cancel" string="取消"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hs_event_annotation_wizard_view">
+            <field name="name">Event Annotation Wizard</field>
+            <field name="model">hs.event.annotation.wizard</field>
+            <field name="arch" type="xml">
+                <form string="批注向导">
+
+                    <field name="content" colspan="4" placeholder="内容"/>
+                    <div>
+                        <label for="attachment_ids"/>
+                        <field name="attachment_ids" widget="many2many_binary"/>
+                    </div>
+
+                    <footer>
+                        <button type="object" name="save_button" string="确认" class="oe_highlight"/>
+                        <button special="cancel" string="取消"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hs_event_note_wizard_view">
+            <field name="name">Event Note Wizard</field>
+            <field name="model">hs.event.note.wizard</field>
+            <field name="arch" type="xml">
+                <form string="撰写日志向导">
+                    <notebook>
+                        <page string="进度日志详情">
+                            <field name="note_ids" readonly="1">
+                                <tree>
+                                    <field name="employee_id" />
+                                    <field name="name" />
+                                    <field name="date_note" />
+                                    <field name="attachment_ids" />
+                                    <field name="percent_complete" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                    <notebook>
+                        <page string="添加进度日志">
+                            <h1>
+                                <field name="name" colspan="4" placeholder="标题"/>
+                            </h1>
+                            <div>
+                                <label for="description"/>
+                                <field name="description" colspan="4" placeholder="进度详情"/>
+                            </div>
+                            <div>
+                                <label for="attachment_ids"/>
+                                <field name="attachment_ids" widget="many2many_binary"/>
+                            </div>
+                            <div>
+                                <div style="display:inline-block; width:120px;">
+                                    <div>
+                                        <label for="percent_complete"/>
+                                        <field name="percent_complete" />
+                                    </div>
+                                </div>
+                                <div style="display:inline-block;">
+                                    <div>
+                                        <label for="percent_last"/>
+                                        <field name="percent_last" readonly="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </page>
+                    </notebook>
+
+                    <footer>
+                        <button type="object" name="save_button" string="确认" class="oe_highlight"/>
                         <button special="cancel" string="取消"/>
                     </footer>
                 </form>
