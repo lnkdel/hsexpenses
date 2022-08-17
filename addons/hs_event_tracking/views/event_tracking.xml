@@ -306,5 +306,27 @@
                 </form>
             </field>
         </record>
+
+        <record id="hs_event_cancel_wizard_view" model="ir.ui.view">
+            <field name="name">Event Cancel Wizard</field>
+            <field name="model">hs.event.cancel.wizard</field>
+            <field name="arch" type="xml">
+                <form string="事项取消向导">
+                    <notebook>
+                        <page string="事项列表">
+                            <field name="event_ids"/>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button type="object" name="save_button" string="确认" class="oe_highlight" confirm="确认取消吗?"/>
+                        <button special="cancel" string="取消"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window id="hs_event_cancel_wizard_action" name="取消事项"
+                    src_model="hs.event"
+                    res_model="hs.event.cancel.wizard" view_mode="form" target="new" multi="True"
+                    groups="hs_event_tracking.group_hs_event_tracking_manager"/>
     </data>
 </odoo>

@@ -187,6 +187,34 @@ class EventNote(models.Model):
             self.percent_last = notes[0].percent_complete
 
 
+class EventCancelWizard(models.TransientModel):
+    _name = 'hs.event.cancel.wizard'
+    _description = '事项取消向导'
+
+    event_ids = fields.Many2many('hs.event', string='事项')
+
+    @api.model
+    def default_get(self, fields):
+        res = {}
+        active_ids = self._context.get('active_ids')
+        if active_ids:
+            events = self.env['hs.event'].search_read(
+                domain=[('id', 'in', active_ids)], fields=['id', 'state'])
+            ids = [s['id'] for s in list(filter(lambda s: s['state'] == 'doing', events))]
+            res = {'event_ids': ids}
+        return res
+
+    def save_button(self):
+        self.ensure_one()
+        active_ids = self._context.get('active_ids')
+        if active_ids:
+            events = self.env['hs.event'].search([
+                ('id', 'in', active_ids),
+                ('state', '=', 'doing')])
+            events.write({'state': 'cancel'})
+        return {'type': 'ir.actions.act_window_close'}
+
+
 class EventScoreWizard(models.TransientModel):
     _name = 'hs.event.score.wizard'
     _description = '打分向导'
