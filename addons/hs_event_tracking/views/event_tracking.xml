@@ -71,7 +71,7 @@
                         </notebook>
                         <notebook>
                             <page string="进度日志">
-                                <field name="note_ids">
+                                <field name="note_ids" attrs="{'readonly': [('state', 'not in', ['draft', 'doing'])]}">
                                     <tree>
                                         <field name="name"/>
                                         <!--<field name="description"/>-->

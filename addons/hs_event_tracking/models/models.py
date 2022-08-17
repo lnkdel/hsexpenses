@@ -53,7 +53,7 @@ class Event(models.Model):
     score = fields.Integer(string="分数", required=False, readonly=True, track_visibility='onchange')
     department_id = fields.Many2one('hs.base.department', string="部门", related='charge_id.department_id', store=True)
     sequence = fields.Integer(string="排序", default=0)
-    active = fields.Boolean(string='是否显示?', default=True)
+    active = fields.Boolean(string='是否显示?', default=True, track_visibility='onchange')
 
     @api.multi
     def write(self, values):
