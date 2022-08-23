@@ -42,8 +42,9 @@
             name="hs_expenses_v2.report_expense_v2_entertain_list"
             file="hs_expenses_v2.report_expense_v2_entertain_list"
             paperformat="hs_expenses.paperformat_month_expense"
-            print_report_name="Entertain Expenses List"
+            print_report_name="'EntertainExpensesSummary'"
         />
+
         <report
             id="action_report_hs_expenses_v2_special_list"
             string="Special Report List"
@@ -52,7 +53,7 @@
             name="hs_expenses_v2.report_expense_v2_special_list"
             file="hs_expenses_v2.report_expense_v2_special_list"
             paperformat="hs_expenses.paperformat_month_expense"
-            print_report_name="Special Expenses List"
+            print_report_name="'Special Expenses List'"
         />
     </data>
 </odoo>
