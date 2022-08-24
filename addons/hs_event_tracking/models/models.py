@@ -3,6 +3,8 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 import datetime
+import itertools
+import operator
 
 
 class EventCategory(models.Model):
@@ -55,6 +57,36 @@ class Event(models.Model):
     sequence = fields.Integer(string="排序", default=0)
     active = fields.Boolean(string='是否显示?', default=True, track_visibility='onchange')
 
+    percent_complete = fields.Float(string="完成百分比", compute='_compute_event_progress')
+    days_not_update = fields.Integer(string="未更新天数", compute='_compute_event_progress')
+
+    @api.one
+    @api.depends('note_ids')
+    def _compute_event_progress(self):
+        per_complete = 0.00
+        if self.note_ids is not None and len(self.note_ids) > 0:
+            grouped_data = dict([(emp, [n.percent_complete for n in note_group])
+                                for emp, note_group in itertools.groupby(self.note_ids,
+                                                                         key=operator.itemgetter('employee_id'))])
+            per_complete = min([max(item[1]) for item in list(grouped_data.items())])
+
+            # per_complete = min(note.percent_complete for note in self.note_ids) if len(grouped_data) > 1 else \
+            #     max(list(grouped_data.items())[0][1])
+            # delay_days = (datetime.datetime.today() -
+            #               datetime.datetime.strptime(max(note.date_note for note in self.note_ids),
+            #                                          '%Y-%m-%d %H:%M:%S')).days
+            # 以上为odoo11写法
+            delay_days = (datetime.datetime.today() - max(note.date_note for note in self.note_ids)).days
+        else:
+            # delay_days = (datetime.datetime.today() -
+            #               datetime.datetime.combine(datetime.datetime.strptime(self.start_date, '%Y-%m-%d'),
+            #                                         datetime.time.min)).days
+            # 以上为odoo11写法
+            delay_days = (datetime.datetime.today() -
+                          datetime.datetime.combine(self.start_date, datetime.time.min)).days
+        self.percent_complete = per_complete
+        self.days_not_update = delay_days
+
     @api.multi
     def write(self, values):
         if 'state' in values:
@@ -92,6 +124,8 @@ class Event(models.Model):
         records = self.env['hs.event'].search([('state', '=', 'doing')])
         for record in records:
             now = datetime.datetime.now()
+            # end_time = datetime.datetime.combine(datetime.datetime.strptime(record.end_date, '%Y-%m-%d'),datetime.time.max)
+            # 以上为odoo11写法
             end_time = datetime.datetime.combine(record.end_date, datetime.time.max)
             if now > end_time:
                 record.state = "delay"
@@ -185,6 +219,12 @@ class EventNote(models.Model):
         notes = self.env['hs.event.note'].search([('event_id', '=', self.event_id.id), ('employee_id', '=', self.employee_id.id)], order='percent_complete desc')
         if notes is not None and len(notes) > 0:
             self.percent_last = notes[0].percent_complete
+
+    @api.constrains('percent_complete')
+    def _check_percent_complete(self):
+        for record in self:
+            if record.percent_complete > 100 or record.percent_complete < 0:
+                raise ValidationError("进度百分比必须在0～100之间！")
 
 
 class EventCancelWizard(models.TransientModel):
@@ -295,6 +335,9 @@ class EventNoteWizard(models.TransientModel):
         att_ids = [attachment_id.id for attachment_id in self.attachment_ids]
         if self.percent_complete == 0 or self.percent_complete < self.percent_last:
             raise UserError("请输入合适的完成百分比！")
+        elif self.percent_complete > 100 or self.percent_complete < 0:
+            raise ValidationError("进度百分比必须在0～100之间！")
+
         note = self.env['hs.event.note'].create({'event_id': event_id,
                                                  'name': self.name,
                                                  'date_note': datetime.datetime.now(),

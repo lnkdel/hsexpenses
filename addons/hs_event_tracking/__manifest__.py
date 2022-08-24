@@ -15,10 +15,10 @@
     'version': '0.1',
     'depends': ['hs_base'],
     'data': [
+        'security/groups.xml',
         'views/views.xml',
         'views/event_tracking.xml',
-        'views/templates.xml',
-        'security/groups.xml',
+        # 'views/templates.xml',
         'security/ir.model.access.csv',
         'security/rules.xml',
         'data/ir.cron.xml',

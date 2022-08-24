@@ -17,5 +17,16 @@
             <field name="domain_force">[('state', '!=', 'draft'), '|', ('charge_id.user_id', '=', user.id), ('player_ids.user_id', 'child_of', user.id)]</field>
             <field name="groups" eval="[(4, ref('hs_event_tracking.group_hs_event_tracking_department_user'))]"/>
         </record>
+
+        <record id="hs_event_note_department_user_rule" model="ir.rule">
+            <field name="name">department user role for hs event note</field>
+            <field name="model_id" ref="model_hs_event_note"/>
+            <field name="groups" eval="[(4, ref('hs_event_tracking.group_hs_event_tracking_department_user'))]"/>
+            <field name="perm_read" eval="0"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="domain_force">[('employee_id.user_id', '=', user.id)]</field>
+        </record>
     </data>
 </odoo>

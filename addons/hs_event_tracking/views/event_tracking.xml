@@ -16,6 +16,8 @@
                     <field name="attachment_ids"/>
                     <field name="state"/>
                     <field name="score"/>
+                    <field name="percent_complete"/>
+                    <field name="days_not_update"/>
                 </tree>
             </field>
         </record>
@@ -36,7 +38,7 @@
                                 class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','doing')]}"
                                 groups="hs_event_tracking.group_hs_event_tracking_department_user"/>
 
-                        <field name="state" widget="statusbar" options="{'clickable': '1'}"
+                        <field name="state" widget="statusbar" clickable="1"
                                statusbar_visible="draft,doing,done"/>
                     </header>
                     <sheet>
@@ -47,7 +49,7 @@
                         <group>
                             <group>
                                 <field name="start_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                                <field name="department_id"/>
+                                <field name="department_id" readonly="1"/>
                                 <field name="player_ids" widget="many2many_tags" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="score"
                                        style="width:40px; text-align:center; font-weight: bold; font-size:18px;"/>
