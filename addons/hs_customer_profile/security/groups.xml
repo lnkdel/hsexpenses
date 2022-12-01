@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_hs_sales_customer_manager" model="res.groups">
+            <field name="name">[HS Sales] 客户档案管理员</field>
+            <field name="category_id" ref="base.module_category_hengshen_sales"/>
+            <field name="comment">The user will be able to manage all records in hs_customer_profile module.</field>
+        </record>
+    </data>
+</odoo>
