@@ -60,6 +60,8 @@
                     </group>
                     <label for="management_description" class="oe_edit_only"/>
                     <field name="management_description" placeholder="主要经营范围"/>
+                    <label for="affiliated_companies" class="oe_edit_only"/>
+                    <field name="affiliated_companies" placeholder="关联公司情况"/>
                     <notebook>
                         <page string="公司主要人员">
                             <field name="customer_employee_ids">
@@ -73,17 +75,17 @@
                     </notebook>
                     <notebook>
                         <page string="客户经营情况">
-                            <group>
-                                <group>
+                            <field name="condition_business_ids">
+                                <tree editable="bottom">
                                     <field name="device_type"/>
-                                    <field name="requirement_one_year_product"/>
-                                    <field name="customer_customer_name"/>
-                                </group>
-                                <group>
                                     <field name="device_count"/>
+                                    <field name="product_type"/>
+                                    <field name="requirement_one_year_product"/>
                                     <field name="requirement_one_year"/>
-                                </group>
-                            </group>
+                                    <field name="requirement_one_year_unit"/>
+                                    <field name="customer_customer_name"/>
+                                </tree>
+                            </field>
                         </page>
                     </notebook>
                     <notebook>
@@ -94,8 +96,10 @@
                                     <field name="product_name"/>
                                     <field name="product_type"/>
                                     <field name="price"/>
-                                    <field name="amount_of_transaction"/>
-                                    <field name="amount"/>
+                                    <field name="amount_of_transaction" sum="total amount of transaction"/>
+                                    <field name="unit"/>
+                                    <field name="amount" sum="total Amount"/>
+                                    <field name="remark"/>
                                 </tree>
                             </field>
                         </page>

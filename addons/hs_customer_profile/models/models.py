@@ -4,6 +4,20 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from datetime import datetime
 
+UNIT_SELECT_ITEM = [('t', '吨'), ('sq.m', '平方米'), ('m', '米'), ('e.a.', '件'), ]
+
+PRODUCT_TYPE = [('carbon fibre', '碳纤维'),
+                ('prepreg', '预浸料'),
+                ('fabric', '织物'),
+                ('part', '制品制件'),
+                ('carbon plate', '拉挤碳板'),
+                ('technical service', '技术服务'), ]
+
+YEAR_SELECT_ITEM = [('2018', '2018'), ('2019', '2019'),
+                    ('2020', '2020'), ('2021', '2021'),
+                    ('2022', '2022'), ('2023', '2023'),
+                    ('2024', '2024'), ('2025', '2025'), ]
+
 
 class CustomerIndustry(models.Model):
     _name = 'hs.customer.industry'
@@ -21,10 +35,35 @@ class CustomerEmployee(models.Model):
     _rec_name = 'name'
     _description = '客户人员'
 
-    name = fields.Char(string="名称")
+    name = fields.Char(string="姓名")
     position = fields.Char(string="职位", required=False, )
     mobile = fields.Char(string="联系方式", required=False, )
     customer_id = fields.Many2one(comodel_name="hs.customer.profile", string="客户公司", required=False, )
+
+
+class ConditionBusiness(models.Model):
+    _name = 'hs.customer.condition.business'
+    _description = '客户经营情况'
+
+    device_type = fields.Char(string="设备类型")
+    device_count = fields.Char(string="设备数量")
+    product_type = fields.Selection(string="需求产品大类", selection=PRODUCT_TYPE, required=False, )
+    requirement_one_year_product = fields.Char(string="需求产品型号")
+    requirement_one_year = fields.Float(string="年需求量")
+    requirement_one_year_unit = fields.Selection(string="单位", selection=UNIT_SELECT_ITEM, required=False, )
+    customer_customer_name = fields.Char(string="终端客户", required=False, )
+    customer_id = fields.Many2one(comodel_name="hs.customer.profile", string="客户公司", required=False, )
+
+    @api.onchange('product_type')
+    def _onchange_product_type(self):
+        if self.product_type == 'carbon fibre' or self.product_type == 'fabric':
+            self.requirement_one_year_unit = 't'
+        elif self.product_type == 'prepreg' or self.product_type == 'carbon plate':
+            self.requirement_one_year_unit = 'sq.m'
+        elif self.product_type == 'part':
+            self.requirement_one_year_unit = 'e.a.'
+        else:
+            self.requirement_one_year_unit = ''
 
 
 class CustomerTransactionRecord(models.Model):
@@ -32,18 +71,32 @@ class CustomerTransactionRecord(models.Model):
     _description = '成交记录'
 
     # transaction_time = fields.Datetime(string="成交时间", required=False, )
-    transaction_year = fields.Date(string="成交时间", required=False, )
+    # transaction_year = fields.Date(string="成交时间", required=False, )
+    transaction_year = fields.Selection(string="成交时间(年)", selection=YEAR_SELECT_ITEM,
+                                        default=lambda self: str(fields.Date(self).today().year), required=False, )
     product_name = fields.Char(string="购买重点产品", required=False, )
-    product_type = fields.Selection(string="产品大类", selection=[('carbon fibre', '碳纤维'),
-                                                              ('prepreg', '预浸料'),
-                                                              ('fabric', '织物'),
-                                                              ('part', '制品制件'),
-                                                              ('carbon plate', '拉挤碳板'),
-                                                              ('technical service', '技术服务'), ], required=False, )
+    product_type = fields.Selection(string="产品大类", selection=PRODUCT_TYPE, required=False, )
     price = fields.Float(string="成交单价", required=False, )
-    amount_of_transaction = fields.Float(string="成交数量(吨)", required=False, )
+    amount_of_transaction = fields.Float(string="成交数量", required=False, )
+    unit = fields.Selection(string="单位", selection=UNIT_SELECT_ITEM, required=False, )
     amount = fields.Float(string="成交金额", required=False, )
     customer_id = fields.Many2one(comodel_name="hs.customer.profile", string="客户公司", required=False, )
+    remark = fields.Text(string="备注", required=False, )
+
+    @api.onchange('amount_of_transaction', 'price')
+    def _onchange_price(self):
+        self.amount = self.amount_of_transaction * self.price
+
+    @api.onchange('product_type')
+    def _onchange_product_type(self):
+        if self.product_type == 'carbon fibre' or self.product_type == 'fabric':
+            self.unit = 't'
+        elif self.product_type == 'prepreg' or self.product_type == 'carbon plate':
+            self.unit = 'sq.m'
+        elif self.product_type == 'part':
+            self.unit = 'e.a.'
+        else:
+            self.unit = ''
 
 
 class CustomerProfile(models.Model):
@@ -77,18 +130,21 @@ class CustomerProfile(models.Model):
     employee_count = fields.Integer(string="人员规模", required=False, )
     industry_id = fields.Many2one(comodel_name="hs.customer.industry", string="所属行业", required=False, )
     sale_area_id = fields.Many2one('hs.sale.area', string='所在区域', )
-    device_type = fields.Char(string="设备类型")
-    device_count = fields.Char(string="设备数量")
-    requirement_one_year = fields.Float(string="年需求量")
-    customer_customer_name = fields.Char(string="终端客户", required=False, )
-    requirement_one_year_unit = fields.Char(string="年需求量单位")
-    requirement_one_year_product = fields.Char(string="需求产品")
+    # device_type = fields.Char(string="设备类型")
+    # device_count = fields.Char(string="设备数量")
+    # requirement_one_year = fields.Float(string="年需求量")
+    # customer_customer_name = fields.Char(string="终端客户", required=False, )
+    # requirement_one_year_unit = fields.Char(string="年需求量单位")
+    # requirement_one_year_product = fields.Char(string="需求产品")
     management_description = fields.Text(string="主要经营范围", required=False, )
+    affiliated_companies = fields.Text(string="关联公司情况", required=False, )
     customer_employee_ids = fields.One2many(comodel_name="hs.customer.employee", inverse_name="customer_id",
                                             string="主要人员", required=False, )
 
     transaction_record_ids = fields.One2many(comodel_name="hs.customer.transaction.record", inverse_name="customer_id",
                                              string="成交记录", required=False, )
+    condition_business_ids = fields.One2many(comodel_name="hs.customer.condition.business", inverse_name="customer_id",
+                                             string="经营情况", required=False, )
     current_remark = fields.Text(string="公司目前政策", required=False, )
 
     _sql_constraints = [
