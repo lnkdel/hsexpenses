@@ -12,8 +12,8 @@ class CustomerIndustry(models.Model):
     _order = 'sequence'
 
     name = fields.Char(string="名称")
-    sequence = fields.Integer(string="Sequence", default=10)
-    active = fields.Boolean(string='Active', default=True)
+    sequence = fields.Integer(string="排序", default=10)
+    active = fields.Boolean(string='有效?', default=True)
 
 
 class CustomerEmployee(models.Model):
@@ -36,7 +36,10 @@ class CustomerTransactionRecord(models.Model):
     product_name = fields.Char(string="购买重点产品", required=False, )
     product_type = fields.Selection(string="产品大类", selection=[('carbon fibre', '碳纤维'),
                                                               ('prepreg', '预浸料'),
-                                                              ('carbon plate', '拉挤碳板'), ], required=False, )
+                                                              ('fabric', '织物'),
+                                                              ('part', '制品制件'),
+                                                              ('carbon plate', '拉挤碳板'),
+                                                              ('technical service', '技术服务'), ], required=False, )
     price = fields.Float(string="成交单价", required=False, )
     amount_of_transaction = fields.Float(string="成交数量(吨)", required=False, )
     amount = fields.Float(string="成交金额", required=False, )
