@@ -4,7 +4,7 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from datetime import datetime
 
-UNIT_SELECT_ITEM = [('t', '吨'), ('sq.m', '平方米'), ('m', '米'), ('e.a.', '件'), ]
+UNIT_SELECT_ITEM = [('kg', '公斤'), ('sq.m', '平方米'), ('m', '米'), ('e.a.', '件'), ]
 
 PRODUCT_TYPE = [('carbon fibre', '碳纤维'),
                 ('prepreg', '预浸料'),
@@ -48,7 +48,7 @@ class ConditionBusiness(models.Model):
     device_type = fields.Char(string="设备类型")
     device_count = fields.Char(string="设备数量")
     product_type = fields.Selection(string="需求产品大类", selection=PRODUCT_TYPE, required=False, )
-    requirement_one_year_product = fields.Char(string="需求产品型号")
+    requirement_one_year_product = fields.Char(string="需求产品规格")
     requirement_one_year = fields.Float(string="年需求量")
     requirement_one_year_unit = fields.Selection(string="单位", selection=UNIT_SELECT_ITEM, required=False, )
     customer_customer_name = fields.Char(string="终端客户", required=False, )
@@ -57,7 +57,7 @@ class ConditionBusiness(models.Model):
     @api.onchange('product_type')
     def _onchange_product_type(self):
         if self.product_type == 'carbon fibre' or self.product_type == 'fabric':
-            self.requirement_one_year_unit = 't'
+            self.requirement_one_year_unit = 'kg'
         elif self.product_type == 'prepreg' or self.product_type == 'carbon plate':
             self.requirement_one_year_unit = 'sq.m'
         elif self.product_type == 'part':
@@ -74,7 +74,7 @@ class CustomerTransactionRecord(models.Model):
     # transaction_year = fields.Date(string="成交时间", required=False, )
     transaction_year = fields.Selection(string="成交时间(年)", selection=YEAR_SELECT_ITEM,
                                         default=lambda self: str(fields.Date(self).today().year), required=False, )
-    product_name = fields.Char(string="购买重点产品", required=False, )
+    product_name = fields.Char(string="购买重点产品规格", required=False, )
     product_type = fields.Selection(string="产品大类", selection=PRODUCT_TYPE, required=False, )
     price = fields.Float(string="成交单价", required=False, )
     amount_of_transaction = fields.Float(string="成交数量", required=False, )
@@ -90,7 +90,7 @@ class CustomerTransactionRecord(models.Model):
     @api.onchange('product_type')
     def _onchange_product_type(self):
         if self.product_type == 'carbon fibre' or self.product_type == 'fabric':
-            self.unit = 't'
+            self.unit = 'kg'
         elif self.product_type == 'prepreg' or self.product_type == 'carbon plate':
             self.unit = 'sq.m'
         elif self.product_type == 'part':

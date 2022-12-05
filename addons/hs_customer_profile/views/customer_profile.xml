@@ -93,10 +93,10 @@
                             <field name="transaction_record_ids">
                                 <tree editable="bottom">
                                     <field name="transaction_year"/>
-                                    <field name="product_name"/>
                                     <field name="product_type"/>
+                                    <field name="product_name"/>
                                     <field name="price"/>
-                                    <field name="amount_of_transaction" sum="total amount of transaction"/>
+                                    <field name="amount_of_transaction"/>
                                     <field name="unit"/>
                                     <field name="amount" sum="total Amount"/>
                                     <field name="remark"/>
