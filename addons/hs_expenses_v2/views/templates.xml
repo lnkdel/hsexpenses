@@ -256,7 +256,7 @@
                                 <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:15%;">申请日期</th>
                                 <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">部门</th>
                                 <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:15%;">招待日期</th>
-                                <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">申请金额</th>
+                                <!--<th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">申请金额</th>-->
                                 <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">审核金额</th>
                             </tr>
                         </thead>
@@ -277,9 +277,9 @@
                                 <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
                                     <span t-field="o.entertain_date"/>
                                 </td>
-                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
-                                    <span t-field="o.applicant_amount"/>
-                                </td>
+                                <!--<td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">-->
+                                    <!--<span t-field="o.applicant_amount"/>-->
+                                <!--</td>-->
                                 <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
                                     <span t-field="o.audit_amount"/>
                                 </td>
@@ -289,9 +289,9 @@
 
                                 </td>
 
-                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
-                                    <t t-esc="sum(l.applicant_amount for l in docs)"/>
-                                </td>
+                                <!--<td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">-->
+                                    <!--<t t-esc="sum(l.applicant_amount for l in docs)"/>-->
+                                <!--</td>-->
                                 <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
                                     <t t-esc="sum(l.audit_amount for l in docs)"/>
                                 </td>
