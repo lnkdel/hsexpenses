@@ -35,7 +35,8 @@ class SpecialApplication(models.Model):
             s.bank_name = s.applicant_id.bank_name
             s.bank_account = s.applicant_id.bank_account
             s.sale_area_id = s.applicant_id.sale_area_id
-            s.sale_market_id = s.applicant_id.sale_market_id
+            if s.applicant_id.sale_market_id:
+                s.sale_market_id = s.applicant_id.sale_market_id
             if s.applicant_id.department_id:
                 if '技术服务' in s.applicant_id.department_id.name:
                     category_quality = self.env['hs.expense.category'].search([('name', '=', '质量')], limit=1)
