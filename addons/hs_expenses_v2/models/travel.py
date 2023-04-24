@@ -100,6 +100,11 @@ class TravelDetail(models.Model):
             de.audit_amount = de.total_cost - de.audit_cut_amount
             # de.travel_application_id.audit_cut_amount += de.audit_cut_amount
 
+    @api.onchange('total_cost')
+    def _onchange_total_cost(self):
+        for de in self:
+            de.audit_amount = de.total_cost - de.audit_cut_amount
+
     start_date = fields.Date(string='Start Date', required=True, default=lambda self: fields.Date.context_today(self))
     end_date = fields.Date(string='End Date', required=True, default=lambda self: fields.Date.context_today(self))
     from_city = fields.Many2one("hs.base.city", string="From City", required=True)
