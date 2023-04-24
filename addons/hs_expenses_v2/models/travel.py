@@ -195,7 +195,9 @@ class TravelApplication(models.Model):
     @api.onchange('audit_cut_amount')
     def _onchange_audit_cut_amount(self):
         for travel in self:
-            travel.audit_amount = travel.total_cost - self.audit_cut_amount
+            for de in travel.travel_detail_ids:
+                de.audit_amount = de.total_cost - de.audit_cut_amount
+            travel.audit_amount = travel.total_cost - travel.audit_cut_amount
 
     destination_city = fields.Many2one("hs.base.city", string="Destination City", required=True)
     travel_detail_ids = fields.One2many('hs.expense.v2.travel.detail', 'travel_application_id', string='Travel Details')
