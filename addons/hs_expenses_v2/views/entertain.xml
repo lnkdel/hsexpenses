@@ -13,6 +13,7 @@
                 <field name="customer_company_no"/>
                 <field name="customer_count"/>
                 <field name="applicant_amount"/>
+                <!--<field name="audit_amount" attrs="{'invisible':[('state', 'not in', ['confirmed', 'audited'])]}"/>-->
                 <field name="state"/>
                 <field name="expense_category_ids"/>
                 <field name="project_id"/>
@@ -201,6 +202,43 @@
                     src_model="hs.expense.v2.entertain.application"
                     res_model="hs.expense.v2.entertain.batch.approve.wizard" view_mode="form" target="new" multi="True"
                     groups="hs_expenses_v2.group_hs_expenses_vice_president"/>
+
+         <record id="batch_audit_entertain_application_wizard_view" model="ir.ui.view">
+            <field name="name">hs.expense.v2.entertain.batch.audit.wizard</field>
+            <field name="model">hs.expense.v2.entertain.batch.audit.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Batch Audit Application Wizard">
+                    <notebook>
+                        <page string="待审核单据">
+                            <field name="application_ids">
+                                <tree editable="bottom">
+                                    <field name="name" readonly="1"/>
+                                    <field name="applicant_id" readonly="1"/>
+                                    <field name="applicant_date" readonly="1"/>
+                                    <field name="applicant_department_id" readonly="1"/>
+                                    <field name="entertain_date" readonly="1"/>
+                                    <field name="customer_company_no" readonly="1"/>
+                                    <field name="customer_count" readonly="1"/>
+                                    <field name="applicant_amount" readonly="1"/>
+                                    <field name="audit_amount"/>
+                                    <field name="state" readonly="1"/>
+                                    <field name="expense_category_ids" readonly="1"/>
+                                    <field name="project_id" readonly="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button type="object" name="batch_audit_button" string="批准" class="oe_highlight"/>
+                        <button special="cancel" string="取消"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window id="batch_audit_entertain_application_wizard_action" name="批量审核向导"
+                    src_model="hs.expense.v2.entertain.application"
+                    res_model="hs.expense.v2.entertain.batch.audit.wizard" view_mode="form" target="new" multi="True"
+                    groups="hs_expenses.group_hs_expenses_financial_officer"/>
 
         <record model="ir.ui.view" id="hs_expense_v2_entertain_back_wizard_view">
             <field name="name">Travel Application Wizard</field>
