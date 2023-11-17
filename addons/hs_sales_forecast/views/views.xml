@@ -1,0 +1,164 @@
+<odoo>
+    <data>
+        <menuitem
+                id="menu_hs_sales_forecast_root"
+                name="销售预测"
+                sequence="12"/>
+
+        <menuitem
+                id="setting_menu"
+                name="设置"
+                parent="menu_hs_sales_forecast_root"
+                sequence="9999"/>
+
+        <record id="view_hs_product_category_tree" model="ir.ui.view">
+            <field name="name">hs.product.category.tree</field>
+            <field name="model">hs.product.category</field>
+            <field name="arch" type="xml">
+                <tree string="产品大类">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hs_product_category_form" model="ir.ui.view">
+            <field name="name">hs.product.category.form</field>
+            <field name="model">hs.product.category</field>
+            <field name="arch" type="xml">
+                <form string="产品大类">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hs_product_category" model="ir.actions.act_window">
+            <field name="name">产品大类</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hs.product.category</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+                id="menu_hs_product_category"
+                action="action_hs_product_category"
+                parent="setting_menu"
+                sequence="0"/>
+
+        <record id="view_hs_product_type_tree" model="ir.ui.view">
+            <field name="name">hs.product.type.tree</field>
+            <field name="model">hs.product.type</field>
+            <field name="arch" type="xml">
+                <tree string="产品小类">
+                    <field name="sequence" widget="handle"/>
+                    <field name="category_id"/>
+                    <field name="name"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hs_product_type_form" model="ir.ui.view">
+            <field name="name">hs.product.type.form</field>
+            <field name="model">hs.product.type</field>
+            <field name="arch" type="xml">
+                <form string="产品小类">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="category_id"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hs_product_type" model="ir.actions.act_window">
+            <field name="name">产品小类</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hs.product.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+                id="menu_hs_product_type"
+                action="action_hs_product_type"
+                parent="setting_menu"
+                sequence="1"/>
+
+        <record id="view_hs_product_specification_tree" model="ir.ui.view">
+            <field name="name">hs.product.specification.tree</field>
+            <field name="model">hs.product.specification</field>
+            <field name="arch" type="xml">
+                <tree string="产品规格">
+                    <field name="sequence" widget="handle"/>
+                    <field name="type_id"/>
+                    <field name="name"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hs_product_specification_form" model="ir.ui.view">
+            <field name="name">hs.product.specification.form</field>
+            <field name="model">hs.product.specification</field>
+            <field name="arch" type="xml">
+                <form string="产品规格">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="type_id"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hs_product_specification" model="ir.actions.act_window">
+            <field name="name">产品规格</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hs.product.specification</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+                id="menu_hs_product_specification"
+                action="action_hs_product_specification"
+                parent="setting_menu"
+                sequence="2"/>
+
+
+    </data>
+</odoo>
