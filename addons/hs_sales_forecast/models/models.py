@@ -66,19 +66,20 @@ class SalesForecast(models.Model):
     month_selection = fields.Selection(string="月份", selection=MONTH_SELECTION,
                                        default=datetime.now().month, required=True, )
     customer_id = fields.Many2one(comodel_name="hs.customer.profile", string="客户名称", required=True, )
-    project_number = fields.Char(string="关联项目", required=True, )
-    incremental_flag = fields.Selection(string="项目增/存量", selection=[('incremental', '增量'), ('stock', '存量'), ],
+    project_number = fields.Char(string="关联项目", required=False, )
+    incremental_flag = fields.Selection(string="业务增/存量（是否新业务）", selection=[('incremental', '增量'), ('stock', '存量'), ],
                                         required=True, )
     customer_factory = fields.Char(string="客户工厂(终端)", required=True)
     customer_sale_area = fields.Selection(string="客户销售区域(省份/国别)", selection=PROVINCES, required=True)
     evaluate_price = fields.Float(string="合同基准价预测",  required=True, )
     month_requirement = fields.Float(string="客户总需求量", required=True, )
-    expected_salable_wallet_share = fields.Float(string="预计可销售钱包份额，%", required=True, )
+    expected_salable_wallet_share = fields.Float(string="预计可销售钱包份额，%",
+                                                 compute='_compute_expected_salable_wallet_share')
     estimated_sales_volume = fields.Float(string="当月预计销售量", required=True, )
-    next_month_w1 = fields.Float(string="次月第1周", required=True, )
-    next_month_w2 = fields.Float(string="次月第2周", required=True, )
-    next_month_w3 = fields.Float(string="次月第3周", required=True, )
-    next_month_w4 = fields.Float(string="次月第4周", required=True, )
+    next_month_w1 = fields.Float(string="第1周", required=False, )
+    next_month_w2 = fields.Float(string="第2周", required=False, )
+    next_month_w3 = fields.Float(string="第3周", required=False, )
+    next_month_w4 = fields.Float(string="第4周", required=False, )
     unit = fields.Selection(string="单位", selection=[('kg', 'kg'), ('sq.m', 'sq.m'), ('件', '件'), ('m', 'm'), ],
                             required=True, )
     current_month_price = fields.Float(string="当月销售价格", required=True, )
@@ -90,7 +91,7 @@ class SalesForecast(models.Model):
     place_of_delivery = fields.Char(string="发货工厂", required=True, )
     payment_method = fields.Selection(string="付款方式", selection=[('cash', '现结'), ('credit', '赊销'), ], required=True, )
     payment_days = fields.Integer(string="付款天数", required=True, )
-    cooperate = fields.Selection(string="是否合作", selection=[('yes', '是'), ('no', '否'), ], required=True, )
+    cooperate = fields.Selection(string="是否合作（是否新客户）", selection=[('yes', '是'), ('no', '否'), ], required=True, )
     remark = fields.Text(string="备注", required=False, )
 
     @api.one
@@ -98,6 +99,12 @@ class SalesForecast(models.Model):
     def _compute_current_month_total_sales(self):
         for rec in self:
             rec.current_month_total_sales = rec.current_month_price * rec.estimated_sales_volume
+
+    @api.one
+    @api.depends('estimated_sales_volume', 'month_requirement')
+    def _compute_expected_salable_wallet_share(self):
+        if self.month_requirement != 0:
+            self.expected_salable_wallet_share = (self.estimated_sales_volume / self.month_requirement) * 100
 
     @api.onchange('product_category_id')
     def _onchange_product_category_id(self):

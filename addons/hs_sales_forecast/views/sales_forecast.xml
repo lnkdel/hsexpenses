@@ -78,7 +78,7 @@
                         </group>
                     </group>
                     <notebook>
-                        <page string="次月预计">
+                        <page string="周预测">
                             <group>
                                 <group>
                                     <field name="next_month_w1"/>
