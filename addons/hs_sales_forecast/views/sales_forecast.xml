@@ -1,0 +1,140 @@
+<odoo>
+    <record id="view_hs_sales_forecast_tree" model="ir.ui.view">
+        <field name="name">hs.sales.forecast.tree</field>
+        <field name="model">hs.sales.forecast</field>
+        <field name="arch" type="xml">
+            <tree string="销售预测">
+                <field name="product_category_id"/>
+                <field name="product_type_id"/>
+                <field name="product_specification_id"/>
+                <field name="market_id"/>
+                <field name="military_selection"/>
+                <field name="manager_id"/>
+                <field name="year_selection"/>
+                <field name="month_selection"/>
+                <field name="customer_id"/>
+                <field name="project_number"/>
+                <field name="incremental_flag"/>
+                <field name="customer_factory"/>
+                <field name="customer_sale_area"/>
+                <field name="evaluate_price"/>
+                <field name="month_requirement"/>
+                <field name="expected_salable_wallet_share"/>
+                <field name="estimated_sales_volume"/>
+                <field name="next_month_w1"/>
+                <field name="next_month_w2"/>
+                <field name="next_month_w3"/>
+                <field name="next_month_w4"/>
+                <field name="unit"/>
+                <field name="current_month_price"/>
+                <field name="current_month_total_sales"/>
+                <field name="currency"/>
+                <field name="customer_category"/>
+                <field name="place_of_delivery"/>
+                <field name="payment_method"/>
+                <field name="payment_days"/>
+                <field name="cooperate"/>
+                <field name="remark"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_hs_sales_forecast_form" model="ir.ui.view">
+        <field name="name">hs.sales.forecast.form</field>
+        <field name="model">hs.sales.forecast</field>
+        <field name="arch" type="xml">
+            <form string="销售预测">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="product_category_id"/>
+                            <field name="product_specification_id"/>
+                            <field name="military_selection"/>
+                            <field name="year_selection"/>
+                            <field name="customer_id"/>
+                            <field name="incremental_flag"/>
+                            <field name="customer_sale_area"/>
+                            <field name="month_requirement"/>
+                            <field name="estimated_sales_volume"/>
+                            <field name="current_month_price"/>
+                            <field name="currency"/>
+                            <field name="place_of_delivery"/>
+                            <field name="payment_days"/>
+                            <field name="remark"/>
+                        </group>
+                        <group>
+                            <field name="product_type_id"/>
+                            <field name="market_id"/>
+                            <field name="manager_id"/>
+                            <field name="month_selection"/>
+                            <field name="project_number"/>
+                            <field name="customer_factory"/>
+                            <field name="evaluate_price"/>
+                            <field name="expected_salable_wallet_share"/>
+                            <field name="unit"/>
+                            <field name="current_month_total_sales"/>
+                            <field name="customer_category"/>
+                            <field name="payment_method"/>
+                            <field name="cooperate"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="次月预计">
+                            <group>
+                                <group>
+                                    <field name="next_month_w1"/>
+                                    <field name="next_month_w3"/>
+                                </group>
+                                <group>
+                                    <field name="next_month_w2"/>
+                                    <field name="next_month_w4"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+    <record id="hs_sales_forecast_search" model="ir.ui.view">
+        <field name="name">hs.sales.forecast.search</field>
+        <field name="model">hs.sales.forecast</field>
+        <field name="arch" type="xml">
+            <search string="销售预测">
+                <field name="product_category_id"/>
+                <field name="manager_id"/>
+                <filter string="当月" name="cmonth"
+                        domain="[('create_date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-01'))]"/>
+                <filter string="上月" name="lmonth"
+                        domain="[('create_date', '&gt;=', (datetime.datetime.now().replace(day=1)-datetime.timedelta(days=1)).strftime('%Y-%m-01')), ('create_date', '&lt;', datetime.datetime.now().strftime('%Y-%m-01'))]"/>
+                <group expand="0" string="Group By">
+                    <filter string="创建者" name="create_by" domain="[]" context="{'group_by':'create_uid'}"/>
+                    <filter string="客户名称" name="customer" domain="[]" context="{'group_by':'customer_id'}"/>
+                    <filter string="业务经理" name="customer" domain="[]" context="{'group_by':'manager_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_hs_sales_forecast" model="ir.actions.act_window">
+        <field name="name">销售预测</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hs.sales.forecast</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p>
+            <p>
+                <!-- More details about what a user can do with this object will be OK -->
+            </p>
+        </field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem
+            id="hs_sales_forecast_management_menu"
+            name="销售预测"
+            parent="menu_hs_sales_forecast_root"
+            action="action_hs_sales_forecast"
+            sequence="1"/>
+</odoo>
