@@ -28,6 +28,7 @@
         'views/sales_forecast.xml',
         # 'views/templates.xml',
         'security/ir.model.access.csv',
+        'security/rules.xml',
     ],
     'installable': True,
     'application': True,

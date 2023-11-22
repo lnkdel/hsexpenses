@@ -5,19 +5,51 @@ from datetime import datetime
 
 
 PROVINCES = [
-    ('bj', '北京市'), ('tj', '天津市'), ('sh', '上海市'), ('cq', '重庆市'), ('he', '河北省'), ('sx', '山西省'),
-    ('ln', '辽宁省'), ('jl', '吉林省'), ('hlj', '黑龙江省'), ('js', '江苏省'), ('zj', '浙江省'), ('ah', '安徽省'),
-    ('fj', '福建省'), ('jx', '江西省'), ('sd', '山东省'), ('hen', '河南省'), ('hb', '湖北省'), ('hn', '湖南省'),
-    ('gd', '广东省'),  ('hi', '海南省'),  ('sc', '四川省'), ('gz', '贵州省'), ('yn', '云南省'),  ('sn', '陕西省'),
-    ('gs', '甘肃省'), ('qh', '青海省'), ('tw', '台湾省'), ('nm', '内蒙古自治区'), ('gx', '广西壮族自治区'),
-    ('xz', '西藏自治区'), ('nx', '宁夏回族自治区'), ('xj', '新疆维吾尔自治区'), ('xg', '香港特别行政区'),
-    ('am', '澳门特别行政区'), ('gw', '国外')
+    ('bj', '北京市'),
+    ('tj', '天津市'),
+    ('sh', '上海市'),
+    ('cq', '重庆市'),
+    ('he', '河北省'),
+    ('sx', '山西省'),
+    ('ln', '辽宁省'),
+    ('jl', '吉林省'),
+    ('hlj', '黑龙江省'),
+    ('js', '江苏省'),
+    ('zj', '浙江省'),
+    ('ah', '安徽省'),
+    ('fj', '福建省'),
+    ('jx', '江西省'),
+    ('sd', '山东省'),
+    ('hen', '河南省'),
+    ('hb', '湖北省'),
+    ('hn', '湖南省'),
+    ('gd', '广东省'),
+    ('hi', '海南省'),
+    ('sc', '四川省'),
+    ('gz', '贵州省'),
+    ('yn', '云南省'),
+    ('sn', '陕西省'),
+    ('gs', '甘肃省'),
+    ('qh', '青海省'),
+    ('tw', '台湾省'),
+    ('nm', '内蒙古自治区'),
+    ('gx', '广西壮族自治区'),
+    ('xz', '西藏自治区'),
+    ('nx', '宁夏回族自治区'),
+    ('xj', '新疆维吾尔自治区'),
+    ('xg', '香港特别行政区'),
+    ('am', '澳门特别行政区'),
+    ('gw', '国外')
 ]
+this_year = datetime.now().year
+YEAR_SELECTION = [(this_year + i, str(this_year + i)) for i in range(-1, 4)]
+MONTH_SELECTION = [(i, str(i)) for i in range(1, 13)]
 
 
 class SalesForecast(models.Model):
     _name = 'hs.sales.forecast'
-    _description = 'Sales Forecast'
+    _description = '销售预测'
+    _order = 'create_date DESC'
 
     @api.model
     def _get_default_employee(self):
@@ -30,15 +62,8 @@ class SalesForecast(models.Model):
     military_selection = fields.Selection(string="业务部门", selection=[('military', '军品'),
                                                                     ('not military', '非军品'), ], required=True, )
     manager_id = fields.Many2one('hs.base.employee', string='业务经理', required=True, default=_get_default_employee, )
-    year_selection = fields.Selection(string="年份", selection=[(2022, '2022'),
-                                                              (2023, '2023'),
-                                                              (2024, '2024'),
-                                                              (2025, '2025'),
-                                                              (2026, '2026')],
-                                      default=datetime.now().year, required=True, )
-    month_selection = fields.Selection(string="月份", selection=[(1, '1'), (2, '2'), (3, '3'), (4, '4'),
-                                                               (5, '5'), (6, '6'), (7, '7'), (8, '8'),
-                                                               (9, '9'), (10, '10'), (11, '11'), (12, '12')],
+    year_selection = fields.Selection(string="年份", selection=YEAR_SELECTION, default=this_year, required=True, )
+    month_selection = fields.Selection(string="月份", selection=MONTH_SELECTION,
                                        default=datetime.now().month, required=True, )
     customer_id = fields.Many2one(comodel_name="hs.customer.profile", string="客户名称", required=True, )
     project_number = fields.Char(string="关联项目", required=True, )
@@ -54,7 +79,7 @@ class SalesForecast(models.Model):
     next_month_w2 = fields.Float(string="次月第2周", required=True, )
     next_month_w3 = fields.Float(string="次月第3周", required=True, )
     next_month_w4 = fields.Float(string="次月第4周", required=True, )
-    unit = fields.Selection(string="单位", selection=[('kg', 'kg'), ('sq.m', 'sq.m'), ('件', '件'), ('m', 'm') ],
+    unit = fields.Selection(string="单位", selection=[('kg', 'kg'), ('sq.m', 'sq.m'), ('件', '件'), ('m', 'm'), ],
                             required=True, )
     current_month_price = fields.Float(string="当月销售价格", required=True, )
     current_month_total_sales = fields.Float(string="月销售总额", compute='_compute_current_month_total_sales')
