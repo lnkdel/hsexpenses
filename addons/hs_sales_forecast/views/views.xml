@@ -9,6 +9,7 @@
                 id="setting_menu"
                 name="设置"
                 parent="menu_hs_sales_forecast_root"
+                groups="group_hs_sales_forecast_manager"
                 sequence="9999"/>
 
         <record id="view_hs_product_category_tree" model="ir.ui.view">
@@ -158,6 +159,13 @@
                 action="action_hs_product_specification"
                 parent="setting_menu"
                 sequence="2"/>
+
+        <menuitem
+            id="menu_hs_sale_market"
+            name="销售市场"
+            action="hs_expenses.action_hs_sale_market"
+            parent="setting_menu"
+            sequence="3"/>
 
 
     </data>

@@ -88,7 +88,7 @@ class SalesForecast(models.Model):
     customer_category = fields.Selection(string="客户属性", selection=[('end customer', '终端客户'),
                                                                    ('trader','贸易商'),
                                                                    ('agent','代理商')], required=True)
-    place_of_delivery = fields.Char(string="发货工厂", required=True, )
+    place_of_delivery = fields.Char(string="发货工厂", required=True)
     payment_method = fields.Selection(string="付款方式", selection=[('cash', '现结'), ('credit', '赊销'), ], required=True, )
     payment_days = fields.Integer(string="付款天数", required=True, )
     cooperate = fields.Selection(string="是否合作（是否新客户）", selection=[('yes', '是'), ('no', '否'), ], required=True, )
