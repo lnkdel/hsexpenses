@@ -85,7 +85,7 @@ class EntertainApplication(models.Model):
     #                                           domain=_get_company_partner_domain)
 
     customer_company_no = fields.Many2one('hs.base.customer.number', required=True, string='Customer Company Number')
-    customer_count = fields.Integer(string='Customer Count', default=1)
+    customer_count = fields.Integer(string='Customer Count', default=1, required=True)
 
     entertain_date = fields.Date(string='Entertain Date', required=True,
                                  default=lambda self: fields.Date.context_today(self))
@@ -119,6 +119,14 @@ class EntertainApplication(models.Model):
     ], string='Status', copy=False, index=True, readonly=True, store=True, default='draft',
         help="Status of the expense.")
 
+    entertain_type = fields.Selection([
+        ('business hospitality1', '商务招待1档（600元/人）'),
+        ('business hospitality2', '商务招待2档（500元/人）'),
+        ('business hospitality3', '商务招待3档（300元/人）'),
+        ('official hospitality', '公务招待（160元/人）'),
+        ('default', ''),
+    ], string='招待类型', required=True, default='default')
+
     expense_category_ids = fields.Many2many(comodel_name="hs.expense.category",
                                             relation="hs_expense_entertain_category_rel",
                                             column1="entertain_id",
@@ -143,6 +151,7 @@ class EntertainApplication(models.Model):
         ('potential', 'Potential')
     ], string='Cause Type', default='bos', required=True)
     reason = fields.Text()
+    approved_records = fields.Text()
 
     @api.model
     def create(self, vals):
@@ -223,6 +232,14 @@ class EntertainApplication(models.Model):
         if any(expense.state != 'draft' for expense in self):
             raise UserError(_("You cannot report twice the same line!"))
 
+        entertain_standard_dict = {'business hospitality1': 600, 'business hospitality2': 500,
+                                   'business hospitality3': 300, 'official hospitality': 160}
+        if self.entertain_type == 'default':
+            raise UserError(_("招待类型不能为NULL！"))
+        elif self.customer_count and self.applicant_amount and \
+                self.applicant_amount > entertain_standard_dict[self.entertain_type] * int(self.customer_count):
+            raise UserError(_("申请金额超标！"))
+
         countersign = self.env['hs.expense.v2.countersign.entertain']
         reviewers = []
 
@@ -286,7 +303,10 @@ class EntertainApplication(models.Model):
     def action_approved_expenses(self):  # 副总裁审批完成，提交到报销经办人申请报销（填写报销相关内容）
         if any(expense.state != 'reported2' for expense in self):
             raise UserError(_("You cannot approve twice the same line!"))
-        self.write({'state': 'approved'})
+
+        approved_text = self.record_approve()
+
+        self.write({'state': 'approved', 'approved_records': approved_text})
         return True
 
     @api.multi
@@ -313,7 +333,9 @@ class EntertainApplication(models.Model):
         if self.reimbursement_amount > self.applicant_amount:
             raise UserError(_("Reimbursement amount must be less than or equal to the application amount!"))
 
-        self.write({'audit_amount': self.reimbursement_amount, 'state': 'confirmed'})
+        approved_text = self.record_approve()
+
+        self.write({'audit_amount': self.reimbursement_amount, 'state': 'confirmed', 'approved_records': approved_text})
         return True
 
     @api.multi
@@ -342,7 +364,10 @@ class EntertainApplication(models.Model):
         if self.audit_amount <= 0:
             raise UserError(_("Please enter the correct audit amount!"))
 
-        self.write({'state': 'audited', 'audit_date': datetime.datetime.now()})
+        approved_text = self.record_approve()
+
+        self.write({'state': 'audited', 'audit_date': datetime.datetime.now(),
+                    'approved_records': approved_text})
         return True
 
     @api.multi
@@ -393,6 +418,47 @@ class EntertainApplication(models.Model):
             },
             'target': 'new'
         }
+
+    def _tranlate_state_name(self, name):
+        if name == 'draft':
+            return '待提交'
+        elif name == 'reported':
+            return '已提交'
+        elif name == 'reported2':
+            return '已审阅'
+        elif name == 'approved':
+            return '已批准'
+        elif name == 'confirmed':
+            return '已确认'
+        elif name == 'audited':
+            return '已审核'
+        elif name == 'countersign':
+            return '会签'
+        elif name == 'done':
+            return '已支付'
+
+    def _next_state(self, name):
+        if name == 'reported2':
+            return 'approved'
+        elif name == 'approved':
+            return 'confirmed'
+        elif name == 'confirmed':
+            return 'audited'
+
+    def record_approve(self):  # 记录审核过程
+        operator = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
+
+        origin_state = self._tranlate_state_name(self.state)
+        now_state = self._tranlate_state_name(self._next_state(self.state))
+
+        approved_text = '%s - %s \n%s ---> %s' % \
+                        (operator.complete_name if operator.complete_name else 'Administrator',
+                         (datetime.datetime.now() + datetime.timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S'),
+                         origin_state,
+                         now_state)
+        if self.approved_records:
+            approved_text = self.approved_records + '\n\n' + approved_text
+        return approved_text
 
 
 class EntertainApplicationBackWizard(models.TransientModel):
@@ -478,8 +544,19 @@ class BatchApprovedEntertainApplicationWizard(models.TransientModel): # 王胜�
         applications = self.env['hs.expense.v2.entertain.application'].search([
             ('id', 'in', active_ids),
             ('state', '=', 'reported2')])
+        operator = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
         for app in applications:
-            app.write({'state': 'approved'})
+            origin_state = '已审阅'
+            now_state = '已批准'
+
+            approved_text = '%s - %s \n%s ---> %s' % \
+                            (operator.complete_name if operator.complete_name else 'Administrator',
+                             (datetime.datetime.now() + datetime.timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S'),
+                             origin_state,
+                             now_state)
+            if app.approved_records:
+                approved_text = app.approved_records + '\n\n' + approved_text
+            app.write({'state': 'approved', 'approved_records': approved_text})
         return {'type': 'ir.actions.act_window_close'}
 
 
@@ -511,8 +588,19 @@ class BatchauditedEntertainApplicationWizard(models.TransientModel): # 财务周
         applications = self.env['hs.expense.v2.entertain.application'].search([
             ('id', 'in', active_ids),
             ('state', '=', 'confirmed')])
+        operator = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
         for app in applications:
-            app.write({'state': 'audited'})
+            origin_state = '已确认'
+            now_state = '已审核'
+
+            approved_text = '%s - %s \n%s ---> %s' % \
+                            (operator.complete_name if operator.complete_name else 'Administrator',
+                             (datetime.datetime.now() + datetime.timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S'),
+                             origin_state,
+                             now_state)
+            if app.approved_records:
+                approved_text = app.approved_records + '\n\n' + approved_text
+            app.write({'state': 'audited', 'approved_records': approved_text})
         return {'type': 'ir.actions.act_window_close'}
 
 

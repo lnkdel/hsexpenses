@@ -70,6 +70,7 @@
                                 <field name="sale_market_id" attrs="{'readonly': [('state', '!=', 'draft')], 'required':[('state', '=', 'draft')]}" />
                                 <field name="project_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="customer_company_no" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="entertain_type" attrs="{'readonly': [('state', '!=', 'draft')]}" />
                                 <field name="customer_count" attrs="{'readonly': [('state', '!=', 'draft')]}" />
                                 <field name="attachment_ids" mode="kanban" attrs="{'readonly': [('state', '!=', 'draft')]}" />
                             </group>
@@ -122,6 +123,11 @@
                         <notebook>
                             <page string="退回记录">
                                 <field name="reason" attrs="{'readonly': True}" options="{'no_create_edit': True}"/>
+                            </page>
+                        </notebook>
+                        <notebook>
+                            <page string="审批记录">
+                                <field name="approved_records" attrs="{'readonly': True}" options="{'no_create_edit': True}"/>
                             </page>
                         </notebook>
                     </sheet>
