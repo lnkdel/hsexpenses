@@ -122,7 +122,7 @@ class EntertainApplication(models.Model):
     entertain_type = fields.Selection([
         ('business hospitality1', '商务招待1档（600元/人）'),
         ('business hospitality2', '商务招待2档（500元/人）'),
-        ('business hospitality3', '商务招待3档（300元/人）'),
+        ('business hospitality3', '商务招待3档（400元/人）'),
         ('official hospitality', '公务招待（160元/人）'),
         ('default', ''),
     ], string='招待类型', required=True, default='default')
