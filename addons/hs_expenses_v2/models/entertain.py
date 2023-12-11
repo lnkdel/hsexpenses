@@ -122,7 +122,7 @@ class EntertainApplication(models.Model):
     entertain_type = fields.Selection([
         ('business hospitality1', '商务招待1档（600元/人）'),
         ('business hospitality2', '商务招待2档（500元/人）'),
-        ('business hospitality3', '商务招待3档（300元/人）'),
+        ('business hospitality3', '商务招待3档（400元/人）'),
         ('official hospitality', '公务招待（160元/人）'),
         ('default', ''),
     ], string='招待类型', required=True, default='default')
@@ -233,7 +233,7 @@ class EntertainApplication(models.Model):
             raise UserError(_("You cannot report twice the same line!"))
 
         entertain_standard_dict = {'business hospitality1': 600, 'business hospitality2': 500,
-                                   'business hospitality3': 300, 'official hospitality': 160}
+                                   'business hospitality3': 400, 'official hospitality': 160}
         if self.entertain_type == 'default':
             raise UserError(_("招待类型不能为NULL！"))
         elif self.customer_count and self.applicant_amount and \

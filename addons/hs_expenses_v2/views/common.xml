@@ -52,8 +52,8 @@
           <field name="model">hs.base.customer.number</field>
           <field name="arch" type="xml">
             <tree>
-                <field name="name"/>
-                <field name="sequence"/>
+                <field name="name" attrs="{'invisible':True}"/>
+                <field name="sequence" attrs="{'invisible':True}"/>
             </tree>
           </field>
         </record>
