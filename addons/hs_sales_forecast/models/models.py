@@ -57,7 +57,7 @@ class SalesForecast(models.Model):
 
     product_category_id = fields.Many2one(comodel_name="hs.product.category", string="产品大类", required=True, )
     product_type_id = fields.Many2one(comodel_name="hs.product.type", string="产品小类", required=True,)
-    product_specification_id = fields.Many2one(comodel_name="hs.product.specification", string="产品规格", required=True, )
+    product_specification_id = fields.Many2one(comodel_name="hs.product.specification", string="产品规格", required=False, )
     market_id = fields.Many2one(comodel_name="hs.sale.market", string="市场", required=True, )
     military_selection = fields.Selection(string="业务部门", selection=[('military', '军品'),
                                                                     ('not military', '非军品'), ], required=True, )
@@ -111,17 +111,18 @@ class SalesForecast(models.Model):
         self.product_type_id = False
         self.product_specification_id = False
         if self.product_category_id:
-            return {'domain': {'product_type_id': [('category_id', '=', self.product_category_id.id)]}}
+            return {'domain': {'product_type_id': [('category_id', '=', self.product_category_id.id)],
+                               'product_specification_id': [('category_id', '=', self.product_category_id.id)]}}
         else:
-            return {'domain': {'product_type_id': []}}
+            return {'domain': {'product_type_id': [], 'product_specification_id': []}}
 
-    @api.onchange('product_type_id')
-    def _onchange_product_type_id(self):
-        self.product_specification_id = False
-        if self.product_type_id:
-            return {'domain': {'product_specification_id': [('type_id', '=', self.product_type_id.id)]}}
-        else:
-            return {'domain': {'product_specification_id': []}}
+    # @api.onchange('product_type_id')
+    # def _onchange_product_type_id(self):
+    #     self.product_specification_id = False
+    #     if self.product_type_id:
+    #         return {'domain': {'product_specification_id': [('type_id', '=', self.product_type_id.id)]}}
+    #     else:
+    #         return {'domain': {'product_specification_id': []}}
 
 
 class ProductCategory(models.Model):
@@ -130,8 +131,12 @@ class ProductCategory(models.Model):
     _description = '产品大类'
 
     name = fields.Char(string="名称", required=True,)
-    sequence = fields.Integer(string="Sequence", default=10)
-    active = fields.Boolean(string='Active', default=True)
+    sequence = fields.Integer(string="排序", default=10)
+    active = fields.Boolean(string='是否显示？', default=True)
+
+    _sql_constraints = [
+        ('name_unique', 'unique(name)', "名称已经存在！")
+    ]
 
 
 class ProductType(models.Model):
@@ -141,8 +146,12 @@ class ProductType(models.Model):
 
     name = fields.Char(string="名称", required=True,)
     category_id = fields.Many2one(comodel_name="hs.product.category", string="产品大类", required=True, )
-    sequence = fields.Integer(string="Sequence", default=10)
-    active = fields.Boolean(string='Active', default=True)
+    sequence = fields.Integer(string="排序", default=10)
+    active = fields.Boolean(string='是否显示？', default=True)
+
+    _sql_constraints = [
+        ('name_unique', 'unique(name)', "名称已经存在！")
+    ]
 
 
 class ProductSpecification(models.Model):
@@ -151,9 +160,14 @@ class ProductSpecification(models.Model):
     _description = '产品规格'
 
     name = fields.Char(string="名称", required=True,)
-    type_id = fields.Many2one(comodel_name="hs.product.type", string="产品小类", required=True, )
-    sequence = fields.Integer(string="Sequence", default=10)
-    active = fields.Boolean(string='Active', default=True)
+    # type_id = fields.Many2one(comodel_name="hs.product.type", string="产品小类", required=True, )
+    category_id = fields.Many2one(comodel_name="hs.product.category", string="产品大类", required=True, )
+    sequence = fields.Integer(string="排序", default=10)
+    active = fields.Boolean(string='是否显示？', default=True)
+
+    _sql_constraints = [
+        ('name_unique', 'unique(name, category_id)', "该类别下名称已经存在！")
+    ]
 
 
 

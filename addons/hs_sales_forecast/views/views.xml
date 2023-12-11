@@ -116,7 +116,7 @@
             <field name="arch" type="xml">
                 <tree string="产品规格">
                     <field name="sequence" widget="handle"/>
-                    <field name="type_id"/>
+                    <field name="category_id"/>
                     <field name="name"/>
                     <field name="active"/>
                 </tree>
@@ -135,7 +135,7 @@
                                 <field name="sequence"/>
                             </group>
                             <group>
-                                <field name="type_id"/>
+                                <field name="category_id"/>
                                 <field name="active"/>
                             </group>
                         </group>
