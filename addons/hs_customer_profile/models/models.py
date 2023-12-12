@@ -13,10 +13,9 @@ PRODUCT_TYPE = [('carbon fibre', '碳纤维'),
                 ('carbon plate', '拉挤碳板'),
                 ('technical service', '技术服务'), ]
 
-YEAR_SELECT_ITEM = [('2018', '2018'), ('2019', '2019'),
-                    ('2020', '2020'), ('2021', '2021'),
-                    ('2022', '2022'), ('2023', '2023'),
-                    ('2024', '2024'), ('2025', '2025'), ]
+this_year = datetime.now().year
+
+YEAR_SELECT_ITEM = [(this_year + i, str(this_year + i)) for i in range(-5, 4)]
 
 
 class CustomerIndustry(models.Model):
@@ -72,8 +71,8 @@ class CustomerTransactionRecord(models.Model):
 
     # transaction_time = fields.Datetime(string="成交时间", required=False, )
     # transaction_year = fields.Date(string="成交时间", required=False, )
-    transaction_year = fields.Selection(string="成交时间(年)", selection=YEAR_SELECT_ITEM,
-                                        default=lambda self: str(fields.Date(self).today().year), required=False, )
+    transaction_year = fields.Selection(string="成交时间(年)", selection=YEAR_SELECT_ITEM, default=this_year,
+                                        required=False, )
     product_name = fields.Char(string="购买重点产品规格", required=False, )
     product_type = fields.Selection(string="产品大类", selection=PRODUCT_TYPE, required=False, )
     price = fields.Float(string="成交单价", required=False, )
@@ -151,3 +150,14 @@ class CustomerProfile(models.Model):
         ('name_uniq', 'unique(name)', '客户名称已存在!'),
         ('customer_no_id_uniq', 'unique(customer_no_id)', '客户编码已存在!'),
     ]
+
+    @api.onchange('customer_no_id')
+    def _onchange_customer_no_id(self):
+        self.name = False
+        if self.customer_no_id:
+            customer_no_name = self.customer_no_id.name
+            index = customer_no_name.rfind(".")
+            if index != -1:
+                self.name = customer_no_name[index+4:]
+            else:
+                self.name = customer_no_name

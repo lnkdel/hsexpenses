@@ -91,8 +91,17 @@
                             </group>
                         </page>
                     </notebook>
+                    <group name="group_log_access">
+                        <group>
+                            <field name="create_date" string="创建时间" readonly="1"/>
+                            <field name="create_uid" string="创建人" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="write_date" string="最后编辑时间" readonly="1"/>
+                            <field name="write_uid" string="最后编辑人" readonly="1"/>
+                        </group>
+                    </group>
                 </sheet>
-
             </form>
         </field>
     </record>
