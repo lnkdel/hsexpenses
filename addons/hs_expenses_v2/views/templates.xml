@@ -242,23 +242,21 @@
                             <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
                                 <table style="width:100%;">
                                     <tr style="height: 30px;">
-                                        <td  width="50%">会签人</td>
-                                        <td  width="50%">是否批准</td>
+                                        <td width="50%">会签人</td>
+                                        <td width="50%">是否批准</td>
                                     </tr>
-                                    <t t-foreach="docs" t-as="oo">
-                                        <t t-foreach="oo.countersign_ids" t-as="countersign_id">
-                                            <tr style="height: 30px;">
-                                               <td>
-                                                    <span t-field="countersign_id.employee_id"/>
-                                                </td>
-                                                <t t-if="countersign_id.is_approved">
-                                                    <td>是</td>
-                                                </t>
-                                                <t t-if="not countersign_id.is_approved">
-                                                    <td>否</td>
-                                                </t>
-                                            </tr>
-                                        </t>
+                                    <t t-foreach="o.countersign_ids" t-as="countersign_id">
+                                        <tr style="height: 30px;">
+                                            <td>
+                                                <span t-field="countersign_id.employee_id"/>
+                                            </td>
+                                            <t t-if="countersign_id.is_approved">
+                                                <td>是</td>
+                                            </t>
+                                            <t t-if="not countersign_id.is_approved">
+                                                <td>否</td>
+                                            </t>
+                                        </tr>
                                     </t>
                                 </table>
                             </div>
