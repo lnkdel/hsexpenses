@@ -150,7 +150,7 @@ class ProductType(models.Model):
     active = fields.Boolean(string='是否显示？', default=True)
 
     _sql_constraints = [
-        ('name_unique', 'unique(name)', "名称已经存在！")
+        ('name_unique', 'unique(name, category_id)', "该类别下名称已经存在！")
     ]
 
 
