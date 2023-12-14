@@ -204,7 +204,7 @@
                                 </table>
                             </div>
 
-                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:20px; padding-bottom:10px;">
+                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:0px; padding-bottom:5px;">
                                 财务审核信息
                             </div>
                             <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
@@ -217,7 +217,7 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:20px; padding-bottom:10px;">
+                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:0px; padding-bottom:5px;">
                                 报销信息
                             </div>
                             <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
@@ -236,7 +236,7 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:20px; padding-bottom:10px;">
+                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:0px; padding-bottom:5px;">
                                 会签信息
                             </div>
                             <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
@@ -261,7 +261,7 @@
                                 </table>
                             </div>
                             <t t-if="o.approved_records">
-                                <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:20px; padding-bottom:10px;">
+                                <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:0px; padding-bottom:5px;">
                                     审批记录
                                 </div>
                                 <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
