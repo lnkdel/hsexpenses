@@ -82,8 +82,9 @@ class SalesForecast(models.Model):
     next_month_w4 = fields.Float(string="第4周", required=False, group_operator=None)
     unit = fields.Selection(string="单位", selection=[('kg', 'kg'), ('sq.m', 'sq.m'), ('件', '件'), ('m', 'm'), ],
                             required=True, )
-    current_month_price = fields.Float(string="当月销售价格", required=True, group_operator='sum')
-    current_month_total_sales = fields.Float(string="月销售总额", compute='_compute_current_month_total_sales')
+    current_month_price = fields.Float(string="当月销售价格", required=True, group_operator=None)
+    current_month_total_sales = fields.Float(string="月销售总额", compute='_compute_current_month_total_sales',
+                                             store=True, group_operator='sum')
     currency = fields.Selection(string="币种", selection=[('rmb', '人民币'), ('other', '外币'), ], required=True, )
     customer_category = fields.Selection(string="客户属性", selection=[('end customer', '终端客户'),
                                                                    ('trader','贸易商'),
