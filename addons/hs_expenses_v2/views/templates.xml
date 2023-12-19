@@ -204,7 +204,7 @@
                                 </table>
                             </div>
 
-                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:20px; padding-bottom:10px;">
+                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:0px; padding-bottom:0px;">
                                 财务审核信息
                             </div>
                             <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
@@ -217,7 +217,7 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:20px; padding-bottom:10px;">
+                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:0px; padding-bottom:0px;">
                                 报销信息
                             </div>
                             <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
@@ -236,13 +236,13 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:20px; padding-bottom:10px;">
-                                会签信息
+                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:0px; padding-bottom:0px;">
+                                审批信息
                             </div>
                             <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
                                 <table style="width:100%;">
                                     <tr style="height: 30px;">
-                                        <td width="50%">会签人</td>
+                                        <td width="50%">审阅人</td>
                                         <td width="50%">是否批准</td>
                                     </tr>
                                     <t t-foreach="o.countersign_ids" t-as="countersign_id">
@@ -261,9 +261,6 @@
                                 </table>
                             </div>
                             <t t-if="o.approved_records">
-                                <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:20px; padding-bottom:10px;">
-                                    审批记录
-                                </div>
                                 <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
                                     <td><span t-field="o.approved_records" /></td>
                                 </div>
