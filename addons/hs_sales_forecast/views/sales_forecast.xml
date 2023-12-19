@@ -14,9 +14,9 @@
                 <field name="month_selection"/>
                 <field name="customer_id"/>
                 <field name="project_number"/>
-                <field name="incremental_flag"/>
-                <field name="customer_factory"/>
-                <field name="customer_sale_area"/>
+                <!--<field name="incremental_flag"/>-->
+                <!--<field name="customer_factory"/>-->
+                <!--<field name="customer_sale_area"/>-->
                 <field name="evaluate_price"/>
                 <field name="month_requirement"/>
                 <field name="expected_salable_wallet_share"/>
@@ -28,11 +28,11 @@
                 <field name="unit"/>
                 <field name="current_month_price"/>
                 <field name="current_month_total_sales"/>
-                <field name="currency"/>
-                <field name="customer_category"/>
-                <field name="place_of_delivery"/>
-                <field name="payment_method"/>
-                <field name="payment_days"/>
+                <!--<field name="currency"/>-->
+                <!--<field name="customer_category"/>-->
+                <!--<field name="place_of_delivery"/>-->
+                <!--<field name="payment_method"/>-->
+                <!--<field name="payment_days"/>-->
                 <field name="cooperate"/>
                 <field name="remark"/>
             </tree>

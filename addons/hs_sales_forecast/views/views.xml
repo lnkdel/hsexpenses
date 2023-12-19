@@ -167,6 +167,52 @@
             parent="setting_menu"
             sequence="3"/>
 
+        <record id="view_hs_sales_member_tree" model="ir.ui.view">
+            <field name="name">hs.sales.market.member.tree</field>
+            <field name="model">hs.sales.market.member</field>
+            <field name="arch" type="xml">
+                <tree string="市场成员">
+                    <field name="owner_id"/>
+                    <field name="sales_employee_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hs_sales_member_form" model="ir.ui.view">
+            <field name="name">hs.sales.market.member.form</field>
+            <field name="model">hs.sales.market.member</field>
+            <field name="arch" type="xml">
+                <form string="市场成员">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="owner_id"/>
+                            </group>
+                            <group>
+                                <field name="sales_employee_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hs_sales_member" model="ir.actions.act_window">
+            <field name="name">市场成员</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hs.sales.market.member</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+                id="menu_hs_sales_member"
+                action="action_hs_sales_member"
+                parent="setting_menu"
+                sequence="4"/>
+
 
     </data>
 </odoo>

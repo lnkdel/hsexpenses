@@ -7,15 +7,15 @@
             <field name="groups" eval="[(4, ref('group_hs_sales_forecast_manager'))]"/>
         </record>
 
-        <record id="hs_sales_forecast_seller_rule" model="ir.rule">
-            <field name="name">applicant can be CRUD the forecast</field>
-            <field name="model_id" ref="model_hs_sales_forecast"/>
-            <field name="perm_read" eval="1" />
-            <field name="perm_write" eval="1" />
-            <field name="perm_create" eval="1" />
-            <field name="perm_unlink" eval="1" />
-            <field name="domain_force">[('create_uid.id', '=', user.id)]</field>
-            <field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_seller'))]"/>
-        </record>
+        <!--<record id="hs_sales_forecast_seller_rule" model="ir.rule">-->
+            <!--<field name="name">applicant can be CRUD the forecast</field>-->
+            <!--<field name="model_id" ref="model_hs_sales_forecast"/>-->
+            <!--<field name="perm_read" eval="1" />-->
+            <!--<field name="perm_write" eval="1" />-->
+            <!--<field name="perm_create" eval="1" />-->
+            <!--<field name="perm_unlink" eval="1" />-->
+            <!--<field name="domain_force">[('create_uid.id', '=', user.id)]</field>-->
+            <!--<field name="groups" eval="[(4, ref('hs_expenses.group_hs_expenses_seller'))]"/>-->
+        <!--</record>-->
     </data>
 </odoo>

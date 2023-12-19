@@ -71,18 +71,18 @@ class SalesForecast(models.Model):
                                         required=True, )
     customer_factory = fields.Char(string="客户工厂(终端)", required=True)
     customer_sale_area = fields.Selection(string="客户销售区域(省份/国别)", selection=PROVINCES, required=True)
-    evaluate_price = fields.Float(string="合同基准价预测",  required=True, )
-    month_requirement = fields.Float(string="客户总需求量", required=True, )
+    evaluate_price = fields.Float(string="合同基准价预测",  required=True, group_operator=None)
+    month_requirement = fields.Float(string="客户总需求量", required=True, group_operator=None)
     expected_salable_wallet_share = fields.Float(string="预计可销售钱包份额，%",
                                                  compute='_compute_expected_salable_wallet_share')
-    estimated_sales_volume = fields.Float(string="当月预计销售量", required=True, )
-    next_month_w1 = fields.Float(string="第1周", required=False, )
-    next_month_w2 = fields.Float(string="第2周", required=False, )
-    next_month_w3 = fields.Float(string="第3周", required=False, )
-    next_month_w4 = fields.Float(string="第4周", required=False, )
+    estimated_sales_volume = fields.Float(string="当月预计销售量", required=True, group_operator=None)
+    next_month_w1 = fields.Float(string="第1周", required=False, group_operator=None)
+    next_month_w2 = fields.Float(string="第2周", required=False, group_operator=None)
+    next_month_w3 = fields.Float(string="第3周", required=False, group_operator=None)
+    next_month_w4 = fields.Float(string="第4周", required=False, group_operator=None)
     unit = fields.Selection(string="单位", selection=[('kg', 'kg'), ('sq.m', 'sq.m'), ('件', '件'), ('m', 'm'), ],
                             required=True, )
-    current_month_price = fields.Float(string="当月销售价格", required=True, )
+    current_month_price = fields.Float(string="当月销售价格", required=True, group_operator='sum')
     current_month_total_sales = fields.Float(string="月销售总额", compute='_compute_current_month_total_sales')
     currency = fields.Selection(string="币种", selection=[('rmb', '人民币'), ('other', '外币'), ], required=True, )
     customer_category = fields.Selection(string="客户属性", selection=[('end customer', '终端客户'),
@@ -90,7 +90,7 @@ class SalesForecast(models.Model):
                                                                    ('agent','代理商')], required=True)
     place_of_delivery = fields.Char(string="发货工厂", required=True)
     payment_method = fields.Selection(string="付款方式", selection=[('cash', '现结'), ('credit', '赊销'), ], required=True, )
-    payment_days = fields.Integer(string="付款天数", required=True, )
+    payment_days = fields.Integer(string="付款天数", required=True, group_operator=None)
     cooperate = fields.Selection(string="是否合作（是否新客户）", selection=[('yes', '是'), ('no', '否'), ], required=True, )
     remark = fields.Text(string="备注", required=False, )
 
@@ -123,6 +123,30 @@ class SalesForecast(models.Model):
     #         return {'domain': {'product_specification_id': [('type_id', '=', self.product_type_id.id)]}}
     #     else:
     #         return {'domain': {'product_specification_id': []}}
+
+    @api.model
+    def search_read(self, domain=None, fields=None, offset=0, limit=None, order=None):
+        domain = self.get_own_forecast_domain(domain)
+        return super(SalesForecast, self).search_read(domain, fields, offset, limit, order)
+
+    def get_own_forecast_domain(self, domain=None):
+        user_domain = domain or []
+        env = self.env
+        user_id = env.uid
+        user = env['res.users'].search([('id', '=', user_id)])
+        if env.ref('hs_sales_forecast.group_hs_sales_forecast_manager') in user.groups_id:
+            own_domain = [(1, '=', 1)]
+        else:
+            employees = env['hs.base.employee'].sudo().search([('user_id', '=', user_id)])
+            own_sales = env['hs.sales.market.member'].sudo().search([('owner_id', 'in',
+                                                                      [employee.id for employee in employees])])
+            if own_sales:
+                own_uids = [sale.sales_employee_id.user_id.id for sale in own_sales] + [user_id]
+                own_domain = [('create_uid.id', 'in', own_uids)]
+            else:
+                own_domain = [('create_uid.id', '=', user_id)]
+
+        return user_domain + own_domain
 
 
 class ProductCategory(models.Model):
@@ -170,7 +194,17 @@ class ProductSpecification(models.Model):
     ]
 
 
+class MarketMember(models.Model):
+    _name = 'hs.sales.market.member'
+    _rec_name = 'owner_id'
+    _description = '市场成员'
 
+    owner_id = fields.Many2one('hs.base.employee', string='市场总监')
+    sales_employee_id = fields.Many2one('hs.base.employee', string='营销员')
+
+    _sql_constraints = [
+        ('owner_id_sales_employee_id_unique', 'unique(owner_id, sales_employee_id)', "该记录已存在！")
+    ]
 
 
 
