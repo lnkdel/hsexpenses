@@ -148,6 +148,13 @@ class SalesForecast(models.Model):
 
         return user_domain + own_domain
 
+    @api.model
+    def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
+        domain = self.get_own_forecast_domain(domain)
+        return super(SalesForecast, self.with_context(virtual_id=False)).read_group(domain, fields, groupby,
+                                                                                    offset=offset, limit=limit,
+                                                                                    orderby=orderby, lazy=lazy)
+
 
 class ProductCategory(models.Model):
     _name = 'hs.product.category'
