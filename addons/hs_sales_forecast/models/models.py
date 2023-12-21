@@ -57,7 +57,7 @@ class SalesForecast(models.Model):
 
     product_category_id = fields.Many2one(comodel_name="hs.product.category", string="产品大类", required=True, )
     product_type_id = fields.Many2one(comodel_name="hs.product.type", string="产品小类", required=True,)
-    product_specification_id = fields.Many2one(comodel_name="hs.product.specification", string="产品规格", required=False, )
+    product_specification_id = fields.Many2one(comodel_name="hs.product.specification", string="产品规格", required=True, )
     market_id = fields.Many2one(comodel_name="hs.sale.market", string="市场", required=True, )
     military_selection = fields.Selection(string="业务部门", selection=[('military', '军品'),
                                                                     ('not military', '非军品'), ], required=True, )
@@ -69,13 +69,13 @@ class SalesForecast(models.Model):
     project_number = fields.Char(string="关联项目", required=False, )
     incremental_flag = fields.Selection(string="业务增/存量（是否新业务）", selection=[('incremental', '增量'), ('stock', '存量'), ],
                                         required=True, )
-    customer_factory = fields.Char(string="客户工厂(终端)", required=True)
+    customer_factory = fields.Char(string="客户工厂(终端)", default='丹阳', required=True)
     customer_sale_area = fields.Selection(string="客户销售区域(省份/国别)", selection=PROVINCES, required=True)
     evaluate_price = fields.Float(string="合同基准价预测",  required=True, group_operator=None)
     month_requirement = fields.Float(string="客户总需求量", required=True, group_operator=None)
     expected_salable_wallet_share = fields.Float(string="预计可销售钱包份额，%",
                                                  compute='_compute_expected_salable_wallet_share')
-    estimated_sales_volume = fields.Float(string="当月预计销售量", required=True, group_operator=None)
+    estimated_sales_volume = fields.Float(string="当月预计销售量", required=True, group_operator='sum')
     next_month_w1 = fields.Float(string="第1周", required=False, group_operator=None)
     next_month_w2 = fields.Float(string="第2周", required=False, group_operator=None)
     next_month_w3 = fields.Float(string="第3周", required=False, group_operator=None)
@@ -89,7 +89,7 @@ class SalesForecast(models.Model):
     customer_category = fields.Selection(string="客户属性", selection=[('end customer', '终端客户'),
                                                                    ('trader','贸易商'),
                                                                    ('agent','代理商')], required=True)
-    place_of_delivery = fields.Char(string="发货工厂", required=True)
+    place_of_delivery = fields.Char(string="发货工厂", required=True, default='丹阳')
     payment_method = fields.Selection(string="付款方式", selection=[('cash', '现结'), ('credit', '赊销'), ], required=True, )
     payment_days = fields.Integer(string="付款天数", required=True, group_operator=None)
     cooperate = fields.Selection(string="是否合作（是否新客户）", selection=[('yes', '是'), ('no', '否'), ], required=True, )
@@ -134,8 +134,7 @@ class SalesForecast(models.Model):
         user_domain = domain or []
         env = self.env
         user_id = env.uid
-        user = env['res.users'].search([('id', '=', user_id)])
-        if env.ref('hs_sales_forecast.group_hs_sales_forecast_manager') in user.groups_id:
+        if self.user_has_groups('hs_sales_forecast.group_hs_sales_forecast_manager'):
             own_domain = [(1, '=', 1)]
         else:
             employees = env['hs.base.employee'].sudo().search([('user_id', '=', user_id)])
@@ -143,9 +142,9 @@ class SalesForecast(models.Model):
                                                                       [employee.id for employee in employees])])
             if own_sales:
                 own_uids = [sale.sales_employee_id.user_id.id for sale in own_sales] + [user_id]
-                own_domain = [('create_uid.id', 'in', own_uids)]
+                own_domain = ['|', ('create_uid.id', 'in', own_uids), ('manager_id.user_id', 'in', own_uids)]
             else:
-                own_domain = [('create_uid.id', '=', user_id)]
+                own_domain = ['|', ('create_uid.id', '=', user_id), ('manager_id.user_id', '=', user_id)]
 
         return user_domain + own_domain
 

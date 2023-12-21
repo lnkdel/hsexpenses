@@ -64,7 +64,7 @@
                         <group>
                             <field name="product_type_id"/>
                             <field name="market_id"/>
-                            <field name="manager_id"/>
+                            <field name="manager_id" readonly="1"/>
                             <field name="month_selection"/>
                             <field name="project_number"/>
                             <field name="customer_factory"/>
@@ -103,6 +103,17 @@
                     </group>
                 </sheet>
             </form>
+        </field>
+    </record>
+    <record id="view_hs_sales_forecast_form_group_manager" model="ir.ui.view">
+        <field name="name">hs.sales.forecast.form</field>
+        <field name="model">hs.sales.forecast</field>
+        <field name="inherit_id" ref="view_hs_sales_forecast_form" />
+        <field name="groups_id" eval="[(4, ref('hs_sales_forecast.group_hs_sales_forecast_manager'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='manager_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
         </field>
     </record>
     <record id="hs_sales_forecast_search" model="ir.ui.view">
