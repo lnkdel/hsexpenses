@@ -10,6 +10,7 @@
                 id="hs_v2_travel_expenses_management_menu"
                 name="Travel Expenses"
                 parent="menu_v2_hs_expenses_root"
+                action="action_travel2_application_v2"
                 sequence="0"/>
 
         <menuitem

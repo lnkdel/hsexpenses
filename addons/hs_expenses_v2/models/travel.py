@@ -17,7 +17,7 @@ class BaseApplication(models.AbstractModel):
     def _get_default_employee(self):
         return self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
 
-    @api.onchange('applicant_id')
+    @api.onchange('applicat_id')
     def onchange_applicant_id(self):
         for s in self:
             s.reimbursement_person_id = s.applicant_id
@@ -35,12 +35,13 @@ class BaseApplication(models.AbstractModel):
     sale_area_id = fields.Many2one('hs.sale.area', related='applicant_id.sale_area_id', string='Sale Area', store=True)
     sale_market_id = fields.Many2one('hs.sale.market', string='Sale Market',)
 
-    reimbursement_person_id = fields.Many2one('hs.base.employee', string="Reimbursement Person", required=True)
+    reimbursement_person_id = fields.Many2one('hs.base.employee', string="Reimbursement Person",
+                                              default=_get_default_employee, required=True)
     reimbursement_payment_method = fields.Selection(
         [('cash', 'Cash'), ('mt', 'Money Transfer')],
         string='Payment Method', default='mt')
-    bank_name = fields.Char(string='Bank Name')
-    bank_account = fields.Char(string='Bank Account')
+    bank_name = fields.Char(string='Bank Name', related='reimbursement_person_id.bank_name')
+    bank_account = fields.Char(string='Bank Account', related='reimbursement_person_id.bank_account')
     audit_date = fields.Datetime(string='Audit Date')
 
     # driver_type = fields.Selection([('BD - VISIT', 'Business Development - Visit'),
@@ -235,32 +236,6 @@ class TravelApplication(models.Model):
                                       'travel_app_id',
                                       'attachment_id',
                                       string='Attachments')
-
-    @api.multi
-    @api.depends('travel_detail_ids')
-    # TODO: update template
-    def _compute_group_text(self):
-        for rec in self:
-            text = ''
-            if rec.travel_detail_ids:
-                text = '<table class="o_list_view table table-sm table-hover table-striped o_list_view_ungrouped">' \
-                       '<tfoot>' \
-                       '<tr class="o_data_row">' \
-                       '<td class="o_data_cell o_required_modifier" width="11%%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>' \
-                       '<td class="o_data_cell o_required_modifier" width="11%%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>' \
-                       '<td class="o_data_cell o_required_modifier" width="11%%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>' \
-                       '<td class="o_data_cell o_required_modifier" width="11%%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>' \
-                       '<td class="o_data_cell o_list_number" width="11%%" style="text-align:right;">%s</td>' \
-                       '<td class="o_data_cell o_list_number" width="11%%" style="text-align:right;">%s</td>' \
-                       '<td class="o_data_cell o_list_number" width="11%%" style="text-align:right;">%s</td>' \
-                       '<td class="o_data_cell o_list_number" width="11%%" style="text-align:right;">%s</td>' \
-                       '<td class="o_data_cell o_list_number" width="11%%" style="text-align:right;">%s</td>' \
-                       '</tr></tfoot></table>' % ('%.2f' % rec.car_total_cost,
-                                                  '%.2f' % rec.meal_total_cost,
-                                                  '%.2f' % rec.hotel_total_cost,
-                                                  '%.2f' % rec.city_car_total_cost,
-                                                  '%.2f' % rec.total_cost)
-            rec.group_text = text
 
     @api.model
     def create(self, values):

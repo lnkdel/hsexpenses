@@ -27,6 +27,7 @@ msgstr "有效"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__applicant_id
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__applicant_id
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__applicant_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__applicant_id
 msgid "Applicant"
 msgstr "申请人"
 
@@ -41,6 +42,7 @@ msgstr "申请金额"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__applicant_date
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__applicant_date
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__applicant_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__applicant_date
 msgid "Application Date"
 msgstr "申请日期"
 
@@ -49,6 +51,7 @@ msgstr "申请日期"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__application_remark
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__application_remark
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__application_remark
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__application_remark
 msgid "Application Remark"
 msgstr "申请单备注"
 
@@ -68,6 +71,7 @@ msgstr "已批准"
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_special_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel2_application_v2_form
 msgid "Are you sure you want to do this?"
 msgstr "是否确定此操作？"
 
@@ -82,6 +86,7 @@ msgstr "附件"
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_special_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel2_application_v2_form
 msgid "Audit"
 msgstr "审核"
 
@@ -90,6 +95,8 @@ msgstr "审核"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__audit_amount
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__audit_amount
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__audit_amount
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__audit_amount
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__audit_amount
 msgid "Audit Amount"
 msgstr "审核金额"
 
@@ -101,6 +108,8 @@ msgstr ""
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__audit_cut_amount
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__audit_cut_amount
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__audit_cut_amount
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__audit_cut_amount
 msgid "Audit Cut Amount"
 msgstr "核减金额"
 
@@ -111,6 +120,7 @@ msgstr ""
 
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__audit_cut_remark
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__audit_cut_remark
 msgid "Audit Cut Remark"
 msgstr "核减备注"
 
@@ -119,6 +129,7 @@ msgstr "核减备注"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__audit_date
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__audit_date
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__audit_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__audit_date
 msgid "Audit Date"
 msgstr "审核日期"
 
@@ -126,11 +137,13 @@ msgstr "审核日期"
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_special_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel2_application_v2_form
 msgid "Audit Information"
 msgstr "财务审核信息"
 
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__audit_remark
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__audit_remark
 msgid "Audit Remark"
 msgstr "审核备注"
 
@@ -145,6 +158,7 @@ msgstr "已审核"
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_special_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel2_application_v2_form
 msgid "Back"
 msgstr "退回"
 
@@ -153,6 +167,7 @@ msgstr "退回"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__bank_account
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__bank_account
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__bank_account
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__bank_account
 msgid "Bank Account"
 msgstr "银行账户"
 
@@ -161,6 +176,7 @@ msgstr "银行账户"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__bank_name
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__bank_name
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__bank_name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__bank_name
 msgid "Bank Name"
 msgstr "开户行"
 
@@ -191,6 +207,7 @@ msgstr "批量结束向导"
 #: model:ir.actions.act_window,name:hs_expenses_v2.batch_end_application_wizard_action
 #: model:ir.actions.act_window,name:hs_expenses_v2.batch_end_entertain_application_wizard_action
 #: model:ir.actions.act_window,name:hs_expenses_v2.batch_end_travel_application_wizard_view
+#: model:ir.actions.act_window,name:hs_expenses_v2.batch_end_travel2_application_wizard_view
 msgid "Batch End Wizard"
 msgstr "批量结束向导"
 
@@ -202,6 +219,7 @@ msgstr "批量结束向导"
 
 #. module: hs_expenses_v2
 #: model:ir.model,name:hs_expenses_v2.model_hs_expense_v2_batch_end_travel_wizard
+#: model:ir.model,name:hs_expenses_v2.model_hs_expense_v2_batch_end_travel2_wizard
 msgid "Batch end travel application wizard"
 msgstr "批量结束向导"
 
@@ -210,6 +228,7 @@ msgstr "批量结束向导"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__name
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__name
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__name
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__name
 msgid "Bill Number"
 msgstr "单据号"
 
@@ -222,6 +241,8 @@ msgstr "取消"
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__car_cost
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__car_cost
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel2_application_v2_form
 msgid "Car Cost"
 msgstr "交通费"
 
@@ -235,6 +256,7 @@ msgstr "交通费标准"
 #: selection:hs.expense.v2.entertain.application,reimbursement_payment_method:0
 #: selection:hs.expense.v2.special.application,reimbursement_payment_method:0
 #: selection:hs.expense.v2.travel.application,reimbursement_payment_method:0
+#: selection:hs.expense.v2.travel2.application,reimbursement_payment_method:0
 msgid "Cash"
 msgstr "现金"
 
@@ -249,6 +271,7 @@ msgstr "类别"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__cause
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__cause
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__cause
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__cause
 msgid "Cause"
 msgstr "事由"
 
@@ -260,6 +283,8 @@ msgstr "城市"
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__city_car_cost
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__city_car_cost
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel2_application_v2_form
 msgid "City Car Cost"
 msgstr "市内交通"
 
@@ -313,6 +338,8 @@ msgstr "会签信息"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__create_uid
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__create_uid
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__create_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__create_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__create_uid
 msgid "Created by"
 msgstr "创建人"
 
@@ -329,6 +356,8 @@ msgstr "创建人"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__create_date
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__create_date
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__create_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__create_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__create_date
 msgid "Created on"
 msgstr "创建时间"
 
@@ -336,6 +365,7 @@ msgstr "创建时间"
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.entertain_application_search
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.special_application_search
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.travel_application_v2_search
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.travel2_application_v2_search
 msgid "Current Month"
 msgstr "当月"
 
@@ -356,6 +386,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__customer_company_no
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__customer_company_no
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__customer_company_no
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__customer_company_no
 msgid "Customer Company Number"
 msgstr "客户公司编码"
 
@@ -377,6 +408,7 @@ msgstr "客户编码"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__applicant_department_id
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__applicant_department_id
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__applicant_department_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__applicant_department_id
 msgid "Department"
 msgstr "部门"
 
@@ -415,6 +447,7 @@ msgstr "完成"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__driver_type_id
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__driver_type_id
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__driver_type_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__driver_type_id
 msgid "Driver Type"
 msgstr "动因类别"
 
@@ -431,6 +464,7 @@ msgstr "员工级别"
 
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__end_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__end_date
 msgid "End Date"
 msgstr "结束日期"
 
@@ -505,12 +539,15 @@ msgstr "招待费用申请报销单"
 
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__from_city
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__from_city
 msgid "From City"
 msgstr "出发地"
 
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__hotel_cost
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__hotel_cost
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel2_application_v2_form
 msgid "Hotel Cost"
 msgstr "住宿费"
 
@@ -556,6 +593,8 @@ msgstr "是否批准"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application____last_update
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application____last_update
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail____last_update
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application____last_update
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail____last_update
 msgid "Last Modified on"
 msgstr "最后修改日"
 
@@ -563,6 +602,7 @@ msgstr "最后修改日"
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.entertain_application_search
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.special_application_search
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.travel_application_v2_search
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.travel2_application_v2_search
 msgid "Last Month"
 msgstr "上月"
 
@@ -579,6 +619,8 @@ msgstr "上月"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__write_uid
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__write_uid
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__write_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__write_uid
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__write_uid
 msgid "Last Updated by"
 msgstr "最后更新者"
 
@@ -595,6 +637,8 @@ msgstr "最后更新者"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__write_date
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__write_date
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__write_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__write_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__write_date
 msgid "Last Updated on"
 msgstr "最后更新时间"
 
@@ -606,6 +650,8 @@ msgstr "营销费用V2"
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__meal_cost
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__meal_cost
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel2_application_v2_form
 msgid "Meal Cost"
 msgstr "伙食费"
 
@@ -619,11 +665,13 @@ msgstr "伙食费标准"
 #: selection:hs.expense.v2.entertain.application,reimbursement_payment_method:0
 #: selection:hs.expense.v2.special.application,reimbursement_payment_method:0
 #: selection:hs.expense.v2.travel.application,reimbursement_payment_method:0
+#: selection:hs.expense.v2.travel2.application,reimbursement_payment_method:0
 msgid "Money Transfer"
 msgstr "银行转帐"
 
 #. module: hs_expenses_v2
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.travel_application_v2_search
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.travel2_application_v2_search
 msgid "Month Applications"
 msgstr "月差旅和普通报销单"
 
@@ -651,6 +699,7 @@ msgstr "已支付"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__reimbursement_payment_method
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__reimbursement_payment_method
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__reimbursement_payment_method
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__reimbursement_payment_method
 msgid "Payment Method"
 msgstr "支付方式"
 
@@ -658,6 +707,7 @@ msgstr "支付方式"
 #: code:addons/hs_expenses_v2/models/entertain.py:262
 #: code:addons/hs_expenses_v2/models/special.py:235
 #: code:addons/hs_expenses_v2/models/travel.py:299
+#: code:addons/hs_expenses_v2/models/travel2.py:210
 #, python-format
 msgid "Please enter the correct audit amount!"
 msgstr "请输入正确的审核金额！"
@@ -669,6 +719,7 @@ msgstr "请输入正确的审核金额！"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__project_id
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__project_id
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__project_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__project_id
 #: model:ir.ui.menu,name:hs_expenses_v2.menu_hs_base_project
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_hs_base_customer_no_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_hs_base_project_form
@@ -685,6 +736,7 @@ msgstr "报销金额"
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_entertain_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_special_application_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel2_application_v2_form
 msgid "Reimbursement Information"
 msgstr "报销信息"
 
@@ -693,6 +745,7 @@ msgstr "报销信息"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__reimbursement_person_id
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__reimbursement_person_id
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__reimbursement_person_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__reimbursement_person_id
 msgid "Reimbursement Person"
 msgstr "报销人员"
 
@@ -700,6 +753,7 @@ msgstr "报销人员"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__reimbursement_remark
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__reimbursement_remark
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__reimbursement_remark
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__reimbursement_remark
 msgid "Reimbursement Remark"
 msgstr "报销备注"
 
@@ -717,6 +771,7 @@ msgstr "报销金额必须小于或者等于申请金额！"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__sale_area_id
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__sale_area_id
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__sale_area_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__sale_area_id
 #: model:ir.ui.menu,name:hs_expenses_v2.menu_hs_sale_area
 msgid "Sale Area"
 msgstr "销售区域"
@@ -731,6 +786,7 @@ msgstr "销售管理"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_entertain_application__sale_market_id
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__sale_market_id
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__sale_market_id
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__sale_market_id
 #: model:ir.ui.menu,name:hs_expenses_v2.menu_hs_sale_market
 msgid "Sale Market"
 msgstr "销售市场"
@@ -811,6 +867,7 @@ msgstr "审批额度申请"
 
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__start_date
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__start_date
 msgid "Start Date"
 msgstr "开始日期"
 
@@ -819,6 +876,8 @@ msgstr "开始日期"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_special_application__state
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__state
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__state
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__state
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__state
 msgid "Status"
 msgstr "状态"
 
@@ -827,6 +886,8 @@ msgstr "状态"
 #: model:ir.model.fields,help:hs_expenses_v2.field_hs_expense_v2_special_application__state
 #: model:ir.model.fields,help:hs_expenses_v2.field_hs_expense_v2_travel_application__state
 #: model:ir.model.fields,help:hs_expenses_v2.field_hs_expense_v2_travel_detail__state
+#: model:ir.model.fields,help:hs_expenses_v2.field_hs_expense_v2_travel2_application__state
+#: model:ir.model.fields,help:hs_expenses_v2.field_hs_expense_v2_travel2_detail__state
 msgid "Status of the expense."
 msgstr "费用状态"
 
@@ -861,6 +922,7 @@ msgstr "待审核"
 
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__to_city
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__to_city
 msgid "To City"
 msgstr "到达城市"
 
@@ -873,11 +935,13 @@ msgstr "待提交"
 
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__car_total_cost
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__car_total_cost
 msgid "Total Car Cost"
 msgstr "交通费合计"
 
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__city_car_total_cost
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__city_car_total_cost
 msgid "Total City Car Cost"
 msgstr "市内交通合计"
 
@@ -885,16 +949,21 @@ msgstr "市内交通合计"
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__total_cost
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_detail__total_cost
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__total_cost
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_detail__total_cost
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel2_application_v2_form
 msgid "Total Cost"
 msgstr "费用合计"
 
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__hotel_total_cost
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__hotel_total_cost
 msgid "Total Hotel Cost"
 msgstr "住宿费合计"
 
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__meal_total_cost
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__meal_total_cost
 msgid "Total Meal Cost"
 msgstr "伙食费合计"
 
@@ -909,7 +978,7 @@ msgstr "差旅"
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_tree
 msgid "Travel Application"
-msgstr "差旅报销申请单"
+msgstr "差旅报销申请单（旧）"
 
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_batch_end_travel_wizard__application_ids
@@ -920,23 +989,27 @@ msgstr "差旅申请单"
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_application_v2_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_detail_v2_form
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel_detail_v2_tree
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel2_application_v2_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel2_detail_v2_form
+#: model_terms:ir.ui.view,arch_db:hs_expenses_v2.view_travel2_detail_v2_tree
 msgid "Travel Detail"
 msgstr "差旅明细"
 
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__travel_detail_ids
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__travel_detail_ids
 msgid "Travel Details"
 msgstr "差旅明细"
 
 #. module: hs_expenses_v2
 #: model:ir.ui.menu,name:hs_expenses_v2.menu_travel_application_v2
 msgid "Travel Expense Management"
-msgstr "差旅费用管理"
+msgstr "差旅费用管理（旧）"
 
 #. module: hs_expenses_v2
 #: model:ir.ui.menu,name:hs_expenses_v2.hs_v2_travel_expenses_management_menu
 msgid "Travel Expenses"
-msgstr "日常费用"
+msgstr "差旅费用"
 
 #. module: hs_expenses_v2
 #: model:ir.actions.report,name:hs_expenses_v2.action_report_hs_expenses_v2_travel
@@ -951,6 +1024,7 @@ msgstr "出差费用标准"
 
 #. module: hs_expenses_v2
 #: model:ir.model,name:hs_expenses_v2.model_hs_expense_v2_travel_detail
+#: model:ir.model,name:hs_expenses_v2.model_hs_expense_v2_travel2_detail
 msgid "Travel detail"
 msgstr "差旅明细"
 
@@ -992,6 +1066,7 @@ msgstr "同一个单据你不能确认两次！"
 #: code:addons/hs_expenses_v2/models/entertain.py:158
 #: code:addons/hs_expenses_v2/models/special.py:131
 #: code:addons/hs_expenses_v2/models/travel.py:278
+#: code:addons/hs_expenses_v2/models/travel2.py:143
 #, python-format
 msgid "You cannot delete a posted or approved expense."
 msgstr "你不能删除已提交的单据！"
@@ -1000,6 +1075,7 @@ msgstr "你不能删除已提交的单据！"
 #: code:addons/hs_expenses_v2/models/entertain.py:160
 #: code:addons/hs_expenses_v2/models/special.py:133
 #: code:addons/hs_expenses_v2/models/travel.py:280
+#: code:addons/hs_expenses_v2/models/travel2.py:145
 #, python-format
 msgid "You cannot delete the expense!"
 msgstr "你不能删除该单据！"
@@ -1015,6 +1091,11 @@ msgstr "同一个单据你不能提交两次！"
 #: model:res.groups,name:hs_expenses_v2.group_hs_expenses_vice_president
 msgid "[HS Expenses] Vice President"
 msgstr "[恒神费用] 副总裁"
+
+#. module: hs_expenses_v2
+#: model:res.groups,name:hs_expenses_v2.group_hs_expenses_travel_application_approver
+msgid "[HS Expenses] travel application approver"
+msgstr "[恒神费用] 出差申请审批员"
 
 #. module: hs_expenses_v2
 #: model_terms:ir.ui.view,arch_db:hs_expenses_v2.report_expense_v2_entertain
@@ -1266,6 +1347,7 @@ msgstr "请在招待备注内按要求填写单位、部门、职位及人员等
 
 #. module: hs_expenses_v2
 #: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel_application__nucleic_acid_testing_amount
+#: model:ir.model.fields,field_description:hs_expenses_v2.field_hs_expense_v2_travel2_application__nucleic_acid_testing_amount
 msgid "Nucleic Acid Testing Fee"
 msgstr "核酸检测费用"
 

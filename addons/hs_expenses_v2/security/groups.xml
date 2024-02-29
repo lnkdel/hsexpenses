@@ -7,5 +7,12 @@
             <field name="implied_ids" eval="[(4, ref('hs_expenses.group_hs_expenses_user'))]"/>
             <field name="comment">The user will be able to reviewed the application.</field>
         </record>
+
+        <record id="group_hs_expenses_travel_application_approver" model="res.groups">
+            <field name="name">[HS Expenses] travel application approver</field>
+            <field name="category_id" ref="base.module_category_hengshen_expense"/>
+            <field name="implied_ids" eval="[(4, ref('hs_expenses.group_hs_expenses_user'))]"/>
+            <field name="comment">The user will be able to approve the travel application.</field>
+        </record>
     </data>
 </odoo>

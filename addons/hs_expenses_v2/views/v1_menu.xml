@@ -41,6 +41,11 @@
             action="hs_expenses.action_hs_city"
             parent="menu_travel"
             sequence="2"/>
+        <menuitem
+            id="menu_hs_audit"
+            action="action_hs_audit"
+            parent="menu_travel"
+            sequence="3"/>
 
         <menuitem
             id="menu_entertain_company"

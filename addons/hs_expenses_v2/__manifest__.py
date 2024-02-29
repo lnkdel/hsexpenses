@@ -33,6 +33,7 @@
         'views/common.xml',
         'views/v1_menu.xml',
         'views/travel.xml',
+        'views/travel2.xml',
         'views/entertain.xml',
         'views/special.xml',
         'views/templates.xml',

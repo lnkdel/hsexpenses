@@ -13,6 +13,17 @@
         />
 
         <report
+            id="action_report_hs_expenses_v2_travel2"
+            string="差旅申请及报销报表"
+            model="hs.expense.v2.travel2.application"
+            report_type="qweb-pdf"
+            name="hs_expenses_v2.report_expense_v2_travel2"
+            file="hs_expenses_v2.report_expense_v2_travel2"
+            paperformat="hs_expenses.paperformat_month_expense"
+            print_report_name="'Travel Expenses - %s - %s' % (object.applicant_id.name, (object.name).replace('/', ''))"
+        />
+
+        <report
             id="action_report_hs_expenses_v2_entertain"
             string="Entertain Report"
             model="hs.expense.v2.entertain.application"

@@ -94,6 +94,51 @@
             parent="menu_sale"
             sequence="-1"/>
 
+        <record model="ir.ui.view" id="view_hs_sale_group">
+          <field name="name">hs.expense.sale.group.tree</field>
+          <field name="model">hs.expense.sale.group</field>
+          <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="view_hs_sale_group_form" model="ir.ui.view">
+            <field name="name">hs.expense.sale.group.form</field>
+            <field name="model">hs.expense.sale.group</field>
+            <field name="arch" type="xml">
+                <form string="销售市场组">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hs_sale_group" model="ir.actions.act_window">
+            <field name="name">销售市场组</field>
+            <field name="res_model">hs.expense.sale.group</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+            id="menu_hs_sale_group"
+            action="action_hs_sale_group"
+            parent="menu_sale"
+            sequence="1"/>
+
         <record model="ir.ui.view" id="view_hs_sales_customer_feedback_no_tree">
           <field name="name">hs.sales.customer.feedback.number.tree</field>
           <field name="model">hs.sales.customer.feedback.number</field>
@@ -140,6 +185,54 @@
             action="action_hs_sales_customer_feedback_no"
             parent="menu_sale"
             sequence="1"/>
+
+        <record model="ir.ui.view" id="view_hs_audit_tree">
+          <field name="name">hs.expense.travel.audit.tree</field>
+          <field name="model">hs.expense.travel.audit</field>
+          <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="sale_group_id"/>
+                <field name="first_audit"/>
+                <field name="second_audit"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="view_hs_audit_form" model="ir.ui.view">
+            <field name="name">hs.expense.travel.audit.form</field>
+            <field name="model">hs.expense.travel.audit</field>
+            <field name="arch" type="xml">
+                <form string="出差申请审批人">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="sale_group_id"/>
+                                <field name="first_audit"/>
+                                <field name="second_audit"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hs_audit" model="ir.actions.act_window">
+            <field name="name">出差申请审批级别</field>
+            <field name="res_model">hs.expense.travel.audit</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem
+            id="menu_hs_audit"
+            action="action_hs_audit"
+            parent="menu_travel"
+            sequence="2"/>
 
     </data>
 </odoo>

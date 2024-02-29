@@ -29,6 +29,7 @@ class City(models.Model):
 
     name = fields.Char()
     city_level_id = fields.Many2one('hs.base.city.level', string='City Level')
+    active = fields.Boolean(string='Active', default=True)
 
     _sql_constraints = [
         ('city_name_uniq',
@@ -43,6 +44,7 @@ class CityLevel(models.Model):
 
     name = fields.Char(required=True)
     city_ids = fields.One2many('hs.base.city', 'city_level_id', string='Cities')
+    active = fields.Boolean(string='Active', default=True)
 
 
 class TravelCategory(models.Model):

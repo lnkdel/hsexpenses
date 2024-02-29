@@ -7,45 +7,70 @@
                         <div class="page">
                             <!--<div style="margin:0 auto;width:300px;height:80px; font-size:24px; font-weight:bold; text-align:center;">-->
                             <div style="padding-top:50px;margin:0 auto;width:100%;height:auto; font-size:24px; font-weight:bold; text-align:center;">
-                                差旅报销单<p t-field="travel.name"/>
+                                差旅报销单
+                                <p t-field="travel.name"/>
                             </div>
                             <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
                                 <table style="width:100%;">
                                     <tr style="height: 30px;">
                                         <td width="10%">申请人</td>
-                                        <td width="40%"><span t-field="travel.applicant_id" /></td>
+                                        <td width="40%">
+                                            <span t-field="travel.applicant_id"/>
+                                        </td>
                                         <td width="10%">申请日期</td>
-                                        <td width="40%"><span t-field="travel.applicant_date" /></td>
+                                        <td width="40%">
+                                            <span t-field="travel.applicant_date"/>
+                                        </td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>部门</td>
-                                        <td><span t-field="travel.applicant_department_id" /></td>
+                                        <td>
+                                            <span t-field="travel.applicant_department_id"/>
+                                        </td>
                                         <td>目的地</td>
-                                        <td><span t-field="travel.destination_city" /></td>
+                                        <td>
+                                            <span t-field="travel.destination_city"/>
+                                        </td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>动因类别</td>
-                                        <td><span t-field="travel.driver_type_id" /></td>
+                                        <td>
+                                            <span t-field="travel.driver_type_id"/>
+                                        </td>
                                         <td>客户名称</td>
-                                        <td><span t-field="travel.customer_company_no" /></td>
+                                        <td>
+                                            <span t-field="travel.customer_company_no"/>
+                                        </td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>销售区域</td>
-                                        <td><span t-field="travel.sale_area_id" /></td>
+                                        <td>
+                                            <span t-field="travel.sale_area_id"/>
+                                        </td>
                                         <td>申请单备注</td>
-                                        <td><span t-field="travel.application_remark" /></td>
+                                        <td>
+                                            <span t-field="travel.application_remark"/>
+                                        </td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>销售市场</td>
-                                        <td><span t-field="travel.sale_market_id" /></td>
+                                        <td>
+                                            <span t-field="travel.sale_market_id"/>
+                                        </td>
                                         <td>项目</td>
-                                        <td><span t-field="travel.project_id" /></td>
+                                        <td>
+                                            <span t-field="travel.project_id"/>
+                                        </td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>事由</td>
-                                        <td><span t-field="travel.cause" /></td>
+                                        <td>
+                                            <span t-field="travel.cause"/>
+                                        </td>
                                         <td>核算检测费用</td>
-                                        <td><span t-field="travel.nucleic_acid_testing_amount" /></td>
+                                        <td>
+                                            <span t-field="travel.nucleic_acid_testing_amount"/>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -57,19 +82,47 @@
                                     <table style="border-collapse:collapse; border-spacing:0; border-left:1px solid #888; border-top:1px solid #888;">
                                         <thead>
                                             <tr style="font-size:16px;">
-                                                <th width="12%" style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">开始日期</th>
-                                                <th width="12%" style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">结束日期</th>
-                                                <th width="10%" style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">出发地</th>
-                                                <th width="10%" style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">到达城市</th>
-                                                <th width="8%" style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">交通费</th>
-                                                <th width="8%" style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">伙食费</th>
-                                                <th width="8%" style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">住宿费</th>
-                                                <th width="8%" style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">市内交通</th>
-                                                <th width="6%" style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">合计</th>
+                                                <th width="12%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    开始日期
+                                                </th>
+                                                <th width="12%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    结束日期
+                                                </th>
+                                                <th width="10%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    出发地
+                                                </th>
+                                                <th width="10%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    到达城市
+                                                </th>
+                                                <th width="8%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    交通费
+                                                </th>
+                                                <th width="8%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    伙食费
+                                                </th>
+                                                <th width="8%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    住宿费
+                                                </th>
+                                                <th width="8%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    市内交通
+                                                </th>
+                                                <th width="6%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    合计
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr t-foreach="travel.travel_detail_ids" t-as="detail" style="font-size:16px;">
+                                            <tr t-foreach="travel.travel_detail_ids" t-as="detail"
+                                                style="font-size:16px;">
                                                 <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
                                                     <span t-field="detail.start_date"/>
                                                 </td>
@@ -99,7 +152,8 @@
                                                 </td>
                                             </tr>
                                             <tr style="font-size:16px;">
-                                                <td colspan="4" style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                <td colspan="4"
+                                                    style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
 
                                                 </td>
                                                 <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
@@ -129,14 +183,18 @@
                                 <table style="width:100%;">
                                     <tr style="height: 30px;">
                                         <td width="10%">核减金额</td>
-                                        <td width="40%"><span t-field="travel.audit_cut_amount" /></td>
+                                        <td width="40%">
+                                            <span t-field="travel.audit_cut_amount"/>
+                                        </td>
                                         <td width="10%">审核金额</td>
-                                        <td width="40%"><span t-field="travel.audit_amount" /></td>
+                                        <td width="40%">
+                                            <span t-field="travel.audit_amount"/>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>审核备注</td>
                                         <td colspan="3">
-                                            <span t-field="travel.audit_remark" />
+                                            <span t-field="travel.audit_remark"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -148,18 +206,288 @@
                                 <table style="width:100%;">
                                     <tr style="height: 30px;">
                                         <td width="10%">报销人员</td>
-                                        <td width="40%"><span t-field="travel.reimbursement_person_id" /></td>
+                                        <td width="40%">
+                                            <span t-field="travel.reimbursement_person_id"/>
+                                        </td>
                                         <td width="10%">支付方式</td>
-                                        <td width="40%"><span t-field="travel.reimbursement_payment_method" /></td>
+                                        <td width="40%">
+                                            <span t-field="travel.reimbursement_payment_method"/>
+                                        </td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>开户行</td>
-                                        <td><span t-field="travel.bank_name" /></td>
+                                        <td>
+                                            <span t-field="travel.bank_name"/>
+                                        </td>
                                         <td>银行账户</td>
-                                        <td><span t-field="travel.bank_account" /></td>
+                                        <td>
+                                            <span t-field="travel.bank_account"/>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="report_expense_v2_travel2">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="travel">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <!--<div style="margin:0 auto;width:300px;height:80px; font-size:24px; font-weight:bold; text-align:center;">-->
+                            <div style="padding-top:50px;margin:0 auto;width:100%;height:auto; font-size:24px; font-weight:bold; text-align:center;">
+                                差旅申请及报销单
+                                <p t-field="travel.name"/>
+                            </div>
+                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-bottom:10px;">
+                                出差申请
+                            </div>
+                            <table style="width:100%;">
+                                <tr style="height: 30px;">
+                                    <td width="10%">申请人</td>
+                                    <td width="40%">
+                                        <span t-field="travel.applicant_id"/>
+                                    </td>
+                                    <td width="10%">出差开始时间</td>
+                                    <td width="40%">
+                                        <span t-field="travel.travel_start_date"/>
+                                    </td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td>部门</td>
+                                    <td>
+                                        <span t-field="travel.applicant_department_id"/>
+                                    </td>
+                                    <td>出差结束时间</td>
+                                    <td>
+                                        <span t-field="travel.travel_end_date"/>
+                                    </td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td>出差目的地</td>
+                                    <td>
+                                        <span t-field="travel.destination_city"/>
+                                    </td>
+                                    <td>动因类别</td>
+                                    <td>
+                                        <span t-field="travel.driver_type_id"/>
+                                    </td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td>出差交通工具</td>
+                                    <td>
+                                        <span t-field="travel.travel_transportation"/>
+                                    </td>
+                                    <td>事由</td>
+                                    <td>
+                                        <span t-field="travel.cause"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-bottom:10px;">
+                                报销申请
+                            </div>
+                            <table style="width:100%;">
+                                <tr style="height: 30px;">
+                                    <td width="10%">申请日期</td>
+                                    <td width="40%">
+                                        <span t-field="travel.applicant_date"/>
+                                    </td>
+                                    <td width="10%">客户名称</td>
+                                    <td width="40%">
+                                        <span t-field="travel.customer_company_no"/>
+                                    </td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td>销售区域</td>
+                                    <td>
+                                        <span t-field="travel.sale_area_id"/>
+                                    </td>
+                                    <td>项目</td>
+                                    <td>
+                                        <span t-field="travel.project_id"/>
+                                    </td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td>销售市场</td>
+                                    <td>
+                                        <span t-field="travel.sale_market_id"/>
+                                    </td>
+                                    <td>申请单备注</td>
+                                    <td>
+                                        <span t-field="travel.application_remark"/>
+                                    </td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td>核算检测费用</td>
+                                    <td>
+                                        <span t-field="travel.nucleic_acid_testing_amount"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="margin:0 auto;width:100%;height:auto; font-size:16px; ">
+                                <t t-if="travel.travel_detail_ids">
+                                    <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-bottom:10px;">
+                                        差旅明细
+                                    </div>
+                                    <table style="border-collapse:collapse; border-spacing:0; border-left:1px solid #888; border-top:1px solid #888;">
+                                        <thead>
+                                            <tr style="font-size:16px;">
+                                                <th width="12%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    开始日期
+                                                </th>
+                                                <th width="12%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    结束日期
+                                                </th>
+                                                <th width="10%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    出发地
+                                                </th>
+                                                <th width="10%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    到达城市
+                                                </th>
+                                                <th width="8%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    交通费
+                                                </th>
+                                                <th width="8%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    伙食费
+                                                </th>
+                                                <th width="8%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    住宿费
+                                                </th>
+                                                <th width="8%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    市内交通
+                                                </th>
+                                                <th width="6%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    合计
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="travel.travel_detail_ids" t-as="detail"
+                                                style="font-size:16px;">
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="detail.start_date"/>
+                                                </td>
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="detail.end_date"/>
+                                                </td>
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="detail.from_city"/>
+                                                </td>
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="detail.to_city"/>
+                                                </td>
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="detail.car_cost"/>
+                                                </td>
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="detail.meal_cost"/>
+                                                </td>
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="detail.hotel_cost"/>
+                                                </td>
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="detail.city_car_cost"/>
+                                                </td>
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="detail.total_cost"/>
+                                                </td>
+                                            </tr>
+                                            <tr style="font-size:16px;">
+                                                <td colspan="4"
+                                                    style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+
+                                                </td>
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="travel.car_total_cost"/>
+                                                </td>
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="travel.meal_total_cost"/>
+                                                </td>
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="travel.hotel_total_cost"/>
+                                                </td>
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="travel.city_car_total_cost"/>
+                                                </td>
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="travel.total_cost"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </t>
+                            </div>
+                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:20px; padding-bottom:10px;">
+                                财务审核信息
+                            </div>
+                            <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
+                                <table style="width:100%;">
+                                    <tr style="height: 30px;">
+                                        <td width="10%">核减金额</td>
+                                        <td width="40%">
+                                            <span t-field="travel.audit_cut_amount"/>
+                                        </td>
+                                        <td width="10%">审核金额</td>
+                                        <td width="40%">
+                                            <span t-field="travel.audit_amount"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>审核备注</td>
+                                        <td colspan="3">
+                                            <span t-field="travel.audit_remark"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:20px; padding-bottom:10px;">
+                                报销信息
+                            </div>
+                            <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
+                                <table style="width:100%;">
+                                    <tr style="height: 30px;">
+                                        <td width="10%">报销人员</td>
+                                        <td width="40%">
+                                            <span t-field="travel.reimbursement_person_id"/>
+                                        </td>
+                                        <td width="10%">支付方式</td>
+                                        <td width="40%">
+                                            <span t-field="travel.reimbursement_payment_method"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 30px;">
+                                        <td>开户行</td>
+                                        <td>
+                                            <span t-field="travel.bank_name"/>
+                                        </td>
+                                        <td>银行账户</td>
+                                        <td>
+                                            <span t-field="travel.bank_account"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <t t-if="travel.approved_records">
+                                <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-top:0px; padding-bottom:0px;">
+                                    审批信息
+                                </div>
+                                <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
+                                        <span t-field="travel.approved_records"/>
+                                </div>
+                            </t>
                         </div>
                     </t>
                 </t>
@@ -173,31 +501,46 @@
                         <div class="page">
                             <!--<div style="margin:0 auto;width:300px;height:80px; font-size:24px; font-weight:bold; text-align:center;">-->
                             <div style="padding-top:50px;margin:0 auto;width:100%;height:auto; font-size:24px; font-weight:bold; text-align:center;">
-                                招待报销单<p t-field="o.name"/>
+                                招待报销单
+                                <p t-field="o.name"/>
                             </div>
                             <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
                                 <table style="width:100%;">
                                     <tr style="height: 30px;">
                                         <td width="10%">申请人</td>
-                                        <td width="40%"><span t-field="o.applicant_id" /></td>
+                                        <td width="40%">
+                                            <span t-field="o.applicant_id"/>
+                                        </td>
                                         <td width="10%">申请日期</td>
-                                        <td width="40%"><span t-field="o.applicant_date" /></td>
+                                        <td width="40%">
+                                            <span t-field="o.applicant_date"/>
+                                        </td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>部门</td>
-                                        <td><span t-field="o.applicant_department_id" /></td>
+                                        <td>
+                                            <span t-field="o.applicant_department_id"/>
+                                        </td>
                                         <td>招待日期</td>
-                                        <td><span t-field="o.entertain_date" /></td>
+                                        <td>
+                                            <span t-field="o.entertain_date"/>
+                                        </td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>事由</td>
-                                        <td><span t-field="o.cause" /></td>
+                                        <td>
+                                            <span t-field="o.cause"/>
+                                        </td>
                                         <td>备注</td>
-                                        <td><span t-field="o.reimbursement_remark" /></td>
+                                        <td>
+                                            <span t-field="o.reimbursement_remark"/>
+                                        </td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>金额</td>
-                                        <td><span t-field="o.applicant_amount" /></td>
+                                        <td>
+                                            <span t-field="o.applicant_amount"/>
+                                        </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
@@ -211,7 +554,9 @@
                                 <table style="width:100%;">
                                     <tr style="height: 30px;">
                                         <td width="10%">审核金额</td>
-                                        <td width="40%"><span t-field="o.audit_amount" /></td>
+                                        <td width="40%">
+                                            <span t-field="o.audit_amount"/>
+                                        </td>
                                         <td width="10%"></td>
                                         <td width="40%"></td>
                                     </tr>
@@ -224,15 +569,23 @@
                                 <table style="width:100%;">
                                     <tr style="height: 30px;">
                                         <td width="10%">报销人员</td>
-                                        <td width="40%"><span t-field="o.reimbursement_person_id" /></td>
+                                        <td width="40%">
+                                            <span t-field="o.reimbursement_person_id"/>
+                                        </td>
                                         <td width="10%">支付方式</td>
-                                        <td width="40%"><span t-field="o.reimbursement_payment_method" /></td>
+                                        <td width="40%">
+                                            <span t-field="o.reimbursement_payment_method"/>
+                                        </td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>开户行</td>
-                                        <td><span t-field="o.bank_name" /></td>
+                                        <td>
+                                            <span t-field="o.bank_name"/>
+                                        </td>
                                         <td>银行账户</td>
-                                        <td><span t-field="o.bank_account" /></td>
+                                        <td>
+                                            <span t-field="o.bank_account"/>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -262,7 +615,7 @@
                             </div>
                             <t t-if="o.approved_records">
                                 <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
-                                    <td><span t-field="o.approved_records" /></td>
+                                    <span t-field="o.approved_records"/>
                                 </div>
                             </t>
                         </div>
@@ -275,63 +628,77 @@
         <template id="report_expense_v2_entertain_list">
             <t t-call="web.html_container">
                 <!--<t t-call="web.external_layout">-->
-                    <!--<div class="page" style="padding-top:80px;">-->
+                <!--<div class="page" style="padding-top:80px;">-->
                 <t t-call="web.internal_layout">
                     <div class="page">
                         <div style="width:100%; text-align:center; font-size:20px;">招待费用报销</div>
                         <table style="border-collapse:collapse; border-spacing:0; border-left:1px solid #888; border-top:1px solid #888; width:98%;">
                             <thead>
-                            <tr>
-                                <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">单据号</th>
-                                <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">申请人</th>
-                                <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:15%;">申请日期</th>
-                                <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">部门</th>
-                                <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:15%;">招待日期</th>
-                                <!--<th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">申请金额</th>-->
-                                <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">审核金额</th>
-                            </tr>
-                        </thead>
+                                <tr>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">
+                                        单据号
+                                    </th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">
+                                        申请人
+                                    </th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:15%;">
+                                        申请日期
+                                    </th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">
+                                        部门
+                                    </th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:15%;">
+                                        招待日期
+                                    </th>
+                                    <!--<th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">申请金额</th>-->
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">
+                                        审核金额
+                                    </th>
+                                </tr>
+                            </thead>
                             <tbody>
-                            <tr t-foreach="docs" t-as="o">
-                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
-                                    <span t-field="o.name"/>
-                                </td>
-                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:100px;">
-                                    <span t-field="o.applicant_id"/>
-                                </td>
-                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
-                                    <span t-field="o.applicant_date"/></td>
+                                <tr t-foreach="docs" t-as="o">
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                        <span t-field="o.name"/>
+                                    </td>
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:100px;">
+                                        <span t-field="o.applicant_id"/>
+                                    </td>
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                        <span t-field="o.applicant_date"/>
+                                    </td>
 
-                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
-                                    <span t-field="o.applicant_department_id"/>
-                                </td>
-                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
-                                    <span t-field="o.entertain_date"/>
-                                </td>
-                                <!--<td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">-->
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                        <span t-field="o.applicant_department_id"/>
+                                    </td>
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                        <span t-field="o.entertain_date"/>
+                                    </td>
+                                    <!--<td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">-->
                                     <!--<span t-field="o.applicant_amount"/>-->
-                                <!--</td>-->
-                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
-                                    <span t-field="o.audit_amount"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                    <!--</td>-->
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                        <span t-field="o.audit_amount"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5"
+                                        style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
 
-                                </td>
+                                    </td>
 
-                                <!--<td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">-->
+                                    <!--<td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">-->
                                     <!--<t t-esc="sum(l.applicant_amount for l in docs)"/>-->
-                                <!--</td>-->
-                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
-                                    <t t-esc="sum(l.audit_amount for l in docs)"/>
-                                </td>
-                            </tr>
-                        </tbody>
+                                    <!--</td>-->
+                                    <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                        <t t-esc="sum(l.audit_amount for l in docs)"/>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
-                <!--</t>-->
-                    </t>
+                    <!--</t>-->
+                </t>
             </t>
         </template>
 
@@ -342,31 +709,46 @@
                         <div class="page">
                             <!--<div style="margin:0 auto;width:300px;height:80px; font-size:24px; font-weight:bold; text-align:center;">-->
                             <div style="padding-top:50px;margin:0 auto;width:100%;height:auto; font-size:24px; font-weight:bold; text-align:center;">
-                                特殊费用单<p t-field="o.name"/>
+                                特殊费用单
+                                <p t-field="o.name"/>
                             </div>
                             <div style="margin:0 auto;width:80%;height:auto; font-size:16px; ">
                                 <table style="width:100%;">
                                     <tr style="height: 30px;">
                                         <td width="10%">申请人</td>
-                                        <td width="40%"><span t-field="o.applicant_id" /></td>
+                                        <td width="40%">
+                                            <span t-field="o.applicant_id"/>
+                                        </td>
                                         <td width="10%">申请日期</td>
-                                        <td width="40%"><span t-field="o.applicant_date" /></td>
+                                        <td width="40%">
+                                            <span t-field="o.applicant_date"/>
+                                        </td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>部门</td>
-                                        <td><span t-field="o.applicant_department_id" /></td>
+                                        <td>
+                                            <span t-field="o.applicant_department_id"/>
+                                        </td>
                                         <td>招待日期</td>
-                                        <td><span t-field="o.entertain_date" /></td>
+                                        <td>
+                                            <span t-field="o.entertain_date"/>
+                                        </td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>事由</td>
-                                        <td><span t-field="o.cause" /></td>
+                                        <td>
+                                            <span t-field="o.cause"/>
+                                        </td>
                                         <td>备注</td>
-                                        <td><span t-field="o.reimbursement_remark" /></td>
+                                        <td>
+                                            <span t-field="o.reimbursement_remark"/>
+                                        </td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>金额</td>
-                                        <td><span t-field="o.applicant_amount" /></td>
+                                        <td>
+                                            <span t-field="o.applicant_amount"/>
+                                        </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
@@ -380,7 +762,9 @@
                                 <table style="width:100%;">
                                     <tr style="height: 30px;">
                                         <td width="10%">审核金额</td>
-                                        <td width="40%"><span t-field="o.audit_amount" /></td>
+                                        <td width="40%">
+                                            <span t-field="o.audit_amount"/>
+                                        </td>
                                         <td width="10%"></td>
                                         <td width="40%"></td>
                                     </tr>
@@ -393,15 +777,23 @@
                                 <table style="width:100%;">
                                     <tr style="height: 30px;">
                                         <td width="10%">报销人员</td>
-                                        <td width="40%"><span t-field="o.reimbursement_person_id" /></td>
+                                        <td width="40%">
+                                            <span t-field="o.reimbursement_person_id"/>
+                                        </td>
                                         <td width="10%">支付方式</td>
-                                        <td width="40%"><span t-field="o.reimbursement_payment_method" /></td>
+                                        <td width="40%">
+                                            <span t-field="o.reimbursement_payment_method"/>
+                                        </td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>开户行</td>
-                                        <td><span t-field="o.bank_name" /></td>
+                                        <td>
+                                            <span t-field="o.bank_name"/>
+                                        </td>
                                         <td>银行账户</td>
-                                        <td><span t-field="o.bank_account" /></td>
+                                        <td>
+                                            <span t-field="o.bank_account"/>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -420,13 +812,27 @@
                         <table style="border-collapse:collapse; border-spacing:0; border-left:1px solid #888; border-top:1px solid #888; width:98%;">
                             <thead>
                                 <tr>
-                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">单据号</th>
-                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">申请人</th>
-                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:15%;">申请日期</th>
-                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">部门</th>
-                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:15%;">招待日期</th>
-                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">申请金额</th>
-                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">审核金额</th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">
+                                        单据号
+                                    </th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">
+                                        申请人
+                                    </th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:15%;">
+                                        申请日期
+                                    </th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">
+                                        部门
+                                    </th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:15%;">
+                                        招待日期
+                                    </th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">
+                                        申请金额
+                                    </th>
+                                    <th style="font-weight:bold;background:#696969; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; width:14%;">
+                                        审核金额
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -438,7 +844,8 @@
                                         <span t-field="o.applicant_id"/>
                                     </td>
                                     <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
-                                        <span t-field="o.applicant_date"/></td>
+                                        <span t-field="o.applicant_date"/>
+                                    </td>
 
                                     <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
                                         <span t-field="o.applicant_department_id"/>
@@ -454,7 +861,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5" style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                    <td colspan="5"
+                                        style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
 
                                     </td>
 
