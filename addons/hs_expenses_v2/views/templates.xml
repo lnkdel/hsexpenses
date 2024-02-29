@@ -271,16 +271,22 @@
                                     <td>
                                         <span t-field="travel.destination_city"/>
                                     </td>
+                                    <td>销售市场组</td>
+                                    <td>
+                                        <span t-field="travel.sale_group_id"/>
+                                    </td>
+                                </tr>
+                                <tr style="height: 30px;">
                                     <td>动因类别</td>
                                     <td>
                                         <span t-field="travel.driver_type_id"/>
                                     </td>
-                                </tr>
-                                <tr style="height: 30px;">
                                     <td>出差交通工具</td>
                                     <td>
                                         <span t-field="travel.travel_transportation"/>
                                     </td>
+                                </tr>
+                                <tr style="height: 30px;">
                                     <td>事由</td>
                                     <td>
                                         <span t-field="travel.cause"/>
@@ -302,29 +308,13 @@
                                     </td>
                                 </tr>
                                 <tr style="height: 30px;">
-                                    <td>销售区域</td>
-                                    <td>
-                                        <span t-field="travel.sale_area_id"/>
-                                    </td>
                                     <td>项目</td>
                                     <td>
                                         <span t-field="travel.project_id"/>
                                     </td>
-                                </tr>
-                                <tr style="height: 30px;">
-                                    <td>销售市场</td>
-                                    <td>
-                                        <span t-field="travel.sale_market_id"/>
-                                    </td>
                                     <td>申请单备注</td>
                                     <td>
                                         <span t-field="travel.application_remark"/>
-                                    </td>
-                                </tr>
-                                <tr style="height: 30px;">
-                                    <td>核算检测费用</td>
-                                    <td>
-                                        <span t-field="travel.nucleic_acid_testing_amount"/>
                                     </td>
                                 </tr>
                             </table>

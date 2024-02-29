@@ -17,7 +17,7 @@ class BaseApplication(models.AbstractModel):
     def _get_default_employee(self):
         return self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
 
-    @api.onchange('applicat_id')
+    @api.onchange('applicant_id')
     def onchange_applicant_id(self):
         for s in self:
             s.reimbursement_person_id = s.applicant_id
