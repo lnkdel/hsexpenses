@@ -179,6 +179,7 @@
                             <group>
                                 <field name="name"/>
                                 <field name="city_level_id"/>
+                                <field name="active"/>
                             </group>
                         </group>
                     </sheet>
