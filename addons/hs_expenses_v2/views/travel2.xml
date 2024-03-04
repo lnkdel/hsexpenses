@@ -36,6 +36,7 @@
                         <button name="action_draft" string="审核" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','first_audited')]}" groups="hs_expenses_v2.group_hs_expenses_travel_application_approver" confirm="Are you sure you want to do this?"/>
 
                         <button name="action_submit_expenses" string="提交" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','draft')]}" groups="hs_expenses.group_hs_expenses_seller" confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_first_audited" string="退回" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'draft')]}" groups="hs_expenses.group_hs_expenses_manager" />
 
                         <button name="action_back_to_draft" string="退回" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'to_audited')]}" groups="hs_expenses.group_hs_expenses_financial_officer" />
                         <button name="action_audited_expenses" string="审核" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'to_audited')]}" groups="hs_expenses.group_hs_expenses_financial_officer" confirm="Are you sure you want to do this?"/>

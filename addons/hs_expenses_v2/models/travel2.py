@@ -196,6 +196,20 @@ class Travel2Application(models.Model):
         self.write({'state': 'draft', 'audit_date': datetime.datetime.now(), 'approved_records': approved_text})
 
     @api.multi
+    def action_back_to_first_audited(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'hs.expense.v2.travel2.back.wizard',
+            'name': '退回向导',
+            'view_mode': 'form',
+            'context': {
+                'travel_id': self.id,
+                'default_state': 'first_audited',
+            },
+            'target': 'new'
+        }
+
+    @api.multi
     def action_submit_expenses(self):  # 营销员提交报销申请
         self.write({'state': 'to_audited'})
 
