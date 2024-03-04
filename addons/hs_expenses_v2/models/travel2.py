@@ -181,11 +181,17 @@ class Travel2Application(models.Model):
 
     @api.multi
     def action_first_audited(self):
+        employee_id = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)])
+        if employee_id != self.first_auditor_id:
+            raise UserError(_("您无权审批该申请!"))
         approved_text = self.record_approve()
         self.write({'state': 'first_audited', 'audit_date': datetime.datetime.now(), 'approved_records': approved_text})
 
     @api.multi
     def action_draft(self):
+        employee_id = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)])
+        if employee_id != self.second_auditor_id:
+            raise UserError(_("您无权审批该申请!"))
         approved_text = self.record_approve()
         self.write({'state': 'draft', 'audit_date': datetime.datetime.now(), 'approved_records': approved_text})
 
