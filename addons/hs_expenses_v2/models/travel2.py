@@ -306,10 +306,10 @@ class Travel2Application(models.Model):
             employees = env['hs.base.employee'].sudo().search([('user_id', '=', user_id)])
             employee_ids = [employee.id for employee in employees]
             if self.user_has_groups('hs_expenses_v2.group_hs_expenses_travel_application_approver'):
-                own_domain = ['|', '|', '|', ('create_uid.id', '=', user_id), '&',
-                              ('first_auditor_id', 'in', employee_ids), ('state', '=', 'travel_to_audited'),
+                own_domain = ['|', '|', ('create_uid.id', '=', user_id), '&', ('first_auditor_id', 'in', employee_ids),
+                              ('state', 'in', ['travel_to_audited', 'to_audited', 'audited', 'done']),
                               '&', ('second_auditor_id', 'in', employee_ids),
-                              ('state', '=', 'first_audited'), ('state', 'in', ['to_audited', 'audited', 'done'])]
+                              ('state', 'in', ['first_audited', 'to_audited', 'audited', 'done'])]
             elif self.user_has_groups('hs_expenses.group_hs_expenses_financial_officer'):
                 own_domain = [('state', 'in', ['to_audited', 'audited'])]
             elif self.user_has_groups('hs_expenses.group_hs_expenses_cashier'):
