@@ -59,6 +59,8 @@
                                 <field name="destination_city" attrs="{'readonly': [('state', '!=', 'travel_draft')]}"/>
                                 <field name="travel_transportation" attrs="{'readonly': [('state', '!=', 'travel_draft')]}"/>
                                 <field name="feedback_number_id" attrs="{'readonly': [('state', '!=', 'travel_draft')], 'invisible': [('driver_type_id','!=',3)], 'required':[('driver_type_id', '=', 3)]}"/>
+                                <field name="first_auditor_id" invisible="1"/>
+                                <field name="second_auditor_id" invisible="1"/>
                             </group>
                             <group>
                                 <field name="travel_start_date" attrs="{'readonly': [('state', '!=', 'travel_draft')]}"/>
