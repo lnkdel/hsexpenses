@@ -141,6 +141,14 @@ class Travel2Application(models.Model):
     @api.multi
     def write(self, values):
         # Add code here
+        employee_id = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)])
+        result = self.env['hs.expense.travel.audit'].sudo().search([('name', '=', employee_id.id),
+                                                                    ('sale_group_id', '=', self.sale_group_id.id)])
+        if result:
+            values['first_auditor_id'] = result.first_audit.id
+            values['second_auditor_id'] = result.second_audit.id
+        else:
+            raise UserError(_("该用户该销售市场组无对于审批人，请联系管理员设置!"))
         return super(Travel2Application, self).write(values)
 
     @api.multi
