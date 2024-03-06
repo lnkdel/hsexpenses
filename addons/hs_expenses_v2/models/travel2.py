@@ -90,8 +90,8 @@ class Travel2Application(models.Model):
     ], string='出差交通工具', required=True, default='train')
     reimbursement_remark = fields.Text(string="Reimbursement Remark")
     sale_group_id = fields.Many2one('hs.expense.sale.group', string='销售市场组', required=True)
-    first_auditor_id = fields.Many2one('hs.base.employee', string='一级审批人', required=True)
-    second_auditor_id = fields.Many2one('hs.base.employee', string='二级审批人', required=True)
+    first_auditor_id = fields.Many2one('hs.base.employee', string='一级审批人')
+    second_auditor_id = fields.Many2one('hs.base.employee', string='二级审批人')
 
     meal_total_cost = fields.Float("Total Meal Cost", compute="_compute_meal_total_cost", digits=(16, 2))
     hotel_total_cost = fields.Float("Total Hotel Cost", compute="_compute_hotel_total_cost", digits=(16, 2))
