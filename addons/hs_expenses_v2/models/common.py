@@ -47,7 +47,9 @@ class TravelAudit(models.Model):
     name = fields.Many2one('hs.base.employee', string='申请人', required=True)
     sale_group_id = fields.Many2one('hs.expense.sale.group', string='销售市场组', required=True)
     first_audit = fields.Many2one('hs.base.employee', string='一级审批人', required=True)
-    second_audit = fields.Many2one('hs.base.employee', string='二级审批人', required=True)
+    second_audit = fields.Many2one('hs.base.employee', string='二级审批人')
+    third_audit = fields.Many2one('hs.base.employee', string='三级审批人')
+    audit_type = fields.Integer(string='审批级别', required=True)
 
     @api.constrains('name', 'sale_group_id')
     def _check(self):

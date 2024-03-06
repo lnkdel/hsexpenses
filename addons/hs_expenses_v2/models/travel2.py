@@ -70,8 +70,9 @@ class Travel2Application(models.Model):
     state = fields.Selection([
         ('travel_draft', '待提交'),
         ('travel_to_audited', '待审核'),
-        ('first_audited', '已审核'),
-        ('draft', '已批准'),
+        ('first_audited', '一级审批'),
+        ('second_audited', '二级审批'),
+        ('draft', '三级审批'),
         ('to_audited', '已确认'),
         ('audited', '财务审核'),
         ('done', '已支付')
@@ -90,8 +91,10 @@ class Travel2Application(models.Model):
     ], string='出差交通工具', required=True, default='train')
     reimbursement_remark = fields.Text(string="Reimbursement Remark")
     sale_group_id = fields.Many2one('hs.expense.sale.group', string='销售市场组', required=True)
+    audit_type = fields.Integer(string='审批类别')
     first_auditor_id = fields.Many2one('hs.base.employee', string='一级审批人')
     second_auditor_id = fields.Many2one('hs.base.employee', string='二级审批人')
+    third_auditor_id = fields.Many2one('hs.base.employee', string='三级审批人')
 
     meal_total_cost = fields.Float("Total Meal Cost", compute="_compute_meal_total_cost", digits=(16, 2))
     hotel_total_cost = fields.Float("Total Hotel Cost", compute="_compute_hotel_total_cost", digits=(16, 2))
@@ -132,23 +135,28 @@ class Travel2Application(models.Model):
         result = self.env['hs.expense.travel.audit'].sudo().search([('name', '=', employee_id.id),
                                                                     ('sale_group_id', '=', values['sale_group_id'])])
         if result:
+            values['audit_type'] = result.audit_type
             values['first_auditor_id'] = result.first_audit.id
             values['second_auditor_id'] = result.second_audit.id
+            values['third_auditor_id'] = result.third_audit.id
         else:
-            raise UserError(_("该用户该销售市场组无对于审批人，请联系管理员设置!"))
+            raise UserError(_("该用户该销售市场组无对应审批人，请联系管理员设置!"))
         return super(Travel2Application, self).create(values)
 
     @api.multi
     def write(self, values):
         # Add code here
         employee_id = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)])
-        result = self.env['hs.expense.travel.audit'].sudo().search([('name', '=', employee_id.id),
-                                                                    ('sale_group_id', '=', self.sale_group_id.id)])
-        if result:
-            values['first_auditor_id'] = result.first_audit.id
-            values['second_auditor_id'] = result.second_audit.id
-        else:
-            raise UserError(_("该用户该销售市场组无对于审批人，请联系管理员设置!"))
+        if self.applicant_id.id == employee_id.id:
+            result = self.env['hs.expense.travel.audit'].sudo().search([('name', '=', employee_id.id),
+                                                                        ('sale_group_id', '=', self.sale_group_id.id)])
+            if result:
+                values['audit_type'] = result.audit_type
+                values['first_auditor_id'] = result.first_audit.id
+                values['second_auditor_id'] = result.second_audit.id
+                values['third_auditor_id'] = result.third_audit.id
+            else:
+                raise UserError(_("该用户该销售市场组无对应审批人，请联系管理员设置!"))
         return super(Travel2Application, self).write(values)
 
     @api.multi
@@ -192,30 +200,33 @@ class Travel2Application(models.Model):
         employee_id = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)])
         if employee_id != self.first_auditor_id:
             raise UserError(_("您无权审批该申请!"))
-        approved_text = self.record_approve()
-        self.write({'state': 'first_audited', 'audit_date': datetime.datetime.now(), 'approved_records': approved_text})
+        if self.audit_type == 1:
+            approved_text = self.record_approve('draft')
+            self.write({'state': 'draft', 'audit_date': datetime.datetime.now(), 'approved_records': approved_text})
+        else:
+            approved_text = self.record_approve('first_audited')
+            self.write({'state': 'first_audited', 'audit_date': datetime.datetime.now(), 'approved_records': approved_text})
+
+    @api.multi
+    def action_second_audited(self):
+        employee_id = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)])
+        if employee_id != self.second_auditor_id:
+            raise UserError(_("您无权审批该申请!"))
+        if self.audit_type == 2:
+            approved_text = self.record_approve('draft')
+            self.write({'state': 'draft', 'audit_date': datetime.datetime.now(), 'approved_records': approved_text})
+        else:
+            approved_text = self.record_approve('second_audited')
+            self.write(
+                {'state': 'second_audited', 'audit_date': datetime.datetime.now(), 'approved_records': approved_text})
 
     @api.multi
     def action_draft(self):
         employee_id = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)])
-        if employee_id != self.second_auditor_id:
+        if employee_id != self.third_auditor_id:
             raise UserError(_("您无权审批该申请!"))
-        approved_text = self.record_approve()
+        approved_text = self.record_approve('draft')
         self.write({'state': 'draft', 'audit_date': datetime.datetime.now(), 'approved_records': approved_text})
-
-    @api.multi
-    def action_back_to_first_audited(self):
-        return {
-            'type': 'ir.actions.act_window',
-            'res_model': 'hs.expense.v2.travel2.back.wizard',
-            'name': '退回向导',
-            'view_mode': 'form',
-            'context': {
-                'travel_id': self.id,
-                'default_state': 'first_audited',
-            },
-            'target': 'new'
-        }
 
     @api.multi
     def action_submit_expenses(self):  # 营销员提交报销申请
@@ -246,7 +257,7 @@ class Travel2Application(models.Model):
     def action_audited_expenses(self):
         if self.audit_amount <= 0:
             raise UserError(_("Please enter the correct audit amount!"))
-        approved_text = self.record_approve()
+        approved_text = self.record_approve('audited')
         self.write({'state': 'audited', 'audit_date': datetime.datetime.now(), 'approved_records': approved_text})
 
     @api.multi
@@ -274,9 +285,11 @@ class Travel2Application(models.Model):
         elif name == 'travel_to_audited':
             return '待审核'
         elif name == 'first_audited':
-            return '已审核'
+            return '一级审批'
+        elif name == 'second_audited':
+            return '二级审批'
         elif name == 'draft':
-            return '已批准'
+            return '三级审批'
         elif name == 'to_audited':
             return '已确认'
         elif name == 'audited':
@@ -284,25 +297,11 @@ class Travel2Application(models.Model):
         elif name == 'done':
             return '已支付'
 
-    def _next_state(self, name):
-        if name == 'travel_draft':
-            return 'travel_to_audited'
-        elif name == 'travel_to_audited':
-            return 'first_audited'
-        elif name == 'first_audited':
-            return 'draft'
-        elif name == 'draft':
-            return 'to_audited'
-        elif name == 'to_audited':
-            return 'audited'
-        elif name == 'audited':
-            return 'done'
-
-    def record_approve(self):  # 记录审核过程
+    def record_approve(self, next_state):  # 记录审核过程
         operator = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)], limit=1)
 
         origin_state = self._tranlate_state_name(self.state)
-        now_state = self._tranlate_state_name(self._next_state(self.state))
+        now_state = self._tranlate_state_name(next_state)
 
         approved_text = '%s - %s \n%s ---> %s' % \
                         (operator.complete_name if operator.complete_name else 'Administrator',
@@ -328,10 +327,12 @@ class Travel2Application(models.Model):
             employees = env['hs.base.employee'].sudo().search([('user_id', '=', user_id)])
             employee_ids = [employee.id for employee in employees]
             if self.user_has_groups('hs_expenses_v2.group_hs_expenses_travel_application_approver'):
-                own_domain = ['|', '|', ('create_uid.id', '=', user_id), '&', ('first_auditor_id', 'in', employee_ids),
+                own_domain = ['|', '|', '|', ('create_uid.id', '=', user_id), '&', ('first_auditor_id', 'in', employee_ids),
                               ('state', 'in', ['travel_to_audited', 'to_audited', 'audited', 'done']),
                               '&', ('second_auditor_id', 'in', employee_ids),
-                              ('state', 'in', ['first_audited', 'to_audited', 'audited', 'done'])]
+                              ('state', 'in', ['first_audited', 'to_audited', 'audited', 'done']),
+                              '&', ('third_auditor_id', 'in', employee_ids),
+                              ('state', 'in', ['second_audited', 'to_audited', 'audited', 'done'])]
             elif self.user_has_groups('hs_expenses.group_hs_expenses_financial_officer'):
                 own_domain = [('state', 'in', ['to_audited', 'audited'])]
             elif self.user_has_groups('hs_expenses.group_hs_expenses_cashier'):
@@ -443,8 +444,9 @@ class Travel2ApplicationBackWizard(models.TransientModel):
     state = fields.Selection([
         ('travel_draft', '待提交'),
         ('travel_to_audited', '待审核'),
-        ('first_audited', '已审核'),
-        ('draft', '已批准'),
+        ('first_audited', '一级审批'),
+        ('second_audited', '二级审批'),
+        ('draft', '三级审批'),
         ('to_audited', '已确认'),
         ('audited', '财务审核'),
         ('done', '已支付')

@@ -33,10 +33,13 @@
                         <button name="action_first_audited" string="审核" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','travel_to_audited')]}" groups="hs_expenses_v2.group_hs_expenses_travel_application_approver" confirm="Are you sure you want to do this?"/>
 
                         <button name="action_back_to_travel_draft" string="退回" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','first_audited')]}" groups="hs_expenses_v2.group_hs_expenses_travel_application_approver" />
-                        <button name="action_draft" string="审核" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','first_audited')]}" groups="hs_expenses_v2.group_hs_expenses_travel_application_approver" confirm="Are you sure you want to do this?"/>
+                        <button name="action_second_audited" string="审核" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','first_audited')]}" groups="hs_expenses_v2.group_hs_expenses_travel_application_approver" confirm="Are you sure you want to do this?"/>
+
+                        <button name="action_back_to_travel_draft" string="退回" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','second_audited')]}" groups="hs_expenses_v2.group_hs_expenses_travel_application_approver" />
+                        <button name="action_draft" string="审核" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','second_audited')]}" groups="hs_expenses_v2.group_hs_expenses_travel_application_approver" confirm="Are you sure you want to do this?"/>
 
                         <button name="action_submit_expenses" string="提交" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','draft')]}" groups="hs_expenses.group_hs_expenses_seller" confirm="Are you sure you want to do this?"/>
-                        <button name="action_back_to_first_audited" string="退回" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'draft')]}" groups="hs_expenses.group_hs_expenses_manager" />
+                        <button name="action_back_to_travel_draft" string="退回" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'draft')]}" groups="hs_expenses.group_hs_expenses_manager" />
 
                         <button name="action_back_to_draft" string="退回" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'to_audited')]}" groups="hs_expenses.group_hs_expenses_financial_officer" />
                         <button name="action_audited_expenses" string="审核" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'to_audited')]}" groups="hs_expenses.group_hs_expenses_financial_officer" confirm="Are you sure you want to do this?"/>
@@ -44,7 +47,7 @@
                         <button name="action_back_to_to_audited" string="退回" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier" />
                         <button name="action_cashier_expenses" string="完成" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=', 'audited')]}" groups="hs_expenses.group_hs_expenses_cashier" confirm="Are you sure you want to do this?"/>
 
-                        <field name="state" widget="statusbar" statusbar_visible="travel_draft,travel_to_audited,first_audited,draft,to_audited,audited,done" />
+                        <field name="state" widget="statusbar" statusbar_visible="travel_draft,travel_to_audited,first_audited,second_audited,draft,to_audited,audited,done" />
                     </header>
                     <sheet>
 
@@ -61,6 +64,8 @@
                                 <field name="feedback_number_id" attrs="{'readonly': [('state', '!=', 'travel_draft')], 'invisible': [('driver_type_id','!=',3)], 'required':[('driver_type_id', '=', 3)]}"/>
                                 <field name="first_auditor_id" invisible="1"/>
                                 <field name="second_auditor_id" invisible="1"/>
+                                <field name="third_auditor_id" invisible="1"/>
+                                <field name="audit_type" invisible="1"/>
                             </group>
                             <group>
                                 <field name="travel_start_date" attrs="{'readonly': [('state', '!=', 'travel_draft')]}"/>

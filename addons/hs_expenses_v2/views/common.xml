@@ -193,8 +193,10 @@
             <tree>
                 <field name="name"/>
                 <field name="sale_group_id"/>
+                <field name="audit_type"/>
                 <field name="first_audit"/>
                 <field name="second_audit"/>
+                <field name="third_audit"/>
             </tree>
           </field>
         </record>
@@ -209,8 +211,10 @@
                             <group>
                                 <field name="name"/>
                                 <field name="sale_group_id"/>
+                                <field name="audit_type"/>
                                 <field name="first_audit"/>
                                 <field name="second_audit"/>
+                                <field name="third_audit"/>
                             </group>
                         </group>
                     </sheet>
