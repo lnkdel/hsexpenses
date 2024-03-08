@@ -200,6 +200,14 @@ class Travel2Application(models.Model):
         employee_id = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)])
         if employee_id != self.first_auditor_id:
             raise UserError(_("您无权审批该申请!"))
+        if self.audit_type == 0:
+            result = self.env['hs.expense.travel.audit'].sudo().search([('name', '=', self.applicant_id.id),
+                                                                        ('sale_group_id', '=', self.sale_group_id.id)])
+            if result:
+                self.audit_type = result.audit_type
+                self.first_auditor_id = result.first_audit.id
+                self.second_auditor_id = result.second_audit.id
+                self.third_auditor_id = result.third_audit.id
         if self.audit_type == 1:
             approved_text = self.record_approve('draft')
             self.write({'state': 'draft', 'audit_date': datetime.datetime.now(), 'approved_records': approved_text})
@@ -212,6 +220,14 @@ class Travel2Application(models.Model):
         employee_id = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)])
         if employee_id != self.second_auditor_id:
             raise UserError(_("您无权审批该申请!"))
+        if self.audit_type == 0:
+            result = self.env['hs.expense.travel.audit'].sudo().search([('name', '=', self.applicant_id.id),
+                                                                        ('sale_group_id', '=', self.sale_group_id.id)])
+            if result:
+                self.audit_type = result.audit_type
+                self.first_auditor_id = result.first_audit.id
+                self.second_auditor_id = result.second_audit.id
+                self.third_auditor_id = result.third_audit.id
         if self.audit_type == 2:
             approved_text = self.record_approve('draft')
             self.write({'state': 'draft', 'audit_date': datetime.datetime.now(), 'approved_records': approved_text})
