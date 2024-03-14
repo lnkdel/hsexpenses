@@ -64,9 +64,12 @@ class Travel2Application(models.Model):
                 de.audit_amount = de.total_cost - de.audit_cut_amount
             travel.audit_amount = travel.total_cost - travel.audit_cut_amount
 
-    destination_city = fields.Many2one("hs.base.city", string="出差目的地", required=True)
+    # destination_city = fields.Many2one("hs.base.city", string="出差目的地", required=True)
     travel_detail_ids = fields.One2many('hs.expense.v2.travel2.detail', 'travel_application_id',
                                         string='Travel Details')
+
+    applictaion_ids = fields.One2many('hs.expense.v2.application.detail', 'travel_application_id',
+                                      string='出差计划明细', required=True)
     state = fields.Selection([
         ('travel_draft', '待提交'),
         ('travel_to_audited', '待审核'),
@@ -365,6 +368,31 @@ class Travel2Application(models.Model):
                                                                                          orderby=orderby, lazy=lazy)
 
 
+class ApplicationDetail(models.Model):
+    _name = 'hs.expense.v2.application.detail'
+    _description = 'Application detail'
+
+    travel_application_id = fields.Many2one(comodel_name="hs.expense.v2.travel2.application",
+                                            string="Travel Application")
+
+    date = fields.Date(string='时间', required=True, default=lambda self: fields.Date.context_today(self))
+    city_id = fields.Many2one("hs.base.city", string="目的地", required=True)
+    cause = fields.Text(string="事由", required=True)
+
+    state = fields.Selection([
+        ('travel_draft', '待提交'),
+        ('travel_to_audited', '待审核'),
+        ('first_audited', '一级审批'),
+        ('second_audited', '二级审批'),
+        ('draft', '三级审批'),
+        ('to_audited', '已确认'),
+        ('audited', '财务审核'),
+        ('done', '已支付')
+    ], string='Status', copy=False, index=True, readonly=True, default='travel_draft',
+        related='travel_application_id.state',
+        help="Status of the expense.")
+
+
 class Travel2Detail(models.Model):
     _name = 'hs.expense.v2.travel2.detail'
     _description = 'Travel detail'
@@ -475,9 +503,11 @@ class Travel2ApplicationBackWizard(models.TransientModel):
         elif name == 'travel_to_audited':
             return '待审核'
         elif name == 'first_audited':
-            return '已审核'
+            return '一级审批'
+        elif name == 'second_audited':
+            return '二级审批'
         elif name == 'draft':
-            return '已审批'
+            return '三级审批'
         elif name == 'to_audited':
             return '已确认'
         elif name == 'audited':

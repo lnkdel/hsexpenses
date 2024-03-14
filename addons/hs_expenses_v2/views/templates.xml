@@ -267,32 +267,69 @@
                                     </td>
                                 </tr>
                                 <tr style="height: 30px;">
-                                    <td>出差目的地</td>
-                                    <td>
-                                        <span t-field="travel.destination_city"/>
-                                    </td>
+                                    <!--<td>出差目的地</td>-->
+                                    <!--<td>-->
+                                        <!--<span t-field="travel.destination_city"/>-->
+                                    <!--</td>-->
                                     <td>销售市场组</td>
                                     <td>
                                         <span t-field="travel.sale_group_id"/>
                                     </td>
-                                </tr>
-                                <tr style="height: 30px;">
                                     <td>动因类别</td>
                                     <td>
                                         <span t-field="travel.driver_type_id"/>
                                     </td>
+                                </tr>
+                                <tr style="height: 30px;">
                                     <td>出差交通工具</td>
                                     <td>
                                         <span t-field="travel.travel_transportation"/>
                                     </td>
-                                </tr>
-                                <tr style="height: 30px;">
                                     <td>事由</td>
                                     <td>
                                         <span t-field="travel.cause"/>
                                     </td>
                                 </tr>
                             </table>
+                            <div style="margin:0 auto;width:100%;height:auto; font-size:16px; ">
+                                <t t-if="travel.applictaion_ids">
+                                    <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-bottom:10px;">
+                                        出差计划明细
+                                    </div>
+                                    <table style="border-collapse:collapse; border-spacing:0; border-left:1px solid #888; border-top:1px solid #888;">
+                                        <thead>
+                                            <tr style="font-size:16px;">
+                                                <th width="12%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    时间
+                                                </th>
+                                                <th width="10%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    目的地
+                                                </th>
+                                                <th width="8%"
+                                                    style="font-weight:bold;background:#ccc; height:24px; line-height:24px;border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    事由
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="travel.applictaion_ids" t-as="detail"
+                                                style="font-size:16px;">
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="detail.date"/>
+                                                </td>
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="detail.city_id"/>
+                                                </td>
+                                                <td style="border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;">
+                                                    <span t-field="detail.cause"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </t>
+                            </div>
                             <div style="margin:0 auto;width:100%;height:auto; font-size:22px; font-weight:bold; padding-bottom:10px;">
                                 报销申请
                             </div>
