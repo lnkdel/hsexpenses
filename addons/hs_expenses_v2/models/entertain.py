@@ -152,7 +152,7 @@ class EntertainApplication(models.Model):
     ], string='Cause Type', default='bos', required=True)
     reason = fields.Text()
     approved_records = fields.Text()
-    sale_group_id = fields.Many2one('hs.expense.sale.group', string='销售市场组', required=True)
+    sale_group_id = fields.Many2one('hs.expense.sale.group', string='销售市场组')
 
     @api.model
     def create(self, vals):
