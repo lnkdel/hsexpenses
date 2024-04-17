@@ -69,7 +69,7 @@ class Travel2Application(models.Model):
                                         string='Travel Details')
 
     applictaion_ids = fields.One2many('hs.expense.v2.application.detail', 'travel_application_id',
-                                      string='出差计划明细', required=True)
+                                      string='出差计划明细')
     state = fields.Selection([
         ('travel_draft', '待提交'),
         ('travel_to_audited', '待审核'),
@@ -90,8 +90,9 @@ class Travel2Application(models.Model):
         ('train', '火车'),
         ('airplane', '飞机'),
         ('car', '汽车'),
-        ('other', '其他')
-    ], string='出差交通工具', required=True, default='train')
+        ('other', '其他'),
+        ('more', '飞机、火车高铁、客车、轮船')
+    ], string='出差交通工具', required=True, default='more')
     reimbursement_remark = fields.Text(string="Reimbursement Remark")
     sale_group_id = fields.Many2one('hs.expense.sale.group', string='销售市场组', required=True)
     audit_type = fields.Integer(string='审批类别')
@@ -144,6 +145,8 @@ class Travel2Application(models.Model):
             values['third_auditor_id'] = result.third_audit.id
         else:
             raise UserError(_("该用户该销售市场组无对应审批人，请联系管理员设置!"))
+        values['bank_name'] = employee_id.bank_name
+        values['bank_account'] = employee_id.bank_account
         return super(Travel2Application, self).create(values)
 
     @api.multi

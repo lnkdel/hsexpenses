@@ -235,7 +235,8 @@
         <template id="report_expense_v2_travel2">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="travel">
-                    <t t-call="web.external_layout">
+                    <!--<t t-call="web.external_layout">-->
+                    <t>
                         <div class="page">
                             <!--<div style="margin:0 auto;width:300px;height:80px; font-size:24px; font-weight:bold; text-align:center;">-->
                             <div style="padding-top:50px;margin:0 auto;width:100%;height:auto; font-size:24px; font-weight:bold; text-align:center;">

@@ -152,6 +152,7 @@ class EntertainApplication(models.Model):
     ], string='Cause Type', default='bos', required=True)
     reason = fields.Text()
     approved_records = fields.Text()
+    sale_group_id = fields.Many2one('hs.expense.sale.group', string='销售市场组', required=True)
 
     @api.model
     def create(self, vals):
@@ -243,33 +244,28 @@ class EntertainApplication(models.Model):
         countersign = self.env['hs.expense.v2.countersign.entertain']
         reviewers = []
 
-        for category in self.expense_category_ids:
-            if category.name == '质量':
-                group_id = self.env.ref('hs_expenses.group_hs_expenses_quality_reviewer').id
-            elif category.name == '合同订单发货回款':
-                group_id = self.env.ref('hs_expenses.group_hs_expenses_contract_reviewer').id
-            elif category.name == '新项目拓展':
-                group_id = self.env.ref('hs_expenses.group_hs_expenses_project_reviewer').id
-            elif category.name == '其他':
-                group_id = self.env.ref('hs_expenses.group_hs_expenses_other_reviewer').id
-            elif category.name == '补充申请':
-                group_id = self.env.ref('hs_expenses.group_hs_expenses_project_reviewer').id
-            reviewers.append(self.env['res.users'].search([('groups_id', '=', group_id)]))
+        employee_id = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)])
+        result = self.env['hs.expense.travel.audit'].sudo().search([('name', '=', employee_id.id),
+                                                                    ('sale_group_id', '=', self.sale_group_id.id)])
+        if result:
+            if result.audit_type < 3:
+                user_id = result.first_audit.id
+            else:
+                user_id = result.second_audit.id
+            reviewers.append(user_id)
+        else:
+            raise UserError(_("该用户该销售市场组无对应审批人，请联系管理员设置!"))
 
-        countersign.sudo().search(
-            [('expense_id', '=', self.id), ('is_approved', '=', False)]).unlink()
+        countersign.sudo().search([('expense_id', '=', self.id)]).unlink()
         countersigns = countersign.sudo().search([('expense_id', '=', self.id)]).read([('employee_id')])
         lst = [cc['employee_id'][0] for cc in countersigns]
 
-        for reviewer in reviewers:
-            for user in reviewer:
-                employee = self.env['hs.base.employee'].search([('user_id', '=', user.id)], limit=1)
-                if employee and not user.has_group('hs_expenses.group_hs_expenses_manager'):
-                    if employee.id not in lst:
-                        countersign.sudo().create({
-                            'employee_id': employee.id,
-                            'expense_id': self.id
-                        })
+        for user in reviewers:
+            if user not in lst:
+                countersign.sudo().create({
+                    'employee_id': user,
+                    'expense_id': self.id
+                })
 
         # if not any(sign.is_approved is True for sign in countersign.sudo().search([('expense_id', '=', self.id)])):
         if all(sign.is_approved is True for sign in countersign.sudo().search([('expense_id', '=', self.id)])):
@@ -459,6 +455,44 @@ class EntertainApplication(models.Model):
         if self.approved_records:
             approved_text = self.approved_records + '\n\n' + approved_text
         return approved_text
+
+    @api.model
+    def search_read(self, domain=None, fields=None, offset=0, limit=None, order=None):
+        domain = self.get_own_forecast_domain(domain)
+        return super(EntertainApplication, self).search_read(domain, fields, offset, limit, order)
+
+    def get_own_forecast_domain(self, domain=None):
+        user_domain = domain or []
+        env = self.env
+        user_id = env.uid
+        if self.user_has_groups('hs_expenses.group_hs_expenses_manager'):
+            own_domain = [(1, '=', 1)]
+        else:
+            employee = env['hs.base.employee'].sudo().search([('user_id', '=', user_id)])
+            countersigns = env['hs.expense.v2.countersign.entertain'].sudo().search([('employee_id', '=', employee.id)])
+            expense_ids = [countersign.expense_id for countersign in countersigns]
+            names = [application.name for application in expense_ids]
+            if self.user_has_groups('hs_expenses_v2.group_hs_expenses_travel_application_approver'):
+                if self.user_has_groups('hs_expenses_v2.group_hs_expenses_vice_president'):
+                    own_domain = ['|', '|', ('create_uid.id', '=', user_id), '&', ('name', 'in', names),
+                                  ('state', '=', 'reported'), ('state', '=', 'reported2')]
+                else:
+                    own_domain = ['|', ('create_uid.id', '=', user_id), '&', ('name', 'in', names),
+                                  ('state', '=', 'reported')]
+            elif self.user_has_groups('hs_expenses.group_hs_expenses_financial_officer'):
+                own_domain = [('state', 'in', ['confirmed', 'audited'])]
+            elif self.user_has_groups('hs_expenses.group_hs_expenses_cashier'):
+                own_domain = [('state', 'in', ['audited', 'done'])]
+            else:
+                own_domain = [('create_uid.id', '=', user_id)]
+        return user_domain + own_domain
+
+    @api.model
+    def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
+        domain = self.get_own_forecast_domain(domain)
+        return super(EntertainApplication, self.with_context(virtual_id=False)).read_group(domain, fields, groupby,
+                                                                                         offset=offset, limit=limit,
+                                                                                         orderby=orderby, lazy=lazy)
 
 
 class EntertainApplicationBackWizard(models.TransientModel):

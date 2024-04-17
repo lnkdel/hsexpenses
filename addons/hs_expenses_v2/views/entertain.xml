@@ -31,17 +31,15 @@
                         <button name="action_submit_expenses" string="Submit" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','draft')]}" groups="hs_expenses.group_hs_expenses_seller" confirm="Are you sure you want to do this?"/>
 
                         <!--reviewer-->
-                        <button name="action_reported2_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 4), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_other_reviewer" confirm="Are you sure you want to do this?"/>
-                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 4), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_other_reviewer" />
-
-                        <button name="action_reported2_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 1), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_quality_reviewer" confirm="Are you sure you want to do this?"/>
-                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 1), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_quality_reviewer" />
-
-                        <button name="action_reported2_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 2), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_contract_reviewer" confirm="Are you sure you want to do this?"/>
-                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 2), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_contract_reviewer" />
-
-                        <button name="action_reported2_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 3), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_project_reviewer" confirm="Are you sure you want to do this?"/>
-                        <button name="action_back_to_draft" string="Back" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 3), ('current_sign_completed', '=', True)]}" groups="hs_expenses.group_hs_expenses_project_reviewer" />
+                        <button name="action_reported2_expenses" string="Approve" type="object"
+                                class="oe_highlight o_expense_submit"
+                                attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 4), ('current_sign_completed', '=', True)]}"
+                                groups="hs_expenses_v2.group_hs_expenses_travel_application_approver"
+                                confirm="Are you sure you want to do this?"/>
+                        <button name="action_back_to_draft" string="Back" type="object"
+                                class="oe_highlight o_expense_submit"
+                                attrs="{'invisible': ['|', '|', ('state','!=','reported'), ('expense_category_ids', 'in', 4), ('current_sign_completed', '=', True)]}"
+                                groups="hs_expenses_v2.group_hs_expenses_travel_application_approver"/>
 
                         <!--vice-president-->
                         <button name="action_approved_expenses" string="Approve" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': [('state','!=','reported2')]}" groups="hs_expenses_v2.group_hs_expenses_vice_president" confirm="Are you sure you want to do this?"/>
@@ -67,7 +65,8 @@
                                 <field name="expense_category_ids" widget="many2many_tags" options="{'no_create_edit': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="applicant_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="sale_area_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
-                                <field name="sale_market_id" attrs="{'readonly': [('state', '!=', 'draft')], 'required':[('state', '=', 'draft')]}" />
+                                <field name="sale_group_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <!--<field name="sale_market_id" attrs="{'readonly': [('state', '!=', 'draft')], 'required':[('state', '=', 'draft')]}" />-->
                                 <field name="project_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="customer_company_no" attrs="{'readonly': [('state', '!=', 'draft')]}" />
                                 <field name="entertain_type" attrs="{'readonly': [('state', '!=', 'draft')]}" />

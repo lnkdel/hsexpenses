@@ -40,8 +40,8 @@ class BaseApplication(models.AbstractModel):
     reimbursement_payment_method = fields.Selection(
         [('cash', 'Cash'), ('mt', 'Money Transfer')],
         string='Payment Method', default='mt')
-    bank_name = fields.Char(string='Bank Name', related='reimbursement_person_id.bank_name')
-    bank_account = fields.Char(string='Bank Account', related='reimbursement_person_id.bank_account')
+    bank_name = fields.Char(string='Bank Name')
+    bank_account = fields.Char(string='Bank Account')
     audit_date = fields.Datetime(string='Audit Date')
 
     # driver_type = fields.Selection([('BD - VISIT', 'Business Development - Visit'),
