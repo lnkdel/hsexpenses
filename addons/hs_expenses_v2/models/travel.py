@@ -32,7 +32,7 @@ class BaseApplication(models.AbstractModel):
     applicant_department_id = fields.Many2one('hs.base.department', related='applicant_id.department_id', store=True)
     cause = fields.Text(string="Cause", required=True)
     application_remark = fields.Text(string="Application Remark")
-    sale_area_id = fields.Many2one('hs.sale.area', related='applicant_id.sale_area_id', string='Sale Area', store=True)
+    sale_area_id = fields.Many2one('hs.sale.area', string='Sale Area', store=True)
     sale_market_id = fields.Many2one('hs.sale.market', string='Sale Market',)
 
     reimbursement_person_id = fields.Many2one('hs.base.employee', string="Reimbursement Person",
