@@ -153,7 +153,7 @@ class Travel2Application(models.Model):
     def write(self, values):
         # Add code here
         employee_id = self.env['hs.base.employee'].sudo().search([('user_id', '=', self.env.uid)])
-        if self.applicant_id.id == employee_id.id and values['sale_group_id']:
+        if self.applicant_id.id == employee_id.id and 'sale_group_id' in values.keys():
             result = self.env['hs.expense.travel.audit'].sudo().search([('name', '=', employee_id.id),
                                                                         ('sale_group_id', '=', values['sale_group_id'])])
             if result:
