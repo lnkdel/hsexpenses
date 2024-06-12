@@ -59,9 +59,7 @@
                             <group>
                                 <field name="applicant_id" attrs="{'readonly': [('state', '!=', 'travel_draft')]}"/>
                                 <field name="applicant_department_id"/>
-                                <field name="sale_group_id" attrs="{'readonly': [('state', '!=', 'travel_draft')]}"/>
-                                <!--<field name="destination_city" attrs="{'readonly': [('state', '!=', 'travel_draft')]}"/>-->
-                                <field name="travel_transportation" attrs="{'readonly': [('state', '!=', 'travel_draft')]}"/>
+                                <field name="sale_market_id" attrs="{'readonly': [('state', '!=', 'travel_draft')], 'required':[('state', '=', 'travel_draft')]}" />                                <field name="travel_transportation" attrs="{'readonly': [('state', '!=', 'travel_draft')]}"/>
                                 <field name="feedback_number_id" attrs="{'readonly': [('state', '!=', 'travel_draft')], 'invisible': [('driver_type_id','!=',3)], 'required':[('driver_type_id', '=', 3)]}"/>
                                 <field name="first_auditor_id" invisible="1"/>
                                 <field name="second_auditor_id" invisible="1"/>
@@ -71,6 +69,7 @@
                             <group>
                                 <field name="travel_start_date" attrs="{'readonly': [('state', '!=', 'travel_draft')]}"/>
                                 <field name="travel_end_date" attrs="{'readonly': [('state', '!=', 'travel_draft')]}"/>
+                                <field name="sale_group_id" attrs="{'readonly': [('state', '!=', 'travel_draft')]}"/>
                                 <field name="driver_type_id" attrs="{'readonly': [('state', '!=', 'travel_draft')]}"/>
                                 <field name="cause" attrs="{'readonly': [('state', '!=', 'travel_draft')]}"/>
                             </group>

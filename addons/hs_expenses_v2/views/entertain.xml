@@ -64,9 +64,9 @@
                             <group>
                                 <field name="expense_category_ids" widget="many2many_tags" options="{'no_create_edit': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="applicant_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="sale_market_id" attrs="{'readonly': [('state', '!=', 'draft')], 'required':[('state', '=', 'draft')]}" />
                                 <field name="sale_area_id" attrs="{'readonly': [('state', '!=', 'draft')], 'required':[('state', '=', 'draft')]}" />
                                 <field name="sale_group_id" attrs="{'readonly': [('state', '!=', 'draft')], 'required':[('state', '=', 'draft')]}"/>
-                                <!--<field name="sale_market_id" attrs="{'readonly': [('state', '!=', 'draft')], 'required':[('state', '=', 'draft')]}" />-->
                                 <field name="project_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="customer_company_no" attrs="{'readonly': [('state', '!=', 'draft')]}" />
                                 <field name="entertain_type" attrs="{'readonly': [('state', '!=', 'draft')]}" />
