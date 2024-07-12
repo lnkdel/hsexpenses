@@ -208,7 +208,7 @@
                     res_model="hs.expense.v2.entertain.batch.approve.wizard" view_mode="form" target="new" multi="True"
                     groups="hs_expenses_v2.group_hs_expenses_vice_president"/>
 
-         <record id="batch_audit_entertain_application_wizard_view" model="ir.ui.view">
+        <record id="batch_audit_entertain_application_wizard_view" model="ir.ui.view">
             <field name="name">hs.expense.v2.entertain.batch.audit.wizard</field>
             <field name="model">hs.expense.v2.entertain.batch.audit.wizard</field>
             <field name="arch" type="xml">

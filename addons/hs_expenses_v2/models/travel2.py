@@ -185,7 +185,8 @@ class Travel2Application(models.Model):
     def action_submit_travel(self):  # 营销员提交出差申请
         if self.travel_end_date < self.travel_start_date:
             raise UserError(_("出差结束时间不得小于出差开始时间!"))
-        self.write({'state': 'travel_to_audited'})
+        applicant_date = (self.travel_end_date + datetime.timedelta(days=1)).strftime('%Y-%m-%d')
+        self.write({'state': 'travel_to_audited', 'applicant_date': applicant_date})
 
     @api.multi
     def action_back_to_travel_draft(self):
