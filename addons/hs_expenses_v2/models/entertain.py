@@ -124,6 +124,7 @@ class EntertainApplication(models.Model):
         ('business hospitality2', '商务招待2档（500元/人）'),
         ('business hospitality3', '商务招待3档（400元/人）'),
         ('official hospitality', '公务招待（160元/人）'),
+        ('souvenir', '纪念品'),
         ('default', ''),
     ], string='招待类型', required=True, default='default')
 
