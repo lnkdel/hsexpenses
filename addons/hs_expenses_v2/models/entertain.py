@@ -235,7 +235,8 @@ class EntertainApplication(models.Model):
             raise UserError(_("You cannot report twice the same line!"))
 
         entertain_standard_dict = {'business hospitality1': 600, 'business hospitality2': 500,
-                                   'business hospitality3': 400, 'official hospitality': 160}
+                                   'business hospitality3': 400, 'official hospitality': 160,
+                                   'souvenir': 600}
         if self.entertain_type == 'default':
             raise UserError(_("招待类型不能为NULL！"))
         elif self.customer_count and self.applicant_amount and \
