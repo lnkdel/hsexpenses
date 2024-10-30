@@ -119,6 +119,7 @@ class Travel2Application(models.Model):
                                       'attachment_id',
                                       string='出差报告')
     approved_records = fields.Text(string="审批记录")
+    approved_records_no_date = fields.Text(string="无日期审批记录")
 
     @api.model
     def create(self, values):
@@ -326,9 +327,8 @@ class Travel2Application(models.Model):
         origin_state = self._tranlate_state_name(self.state)
         now_state = self._tranlate_state_name(next_state)
 
-        approved_text = '%s - %s \n%s ---> %s' % \
+        approved_text = '%s   %s ---> %s' % \
                         (operator.complete_name if operator.complete_name else 'Administrator',
-                         (datetime.datetime.now() + datetime.timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S'),
                          origin_state,
                          now_state)
         if self.approved_records:

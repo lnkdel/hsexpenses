@@ -171,6 +171,7 @@
                 <search string="Month Applications">
                     <field name="name" />
                     <field name="applicant_id" />
+                    <filter string="申请待审批" name="toaudited" domain="[('state', 'in', ['travel_to_audited', 'first_audited', 'second_audited'])]" />
                     <filter string="Current Month" name="cmonth" domain="[('applicant_date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-01'))]" />
                     <filter string="Last Month" name="lmonth" domain="[('applicant_date', '&gt;=', (datetime.datetime.now().replace(day=1)-datetime.timedelta(days=1)).strftime('%Y-%m-01')), ('applicant_date', '&lt;', datetime.datetime.now().strftime('%Y-%m-01'))]" />
                 </search>

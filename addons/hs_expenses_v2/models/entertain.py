@@ -124,7 +124,7 @@ class EntertainApplication(models.Model):
         ('business hospitality2', '商务招待2档（500元/人）'),
         ('business hospitality3', '商务招待3档（400元/人）'),
         ('official hospitality', '公务招待（160元/人）'),
-        ('souvenir', '纪念品'),
+        ('souvenir', '纪念品（600元/人）'),
         ('default', ''),
     ], string='招待类型', required=True, default='default')
 
@@ -449,9 +449,8 @@ class EntertainApplication(models.Model):
         origin_state = self._tranlate_state_name(self.state)
         now_state = self._tranlate_state_name(self._next_state(self.state))
 
-        approved_text = '%s - %s \n%s ---> %s' % \
+        approved_text = '%s   %s ---> %s' % \
                         (operator.complete_name if operator.complete_name else 'Administrator',
-                         (datetime.datetime.now() + datetime.timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S'),
                          origin_state,
                          now_state)
         if self.approved_records:
